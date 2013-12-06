@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace MonopolyBoard
-{
+{///Jag kan :D
     public partial class Monopoly : Form
     {
 
