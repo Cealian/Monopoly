@@ -1,6 +1,6 @@
 ﻿namespace MonopolyBoard
 {
-    class FreeParking
+    public class FreeParking
     {
         /*Classen skapar metod för att registrera in pengar i friparkering och 
          * metod för att skicka friparkerings pengar över till spelaren 
