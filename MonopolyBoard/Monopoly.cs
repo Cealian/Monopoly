@@ -347,6 +347,8 @@ namespace MonopolyBoard
             Player[activePlayer].SubtractMoney(positionprice);
             Freepark.AddMoney(positionprice);
         }
+        //TEST
+        //Test
     }
 }
 //TEST
