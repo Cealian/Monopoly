@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbAPlayer = new System.Windows.Forms.GroupBox();
             this.mtxtMoneyA = new System.Windows.Forms.MaskedTextBox();
             this.txtMoneyA = new System.Windows.Forms.TextBox();
             this.cbMoneyA = new System.Windows.Forms.CheckBox();
             this.clbPlayerA = new System.Windows.Forms.CheckedListBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gbSPlayer = new System.Windows.Forms.GroupBox();
             this.mtxtMoneyB = new System.Windows.Forms.MaskedTextBox();
             this.txtMoneyB = new System.Windows.Forms.TextBox();
             this.cbMoneyB = new System.Windows.Forms.CheckBox();
@@ -41,22 +41,22 @@
             this.AtoB = new System.Windows.Forms.Button();
             this.BtoA = new System.Windows.Forms.Button();
             this.btnTrade = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.gbAPlayer.SuspendLayout();
+            this.gbSPlayer.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // gbAPlayer
             // 
-            this.groupBox1.Controls.Add(this.mtxtMoneyA);
-            this.groupBox1.Controls.Add(this.txtMoneyA);
-            this.groupBox1.Controls.Add(this.cbMoneyA);
-            this.groupBox1.Controls.Add(this.clbPlayerA);
-            this.groupBox1.Location = new System.Drawing.Point(26, 36);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 250);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Player A";
+            this.gbAPlayer.Controls.Add(this.mtxtMoneyA);
+            this.gbAPlayer.Controls.Add(this.txtMoneyA);
+            this.gbAPlayer.Controls.Add(this.cbMoneyA);
+            this.gbAPlayer.Controls.Add(this.clbPlayerA);
+            this.gbAPlayer.Location = new System.Drawing.Point(26, 36);
+            this.gbAPlayer.Name = "gbAPlayer";
+            this.gbAPlayer.Size = new System.Drawing.Size(200, 250);
+            this.gbAPlayer.TabIndex = 0;
+            this.gbAPlayer.TabStop = false;
+            this.gbAPlayer.Text = "Player A";
             // 
             // mtxtMoneyA
             // 
@@ -92,18 +92,18 @@
             this.clbPlayerA.Size = new System.Drawing.Size(188, 199);
             this.clbPlayerA.TabIndex = 0;
             // 
-            // groupBox2
+            // gbSPlayer
             // 
-            this.groupBox2.Controls.Add(this.mtxtMoneyB);
-            this.groupBox2.Controls.Add(this.txtMoneyB);
-            this.groupBox2.Controls.Add(this.cbMoneyB);
-            this.groupBox2.Controls.Add(this.clbPlayerB);
-            this.groupBox2.Location = new System.Drawing.Point(345, 36);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 250);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Player B";
+            this.gbSPlayer.Controls.Add(this.mtxtMoneyB);
+            this.gbSPlayer.Controls.Add(this.txtMoneyB);
+            this.gbSPlayer.Controls.Add(this.cbMoneyB);
+            this.gbSPlayer.Controls.Add(this.clbPlayerB);
+            this.gbSPlayer.Location = new System.Drawing.Point(345, 36);
+            this.gbSPlayer.Name = "gbSPlayer";
+            this.gbSPlayer.Size = new System.Drawing.Size(200, 250);
+            this.gbSPlayer.TabIndex = 1;
+            this.gbSPlayer.TabStop = false;
+            this.gbSPlayer.Text = "Player B";
             // 
             // mtxtMoneyB
             // 
@@ -177,26 +177,26 @@
             this.Controls.Add(this.btnTrade);
             this.Controls.Add(this.BtoA);
             this.Controls.Add(this.AtoB);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gbSPlayer);
+            this.Controls.Add(this.gbAPlayer);
             this.Name = "Trade";
             this.Text = "Trade";
             this.Load += new System.EventHandler(this.Trade_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.gbAPlayer.ResumeLayout(false);
+            this.gbAPlayer.PerformLayout();
+            this.gbSPlayer.ResumeLayout(false);
+            this.gbSPlayer.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gbAPlayer;
         private System.Windows.Forms.TextBox txtMoneyA;
         private System.Windows.Forms.CheckBox cbMoneyA;
         private System.Windows.Forms.CheckedListBox clbPlayerA;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox gbSPlayer;
         private System.Windows.Forms.TextBox txtMoneyB;
         private System.Windows.Forms.CheckBox cbMoneyB;
         private System.Windows.Forms.CheckedListBox clbPlayerB;

@@ -119,6 +119,7 @@ namespace MonopolyBoard
 
         private void Trade_Load(object sender, EventArgs e)
         {
+            gbAPlayer.Text = board.Player[board.activePlayer].GetName();
             for (int i = 0; i < board.SquaresArray.Length; i++)
             {
                 if (board.SquaresArray[i].GetType().ToString() == "MonopolyBoard.Street")
