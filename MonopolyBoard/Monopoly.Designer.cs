@@ -55,6 +55,8 @@
             // 
             this.pnlMainPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pnlMainPanel.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlMainPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pnlMainPanel.BackgroundImage")));
+            this.pnlMainPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnlMainPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlMainPanel.Controls.Add(this.picPlayer3);
             this.pnlMainPanel.Controls.Add(this.picPlayer2);
