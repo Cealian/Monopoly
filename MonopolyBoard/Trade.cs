@@ -122,7 +122,8 @@ namespace MonopolyBoard
             gbAPlayer.Text = board.Player[board.activePlayer].GetName();
             for (int i = 0; i < board.Player.Length; i++)
             {
-                cbPlayerB.Items.Add(board.Player[i].GetName());
+                if(i!=board.activePlayer)
+                    cbPlayerB.Items.Add(board.Player[i].GetName());
             }
             for (int i = 0; i < board.SquaresArray.Length; i++)
             {
