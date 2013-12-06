@@ -356,5 +356,12 @@ namespace MonopolyBoard
             TradeForm.board = this;
             TradeForm.Show();
         }
-    }
+
+        public void TaxActivePlayer()
+        {
+            int positionprice = SquaresArray[Player[activePlayer].GetPosition()].GetPrice();
+            
+            Player[activePlayer].SubtractMoney(positionprice);
+            Freepark.AddMoney(positionprice);
+        }
 }
