@@ -345,6 +345,7 @@ namespace MonopolyBoard
             {
                 Player = newGame.GetPlayers();
                 NextPlayer();
+                HideInactivePlayers();
             }
 
         }
@@ -357,11 +358,24 @@ namespace MonopolyBoard
             TradeForm.Show();
         }
 
+        public void HideInactivePlayers() 
+        {
+            if (Player[3].GetName() == "")
+            {
+                picPlayer2.Hide();
+                picPlayer3.Hide();
+            }
+            else if (Player[4].GetName() == "")
+            {
+                picPlayer3.Hide();
+            }
+        }
+
         public void TaxActivePlayer()
         {
             int positionprice = SquaresArray[Player[activePlayer].GetPosition()].GetPrice();
             
             Player[activePlayer].SubtractMoney(positionprice);
             Freepark.AddMoney(positionprice);
-        }
+    }
 }
