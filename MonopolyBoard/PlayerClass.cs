@@ -77,6 +77,11 @@ namespace MonopolyBoard
             return position;
         }
 
+        public int GetMoney()
+        {
+            return money;
+        }
+
         public bool TakeStep()
         {
             stepsLeft--;
