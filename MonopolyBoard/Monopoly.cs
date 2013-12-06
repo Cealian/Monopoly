@@ -13,11 +13,12 @@ namespace MonopolyBoard
         public PlayerClass[] Player = new PlayerClass[4]; /* Players */
         public Square[] SquaresArray = new Square[40];
         public BindingList<Square> Squares;
+        public FreeParking Freepark = new FreeParking();
 
         int paces = 0;
         const int PACES_PER_SQUARE = 6;
         const int PX_PER_PACE = 9;
-        public int activePlayer = new Random().Next(0, 4);
+        int activePlayer = new Random().Next(0, 4);
         int diceEqualCount = 0;
 
         public Monopoly()
@@ -32,7 +33,7 @@ namespace MonopolyBoard
 
             Squares = new BindingList<Square>(SquaresArray);
 
-            
+
 
             for (int i = 0; i < 4; i++)
             {
@@ -73,7 +74,7 @@ namespace MonopolyBoard
 
         public void MoveActivePlayer() /* Move the active player */
         {
-            if(paces < PACES_PER_SQUARE) /* Move the player 16px five times for every square. */
+            if (paces < PACES_PER_SQUARE) /* Move the player 16px five times for every square. */
             {
                 if (activePlayer == 0)
                 {
@@ -98,7 +99,7 @@ namespace MonopolyBoard
             }
             paces = 0;
 
-            if(!Player[activePlayer].TakeStep())
+            if (!Player[activePlayer].TakeStep())
             {
                 tmrMovePlayer.Stop();
 
@@ -225,7 +226,7 @@ namespace MonopolyBoard
                 activePlayer++;
             }
 
-            if(activePlayer > 3 || Player[activePlayer].GetName() == "")
+            if (activePlayer > 3 || Player[activePlayer].GetName() == "")
             {
                 activePlayer = 0;
             }
@@ -304,7 +305,7 @@ namespace MonopolyBoard
         private void btnTurn_Click(object sender, EventArgs e) /*To turn dices*/
         {
 
-            if(tmrMovePlayer.Enabled) /* No cheating */
+            if (tmrMovePlayer.Enabled) /* No cheating */
             {
                 return;
             }
@@ -332,7 +333,7 @@ namespace MonopolyBoard
             lbldice2.Text = Convert.ToString(dice2);
             lblresult.Text = Convert.ToString(result);
 
-            
+
             MovePlayer(result);
 
         }
@@ -358,7 +359,7 @@ namespace MonopolyBoard
             TradeForm.Show();
         }
 
-        public void HideInactivePlayers() 
+        public void HideInactivePlayers()
         {
             if (Player[3].GetName() == "")
             {
@@ -369,6 +370,14 @@ namespace MonopolyBoard
             {
                 picPlayer3.Hide();
             }
+        }
+
+        public void TaxActivePlayer()
+        {
+            int positionprice = SquaresArray[Player[activePlayer].GetPosition()].GetPrice();
+
+            Player[activePlayer].SubtractMoney(positionprice);
+            Freepark.AddMoney(positionprice);
         }
     }
 }
