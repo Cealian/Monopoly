@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FreeParking.cs" />
     <Compile Include="Monopoly.cs">
       <SubType>Form</SubType>
     </Compile>
