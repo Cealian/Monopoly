@@ -338,6 +338,7 @@ namespace MonopolyBoard
             {
                 Player = newGame.GetPlayers();
                 NextPlayer();
+                HideInactivePlayers();
             }
 
         }
@@ -348,6 +349,19 @@ namespace MonopolyBoard
 
             TradeForm.board = this;
             TradeForm.Show();
+        }
+
+        public void HideInactivePlayers() 
+        {
+            if (Player[3].GetName() == "")
+            {
+                picPlayer2.Hide();
+                picPlayer3.Hide();
+            }
+            else if (Player[4].GetName() == "")
+            {
+                picPlayer3.Hide();
+            }
         }
     }
 }
