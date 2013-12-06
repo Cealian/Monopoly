@@ -123,7 +123,7 @@ namespace MonopolyBoard
             for (int i = 0; i < board.Player.Length; i++)
             {
                 if(i!=board.activePlayer)
-                    cbPlayerB.Items.Add(board.Player[i].GetName());
+                    lbPlayers.Items.Add(board.Player[i].GetName());
             }
 
             for (int i = 0; i < board.SquaresArray.Length; i++)
