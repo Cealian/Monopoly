@@ -6,11 +6,9 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace MonopolyBoard
-{///Jag kan :D
+{
     public partial class Monopoly : Form
     {
-        // Hej alla fula! Ser ni??? :(
-        // SEBASTIAN ÄR KASS
         public GFX GEngine; /* GFX engine */
         public PlayerClass[] Player = new PlayerClass[4]; /* Players */
         public Square[] SquaresArray = new Square[40];
@@ -33,13 +31,6 @@ namespace MonopolyBoard
             InstantiatePowerStations();
 
             Squares = new BindingList<Square>(SquaresArray);
-
-            
-
-            for (int i = 0; i < 4; i++)
-            {
-                Player[i] = new PlayerClass("Kalle");
-            }
         }
 
         private void btnQuit_Click(object sender, EventArgs e) /* Make sure user really wants to quit. */
@@ -358,7 +349,5 @@ namespace MonopolyBoard
             TradeForm.board = this;
             TradeForm.Show();
         }
-        //Test
-        //test2
     }
 }
