@@ -18,7 +18,7 @@ namespace MonopolyBoard
         int paces = 0;
         const int PACES_PER_SQUARE = 6;
         const int PX_PER_PACE = 9;
-        int activePlayer = new Random().Next(0, 4);
+        public int activePlayer = new Random().Next(0, 4);
         int diceEqualCount = 0;
 
         public Monopoly()
