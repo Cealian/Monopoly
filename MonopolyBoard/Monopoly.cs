@@ -11,15 +11,14 @@ namespace MonopolyBoard
     {
 
         public GFX GEngine; /* GFX engine */
-        public Player[] Player = new Player[4]; /* Players */
+        public PlayerClass[] Player = new PlayerClass[4]; /* Players */
         public Square[] SquaresArray = new Square[40];
         public BindingList<Square> Squares;
-        public FreeParking Freepark = new FreeParking();
 
         int paces = 0;
         const int PACES_PER_SQUARE = 6;
         const int PX_PER_PACE = 9;
-        int activePlayer = new Random().Next(-1, 5);
+        int activePlayer = new Random().Next(0, 4);
         int diceEqualCount = 0;
 
         public Monopoly()
@@ -34,9 +33,11 @@ namespace MonopolyBoard
 
             Squares = new BindingList<Square>(SquaresArray);
 
+            
+
             for (int i = 0; i < 4; i++)
             {
-                Player[i] = new Player("Kalle");
+                Player[i] = new PlayerClass("Kalle");
             }
         }
 
@@ -48,18 +49,16 @@ namespace MonopolyBoard
                 Application.Exit();
             }
         }
+
         private void pnlMainPanel_Paint(object sender, PaintEventArgs e) /* Paint monopoly board using GFX engine */
         {
             Graphics panelToPaint = pnlMainPanel.CreateGraphics();
             GEngine = new GFX(panelToPaint);
         }
-       
+
         private void btnMove_Click(object sender, EventArgs e) /* Move the selected player the specified number of steps */
         {
-            if(!tmrMovePlayer.Enabled)
-            {
-                MovePlayer( Convert.ToInt16(txtNumberOfSteps.Text));
-            }
+            Console.WriteLine(((Street)SquaresArray[39]).GetInfo());
         }
 
         public void MovePlayer(int steps)
@@ -227,7 +226,7 @@ namespace MonopolyBoard
                 activePlayer++;
             }
 
-            if(activePlayer > 3)
+            if(activePlayer > 3 || Player[activePlayer].GetName() == "")
             {
                 activePlayer = 0;
             }
@@ -305,6 +304,12 @@ namespace MonopolyBoard
 
         private void btnTurn_Click(object sender, EventArgs e) /*To turn dices*/
         {
+
+            if(tmrMovePlayer.Enabled) /* No cheating */
+            {
+                return;
+            }
+
             Random random = new Random();
             int dice1 = random.Next(1, 7);                             //Skapar slumpgeneratorerna                           
             int dice2 = random.Next(1, 7);                              //sätter ett nummer mellan 1 och 6.
@@ -328,27 +333,30 @@ namespace MonopolyBoard
             lbldice2.Text = Convert.ToString(dice2);
             lblresult.Text = Convert.ToString(result);
 
+            
             MovePlayer(result);
 
         }
 
-        private void btnStartNewGame_Click(object sender, EventArgs e)
+        private void Monopoly_Load(object sender, EventArgs e)
         {
             New_game newGame = new New_game();
 
             if (newGame.ShowDialog() == DialogResult.OK)
             {
-               //Player = newGame.GetPlayers();
+                Player = newGame.GetPlayers();
+                NextPlayer();
             }
+
         }
-        public void TaxActivePlayer()
+
+        private void btnTrade_Click(object sender, EventArgs e)
         {
-            int positionprice = SquaresArray[Player[activePlayer].GetPosition()].GetPrice();
-            
-            Player[activePlayer].SubtractMoney(positionprice);
-            Freepark.AddMoney(positionprice);
+            Trade TradeForm = new Trade();
+
+            TradeForm.board = this;
+            TradeForm.Show();
         }
-        //Lägger till en kommentar
+
     }
 }
-

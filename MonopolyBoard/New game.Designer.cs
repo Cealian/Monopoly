@@ -42,7 +42,7 @@
             this.btnStart.Location = new System.Drawing.Point(48, 271);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
-            this.btnStart.TabIndex = 0;
+            this.btnStart.TabIndex = 4;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
@@ -53,7 +53,7 @@
             this.btnCancel.Location = new System.Drawing.Point(195, 271);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 1;
+            this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Avbryt";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
@@ -71,28 +71,35 @@
             this.txtBoxPlayer1.Location = new System.Drawing.Point(20, 61);
             this.txtBoxPlayer1.Name = "txtBoxPlayer1";
             this.txtBoxPlayer1.Size = new System.Drawing.Size(151, 20);
-            this.txtBoxPlayer1.TabIndex = 4;
+            this.txtBoxPlayer1.TabIndex = 0;
+            this.txtBoxPlayer1.TextChanged += new System.EventHandler(this.txtPlayer_TextChanged);
             // 
             // txtBoxPlayer2
             // 
+            this.txtBoxPlayer2.Enabled = false;
             this.txtBoxPlayer2.Location = new System.Drawing.Point(20, 102);
             this.txtBoxPlayer2.Name = "txtBoxPlayer2";
             this.txtBoxPlayer2.Size = new System.Drawing.Size(151, 20);
-            this.txtBoxPlayer2.TabIndex = 5;
+            this.txtBoxPlayer2.TabIndex = 1;
+            this.txtBoxPlayer2.TextChanged += new System.EventHandler(this.txtPlayer_TextChanged);
             // 
             // txtBoxPlayer3
             // 
+            this.txtBoxPlayer3.Enabled = false;
             this.txtBoxPlayer3.Location = new System.Drawing.Point(20, 146);
             this.txtBoxPlayer3.Name = "txtBoxPlayer3";
             this.txtBoxPlayer3.Size = new System.Drawing.Size(151, 20);
-            this.txtBoxPlayer3.TabIndex = 6;
+            this.txtBoxPlayer3.TabIndex = 2;
+            this.txtBoxPlayer3.TextChanged += new System.EventHandler(this.txtPlayer_TextChanged);
             // 
             // txtBoxPlayer4
             // 
+            this.txtBoxPlayer4.Enabled = false;
             this.txtBoxPlayer4.Location = new System.Drawing.Point(20, 191);
             this.txtBoxPlayer4.Name = "txtBoxPlayer4";
             this.txtBoxPlayer4.Size = new System.Drawing.Size(151, 20);
-            this.txtBoxPlayer4.TabIndex = 7;
+            this.txtBoxPlayer4.TabIndex = 3;
+            this.txtBoxPlayer4.TextChanged += new System.EventHandler(this.txtPlayer_TextChanged);
             // 
             // New_game
             // 
@@ -109,6 +116,7 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnStart);
             this.Name = "New_game";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "New_game";
             this.ResumeLayout(false);
             this.PerformLayout();

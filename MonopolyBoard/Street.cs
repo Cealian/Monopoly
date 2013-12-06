@@ -46,6 +46,11 @@ namespace MonopolyBoard
             else
                 return Convert.ToInt32(GetPrice()*4.88);
         }
+        new public string GetRents()
+        {
+            return "Bara tomt " + Convert.ToInt32(GetPrice() * 0.08) + " \nEtt hus " + Convert.ToInt32(GetPrice() * 0.38) + " \nTvå hus " + Convert.ToInt32(GetPrice() * 1.08)
+                + " \nTre hus " + Convert.ToInt32(GetPrice() * 2.78) + " \nFyra hus " + Convert.ToInt32(GetPrice() * 3.78) + " \nEtt hotell " + Convert.ToInt32(GetPrice() * 4.88);
+        }
         public void SellHouse()
         {
             noOfHouses--;
@@ -57,6 +62,11 @@ namespace MonopolyBoard
         public int GetSellHousePrice()
         {
             return Convert.ToInt32(GetPrice() * 0.345);
+        }
+
+        new public string GetInfo()
+        {
+            return GetName()+" \n" + GetPrice()+" \n" + GetRents()+" \nHus kostar " + GetHousePrice();
         }
 
     }

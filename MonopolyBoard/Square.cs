@@ -36,6 +36,11 @@ namespace MonopolyBoard
         {
             price = setPrice;
         }
+        public string GetInfo()
+        {
+            return name + " \n" +price;
+
+        }
     }
 
 }

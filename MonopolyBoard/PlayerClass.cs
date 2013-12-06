@@ -2,7 +2,7 @@
 using System;
 namespace MonopolyBoard
 {
-    public class Player
+    public class PlayerClass
     {
         //MEMBERS
         private string name;
@@ -19,7 +19,7 @@ namespace MonopolyBoard
         }
 
         // funktioner
-        public Player(string newName)
+        public PlayerClass(string newName)
         {
             name = newName;
         }

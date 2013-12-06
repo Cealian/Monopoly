@@ -43,7 +43,7 @@
             this.lbldice1 = new System.Windows.Forms.Label();
             this.lbldice2 = new System.Windows.Forms.Label();
             this.lblresult = new System.Windows.Forms.Label();
-            this.btnStartNewGame = new System.Windows.Forms.Button();
+            this.btnTrade = new System.Windows.Forms.Button();
             this.pnlMainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer2)).BeginInit();
@@ -114,6 +114,7 @@
             // 
             this.btnQuit.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnQuit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnQuit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnQuit.Location = new System.Drawing.Point(654, 38);
             this.btnQuit.Name = "btnQuit";
             this.btnQuit.Size = new System.Drawing.Size(40, 32);
@@ -182,23 +183,24 @@
             this.lblresult.TabIndex = 7;
             this.lblresult.Text = "label3";
             // 
-            // btnStartNewGame
+            // btnTrade
             // 
-            this.btnStartNewGame.Location = new System.Drawing.Point(678, 613);
-            this.btnStartNewGame.Name = "btnStartNewGame";
-            this.btnStartNewGame.Size = new System.Drawing.Size(98, 23);
-            this.btnStartNewGame.TabIndex = 8;
-            this.btnStartNewGame.Text = "Starta nytt spel";
-            this.btnStartNewGame.UseVisualStyleBackColor = true;
-            this.btnStartNewGame.Click += new System.EventHandler(this.btnStartNewGame_Click);
+            this.btnTrade.Location = new System.Drawing.Point(668, 300);
+            this.btnTrade.Name = "btnTrade";
+            this.btnTrade.Size = new System.Drawing.Size(75, 23);
+            this.btnTrade.TabIndex = 8;
+            this.btnTrade.Text = "Trade";
+            this.btnTrade.UseVisualStyleBackColor = true;
+            this.btnTrade.Click += new System.EventHandler(this.btnTrade_Click);
             // 
             // Monopoly
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.CancelButton = this.btnQuit;
             this.ClientSize = new System.Drawing.Size(798, 648);
-            this.Controls.Add(this.btnStartNewGame);
+            this.Controls.Add(this.btnTrade);
             this.Controls.Add(this.lblresult);
             this.Controls.Add(this.lbldice2);
             this.Controls.Add(this.lbldice1);
@@ -212,6 +214,7 @@
             this.Name = "Monopoly";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Monopol";
+            this.Load += new System.EventHandler(this.Monopoly_Load);
             this.pnlMainPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer2)).EndInit();
@@ -237,7 +240,7 @@
         private System.Windows.Forms.Label lbldice1;
         private System.Windows.Forms.Label lbldice2;
         private System.Windows.Forms.Label lblresult;
-        private System.Windows.Forms.Button btnStartNewGame;
+        private System.Windows.Forms.Button btnTrade;
     }
 }
 
