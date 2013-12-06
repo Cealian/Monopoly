@@ -366,10 +366,6 @@ namespace MonopolyBoard
                 picPlayer2.Hide();
                 picPlayer3.Hide();
             }
-            else if (Player[4].GetName() == "")
-            {
-                picPlayer3.Hide();
-            }
         }
 
         public void TaxActivePlayer()
