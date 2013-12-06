@@ -9,7 +9,7 @@ namespace MonopolyBoard
 {///Jag kan :D
     public partial class Monopoly : Form
     {
-        // Hej alla fula! Ser ni??? :(
+        // Här nu då!
         public GFX GEngine; /* GFX engine */
         public PlayerClass[] Player = new PlayerClass[4]; /* Players */
         public Square[] SquaresArray = new Square[40];
