@@ -41,7 +41,7 @@
             this.AtoB = new System.Windows.Forms.Button();
             this.BtoA = new System.Windows.Forms.Button();
             this.btnTrade = new System.Windows.Forms.Button();
-            this.cbPlayerB = new System.Windows.Forms.ComboBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.gbAPlayer.SuspendLayout();
             this.gbSPlayer.SuspendLayout();
             this.SuspendLayout();
@@ -142,7 +142,7 @@
             // 
             // AtoB
             // 
-            this.AtoB.Location = new System.Drawing.Point(246, 127);
+            this.AtoB.Location = new System.Drawing.Point(246, 173);
             this.AtoB.Name = "AtoB";
             this.AtoB.Size = new System.Drawing.Size(75, 23);
             this.AtoB.TabIndex = 2;
@@ -152,7 +152,7 @@
             // 
             // BtoA
             // 
-            this.BtoA.Location = new System.Drawing.Point(246, 156);
+            this.BtoA.Location = new System.Drawing.Point(246, 202);
             this.BtoA.Name = "BtoA";
             this.BtoA.Size = new System.Drawing.Size(75, 23);
             this.BtoA.TabIndex = 3;
@@ -162,7 +162,7 @@
             // 
             // btnTrade
             // 
-            this.btnTrade.Location = new System.Drawing.Point(246, 185);
+            this.btnTrade.Location = new System.Drawing.Point(246, 231);
             this.btnTrade.Name = "btnTrade";
             this.btnTrade.Size = new System.Drawing.Size(75, 23);
             this.btnTrade.TabIndex = 4;
@@ -170,20 +170,20 @@
             this.btnTrade.UseVisualStyleBackColor = true;
             this.btnTrade.Click += new System.EventHandler(this.trade_Click);
             // 
-            // cbPlayerB
+            // listBox1
             // 
-            this.cbPlayerB.FormattingEnabled = true;
-            this.cbPlayerB.Location = new System.Drawing.Point(246, 36);
-            this.cbPlayerB.Name = "cbPlayerB";
-            this.cbPlayerB.Size = new System.Drawing.Size(75, 21);
-            this.cbPlayerB.TabIndex = 5;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(246, 85);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(75, 82);
+            this.listBox1.TabIndex = 5;
             // 
             // Trade
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(585, 342);
-            this.Controls.Add(this.cbPlayerB);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.btnTrade);
             this.Controls.Add(this.BtoA);
             this.Controls.Add(this.AtoB);
@@ -215,7 +215,7 @@
         private System.Windows.Forms.Button btnTrade;
         private System.Windows.Forms.MaskedTextBox mtxtMoneyA;
         private System.Windows.Forms.MaskedTextBox mtxtMoneyB;
-        private System.Windows.Forms.ComboBox cbPlayerB;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
 

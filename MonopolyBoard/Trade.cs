@@ -125,6 +125,7 @@ namespace MonopolyBoard
                 if(i!=board.activePlayer)
                     cbPlayerB.Items.Add(board.Player[i].GetName());
             }
+
             for (int i = 0; i < board.SquaresArray.Length; i++)
             {
                 if (board.SquaresArray[i].GetType().ToString() == "MonopolyBoard.Street")
