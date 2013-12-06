@@ -344,9 +344,11 @@ namespace MonopolyBoard
         public void TaxActivePlayer()
         {
             int positionprice = SquaresArray[Player[activePlayer].GetPosition()].GetPrice();
+            
             Player[activePlayer].SubtractMoney(positionprice);
             Freepark.AddMoney(positionprice);
         }
+        //Lägger till en kommentar
     }
 }
 
