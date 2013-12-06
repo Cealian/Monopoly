@@ -31,6 +31,13 @@ namespace MonopolyBoard
             InstantiatePowerStations();
 
             Squares = new BindingList<Square>(SquaresArray);
+
+            
+
+            for (int i = 0; i < 4; i++)
+            {
+                Player[i] = new PlayerClass("Kalle");
+            }
         }
 
         private void btnQuit_Click(object sender, EventArgs e) /* Make sure user really wants to quit. */
