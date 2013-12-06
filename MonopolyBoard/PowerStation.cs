@@ -18,7 +18,7 @@ namespace MonopolyBoard
             SetOwner(0);
             SetBlock(setBlock);
         }
-        new public int GetRent(int dice)
+        public int GetRent(int dice)
         {
             return (100 * dice);
         }
@@ -28,7 +28,7 @@ namespace MonopolyBoard
             return "Om du äger ETT kraftverk blir hyran 100 * värdet tärningarna visar.\n Äger du TVÅ kraftverk blir hyran 200 * värdet tärningarna visar, osv"; 
         }
 
-        new public string Getinfo()
+        new public string GetInfo()
         {
             return GetName() + GetOwner() + GetPrice() + GetRents();
         }
