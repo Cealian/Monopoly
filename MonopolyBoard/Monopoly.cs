@@ -74,9 +74,10 @@ namespace MonopolyBoard
             Player[1].SetMoney(600);
             Player[2].SetMoney(700);
             Player[3].SetMoney(800);
+            RunSquareEvent();
         }
 
-        public void MovePlayer(int steps)
+        public void MovePlayer(int steps) /* Move active player the specified number of steps. */
         {
             Player[activePlayer].MoveForward(steps);
             tmrMovePlayer.Start();
@@ -118,7 +119,7 @@ namespace MonopolyBoard
             {
                 tmrMovePlayer.Stop();
 
-                if(diceEqualCount == 0)
+                if (diceEqualCount == 0)
                 {
                     btnNextPlayer.Enabled = true;
                 }
@@ -396,12 +397,13 @@ namespace MonopolyBoard
                 picPlayer3.Hide();
             }
 
-            if(Player[2].GetName() == ""){
+            if (Player[2].GetName() == "")
+            {
                 picPlayer2.Hide();
             }
         }
 
-        public void TaxActivePlayer()
+        public void TaxActivePlayer() /* Tax the active player and subtract the appripriate amount. */
         {
             int positionprice = SquaresArray[Player[activePlayer].GetPosition()].GetPrice();
 
@@ -409,7 +411,7 @@ namespace MonopolyBoard
             Freepark.AddMoney(positionprice);
         }
 
-        public void ShowSquareInfo()
+        public void ShowSquareInfo() /* Show the squares info in lblSquareInfo */
         {
             string info = "";
 
@@ -443,6 +445,47 @@ namespace MonopolyBoard
             btnRollDices.Enabled = true;
             btnNextPlayer.Enabled = false;
             NextPlayer();
+        }
+
+        public void RunSquareEvent() /* Checks what kind of square the player landed on and acts accordingly. */
+        {
+
+            Type squareType = Squares[Player[activePlayer].GetPosition()].GetType();
+
+            if(squareType == typeof(Street))
+            {
+                /*
+                 * Street:
+                 *  Ägd: pay rent
+                 *  Inte: buy?
+                 */
+            }
+            else if (squareType == typeof(Square))
+            {
+                /* 
+                 * Square:
+                 *  Possible squares: Gå, fängelse, skatt, fri parkering, gå till fängelse.
+                 *  Gå: Gör inget.
+                 *  Fängelse: HaD.
+                 *  Skatt: player.money = player.money - skatt.
+                 *  Fri parkering: ge spelaren pengar, töm fri park.
+                 *  Gå till fängelse: Player.position = 10, player.injail = true.
+                 */
+            }
+            else if (squareType == typeof(Station))
+            {
+                /*
+                 * Station:
+                 *  Som street, annan hyra.
+                 */
+            }
+            else if (squareType == typeof(PowerStation))
+            {
+                /*
+                 * PowerStation:
+                 *  Som street, annan hyra.
+                 */
+            }
         }
     }
 }
