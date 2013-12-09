@@ -437,10 +437,6 @@ namespace MonopolyBoard
             lblSquareInfo.Text = info;
         }
 
-        /* Allow command line to be seen during normal execution */
-        [DllImport("kernel32.dll", SetLastError = true)]
-        [return: MarshalAsAttribute(UnmanagedType.Bool)]
-        static extern bool AllocConsole();
 
         private void btnNextPlayer_Click(object sender, EventArgs e) /* Set activePlayer to the next one avaliable */
         {
@@ -502,6 +498,11 @@ namespace MonopolyBoard
              *  I fängelse
              */
         }
+
+        /* Allow command line to be seen during normal execution */
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAsAttribute(UnmanagedType.Bool)]
+        static extern bool AllocConsole();
     }
 }
 
