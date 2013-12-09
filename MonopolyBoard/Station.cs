@@ -5,7 +5,7 @@ namespace MonopolyBoard
     {
         private int owner, block, position;
 
-        public Station()
+        public Station() /* Nödvändig? */
         {
             SetName("");
             SetPrice(0);
@@ -16,6 +16,11 @@ namespace MonopolyBoard
 
         public Station(string setName, int setPrice, int setBlock, int setPosition)
         {
+            /*
+             * name = setName   ?
+             * price = setPrice ?
+             */
+
             SetName(setName);
             SetPrice(setPrice);
             owner = 5;
@@ -27,42 +32,52 @@ namespace MonopolyBoard
         {
             return owner;
         }
+
         public int GetBlock()
         {
             return block;
         }
+
         public void ChangeOwner(int newOwner)
         {
             owner = newOwner;
         }
+
         public int GetRent()
         {
             return GetPrice() / 4;
         }
+
         public int GetSellPrice()
         {
             return GetPrice() / 2;
         }
+
         public void SetBlock(int setBlock)
         {
             block = setBlock;
         }
+
         public void SetOwner(int setOwner)
         {
             owner = setOwner;
         }
-        public string GetRents()
+
+        public string GetRents() /* Formatera för bättre visning */
         {
             return "Äger du en station: " + GetRent() + "\nÄger du två stationer: " + GetRent() * 2 + "\nÄger du tre stationer: " + GetRent() * 3 + "\nÄger du fyra stationer: " + GetRent() * 4;
         }
+
         new public string GetInfo()
         {
             return GetName() + " \n" + GetPrice() + " \n" + GetRents();
         }
+
         public void SetPosition(int setPosition)
         {
             position = setPosition;
         }
+
         public int GetPosition()
         {
             return position;

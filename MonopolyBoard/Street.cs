@@ -6,7 +6,7 @@ namespace MonopolyBoard
     {
         private int noOfHouses;
   
-         public Street()
+         public Street() /* Nödvändig? */
         {
             SetName("");
             SetPrice(0);
@@ -18,6 +18,14 @@ namespace MonopolyBoard
 
         public Street(string setName, int setPrice, int setBlock, int setPosition)
         {
+            /*
+             * name = setName           ?
+             * price = setPrice         ?
+             * owner = setOwner         ?
+             * block = setBlock         ?
+             * position = setPosition   ?
+             */
+
             SetName(setName);
             SetPrice(setPrice);
             SetOwner(5);

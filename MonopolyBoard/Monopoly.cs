@@ -32,22 +32,22 @@ namespace MonopolyBoard
             InstantiatePowerStations();
 
             Squares = new BindingList<Square>(SquaresArray);
-
-
-
-            for (int i = 0; i < 4; i++)
-            {
-                Player[i] = new PlayerClass("Kalle");
-            }
         }
 
-        private void btnQuit_Click(object sender, EventArgs e) /* Make sure user really wants to quit. */
+        private void Monopoly_Load(object sender, EventArgs e) /* Monopoply loads, start new game. */
         {
+            New_game newGame = new New_game();
 
-            if (MessageBox.Show("Quit monopoly", "Quit?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (newGame.ShowDialog() == DialogResult.OK)
             {
-                Application.Exit();
+                Player = newGame.GetPlayers();
+                NextPlayer();
+                HideInactivePlayers();
             }
+            else
+                Application.Exit();
+
+
         }
 
         private void pnlMainPanel_Paint(object sender, PaintEventArgs e) /* Paint monopoly board using GFX engine. */
@@ -56,26 +56,8 @@ namespace MonopolyBoard
             GEngine = new GFX(panelToPaint);
         }
 
-        private void btnMove_Click(object sender, EventArgs e) /* Move the selected player the specified number of steps. */
-        {
-            ((Street)Squares[1]).ChangeOwner(0);
-            ((Street)Squares[3]).ChangeOwner(0);
-            ((Street)Squares[6]).ChangeOwner(0);
-            ((Street)Squares[8]).ChangeOwner(1);
-            ((Street)Squares[9]).ChangeOwner(1);
-            ((Street)Squares[11]).ChangeOwner(1);
-            ((Street)Squares[13]).ChangeOwner(2);
-            ((Street)Squares[14]).ChangeOwner(2);
-            ((Street)Squares[16]).ChangeOwner(2);
-            ((Street)Squares[18]).ChangeOwner(3);
-            ((Street)Squares[19]).ChangeOwner(3);
-            ((Street)Squares[21]).ChangeOwner(3);
-            Player[0].SetMoney(500);
-            Player[1].SetMoney(600);
-            Player[2].SetMoney(700);
-            Player[3].SetMoney(800);
-            RunSquareEvent();
-        }
+        /* Functions to animate and move player */
+        #region MovePlayer functions
 
         public void MovePlayer(int steps) /* Move active player the specified number of steps. */
         {
@@ -246,18 +228,10 @@ namespace MonopolyBoard
             paces++;
         }
 
-        public void NextPlayer() /* Change activePlayer to next player. */
-        {
-            if (diceEqualCount == 0)
-            {
-                activePlayer++;
-            }
+        #endregion
 
-            if (activePlayer > 3 || Player[activePlayer].GetName() == "")
-            {
-                activePlayer = 0;
-            }
-        }
+        /* Instantiate squares, streets, stations and PowerStations */
+        #region Square instantiation
 
         public void InstantiateSquares() /* Instantiate all squares that are just squares. */
         {
@@ -324,6 +298,39 @@ namespace MonopolyBoard
             SquaresArray[28] = new PowerStation("Vattenledningsverket", 3000, 9);
         }
 
+        #endregion
+
+        /* All button event handlers for frmMonopoly goes here */
+        #region Button event handlers
+
+        private void btnQuit_Click(object sender, EventArgs e) /* Make sure user really wants to quit. */
+        {
+            if (MessageBox.Show("Quit monopoly", "Quit?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
+
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+            ((Street)Squares[1]).ChangeOwner(0);
+            ((Street)Squares[3]).ChangeOwner(0);
+            ((Street)Squares[6]).ChangeOwner(0);
+            ((Street)Squares[8]).ChangeOwner(1);
+            ((Street)Squares[9]).ChangeOwner(1);
+            ((Street)Squares[11]).ChangeOwner(1);
+            ((Street)Squares[13]).ChangeOwner(2);
+            ((Street)Squares[14]).ChangeOwner(2);
+            ((Street)Squares[16]).ChangeOwner(2);
+            ((Street)Squares[18]).ChangeOwner(3);
+            ((Street)Squares[19]).ChangeOwner(3);
+            ((Street)Squares[21]).ChangeOwner(3);
+            Player[0].SetMoney(500);
+            Player[1].SetMoney(600);
+            Player[2].SetMoney(700);
+            Player[3].SetMoney(800);
+        } /* Use this function to test anything, remove before release. */
+
         private void btnTurn_Click(object sender, EventArgs e) /* Roll dices and move active player. */
         {
             btnRollDices.Enabled = false;
@@ -368,22 +375,6 @@ namespace MonopolyBoard
 
         }
 
-        private void Monopoly_Load(object sender, EventArgs e) /* Monopoply loads, start new game. */
-        {
-            New_game newGame = new New_game();
-
-            if (newGame.ShowDialog() == DialogResult.OK)
-            {
-                Player = newGame.GetPlayers();
-                NextPlayer();
-                HideInactivePlayers();
-            }
-            else
-                Application.Exit();
-
-
-        }
-
         private void btnTrade_Click(object sender, EventArgs e) /* Open trade window. */
         {
             Trade TradeForm = new Trade();
@@ -391,6 +382,15 @@ namespace MonopolyBoard
             TradeForm.board = this;
             TradeForm.Show();
         }
+
+        private void btnNextPlayer_Click(object sender, EventArgs e) /* Set activePlayer to the next one avaliable. */
+        {
+            btnRollDices.Enabled = true;
+            btnNextPlayer.Enabled = false;
+            NextPlayer();
+        }
+
+        #endregion
 
         public void HideInactivePlayers() /* Hide players that are not in the game. */
         {
@@ -405,44 +405,17 @@ namespace MonopolyBoard
             }
         }
 
-        public void TaxActivePlayer() /* Tax the active player and subtract the appropriate amount. */
+        public void NextPlayer() /* Change activePlayer to next player. */
         {
-            int positionprice = SquaresArray[Player[activePlayer].GetPosition()].GetPrice();
-
-            Player[activePlayer].SubtractMoney(positionprice);
-            Freepark.AddMoney(positionprice);
-        }
-
-        public void ShowSquareInfo() /* Show the squares info in lblSquareInfo. */
-        {
-            string info = "";
-
-            if (Squares[Player[activePlayer].GetPosition()].GetType().ToString() == "MonopolyBoard.Square")
+            if (diceEqualCount == 0)
             {
-                info = ((Square)Squares[Player[activePlayer].GetPosition()]).GetInfo();
-            }
-            else if (Squares[Player[activePlayer].GetPosition()].GetType().ToString() == "MonopolyBoard.Street")
-            {
-                info = ((Street)Squares[Player[activePlayer].GetPosition()]).GetInfo();
-            }
-            else if (Squares[Player[activePlayer].GetPosition()].GetType().ToString() == "MonopolyBoard.Station")
-            {
-                info = ((Station)Squares[Player[activePlayer].GetPosition()]).GetInfo();
-            }
-            else if (Squares[Player[activePlayer].GetPosition()].GetType().ToString() == "MonopolyBoard.PowerStation")
-            {
-                info = ((PowerStation)Squares[Player[activePlayer].GetPosition()]).GetInfo();
+                activePlayer++;
             }
 
-            lblSquareInfo.Text = info;
-        }
-
-
-        private void btnNextPlayer_Click(object sender, EventArgs e) /* Set activePlayer to the next one avaliable */
-        {
-            btnRollDices.Enabled = true;
-            btnNextPlayer.Enabled = false;
-            NextPlayer();
+            if (activePlayer > 3 || Player[activePlayer].GetName() == "")
+            {
+                activePlayer = 0;
+            }
         }
 
         public void RunSquareEvent() /* Checks what kind of square the player landed on and acts accordingly. */
@@ -487,7 +460,39 @@ namespace MonopolyBoard
             }
         }
 
-        public void UpdatePlayerInfo() /* Updates the on-screen info about the players */
+        public void ShowSquareInfo() /* Show the squares info in lblSquareInfo. */
+        {
+            string info = "";
+
+            if (Squares[Player[activePlayer].GetPosition()].GetType().ToString() == "MonopolyBoard.Square")
+            {
+                info = ((Square)Squares[Player[activePlayer].GetPosition()]).GetInfo();
+            }
+            else if (Squares[Player[activePlayer].GetPosition()].GetType().ToString() == "MonopolyBoard.Street")
+            {
+                info = ((Street)Squares[Player[activePlayer].GetPosition()]).GetInfo();
+            }
+            else if (Squares[Player[activePlayer].GetPosition()].GetType().ToString() == "MonopolyBoard.Station")
+            {
+                info = ((Station)Squares[Player[activePlayer].GetPosition()]).GetInfo();
+            }
+            else if (Squares[Player[activePlayer].GetPosition()].GetType().ToString() == "MonopolyBoard.PowerStation")
+            {
+                info = ((PowerStation)Squares[Player[activePlayer].GetPosition()]).GetInfo();
+            }
+
+            lblSquareInfo.Text = info;
+        }
+
+        public void TaxActivePlayer() /* Tax the active player and subtract the appropriate amount. */
+        {
+            int positionprice = SquaresArray[Player[activePlayer].GetPosition()].GetPrice();
+
+            Player[activePlayer].SubtractMoney(positionprice);
+            Freepark.AddMoney(positionprice);
+        }
+
+        public void UpdatePlayerInfo() /* Updates the on-screen info about the players. */
         {
             /*
              * Uppdatera information om alla spelare.
@@ -498,12 +503,14 @@ namespace MonopolyBoard
              *  I fängelse
              */
         }
+        
+        /* Fixa husköparform Harry */
 
         /* Allow command line to be seen during normal execution */
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAsAttribute(UnmanagedType.Bool)]
         static extern bool AllocConsole();
+
     }
 }
 
-        /* Fixa husköparform HaD */
