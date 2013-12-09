@@ -38,7 +38,7 @@ namespace MonopolyBoard
         }
         public string GetInfo()
         {
-            return name + " \n" +price;
+            return name + " \n" + price;
 
         }
     }

@@ -6,7 +6,7 @@ namespace MonopolyBoard
     {
         private static Graphics gObject;
 
-        Monopoly frm = new Monopoly();
+        frmMonopoly frm = new frmMonopoly();
 
         public GFX(Graphics g)
         {

@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MonopolyBoard
@@ -37,6 +30,13 @@ namespace MonopolyBoard
             if (CheckPlayers() == 0)
             {
                 MessageBox.Show("Inget i ettan");
+                txtBoxPlayer1.Focus();
+                return;
+            }
+            else if(CheckPlayers() == 1)
+            {
+                MessageBox.Show("Inget i tvåan");
+                txtBoxPlayer2.Focus();
                 return;
             }
             
@@ -51,15 +51,15 @@ namespace MonopolyBoard
             {
                 noOfPlayers = 1;
             }
-            else if (txtBoxPlayer2.Text != "")
+            if (txtBoxPlayer2.Text != "")
             {
                 noOfPlayers = 2;
             }
-            else if (txtBoxPlayer3.Text != "")
+            if (txtBoxPlayer3.Text != "")
             {
                 noOfPlayers = 3;
             }
-            else if (txtBoxPlayer4.Text != "")
+            if (txtBoxPlayer4.Text != "")
             {
                 noOfPlayers = 4;
             }

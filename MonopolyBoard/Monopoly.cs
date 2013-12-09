@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
@@ -7,7 +6,7 @@ using System.Windows.Forms;
 
 namespace MonopolyBoard
 {
-    public partial class Monopoly : Form
+    public partial class frmMonopoly : Form
     {
         public GFX GEngine; /* GFX engine */
         public PlayerClass[] Player = new PlayerClass[4]; /* Players */
@@ -21,10 +20,11 @@ namespace MonopolyBoard
         public int activePlayer = new Random().Next(0, 4);
         int diceEqualCount = 0;
 
-        public Monopoly()
+        public frmMonopoly()
         {
             InitializeComponent();
-            AllocConsole();
+
+            AllocConsole(); // Show console.
 
             InstantiateSquares();
             InstantiateStreets();
@@ -50,29 +50,29 @@ namespace MonopolyBoard
             }
         }
 
-        private void pnlMainPanel_Paint(object sender, PaintEventArgs e) /* Paint monopoly board using GFX engine */
+        private void pnlMainPanel_Paint(object sender, PaintEventArgs e) /* Paint monopoly board using GFX engine. */
         {
             Graphics panelToPaint = pnlMainPanel.CreateGraphics();
             GEngine = new GFX(panelToPaint);
         }
 
-        private void btnMove_Click(object sender, EventArgs e) /* Move the selected player the specified number of steps */
+        private void btnMove_Click(object sender, EventArgs e) /* Move the selected player the specified number of steps. */
         {
             Console.WriteLine(((Street)SquaresArray[39]).GetInfo());
         }
 
         public void MovePlayer(int steps)
         {
-            Player[activePlayer].Move(steps);
+            Player[activePlayer].MoveForward(steps);
             tmrMovePlayer.Start();
         }
 
-        private void tmrMovePlayer_Tick(object sender, EventArgs e) /* Move player until its remaining steps = 0 */
+        private void tmrMovePlayer_Tick(object sender, EventArgs e) /* Move player until its remaining steps = 0. */
         {
             MoveActivePlayer();
         }
 
-        public void MoveActivePlayer() /* Move the active player */
+        public void MoveActivePlayer() /* Move the active player. */
         {
             if (paces < PACES_PER_SQUARE) /* Move the player 16px five times for every square. */
             {
@@ -103,14 +103,21 @@ namespace MonopolyBoard
             {
                 tmrMovePlayer.Stop();
 
+                if(diceEqualCount == 0)
+                {
+                    btnNextPlayer.Enabled = true;
+                }
+                
+
                 Console.WriteLine(picPlayer2.Location.X + " - " + picPlayer2.Location.Y);
 
-                NextPlayer();
+                ShowSquareInfo();
+
                 Console.WriteLine("Active player: {0}", activePlayer);
             }
         }
 
-        private void MovePlayer0() /* Move player 0 one pace */
+        private void MovePlayer0() /* Move player 0 one pace. */
         {
             int X = picPlayer0.Location.X;
             int Y = picPlayer0.Location.Y;
@@ -138,7 +145,7 @@ namespace MonopolyBoard
             paces++;
         }
 
-        private void MovePlayer1() /* Move player 1 one pace */
+        private void MovePlayer1() /* Move player 1 one pace. */
         {
             int X = picPlayer1.Location.X;
             int Y = picPlayer1.Location.Y;
@@ -165,7 +172,7 @@ namespace MonopolyBoard
             paces++;
         }
 
-        private void MovePlayer2() /* Move player 2 one pace */
+        private void MovePlayer2() /* Move player 2 one pace. */
         {
             int X = picPlayer2.Location.X;
             int Y = picPlayer2.Location.Y;
@@ -192,7 +199,7 @@ namespace MonopolyBoard
             paces++;
         }
 
-        private void MovePlayer3() /* Move player 3 one pace */
+        private void MovePlayer3() /* Move player 3 one pace. */
         {
             int X = picPlayer3.Location.X;
             int Y = picPlayer3.Location.Y;
@@ -219,7 +226,7 @@ namespace MonopolyBoard
             paces++;
         }
 
-        public void NextPlayer() /* Change activePlayer to next player */
+        public void NextPlayer() /* Change activePlayer to next player. */
         {
             if (diceEqualCount == 0)
             {
@@ -232,7 +239,7 @@ namespace MonopolyBoard
             }
         }
 
-        public void InstantiateSquares() /* Instantiate all squares that are just squares */
+        public void InstantiateSquares() /* Instantiate all squares that are just squares. */
         {
             SquaresArray[0] = new Square("Gå", 4000);
             SquaresArray[2] = new Square("Allmänning");
@@ -283,7 +290,7 @@ namespace MonopolyBoard
             SquaresArray[39] = new Street("Norrmalmstorg", 8000, 7);
         }
 
-        public void InstantiateStations() /* Instantiate all squares that are stations */
+        public void InstantiateStations() /* Instantiate all squares that are stations. */
         {
             SquaresArray[5] = new Station("Södra station", 4000, 8);
             SquaresArray[15] = new Station("Östra station", 4000, 8);
@@ -291,37 +298,43 @@ namespace MonopolyBoard
             SquaresArray[35] = new Station("Norra station", 4000, 8);
         }
 
-        public void InstantiatePowerStations()/* Instantiate all squares that are powerstations */
+        public void InstantiatePowerStations()/* Instantiate all squares that are powerstations. */
         {
             SquaresArray[12] = new PowerStation("Elverket", 3000, 9);
             SquaresArray[28] = new PowerStation("Vattenledningsverket", 3000, 9);
         }
 
-        /* Allow command line to be seen during normal execution */
-        [DllImport("kernel32.dll", SetLastError = true)]
-        [return: MarshalAsAttribute(UnmanagedType.Bool)]
-        static extern bool AllocConsole();
-
-        private void btnTurn_Click(object sender, EventArgs e) /*To turn dices*/
+        private void btnTurn_Click(object sender, EventArgs e) /* Roll dices and move active player. */
         {
+            btnRollDices.Enabled = false;
+
+            Color formColor = this.BackColor;
+            Color doubleDiceColor = Color.LawnGreen;
 
             if (tmrMovePlayer.Enabled) /* No cheating */
-            {
                 return;
-            }
 
-            Random random = new Random();
-            int dice1 = random.Next(1, 7);                             //Skapar slumpgeneratorerna                           
-            int dice2 = random.Next(1, 7);                              //sätter ett nummer mellan 1 och 6.
-            int result = dice1 + dice2;                                 //räknar ihop tärningarna
+            Random random = new Random(); //Skapar slumpgeneratorerna
+            int dice1 = random.Next(1, 7); //sätter ett nummer mellan 1 och 6.
+            int dice2 = random.Next(1, 7); //sätter ett nummer mellan 1 och 6.
+            int result = dice1 + dice2; //räknar ihop tärningarna
 
             if (dice1 == dice2)
             {
                 diceEqualCount++;
+
+                lblDice1.BackColor = doubleDiceColor;
+                lblDice2.BackColor = doubleDiceColor;
+
+                btnRollDices.Enabled = true;
             }
             else
             {
                 diceEqualCount = 0;
+                
+                lblDice1.BackColor = formColor;
+                lblDice2.BackColor = formColor;
+
             }
 
             if (diceEqualCount == 3)
@@ -329,16 +342,15 @@ namespace MonopolyBoard
                 Player[activePlayer].MoveToJail();
             }
 
-            lbldice1.Text = Convert.ToString(dice1);
-            lbldice2.Text = Convert.ToString(dice2);
-            lblresult.Text = Convert.ToString(result);
-
+            lblDice1.Text = Convert.ToString(dice1);
+            lblDice2.Text = Convert.ToString(dice2);
+            lblTotal.Text = Convert.ToString(result);
 
             MovePlayer(result);
 
         }
 
-        private void Monopoly_Load(object sender, EventArgs e)
+        private void Monopoly_Load(object sender, EventArgs e) /* Monopoply loads, start new game. */
         {
             New_game newGame = new New_game();
 
@@ -348,10 +360,13 @@ namespace MonopolyBoard
                 NextPlayer();
                 HideInactivePlayers();
             }
+            else
+                Application.Exit();
+                
 
         }
 
-        private void btnTrade_Click(object sender, EventArgs e)
+        private void btnTrade_Click(object sender, EventArgs e) /* Open trade window */
         {
             Trade TradeForm = new Trade();
 
@@ -359,12 +374,15 @@ namespace MonopolyBoard
             TradeForm.Show();
         }
 
-        public void HideInactivePlayers()
+        public void HideInactivePlayers() /* Hide players that are not in the game. */
         {
             if (Player[3].GetName() == "")
             {
-                picPlayer2.Hide();
                 picPlayer3.Hide();
+            }
+
+            if(Player[2].GetName() == ""){
+                picPlayer2.Hide();
             }
         }
 
@@ -374,6 +392,42 @@ namespace MonopolyBoard
 
             Player[activePlayer].SubtractMoney(positionprice);
             Freepark.AddMoney(positionprice);
+        }
+
+        public void ShowSquareInfo()
+        {
+            string info = "";
+
+            if (Squares[Player[activePlayer].GetPosition()].GetType().ToString() == "MonopolyBoard.Square")
+            {
+                info = ((Square)Squares[Player[activePlayer].GetPosition()]).GetInfo();
+            }
+            else if (Squares[Player[activePlayer].GetPosition()].GetType().ToString() == "MonopolyBoard.Street")
+            {
+                info = ((Street)Squares[Player[activePlayer].GetPosition()]).GetInfo();
+            }
+            else if (Squares[Player[activePlayer].GetPosition()].GetType().ToString() == "MonopolyBoard.Station")
+            {
+                info = ((Station)Squares[Player[activePlayer].GetPosition()]).GetInfo();
+            }
+            else if (Squares[Player[activePlayer].GetPosition()].GetType().ToString() == "MonopolyBoard.PowerStation")
+            {
+                info = ((PowerStation)Squares[Player[activePlayer].GetPosition()]).GetInfo();
+            }
+
+            lblSquareInfo.Text = info;
+        }
+
+        /* Allow command line to be seen during normal execution */
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAsAttribute(UnmanagedType.Bool)]
+        static extern bool AllocConsole();
+
+        private void btnNextPlayer_Click(object sender, EventArgs e)
+        {
+            btnRollDices.Enabled = true;
+            btnNextPlayer.Enabled = false;
+            NextPlayer();
         }
     }
 }
