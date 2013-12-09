@@ -437,10 +437,6 @@ namespace MonopolyBoard
             lblSquareInfo.Text = info;
         }
 
-        /* Allow command line to be seen during normal execution */
-        [DllImport("kernel32.dll", SetLastError = true)]
-        [return: MarshalAsAttribute(UnmanagedType.Bool)]
-        static extern bool AllocConsole();
 
         private void btnNextPlayer_Click(object sender, EventArgs e) /* Set activePlayer to the next one avaliable */
         {
@@ -472,6 +468,7 @@ namespace MonopolyBoard
                  *  Skatt: player.money = player.money - skatt.
                  *  Fri parkering: ge spelaren pengar, töm fri park.
                  *  Gå till fängelse: Player.position = 10, player.injail = true.
+                 *  #### Gör separat funktion för att skicka aktiv spelare till fängelse! ####
                  */
             }
             else if (squareType == typeof(Station))
@@ -501,6 +498,11 @@ namespace MonopolyBoard
              *  I fängelse
              */
         }
+
+        /* Allow command line to be seen during normal execution */
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAsAttribute(UnmanagedType.Bool)]
+        static extern bool AllocConsole();
     }
 }
 
