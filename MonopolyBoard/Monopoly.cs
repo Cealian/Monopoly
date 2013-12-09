@@ -454,7 +454,7 @@ namespace MonopolyBoard
 
             Type squareType = Squares[Player[activePlayer].GetPosition()].GetType();
 
-            if(squareType == typeof(Street))
+            if (squareType == typeof(Street))
             {
                 /*
                  * Street:
@@ -501,5 +501,7 @@ namespace MonopolyBoard
              *  I fängelse
              */
         }
+    }
+}
 
         /* Fixa husköparform HaD */
