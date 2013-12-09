@@ -279,43 +279,43 @@ namespace MonopolyBoard
 
         public void InstantiateStreets() /* Instantiate all squares that are streets. */
         {
-            SquaresArray[1] = new Street("Västerlångatan", 1200, 0,1);
-            SquaresArray[3] = new Street("Hornsgatan", 1200, 0,3);
+            SquaresArray[1] = new Street("Västerlångatan", 1200, 0);
+            SquaresArray[3] = new Street("Hornsgatan", 1200, 0);
 
-            SquaresArray[6] = new Street("Folkungagatan", 2000, 1,6);
-            SquaresArray[8] = new Street("Götgatan", 2000, 1,8);
-            SquaresArray[9] = new Street("Ringvägen", 2400, 1,9);
+            SquaresArray[6] = new Street("Folkungagatan", 2000, 1);
+            SquaresArray[8] = new Street("Götgatan", 2000, 1);
+            SquaresArray[9] = new Street("Ringvägen", 2400, 1);
 
-            SquaresArray[11] = new Street("S:t Eriksgatan", 2800, 2,11);
-            SquaresArray[13] = new Street("Odengatan", 2800, 2,13);
-            SquaresArray[14] = new Street("Valhallavägen", 3200, 2,14);
+            SquaresArray[11] = new Street("S:t Eriksgatan", 2800, 2);
+            SquaresArray[13] = new Street("Odengatan", 2800, 2);
+            SquaresArray[14] = new Street("Valhallavägen", 3200, 2);
 
-            SquaresArray[16] = new Street("Sturegatan", 3600, 3,16);
-            SquaresArray[18] = new Street("Karlavägen", 3600, 3,18);
-            SquaresArray[19] = new Street("Narvavägen", 4000, 3,19);
+            SquaresArray[16] = new Street("Sturegatan", 3600, 3);
+            SquaresArray[18] = new Street("Karlavägen", 3600, 3);
+            SquaresArray[19] = new Street("Narvavägen", 4000, 3);
 
-            SquaresArray[21] = new Street("Strandvägen", 4400, 4,21);
-            SquaresArray[23] = new Street("Kungsträdgårdsgatan", 4400, 4,23);
-            SquaresArray[24] = new Street("Hamngatan", 4800, 4,24);
+            SquaresArray[21] = new Street("Strandvägen", 4400, 4);
+            SquaresArray[23] = new Street("Kungsträdgårdsgatan", 4400, 4);
+            SquaresArray[24] = new Street("Hamngatan", 4800, 4);
 
-            SquaresArray[26] = new Street("Vasagatan", 5200, 5,26);
-            SquaresArray[27] = new Street("Kungsgatan", 5200, 5,27);
-            SquaresArray[29] = new Street("Stureplan", 5600, 5,29);
+            SquaresArray[26] = new Street("Vasagatan", 5200, 5);
+            SquaresArray[27] = new Street("Kungsgatan", 5200, 5);
+            SquaresArray[29] = new Street("Stureplan", 5600, 5);
 
-            SquaresArray[31] = new Street("Gustav Adolfs torg", 6000, 6,31);
-            SquaresArray[32] = new Street("Drottninggatan", 6000, 6,32);
-            SquaresArray[34] = new Street("Diplomatstaden", 6400, 6,34);
+            SquaresArray[31] = new Street("Gustav Adolfs torg", 6000, 6);
+            SquaresArray[32] = new Street("Drottninggatan", 6000, 6);
+            SquaresArray[34] = new Street("Diplomatstaden", 6400, 6);
 
-            SquaresArray[37] = new Street("Centrum", 7000, 7,37);
-            SquaresArray[39] = new Street("Norrmalmstorg", 8000, 7,39);
+            SquaresArray[37] = new Street("Centrum", 7000, 7);
+            SquaresArray[39] = new Street("Norrmalmstorg", 8000, 7);
         }
 
         public void InstantiateStations() /* Instantiate all squares that are stations. */
         {
-            SquaresArray[5] = new Station("Södra station", 4000, 8,5);
-            SquaresArray[15] = new Station("Östra station", 4000, 8,15);
-            SquaresArray[25] = new Station("Centralstation", 4000, 8,25);
-            SquaresArray[35] = new Station("Norra station", 4000, 8,35);
+            SquaresArray[5] = new Station("Södra station", 4000, 8);
+            SquaresArray[15] = new Station("Östra station", 4000, 8);
+            SquaresArray[25] = new Station("Centralstation", 4000, 8);
+            SquaresArray[35] = new Station("Norra station", 4000, 8);
         }
 
         public void InstantiatePowerStations()/* Instantiate all squares that are powerstations. */
