@@ -57,15 +57,7 @@ namespace MonopolyBoard
        {
             return GetName() + " \n" + GetPrice() + " \n" + GetRents();
        }
-        public void SetPosition(int setPosition)
-        {
-            position = setPosition;
-        }
-        public int GetPosition()
-        {
-            return position;
-        }
-
+       
         private int Round(int value) /* Rounds to the nearest value of VALUE_TO_ROUND_TO */
         {
             int newValue = 0;
