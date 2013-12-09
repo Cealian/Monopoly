@@ -3,7 +3,7 @@ namespace MonopolyBoard
 {
     public class Station : Square
     {
-        private int owner, block, position;
+        private int owner, block;
 
         public Station() /* Nödvändig? */
         {
@@ -11,10 +11,9 @@ namespace MonopolyBoard
             SetPrice(0);
             owner = 5;
             block = 0;
-            position = 0;
         }
 
-        public Station(string setName, int setPrice, int setBlock, int setPosition)
+        public Station(string setName, int setPrice, int setBlock)
         {
             /*
              * name = setName   ?
@@ -25,7 +24,6 @@ namespace MonopolyBoard
             SetPrice(setPrice);
             owner = 5;
             block = setBlock;
-            position = setPosition;
         }
 
         public int GetOwner()
@@ -71,16 +69,6 @@ namespace MonopolyBoard
         new public string GetInfo()
         {
             return GetName() + " \n" + GetPrice() + " \n" + GetRents();
-        }
-
-        public void SetPosition(int setPosition)
-        {
-            position = setPosition;
-        }
-
-        public int GetPosition()
-        {
-            return position;
         }
 
         private int Round(int value) /* Rounds to the nearest value of VALUE_TO_ROUND_TO */

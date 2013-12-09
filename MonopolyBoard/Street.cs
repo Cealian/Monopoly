@@ -13,10 +13,9 @@ namespace MonopolyBoard
             SetOwner(5);
             SetBlock (0);
             noOfHouses = 0;
-            SetPosition(0);
         }
 
-        public Street(string setName, int setPrice, int setBlock, int setPosition)
+        public Street(string setName, int setPrice, int setBlock)
         {
             /*
              * name = setName           ?
@@ -31,7 +30,6 @@ namespace MonopolyBoard
             SetOwner(5);
             SetBlock(setBlock);
             noOfHouses = 0;
-            SetPosition(setPosition);
         }
         public int GetNoOfHouses()
         {
