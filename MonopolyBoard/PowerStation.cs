@@ -7,7 +7,7 @@ namespace MonopolyBoard
         {
             SetName("");
             SetPrice(0);
-            SetOwner(0);
+            SetOwner(5);
             SetBlock (0);
         }
 
@@ -15,7 +15,7 @@ namespace MonopolyBoard
         {
             SetName(setName);
             SetPrice(setPrice);
-            SetOwner(0);
+            SetOwner(5);
             SetBlock(setBlock);
         }
         public int GetRent(int dice)
