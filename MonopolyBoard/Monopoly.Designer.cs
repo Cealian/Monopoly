@@ -1,6 +1,6 @@
 ﻿namespace MonopolyBoard
 {
-    partial class Monopoly
+    partial class frmMonopoly
     {
         /// <summary>
         /// Required designer variable.
@@ -29,21 +29,22 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Monopoly));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMonopoly));
             this.pnlMainPanel = new System.Windows.Forms.Panel();
             this.picPlayer3 = new System.Windows.Forms.PictureBox();
             this.picPlayer2 = new System.Windows.Forms.PictureBox();
             this.picPlayer1 = new System.Windows.Forms.PictureBox();
             this.picPlayer0 = new System.Windows.Forms.PictureBox();
             this.btnQuit = new System.Windows.Forms.Button();
-            this.btnMove = new System.Windows.Forms.Button();
+            this.btnTest = new System.Windows.Forms.Button();
             this.tmrMovePlayer = new System.Windows.Forms.Timer(this.components);
-            this.txtNumberOfSteps = new System.Windows.Forms.TextBox();
-            this.btnTurn = new System.Windows.Forms.Button();
-            this.lbldice1 = new System.Windows.Forms.Label();
-            this.lbldice2 = new System.Windows.Forms.Label();
-            this.lblresult = new System.Windows.Forms.Label();
+            this.btnRollDices = new System.Windows.Forms.Button();
+            this.lblDice1 = new System.Windows.Forms.Label();
+            this.lblDice2 = new System.Windows.Forms.Label();
+            this.lblTotal = new System.Windows.Forms.Label();
             this.btnTrade = new System.Windows.Forms.Button();
+            this.lblSquareInfo = new System.Windows.Forms.Label();
+            this.btnNextPlayer = new System.Windows.Forms.Button();
             this.pnlMainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer2)).BeginInit();
@@ -72,7 +73,7 @@
             // 
             this.picPlayer3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.picPlayer3.Image = ((System.Drawing.Image)(resources.GetObject("picPlayer3.Image")));
-            this.picPlayer3.InitialImage = ((System.Drawing.Image)(resources.GetObject("picPlayer3.InitialImage")));
+            this.picPlayer3.InitialImage = null;
             this.picPlayer3.Location = new System.Drawing.Point(596, 596);
             this.picPlayer3.Name = "picPlayer3";
             this.picPlayer3.Size = new System.Drawing.Size(20, 20);
@@ -83,7 +84,7 @@
             // 
             this.picPlayer2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.picPlayer2.Image = ((System.Drawing.Image)(resources.GetObject("picPlayer2.Image")));
-            this.picPlayer2.InitialImage = ((System.Drawing.Image)(resources.GetObject("picPlayer2.InitialImage")));
+            this.picPlayer2.InitialImage = null;
             this.picPlayer2.Location = new System.Drawing.Point(596, 570);
             this.picPlayer2.Name = "picPlayer2";
             this.picPlayer2.Size = new System.Drawing.Size(20, 20);
@@ -94,7 +95,7 @@
             // 
             this.picPlayer1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.picPlayer1.Image = ((System.Drawing.Image)(resources.GetObject("picPlayer1.Image")));
-            this.picPlayer1.InitialImage = ((System.Drawing.Image)(resources.GetObject("picPlayer1.InitialImage")));
+            this.picPlayer1.InitialImage = null;
             this.picPlayer1.Location = new System.Drawing.Point(570, 596);
             this.picPlayer1.Name = "picPlayer1";
             this.picPlayer1.Size = new System.Drawing.Size(20, 20);
@@ -105,7 +106,7 @@
             // 
             this.picPlayer0.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.picPlayer0.Image = ((System.Drawing.Image)(resources.GetObject("picPlayer0.Image")));
-            this.picPlayer0.InitialImage = ((System.Drawing.Image)(resources.GetObject("picPlayer0.InitialImage")));
+            this.picPlayer0.InitialImage = null;
             this.picPlayer0.Location = new System.Drawing.Point(570, 570);
             this.picPlayer0.Name = "picPlayer0";
             this.picPlayer0.Size = new System.Drawing.Size(20, 20);
@@ -114,80 +115,73 @@
             // 
             // btnQuit
             // 
-            this.btnQuit.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnQuit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnQuit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnQuit.Location = new System.Drawing.Point(654, 38);
+            this.btnQuit.Location = new System.Drawing.Point(654, 53);
             this.btnQuit.Name = "btnQuit";
             this.btnQuit.Size = new System.Drawing.Size(40, 32);
             this.btnQuit.TabIndex = 1;
             this.btnQuit.Text = "Quit";
-            this.btnQuit.UseVisualStyleBackColor = false;
+            this.btnQuit.UseVisualStyleBackColor = true;
             this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
             // 
-            // btnMove
+            // btnTest
             // 
-            this.btnMove.Location = new System.Drawing.Point(691, 12);
-            this.btnMove.Name = "btnMove";
-            this.btnMove.Size = new System.Drawing.Size(75, 20);
-            this.btnMove.TabIndex = 2;
-            this.btnMove.Text = "Move";
-            this.btnMove.UseVisualStyleBackColor = true;
-            this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
+            this.btnTest.Location = new System.Drawing.Point(654, 12);
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Size = new System.Drawing.Size(40, 35);
+            this.btnTest.TabIndex = 2;
+            this.btnTest.Text = "Test";
+            this.btnTest.UseVisualStyleBackColor = true;
+            this.btnTest.Click += new System.EventHandler(this.btnMove_Click);
             // 
             // tmrMovePlayer
             // 
             this.tmrMovePlayer.Interval = 40;
             this.tmrMovePlayer.Tick += new System.EventHandler(this.tmrMovePlayer_Tick);
             // 
-            // txtNumberOfSteps
+            // btnRollDices
             // 
-            this.txtNumberOfSteps.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtNumberOfSteps.Location = new System.Drawing.Point(654, 12);
-            this.txtNumberOfSteps.Name = "txtNumberOfSteps";
-            this.txtNumberOfSteps.Size = new System.Drawing.Size(31, 20);
-            this.txtNumberOfSteps.TabIndex = 3;
+            this.btnRollDices.Location = new System.Drawing.Point(700, 41);
+            this.btnRollDices.Name = "btnRollDices";
+            this.btnRollDices.Size = new System.Drawing.Size(75, 23);
+            this.btnRollDices.TabIndex = 4;
+            this.btnRollDices.Text = "Slå tärningar";
+            this.btnRollDices.UseVisualStyleBackColor = true;
+            this.btnRollDices.Click += new System.EventHandler(this.btnTurn_Click);
             // 
-            // btnTurn
+            // lblDice1
             // 
-            this.btnTurn.Location = new System.Drawing.Point(654, 86);
-            this.btnTurn.Name = "btnTurn";
-            this.btnTurn.Size = new System.Drawing.Size(75, 23);
-            this.btnTurn.TabIndex = 4;
-            this.btnTurn.Text = "Slå tärningar";
-            this.btnTurn.UseVisualStyleBackColor = true;
-            this.btnTurn.Click += new System.EventHandler(this.btnTurn_Click);
+            this.lblDice1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblDice1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDice1.Location = new System.Drawing.Point(654, 422);
+            this.lblDice1.Name = "lblDice1";
+            this.lblDice1.Size = new System.Drawing.Size(30, 30);
+            this.lblDice1.TabIndex = 5;
+            this.lblDice1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lbldice1
+            // lblDice2
             // 
-            this.lbldice1.AutoSize = true;
-            this.lbldice1.Location = new System.Drawing.Point(665, 132);
-            this.lbldice1.Name = "lbldice1";
-            this.lbldice1.Size = new System.Drawing.Size(35, 13);
-            this.lbldice1.TabIndex = 5;
-            this.lbldice1.Text = "label1";
+            this.lblDice2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblDice2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDice2.Location = new System.Drawing.Point(684, 422);
+            this.lblDice2.Name = "lblDice2";
+            this.lblDice2.Size = new System.Drawing.Size(30, 30);
+            this.lblDice2.TabIndex = 6;
+            this.lblDice2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lbldice2
+            // lblTotal
             // 
-            this.lbldice2.AutoSize = true;
-            this.lbldice2.Location = new System.Drawing.Point(717, 132);
-            this.lbldice2.Name = "lbldice2";
-            this.lbldice2.Size = new System.Drawing.Size(35, 13);
-            this.lbldice2.TabIndex = 6;
-            this.lbldice2.Text = "label2";
-            // 
-            // lblresult
-            // 
-            this.lblresult.AutoSize = true;
-            this.lblresult.Location = new System.Drawing.Point(688, 165);
-            this.lblresult.Name = "lblresult";
-            this.lblresult.Size = new System.Drawing.Size(35, 13);
-            this.lblresult.TabIndex = 7;
-            this.lblresult.Text = "label3";
+            this.lblTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotal.Location = new System.Drawing.Point(654, 452);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(60, 30);
+            this.lblTotal.TabIndex = 7;
+            this.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnTrade
             // 
-            this.btnTrade.Location = new System.Drawing.Point(668, 300);
+            this.btnTrade.Location = new System.Drawing.Point(700, 12);
             this.btnTrade.Name = "btnTrade";
             this.btnTrade.Size = new System.Drawing.Size(75, 23);
             this.btnTrade.TabIndex = 8;
@@ -195,25 +189,46 @@
             this.btnTrade.UseVisualStyleBackColor = true;
             this.btnTrade.Click += new System.EventHandler(this.btnTrade_Click);
             // 
-            // Monopoly
+            // lblSquareInfo
+            // 
+            this.lblSquareInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblSquareInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSquareInfo.Location = new System.Drawing.Point(654, 482);
+            this.lblSquareInfo.Name = "lblSquareInfo";
+            this.lblSquareInfo.Size = new System.Drawing.Size(132, 157);
+            this.lblSquareInfo.TabIndex = 9;
+            // 
+            // btnNextPlayer
+            // 
+            this.btnNextPlayer.Enabled = false;
+            this.btnNextPlayer.Location = new System.Drawing.Point(700, 70);
+            this.btnNextPlayer.Name = "btnNextPlayer";
+            this.btnNextPlayer.Size = new System.Drawing.Size(75, 23);
+            this.btnNextPlayer.TabIndex = 10;
+            this.btnNextPlayer.Text = "Nästa";
+            this.btnNextPlayer.UseVisualStyleBackColor = true;
+            this.btnNextPlayer.Click += new System.EventHandler(this.btnNextPlayer_Click);
+            // 
+            // frmMonopoly
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.CancelButton = this.btnQuit;
             this.ClientSize = new System.Drawing.Size(798, 648);
+            this.Controls.Add(this.btnNextPlayer);
+            this.Controls.Add(this.lblSquareInfo);
             this.Controls.Add(this.btnTrade);
-            this.Controls.Add(this.lblresult);
-            this.Controls.Add(this.lbldice2);
-            this.Controls.Add(this.lbldice1);
-            this.Controls.Add(this.btnTurn);
-            this.Controls.Add(this.txtNumberOfSteps);
-            this.Controls.Add(this.btnMove);
+            this.Controls.Add(this.lblTotal);
+            this.Controls.Add(this.lblDice2);
+            this.Controls.Add(this.lblDice1);
+            this.Controls.Add(this.btnRollDices);
+            this.Controls.Add(this.btnTest);
             this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.pnlMainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Monopoly";
+            this.Name = "frmMonopoly";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Monopol";
             this.Load += new System.EventHandler(this.Monopoly_Load);
@@ -223,7 +238,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer0)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -231,18 +245,19 @@
 
         private System.Windows.Forms.Panel pnlMainPanel;
         private System.Windows.Forms.Button btnQuit;
-        private System.Windows.Forms.Button btnMove;
+        private System.Windows.Forms.Button btnTest;
         private System.Windows.Forms.Timer tmrMovePlayer;
         public System.Windows.Forms.PictureBox picPlayer0;
-        private System.Windows.Forms.TextBox txtNumberOfSteps;
         public System.Windows.Forms.PictureBox picPlayer1;
         public System.Windows.Forms.PictureBox picPlayer3;
         public System.Windows.Forms.PictureBox picPlayer2;
-        private System.Windows.Forms.Button btnTurn;
-        private System.Windows.Forms.Label lbldice1;
-        private System.Windows.Forms.Label lbldice2;
-        private System.Windows.Forms.Label lblresult;
+        private System.Windows.Forms.Button btnRollDices;
+        private System.Windows.Forms.Label lblDice1;
+        private System.Windows.Forms.Label lblDice2;
+        private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Button btnTrade;
+        private System.Windows.Forms.Label lblSquareInfo;
+        private System.Windows.Forms.Button btnNextPlayer;
     }
 }
 

@@ -12,7 +12,7 @@ namespace MonopolyBoard
 {
     public partial class Trade : Form
     {
-        public Monopoly board;
+        public frmMonopoly board;
         public Trade()
         {
             InitializeComponent();

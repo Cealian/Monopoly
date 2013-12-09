@@ -9,13 +9,13 @@ namespace MonopolyBoard
         private int money = 30000;
         private int position = 0;
         private bool inJail = false;
-        private int steps;
         private int stepsLeft;
 
 
         public void Move(int steps)
         {
             stepsLeft = steps;
+            position += steps;
         }
 
         // funktioner
@@ -31,6 +31,7 @@ namespace MonopolyBoard
 
         public void MoveForward(int steps)
         {
+            stepsLeft = steps;
             //flytta fram, om position > 39 efter position -= 39
             position += steps;  //addera steg
             if (position > 39)
@@ -86,8 +87,6 @@ namespace MonopolyBoard
         {
             stepsLeft--;
             bool moreSteps = (stepsLeft > 0);
-
-            Console.WriteLine("Steps left: {0}", stepsLeft);
 
             return moreSteps;
         }
