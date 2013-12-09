@@ -117,7 +117,6 @@
             this.Controls.Add(this.btnStart);
             this.Name = "New_game";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "New_game";
             this.ResumeLayout(false);
             this.PerformLayout();
 
