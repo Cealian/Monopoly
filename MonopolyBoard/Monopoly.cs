@@ -472,6 +472,7 @@ namespace MonopolyBoard
                  *  Skatt: player.money = player.money - skatt.
                  *  Fri parkering: ge spelaren pengar, töm fri park.
                  *  Gå till fängelse: Player.position = 10, player.injail = true.
+                 *  #### Gör separat funktion för att skicka aktiv spelare till fängelse! ####
                  */
             }
             else if (squareType == typeof(Station))

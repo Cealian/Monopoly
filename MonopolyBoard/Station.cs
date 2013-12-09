@@ -1,7 +1,7 @@
 ﻿
 namespace MonopolyBoard
 {
-    public class Station:Square
+    public class Station : Square
     {
         private int owner, block, position;
 
@@ -55,18 +55,32 @@ namespace MonopolyBoard
         {
             return "Äger du en station: " + GetRent() + "\nÄger du två stationer: " + GetRent() * 2 + "\nÄger du tre stationer: " + GetRent() * 3 + "\nÄger du fyra stationer: " + GetRent() * 4;
         }
-       new public string GetInfo()
-       {
-            return GetName()+" \n" + GetPrice() +" \n" + GetRents();
-       }
-       public void SetPosition(int setPosition)
-       {
-           position = setPosition;
-       }
-       public int GetPosition()
-       {
-           return position;
-       }
+        new public string GetInfo()
+        {
+            return GetName() + " \n" + GetPrice() + " \n" + GetRents();
+        }
+        public void SetPosition(int setPosition)
+        {
+            position = setPosition;
+        }
+        public int GetPosition()
+        {
+            return position;
+        }
 
+        private int Round(int value) /* Rounds to the nearest value of VALUE_TO_ROUND_TO */
+        {
+            int newValue = 0;
+            const int VALUE_TO_ROUND_TO = 50;
+
+            newValue = (value / VALUE_TO_ROUND_TO) * VALUE_TO_ROUND_TO;
+
+            if (value - newValue >= (VALUE_TO_ROUND_TO / 2))
+            {
+                newValue += VALUE_TO_ROUND_TO;
+            }
+
+            return newValue;
+        }
     }
 }
