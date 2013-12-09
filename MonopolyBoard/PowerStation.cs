@@ -25,7 +25,7 @@ namespace MonopolyBoard
 
         new public string GetRents()
         {
-            return "Om du äger ETT kraftverk blir hyran 100 * värdet tärningarna visar.\n Äger du TVÅ kraftverk blir hyran 200 * värdet tärningarna visar, osv"; 
+            return "Äger du ETT kraftverk blir hyran 100 * värdet tärningarna visar.\nÄger du TVÅ kraftverk blir hyran 200 * värdet tärningarna visar."; 
         }
 
         new public string GetInfo()
