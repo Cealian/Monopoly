@@ -107,6 +107,10 @@ namespace MonopolyBoard
                 {
                     btnNextPlayer.Enabled = true;
                 }
+                else
+                {
+                    btnRollDices.Enabled = true;
+                }
 
 
                 Console.WriteLine(picPlayer2.Location.X + " - " + picPlayer2.Location.Y);
@@ -325,8 +329,6 @@ namespace MonopolyBoard
 
                 lblDice1.BackColor = doubleDiceColor;
                 lblDice2.BackColor = doubleDiceColor;
-
-                btnRollDices.Enabled = true;
             }
             else
             {
@@ -366,7 +368,7 @@ namespace MonopolyBoard
 
         }
 
-        private void btnTrade_Click(object sender, EventArgs e) /* Open trade window */
+        private void btnTrade_Click(object sender, EventArgs e) /* Open trade window. */
         {
             Trade TradeForm = new Trade();
 
@@ -387,7 +389,7 @@ namespace MonopolyBoard
             }
         }
 
-        public void TaxActivePlayer() /* Tax the active player and subtract the appripriate amount. */
+        public void TaxActivePlayer() /* Tax the active player and subtract the appropriate amount. */
         {
             int positionprice = SquaresArray[Player[activePlayer].GetPosition()].GetPrice();
 
@@ -395,7 +397,7 @@ namespace MonopolyBoard
             Freepark.AddMoney(positionprice);
         }
 
-        public void ShowSquareInfo() /* Show the squares info in lblSquareInfo */
+        public void ShowSquareInfo() /* Show the squares info in lblSquareInfo. */
         {
             string info = "";
 
@@ -424,7 +426,7 @@ namespace MonopolyBoard
         [return: MarshalAsAttribute(UnmanagedType.Bool)]
         static extern bool AllocConsole();
 
-        private void btnNextPlayer_Click(object sender, EventArgs e)
+        private void btnNextPlayer_Click(object sender, EventArgs e) /* Set activePlayer to the next one avaliable */
         {
             btnRollDices.Enabled = true;
             btnNextPlayer.Enabled = false;
