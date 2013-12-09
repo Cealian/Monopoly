@@ -58,6 +58,22 @@ namespace MonopolyBoard
 
         private void btnMove_Click(object sender, EventArgs e) /* Move the selected player the specified number of steps. */
         {
+            ((Street)Squares[1]).ChangeOwner(0);
+            ((Street)Squares[3]).ChangeOwner(0);
+            ((Street)Squares[6]).ChangeOwner(0);
+            ((Street)Squares[8]).ChangeOwner(1);
+            ((Street)Squares[9]).ChangeOwner(1);
+            ((Street)Squares[11]).ChangeOwner(1);
+            ((Street)Squares[13]).ChangeOwner(2);
+            ((Street)Squares[14]).ChangeOwner(2);
+            ((Street)Squares[16]).ChangeOwner(2);
+            ((Street)Squares[18]).ChangeOwner(3);
+            ((Street)Squares[19]).ChangeOwner(3);
+            ((Street)Squares[21]).ChangeOwner(3);
+            Player[0].SetMoney(500);
+            Player[1].SetMoney(600);
+            Player[2].SetMoney(700);
+            Player[3].SetMoney(800);
             RunSquareEvent();
         }
 
