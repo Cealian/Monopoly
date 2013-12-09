@@ -489,5 +489,17 @@ namespace MonopolyBoard
                  */
             }
         }
-    }
-}
+
+        public void UpdatePlayerInfo() /* Updates the on-screen info about the players */
+        {
+            /*
+             * Uppdatera information om alla spelare.
+             * Visa:
+             *  Namn
+             *  Pengar
+             *  Ägda gator (Visa vilka som tillhör samma kvarter)
+             *  I fängelse
+             */
+        }
+
+        /* Fixa husköparform HaD */
