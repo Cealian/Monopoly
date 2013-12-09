@@ -91,5 +91,10 @@ namespace MonopolyBoard
             return moreSteps;
         }
 
+        //SETMONEY Ta bort sen
+        public void SetMoney(int newMoney)
+        {
+            money = newMoney;
+        }
     }
 }

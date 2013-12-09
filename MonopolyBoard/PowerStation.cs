@@ -30,7 +30,7 @@ namespace MonopolyBoard
 
         new public string GetInfo()
         {
-            return GetName() + GetOwner() + GetPrice() + GetRents();
+            return GetName() + GetPrice() + GetRents();
         }
     }
 }

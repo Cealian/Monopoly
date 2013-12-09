@@ -18,36 +18,30 @@ namespace MonopolyBoard
             InitializeComponent();
         }
 
-        static void TradeMoney(ref string fromMoney, ref string toMoney, ref string toMove)
-        {
-            int a = 0, b = 0, aTob = 0;
-            a = int.Parse(fromMoney);
-            b = int.Parse(toMoney);
-            try
-            {
-                aTob = int.Parse(toMove);
-            }
-            catch
-            {
-                aTob = 0;
-            }
-            a -= aTob;
-            b += aTob;
-            fromMoney = a.ToString();
-            toMoney = b.ToString();
-            toMove = "";
-        }
-
         private void AtoB_Click(object sender, EventArgs e)
         {
             if (cbMoneyA.Checked)
             {
-                string a = mtxtMoneyA.Text, b = mtxtMoneyB.Text, c = txtMoneyA.Text;
-                TradeMoney(ref a, ref b, ref c);
-                cbMoneyA.Checked = false;
-                mtxtMoneyA.Text = a;
-                mtxtMoneyB.Text = b;
-                txtMoneyA.Text = c;
+                int moneyToMove = 0;
+                try
+                {
+                    moneyToMove = int.Parse(txtMoneyA.Text);
+                }
+                catch
+                {
+                    moneyToMove = 0;
+                }
+                board.Player[board.activePlayer].SubtractMoney(moneyToMove);
+                for (int j = 0; j < board.Player.Length; j++)
+                {
+                    if (lbPlayers.SelectedItem.ToString() == board.Player[j].GetName())
+                    {
+                        board.Player[j].AddMoney(moneyToMove);
+                        mtxtMoneyB.Text = board.Player[j].GetMoney().ToString();
+                    }
+                }
+                txtMoneyA.Text = "";
+                mtxtMoneyA.Text = board.Player[board.activePlayer].GetMoney().ToString();
             }
             while (clbPlayerA.CheckedItems.Count > 0)
             {
@@ -60,12 +54,17 @@ namespace MonopolyBoard
         {
             if (cbMoneyB.Checked)
             {
-                string a = mtxtMoneyB.Text, b = mtxtMoneyA.Text, c = txtMoneyB.Text;
-                TradeMoney(ref a, ref b, ref c);
-                cbMoneyB.Checked = false;
-                mtxtMoneyB.Text = a;
-                mtxtMoneyA.Text = b;
-                txtMoneyB.Text = c;
+                string moneyToMove = txtMoneyA.Text;
+                int pAMoney = board.Player[board.activePlayer].GetMoney(), pBMoney = 0;
+                for (int j = 0; j < board.Player.Length; j++)
+                {
+                    if (lbPlayers.SelectedItem.ToString() == board.Player[j].GetName())
+                        pBMoney = board.Player[j].GetMoney();
+
+                }
+                //TradeMoney(ref pAMoney, ref pBMoney, ref moneyToMove);
+                txtMoneyA.Text = moneyToMove;
+                cbMoneyA.Checked = false;
             }
             while (clbPlayerB.CheckedItems.Count > 0)
             {
@@ -89,7 +88,7 @@ namespace MonopolyBoard
             if (cbMoneyA.Checked)
             {
                 string a = mtxtMoneyA.Text, b = mtxtMoneyB.Text, c = txtMoneyA.Text;
-                TradeMoney(ref a, ref b, ref c);
+                //TradeMoney(ref a, ref b, ref c);
                 cbMoneyA.Checked = false;
                 mtxtMoneyA.Text = a;
                 mtxtMoneyB.Text = b;
@@ -104,7 +103,7 @@ namespace MonopolyBoard
             if (cbMoneyB.Checked)
             {
                 string a = mtxtMoneyB.Text, b = mtxtMoneyA.Text, c = txtMoneyB.Text;
-                TradeMoney(ref a, ref b, ref c);
+                //TradeMoney(ref a, ref b, ref c);
                 cbMoneyB.Checked = false;
                 mtxtMoneyB.Text = a;
                 mtxtMoneyA.Text = b;
@@ -120,42 +119,70 @@ namespace MonopolyBoard
         private void Trade_Load(object sender, EventArgs e)
         {
             gbAPlayer.Text = board.Player[board.activePlayer].GetName();
+            mtxtMoneyA.Text = board.Player[board.activePlayer].GetMoney().ToString();
             for (int i = 0; i < board.Player.Length; i++)
             {
-                if(i!=board.activePlayer)
+                if (i != board.activePlayer)
                     lbPlayers.Items.Add(board.Player[i].GetName());
             }
+            lbPlayers.SetSelected(0, true);
+            gbSPlayer.Text = lbPlayers.SelectedItem.ToString();
+            ChangePlayers();
+        }
+
+        private void lbPlayers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ChangePlayers();
+            gbSPlayer.Text = lbPlayers.SelectedItem.ToString();
+        }
+
+        public void ChangePlayers()
+        {
+            clbPlayerA.Items.Clear();
+            clbPlayerB.Items.Clear();
 
             for (int i = 0; i < board.SquaresArray.Length; i++)
             {
-                if (board.SquaresArray[i].GetType().ToString() == "MonopolyBoard.Street")
+                if (board.SquaresArray[i].GetType() == typeof(Street))
                 {
-                    Street newStreet = (Street)board.SquaresArray[i];
-                    if (newStreet.GetOwner() == board.activePlayer)
-                        clbPlayerA.Items.Add(newStreet.GetName());
-                    else if (newStreet.GetOwner() == 0)
-                        clbPlayerB.Items.Add(newStreet.GetName());
+                    if (((Street)board.SquaresArray[i]).GetOwner() == board.activePlayer)
+                        clbPlayerA.Items.Add(((Street)board.SquaresArray[i]).GetName());
                 }
-                else if (board.SquaresArray[i].GetType().ToString() == "MonopolyBoard.Station")
+                else if (board.SquaresArray[i].GetType() == typeof(Station))
                 {
-                    Station newStation = (Station)board.SquaresArray[i];
-                    if (newStation.GetOwner() == board.activePlayer)
-                        clbPlayerA.Items.Add(newStation.GetName());
-                    else if (newStation.GetOwner() == 0)
-                        clbPlayerB.Items.Add(newStation.GetName());
+                    if (((Station)board.SquaresArray[i]).GetOwner() == board.activePlayer)
+                        clbPlayerA.Items.Add(((Station)board.SquaresArray[i]).GetName());
                 }
-                else if (board.SquaresArray[i].GetType().ToString() == "MonopolyBoard.PowerStation")
+                else if (board.SquaresArray[i].GetType() == typeof(PowerStation))
                 {
-                    PowerStation newPower = (PowerStation)board.SquaresArray[i];
-                    if (newPower.GetOwner() == board.activePlayer)
-                        clbPlayerA.Items.Add(newPower.GetName());
-                    else if (newPower.GetOwner() == 0)
-                        clbPlayerB.Items.Add(newPower.GetName());
+                    if (((PowerStation)board.SquaresArray[i]).GetOwner() == board.activePlayer)
+                        clbPlayerA.Items.Add(((PowerStation)board.SquaresArray[i]).GetName());
+                }
+
+                for (int j = 0; j < board.Player.Length; j++)
+                {
+                    if (lbPlayers.SelectedItem.ToString() == board.Player[j].GetName())
+                        mtxtMoneyB.Text = board.Player[j].GetMoney().ToString();
+                    if (board.SquaresArray[i].GetType() == typeof(Street))
+                    {
+                        if (lbPlayers.SelectedItem.ToString() == board.Player[j].GetName()
+                            && ((Street)board.SquaresArray[i]).GetOwner() == j)
+                            clbPlayerB.Items.Add(((Street)board.SquaresArray[i]).GetName());
+                    }
+                    else if (board.SquaresArray[i].GetType() == typeof(Station))
+                    {   
+                        if (lbPlayers.SelectedItem.ToString() == board.Player[j].GetName()
+                            && ((Station)board.SquaresArray[i]).GetOwner() == j)
+                            clbPlayerB.Items.Add(((Station)board.SquaresArray[i]).GetName());
+                    }
+                    else if (board.SquaresArray[i].GetType() == typeof(PowerStation))
+                    {
+                        if (lbPlayers.SelectedItem.ToString() == board.Player[j].GetName()
+                            && ((PowerStation)board.SquaresArray[i]).GetOwner() == j)
+                            clbPlayerB.Items.Add(((PowerStation)board.SquaresArray[i]).GetName());
+                    }
                 }
             }
-
-            mtxtMoneyA.Text = board.Player[board.activePlayer].GetMoney().ToString();
-            mtxtMoneyB.Text = board.Player[board.activePlayer].GetMoney().ToString();
         }
     }
 }

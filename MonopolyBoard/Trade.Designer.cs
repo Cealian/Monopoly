@@ -177,6 +177,7 @@
             this.lbPlayers.Name = "lbPlayers";
             this.lbPlayers.Size = new System.Drawing.Size(75, 82);
             this.lbPlayers.TabIndex = 5;
+            this.lbPlayers.SelectedIndexChanged += new System.EventHandler(this.lbPlayers_SelectedIndexChanged);
             // 
             // Trade
             // 
