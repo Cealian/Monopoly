@@ -9,7 +9,7 @@ namespace MonopolyBoard
         {
             SetName("");
             SetPrice(0);
-            owner = 0;
+            owner = 5;
             block = 0;
         }
 
@@ -17,7 +17,7 @@ namespace MonopolyBoard
         {
             SetName(setName);
             SetPrice(setPrice);
-            owner = 0;
+            owner = 5;
             block = setBlock;
         }
 
