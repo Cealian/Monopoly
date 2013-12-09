@@ -27,9 +27,11 @@ namespace MonopolyBoard
                 {
                     moneyToMove = int.Parse(txtMoneyA.Text);
                 }
-                catch
+                catch (FormatException)
                 {
                     moneyToMove = 0;
+                    txtMoneyA.Text = "";
+                    MessageBox.Show("Skriv in ett heltal");
                 }
                 board.Player[board.activePlayer].SubtractMoney(moneyToMove);
                 for (int j = 0; j < board.Player.Length; j++)
@@ -43,11 +45,34 @@ namespace MonopolyBoard
                 txtMoneyA.Text = "";
                 mtxtMoneyA.Text = board.Player[board.activePlayer].GetMoney().ToString();
             }
-            while (clbPlayerA.CheckedItems.Count > 0)
+            foreach (object itemChecked in clbPlayerA.CheckedItems)
             {
-                clbPlayerB.Items.Add(clbPlayerA.CheckedItems[0]);
-                clbPlayerA.Items.Remove(clbPlayerA.CheckedItems[0]);
+                for (int i = 0; i < board.SquaresArray.Length; i++)
+                {
+                    for (int j = 0; j < board.Player.Length; j++)
+                    {
+                        if (lbPlayers.SelectedItem.ToString() == board.Player[j].GetName())
+                        {
+                            if (itemChecked.ToString() == board.SquaresArray[i].GetName())
+                            {
+                                if (board.SquaresArray[i].GetType() == typeof(Street))
+                                {
+                                    ((Street)board.SquaresArray[i]).ChangeOwner(j);
+                                }
+                                else if (board.SquaresArray[i].GetType() == typeof(Station))
+                                {
+                                    ((Station)board.SquaresArray[i]).ChangeOwner(j);
+                                }
+                                else if (board.SquaresArray[i].GetType() == typeof(PowerStation))
+                                {
+                                    ((PowerStation)board.SquaresArray[i]).ChangeOwner(j);
+                                }
+                            }
+                        }
+                    }
+                }
             }
+            ChangePlayers();
         }
 
         private void BtoA_Click(object sender, EventArgs e)
@@ -170,7 +195,7 @@ namespace MonopolyBoard
                             clbPlayerB.Items.Add(((Street)board.SquaresArray[i]).GetName());
                     }
                     else if (board.SquaresArray[i].GetType() == typeof(Station))
-                    {   
+                    {
                         if (lbPlayers.SelectedItem.ToString() == board.Player[j].GetName()
                             && ((Station)board.SquaresArray[i]).GetOwner() == j)
                             clbPlayerB.Items.Add(((Station)board.SquaresArray[i]).GetName());

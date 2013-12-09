@@ -3,7 +3,7 @@ namespace MonopolyBoard
 {
     public class Station:Square
     {
-        private int owner, block;
+        private int owner, block, position;
 
         public Station()
         {
@@ -11,14 +11,16 @@ namespace MonopolyBoard
             SetPrice(0);
             owner = 5;
             block = 0;
+            position = 0;
         }
 
-        public Station(string setName, int setPrice, int setBlock)
+        public Station(string setName, int setPrice, int setBlock, int setPosition)
         {
             SetName(setName);
             SetPrice(setPrice);
             owner = 5;
             block = setBlock;
+            position = setPosition;
         }
 
         public int GetOwner()
@@ -54,9 +56,17 @@ namespace MonopolyBoard
             return "Äger du en station: " + GetRent() + "\nÄger du två stationer: " + GetRent() * 2 + "\nÄger du tre stationer: " + GetRent() * 3 + "\nÄger du fyra stationer: " + GetRent() * 4;
         }
        new public string GetInfo()
-        {
+       {
             return GetName()+" \n" + GetPrice() +" \n" + GetRents();
-        }
+       }
+       public void SetPosition(int setPosition)
+       {
+           position = setPosition;
+       }
+       public int GetPosition()
+       {
+           return position;
+       }
 
     }
 }
