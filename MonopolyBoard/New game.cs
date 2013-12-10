@@ -11,31 +11,29 @@ namespace MonopolyBoard
             txtBoxPlayer1.Focus();
         }
 
-        public PlayerClass[] GetPlayers()
+        public PlayerClass[] GetPlayers() /* Instantiates players and sends them to the main program. */
         {
-            PlayerClass[] player = new PlayerClass[4];
+            PlayerClass[] players = new PlayerClass[4];
 
-            
-            
-            player[0] = new PlayerClass(txtBoxPlayer1.Text);
-            player[1] = new PlayerClass(txtBoxPlayer2.Text);
-            player[2] = new PlayerClass(txtBoxPlayer3.Text);
-            player[3] = new PlayerClass(txtBoxPlayer4.Text);
+            players[0] = new PlayerClass(txtBoxPlayer1.Text);
+            players[1] = new PlayerClass(txtBoxPlayer2.Text);
+            players[2] = new PlayerClass(txtBoxPlayer3.Text);
+            players[3] = new PlayerClass(txtBoxPlayer4.Text);
 
-            return player;
+            return players;
         }
 
-        private void btnStart_Click(object sender, EventArgs e)
+        private void btnStart_Click(object sender, EventArgs e) /* Makes sure there are at least 2 player names entered. */
         {
             if (CheckPlayers() == 0)
             {
-                MessageBox.Show("Inget i ettan");
+                MessageBox.Show("Ange namn för minst första och andra spelaren.");
                 txtBoxPlayer1.Focus();
                 return;
             }
             else if(CheckPlayers() == 1)
             {
-                MessageBox.Show("Inget i tvåan");
+                MessageBox.Show("Ange namn för minst första och andra spelaren.");
                 txtBoxPlayer2.Focus();
                 return;
             }
@@ -43,7 +41,7 @@ namespace MonopolyBoard
             this.DialogResult = DialogResult.OK;
         }
 
-        public int CheckPlayers() 
+        public int CheckPlayers()  /* Returns the number of players with names */
         {
             int noOfPlayers = 0;
 
@@ -67,7 +65,7 @@ namespace MonopolyBoard
             return noOfPlayers;
         }
 
-        private void txtPlayer_TextChanged(object sender, EventArgs e)
+        private void txtPlayer_TextChanged(object sender, EventArgs e) /* Make sure you can't type the name of a player unless the players name before have been entered */
         {
             TextBox txtBoxPlayer = sender as TextBox;
 

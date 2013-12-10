@@ -132,7 +132,7 @@
             this.btnTest.TabIndex = 2;
             this.btnTest.Text = "Test";
             this.btnTest.UseVisualStyleBackColor = true;
-            this.btnTest.Click += new System.EventHandler(this.btnMove_Click);
+            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
             // tmrMovePlayer
             // 
