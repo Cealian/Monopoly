@@ -23,6 +23,7 @@ namespace MonopolyBoard
             block = setBlock;
             noOfHouses = 0;
         }
+
         public int GetNoOfHouses()
         {
             return noOfHouses;
