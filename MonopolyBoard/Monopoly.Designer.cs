@@ -45,6 +45,7 @@
             this.btnTrade = new System.Windows.Forms.Button();
             this.lblSquareInfo = new System.Windows.Forms.Label();
             this.btnNextPlayer = new System.Windows.Forms.Button();
+            this.btnBuyHouses = new System.Windows.Forms.Button();
             this.pnlMainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer2)).BeginInit();
@@ -209,6 +210,16 @@
             this.btnNextPlayer.UseVisualStyleBackColor = true;
             this.btnNextPlayer.Click += new System.EventHandler(this.btnNextPlayer_Click);
             // 
+            // btnBuyHouses
+            // 
+            this.btnBuyHouses.Location = new System.Drawing.Point(700, 99);
+            this.btnBuyHouses.Name = "btnBuyHouses";
+            this.btnBuyHouses.Size = new System.Drawing.Size(75, 23);
+            this.btnBuyHouses.TabIndex = 11;
+            this.btnBuyHouses.Text = "Köpa hus";
+            this.btnBuyHouses.UseVisualStyleBackColor = true;
+            this.btnBuyHouses.Click += new System.EventHandler(this.btnBuyHouses_Click);
+            // 
             // frmMonopoly
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -216,6 +227,7 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.CancelButton = this.btnQuit;
             this.ClientSize = new System.Drawing.Size(798, 648);
+            this.Controls.Add(this.btnBuyHouses);
             this.Controls.Add(this.btnNextPlayer);
             this.Controls.Add(this.lblSquareInfo);
             this.Controls.Add(this.btnTrade);
@@ -258,6 +270,7 @@
         private System.Windows.Forms.Button btnTrade;
         private System.Windows.Forms.Label lblSquareInfo;
         private System.Windows.Forms.Button btnNextPlayer;
+        private System.Windows.Forms.Button btnBuyHouses;
     }
 }
 

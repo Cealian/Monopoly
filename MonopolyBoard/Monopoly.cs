@@ -387,7 +387,6 @@ namespace MonopolyBoard
         private void btnTrade_Click(object sender, EventArgs e) /* Open trade window. */
         {
             Trade TradeForm = new Trade();
-
             TradeForm.board = this;
             TradeForm.Show();
         }
@@ -503,6 +502,13 @@ namespace MonopolyBoard
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAsAttribute(UnmanagedType.Bool)]
         static extern bool AllocConsole();
+
+        private void btnBuyHouses_Click(object sender, EventArgs e)
+        {
+            BuyHouse BuyHouseForm = new BuyHouse();
+            BuyHouseForm.board = this;
+            BuyHouseForm.Show();
+        }
     }
 }
 
