@@ -35,7 +35,7 @@ namespace MonopolyBoard
                 }
                 MoveMoney(board.activePlayer, GetSelectedPlayer(), moneyToMove);
             }
-            MoveStreets(board.activePlayer, GetSelectedPlayer());
+            MoveStreets(GetSelectedPlayer());
             ChangePlayers();
         }   //Move money and streets from PlayerA to PlayerB.
 
@@ -56,9 +56,9 @@ namespace MonopolyBoard
                 }
                 MoveMoney(GetSelectedPlayer(), board.activePlayer, moneyToMove);
             }
-            MoveStreets(GetSelectedPlayer(), board.activePlayer);
+            MoveStreets(board.activePlayer);
             ChangePlayers();
-        }   //Move money and streets from Player to PlayerA.
+        }   //Move money and streets from PlayerB to PlayerA.
 
         private void cbMoneyA_CheckedChanged(object sender, EventArgs e)
         {
@@ -78,17 +78,17 @@ namespace MonopolyBoard
                 int moneyToMove = 0;
                 try
                 {
-                    moneyToMove = int.Parse(txtMoneyB.Text);
+                    moneyToMove = int.Parse(txtMoneyA.Text);
                 }
                 catch (FormatException)
                 {
                     moneyToMove = 0;
-                    txtMoneyB.Text = "";
+                    txtMoneyA.Text = "";
                     MessageBox.Show("Skriv in ett heltal");
                 }
                 MoveMoney(board.activePlayer, GetSelectedPlayer(), moneyToMove);
             }
-            MoveStreets(board.activePlayer, GetSelectedPlayer());
+            MoveStreets(GetSelectedPlayer());
 
             if (cbMoneyB.Checked)
             {
@@ -105,7 +105,7 @@ namespace MonopolyBoard
                 }
                 MoveMoney(GetSelectedPlayer(), board.activePlayer, moneyToMove);
             }
-            MoveStreets(GetSelectedPlayer(), board.activePlayer);
+            MoveStreets(board.activePlayer);
             ChangePlayers();
         }   //Moves money and streets from PlayerA to B and from B to A.
 
@@ -113,7 +113,7 @@ namespace MonopolyBoard
         {
             for (int i = 0; i < board.Player.Length; i++)
             {
-                if (i != board.activePlayer)
+                if (i != board.activePlayer && board.Player[i].GetName()!="")
                     lbPlayers.Items.Add(board.Player[i].GetName());
             }
             lbPlayers.SetSelected(0, true);
@@ -181,7 +181,7 @@ namespace MonopolyBoard
             return player;
         }   //Return the index of the player you are trading with.
 
-        private void MoveStreets(int fromPlayer, int toPlayer)
+        private void MoveStreets(int toPlayer)
         {
             for (int i = 0; i < board.SquaresArray.Length; i++)
             {
@@ -189,6 +189,24 @@ namespace MonopolyBoard
                 {
                     if (lbPlayers.SelectedItem.ToString() == board.Player[toPlayer].GetName()
                         && itemChecked.ToString() == board.SquaresArray[i].GetName())
+                    {
+                        if (board.SquaresArray[i].GetType() == typeof(Street))
+                        {
+                            ((Street)board.SquaresArray[i]).ChangeOwner(toPlayer);
+                        }
+                        else if (board.SquaresArray[i].GetType() == typeof(Station))
+                        {
+                            ((Station)board.SquaresArray[i]).ChangeOwner(toPlayer);
+                        }
+                        else if (board.SquaresArray[i].GetType() == typeof(PowerStation))
+                        {
+                            ((PowerStation)board.SquaresArray[i]).ChangeOwner(toPlayer);
+                        }
+                    }
+                }
+                foreach (object itemChecked in clbPlayerB.CheckedItems)
+                {
+                    if (itemChecked.ToString() == board.SquaresArray[i].GetName())
                     {
                         if (board.SquaresArray[i].GetType() == typeof(Street))
                         {
