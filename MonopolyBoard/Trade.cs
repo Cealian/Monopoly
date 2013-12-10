@@ -136,31 +136,34 @@ namespace MonopolyBoard
             gbAPlayer.Text = board.Player[board.activePlayer].GetName();
             gbSPlayer.Text = lbPlayers.SelectedItem.ToString();
 
-            for (int i = 0; i < board.SquaresArray.Length; i++)
+            string selectedPlayerList = lbPlayers.SelectedItem.ToString();
+            string selectedPlayerName = board.Player[GetSelectedPlayer()].GetName();
+            
+            foreach (Square square in board.SquaresArray)
             {
-                if (board.SquaresArray[i].GetType() == typeof(Street))
+                if (square.GetType() == typeof(Street))
                 {
-                    if (((Street)board.SquaresArray[i]).GetOwner() == board.activePlayer)
-                        clbPlayerA.Items.Add(((Street)board.SquaresArray[i]).GetName());
-                    else if (lbPlayers.SelectedItem.ToString() == board.Player[GetSelectedPlayer()].GetName()
-                        && ((Street)board.SquaresArray[i]).GetOwner() == GetSelectedPlayer())
-                        clbPlayerB.Items.Add(((Street)board.SquaresArray[i]).GetName());
+                    if (((Street)square).GetOwner() == board.activePlayer)
+                        clbPlayerA.Items.Add(((Street)square).GetName());
+                    else if (selectedPlayerList == selectedPlayerName
+                        && ((Street)square).GetOwner() == GetSelectedPlayer())
+                        clbPlayerB.Items.Add(((Street)square).GetName());
                 }
-                else if (board.SquaresArray[i].GetType() == typeof(Station))
+                else if (square.GetType() == typeof(Station))
                 {
-                    if (((Station)board.SquaresArray[i]).GetOwner() == board.activePlayer)
-                        clbPlayerA.Items.Add(((Station)board.SquaresArray[i]).GetName());
-                    else if (lbPlayers.SelectedItem.ToString() == board.Player[GetSelectedPlayer()].GetName()
-                        && ((Station)board.SquaresArray[i]).GetOwner() == GetSelectedPlayer())
-                        clbPlayerB.Items.Add(((Station)board.SquaresArray[i]).GetName());
+                    if (((Station)square).GetOwner() == board.activePlayer)
+                        clbPlayerA.Items.Add(((Station)square).GetName());
+                    else if (selectedPlayerList == selectedPlayerName
+                        && ((Station)square).GetOwner() == GetSelectedPlayer())
+                        clbPlayerB.Items.Add(((Station)square).GetName());
                 }
-                else if (board.SquaresArray[i].GetType() == typeof(PowerStation))
+                else if (square.GetType() == typeof(PowerStation))
                 {
-                    if (((PowerStation)board.SquaresArray[i]).GetOwner() == board.activePlayer)
-                        clbPlayerA.Items.Add(((PowerStation)board.SquaresArray[i]).GetName());
-                    else if (lbPlayers.SelectedItem.ToString() == board.Player[GetSelectedPlayer()].GetName()
-                        && ((Station)board.SquaresArray[i]).GetOwner() == GetSelectedPlayer())
-                        clbPlayerB.Items.Add(((Station)board.SquaresArray[i]).GetName());
+                    if (((PowerStation)square).GetOwner() == board.activePlayer)
+                        clbPlayerA.Items.Add(((PowerStation)square).GetName());
+                    else if (selectedPlayerList == selectedPlayerName
+                        && ((Station)square).GetOwner() == GetSelectedPlayer())
+                        clbPlayerB.Items.Add(((Station)square).GetName());
                 }
             }
         }   //Reloads all listbox and textfields with the corect data.
