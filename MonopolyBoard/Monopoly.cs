@@ -444,43 +444,64 @@ namespace MonopolyBoard
 
         public void RunSquareEvent() /* Checks what kind of square the player landed on and acts accordingly. */
         {
-
-            Type squareType = Squares[Player[activePlayer].GetPosition()].GetType();
+            int position = Player[activePlayer].GetPosition();
+            int owner = ((Street)Squares[position]).GetOwner();
+            
+            Type squareType = Squares[position].GetType();
 
             if (squareType == typeof(Street))
             {
-                /*
-                 * Street:
-                 *  Ägd: pay rent
-                 *  Inte: buy?
-                 */
+                if (owner != 5 || owner != activePlayer)
+                {
+                    int rent = ((Street)Squares[position]).GetRent();
+                    Player[activePlayer].SubtractMoney(rent);
+                }
+                else
+                {//Visa buy knapp
+                
+                }
             }
             else if (squareType == typeof(Square))
             {
-                /* 
-                 * Square:
-                 *  Possible squares: Gå, fängelse, skatt, fri parkering, gå till fängelse.
-                 *  Gå: Gör inget.
-                 *  Fängelse: HaD.
-                 *  Skatt: player.money = player.money - skatt.
-                 *  Fri parkering: ge spelaren pengar, töm fri park.
-                 *  Gå till fängelse: Player.position = 10, player.injail = true.
-                 *  #### Gör separat funktion för att skicka aktiv spelare till fängelse! ####
-                 */
+                if (position == 4 || position == 38)
+                {
+                    TaxActivePlayer();
+                }
+
+                else if (position == 20)
+                {
+                    Player[activePlayer].AddMoney(Freepark.TakeMoney());
+                }
+
+                else if (position == 30)
+                {
+                    MoveActivePlayerToJail();
+                }
+
             }
             else if (squareType == typeof(Station))
             {
-                /*
-                 * Station:
-                 *  Som street, annan hyra.
-                 */
+                if (owner != 5 || owner != activePlayer)
+                {
+                    int strent = ((Station)Squares[position]).GetRent();
+                    Player[activePlayer].SubtractMoney(strent);
+                }
+                else
+                {//Visa buy knapp
+
+                }
             }
             else if (squareType == typeof(PowerStation))
             {
-                /*
-                 * PowerStation:
-                 *  Som street, annan hyra.
-                 */
+                if (owner != 5 || owner != activePlayer)
+                {
+                    int psrent = ((PowerStation)Squares[position]).GetRent();
+                    Player[activePlayer].SubtractMoney(psrent);
+                }
+                else
+                {//Visa buy knapp
+
+                }
             }
         }
 
