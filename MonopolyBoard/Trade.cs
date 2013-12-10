@@ -223,7 +223,6 @@ namespace MonopolyBoard
                     }
                 }
             }
-            ChangePlayers();
         }   //Moves the checked streets from one player to another.
 
         private void MoveMoney(int fromPlayer, int toPlayer, int moveMoney)
