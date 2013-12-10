@@ -51,11 +51,11 @@ namespace MonopolyBoard
         }
         public string GetRents()
         {
-            return "Äger du en station: " + GetRent() + "\nÄger du två stationer: " + GetRent() * 2 + "\nÄger du tre stationer: " + GetRent() * 3 + "\nÄger du fyra stationer: " + GetRent() * 4;
+            return "Äger du en station: " + GetRent() + " kr\nÄger du två stationer: " + GetRent() * 2 + " kr\nÄger du tre stationer: " + GetRent() * 3 + " kr\nÄger du fyra stationer: " + GetRent() * 4+" kr";
         }
        new public string GetInfo()
        {
-            return GetName() + " \n" + GetPrice() + " \n" + GetRents();
+            return GetName() + " \n" + GetPrice() + " kr\n" + GetRents();
        }
        
         private int Round(int value) /* Rounds to the nearest value of VALUE_TO_ROUND_TO */
