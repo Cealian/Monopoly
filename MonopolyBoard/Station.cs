@@ -3,12 +3,12 @@ namespace MonopolyBoard
 {
     public class Station : Square
     {
-        private int owner, block;
+        protected int owner, block;
 
-        public Station() /* Nödvändig? */
+        public Station()
         {
-            SetName("");
-            SetPrice(0);
+            name = "";
+            price = 0;
             owner = 5;
             block = 0;
         }
@@ -20,8 +20,8 @@ namespace MonopolyBoard
              * price = setPrice ?
              */
 
-            SetName(setName);
-            SetPrice(setPrice);
+            name = setName;
+            price = setPrice;
             owner = 5;
             block = setBlock;
         }
@@ -43,32 +43,22 @@ namespace MonopolyBoard
 
         public int GetRent()
         {
-            return GetPrice() / 4;
+            return Round(GetPrice() / 4);
         }
 
         public int GetSellPrice()
         {
-            return GetPrice() / 2;
+            return Round(GetPrice() / 2);
         }
 
-        public void SetBlock(int setBlock)
-        {
-            block = setBlock;
-        }
-
-        public void SetOwner(int setOwner)
-        {
-            owner = setOwner;
-        }
-
-        public string GetRents() /* Formatera för bättre visning */
+        public string GetRentOutput()
         {
             return "Äger du en station: " + GetRent() + " kr\nÄger du två stationer: " + GetRent() * 2 + " kr\nÄger du tre stationer: " + GetRent() * 3 + " kr\nÄger du fyra stationer: " + GetRent() * 4+" kr";
         }
 
-       new public string GetInfo()
+        new public string GetInfo()
        {
-            return GetName() + " \n" + GetPrice() + " kr\n" + GetRents();
+            return GetName() + " \n" + GetPrice() + " kr\n" + GetRentOutput();
        }
        
         private int Round(int value) /* Rounds to the nearest value of VALUE_TO_ROUND_TO */

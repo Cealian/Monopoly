@@ -3,10 +3,10 @@ namespace MonopolyBoard
 {
     public class Square
     {
-        private string name;
-        private int price;
+        protected string name;
+        protected int price;
 
-        public Square() /* Nödvändig? */
+        public Square()
         {
             name = "";
             price = 0;
@@ -23,19 +23,11 @@ namespace MonopolyBoard
             return name;
         }
 
-        public void SetName(string setName)
-        {
-            name = setName;
-        }
-
         public int GetPrice()
         {
             return price;
         }
-        public void SetPrice(int setPrice)
-        {
-            price = setPrice;
-        }
+
         public string GetInfo()
         {
             if (price == 0)
