@@ -561,19 +561,19 @@ namespace MonopolyBoard
              */
         }
 
-        /* Fixa husköparform Harry */
+        private void btnBuyHouses_Click(object sender, EventArgs e) // Hjälp mig inne i formen
+        {
+            BuyHouse BuyHouseForm = new BuyHouse();
+            BuyHouseForm.board = this;
+            BuyHouseForm.Show();
+        }
 
         /* Allow command line to be seen during normal execution */
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAsAttribute(UnmanagedType.Bool)]
         static extern bool AllocConsole();
 
-        private void btnBuyHouses_Click(object sender, EventArgs e)
-        {
-            BuyHouse BuyHouseForm = new BuyHouse();
-            BuyHouseForm.board = this;
-            BuyHouseForm.Show();
-        }
+
     }
 }
 
