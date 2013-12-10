@@ -36,8 +36,8 @@ namespace MonopolyBoard
 
         public void MoveToJail() /* Set inJail and position to values according to him/her being in jail. */
         {
-        inJail = true;
-        position = 10;
+            inJail = true;
+            position = 10;
         }
 
         public bool IsInJail() /* Used to determine wheter the player is in jail. Returns true if he/she is. */

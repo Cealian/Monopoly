@@ -121,23 +121,26 @@ namespace MonopolyBoard
 
         public void MoveActivePlayerToJail()
         {
-            int x = 0;
+            int x = 30;
+            int y = 570;
             if(activePlayer == 0)
             {
-                picPlayer0.Location = new Point();
+                picPlayer0.Location = new Point(x, y);
             }
             else if (activePlayer == 1)
             {
-
+                picPlayer1.Location = new Point(x, y + 26);
             }
             else if (activePlayer == 2)
             {
-
+                picPlayer2.Location = new Point(x + 26, y);
             }
             else if (activePlayer == 3)
             {
-
+                picPlayer3.Location = new Point(x + 26, y + 26);
             }
+
+            Player[activePlayer].MoveToJail();
         }
 
         private void MovePlayer0() /* Move player 0 one pace. */
@@ -350,9 +353,8 @@ namespace MonopolyBoard
             // Player[1].SetMoney(600);
             // Player[2].SetMoney(700);
             // Player[3].SetMoney(800);
-
-            Console.WriteLine("");
-
+            
+            MoveActivePlayerToJail();
         }
 
         private void btnTurn_Click(object sender, EventArgs e) /* Roll dices and move active player. */
@@ -369,6 +371,10 @@ namespace MonopolyBoard
             int dice1 = random.Next(1, 7); //sätter ett nummer mellan 1 och 6.
             int dice2 = random.Next(1, 7); //sätter ett nummer mellan 1 och 6.
             int result = dice1 + dice2; //räknar ihop tärningarna
+            
+            lblDice1.Text = Convert.ToString(dice1);
+            lblDice2.Text = Convert.ToString(dice2);
+            lblTotal.Text = Convert.ToString(result);
 
             if (dice1 == dice2)
             {
@@ -376,6 +382,11 @@ namespace MonopolyBoard
 
                 lblDice1.BackColor = doubleDiceColor;
                 lblDice2.BackColor = doubleDiceColor;
+                
+                if(Player[activePlayer].IsInJail())
+                {
+                    Player[activePlayer].GetOutOfJail();
+                }
             }
             else
             {
@@ -384,16 +395,18 @@ namespace MonopolyBoard
                 lblDice1.BackColor = formColor;
                 lblDice2.BackColor = formColor;
 
+                if(Player[activePlayer].IsInJail())
+                {
+                    btnNextPlayer.Enabled = true;
+                    return;
+                }
             }
 
             if (diceEqualCount == 3)
             {
-                Player[activePlayer].MoveToJail();
+                MoveActivePlayerToJail();
+                return;
             }
-
-            lblDice1.Text = Convert.ToString(dice1);
-            lblDice2.Text = Convert.ToString(dice2);
-            lblTotal.Text = Convert.ToString(result);
 
             MovePlayer(result);
 
