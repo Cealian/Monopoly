@@ -119,6 +119,27 @@ namespace MonopolyBoard
             }
         }
 
+        public void MoveActivePlayerToJail()
+        {
+            int x = 0;
+            if(activePlayer == 0)
+            {
+                picPlayer0.Location = new Point();
+            }
+            else if (activePlayer == 1)
+            {
+
+            }
+            else if (activePlayer == 2)
+            {
+
+            }
+            else if (activePlayer == 3)
+            {
+
+            }
+        }
+
         private void MovePlayer0() /* Move player 0 one pace. */
         {
             int X = picPlayer0.Location.X;
@@ -311,7 +332,7 @@ namespace MonopolyBoard
             }
         }
 
-        private void btnTest_Click(object sender, EventArgs e)
+        private void btnTest_Click(object sender, EventArgs e) /* Use this function to test anything, remove before release. */
         {
             ((Street)Squares[1]).ChangeOwner(0);
             ((Street)Squares[3]).ChangeOwner(0);
@@ -325,11 +346,14 @@ namespace MonopolyBoard
             ((Street)Squares[18]).ChangeOwner(3);
             ((Street)Squares[19]).ChangeOwner(3);
             ((Street)Squares[21]).ChangeOwner(3);
-            Player[0].SetMoney(500);
-            Player[1].SetMoney(600);
-            Player[2].SetMoney(700);
-            Player[3].SetMoney(800);
-        } /* Use this function to test anything, remove before release. */
+            // Player[0].SetMoney(500);
+            // Player[1].SetMoney(600);
+            // Player[2].SetMoney(700);
+            // Player[3].SetMoney(800);
+
+            Console.WriteLine("");
+
+        }
 
         private void btnTurn_Click(object sender, EventArgs e) /* Roll dices and move active player. */
         {
