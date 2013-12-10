@@ -4,63 +4,57 @@ namespace MonopolyBoard
 {
     public class PlayerClass
     {
-        //MEMBERS
+        /* ----- Members ----- */
         private string name;
         private int money = 30000;
         private int position = 0;
         private bool inJail = false;
-        private int stepsLeft;
+        private int stepsLeft; // Used when moving player to see how many steps he/she has left.
 
 
-        public void Move(int steps)
-        {
-            stepsLeft = steps;
-            position += steps;
-        }
-
-        // funktioner
-        public PlayerClass(string newName)
+        /* ----- Functions -----*/
+        public PlayerClass(string newName) /* Constructor, sets player name. */
         {
             name = newName;
         }
 
-        public string GetName()
+        public string GetName() /* Return the name of the player. */
         {
             return name;
         }
 
-        public void MoveForward(int steps)
+        public void MoveForward(int steps) /* increment position. Reset position and give player 4000 if he/she passes square 0. */
         {
             stepsLeft = steps;
-            //flytta fram, om position > 39 efter position -= 39
-            position += steps;  //addera steg
+            position += steps;
             if (position > 39)
             {
                 position -= 40;
+                money += 4000;
             }
         }
 
-        public void MoveToJail()
+        public void MoveToJail() /* Set inJail and position to values according to him/her being in jail. */
         {
-        inJail = true;
-        position = 10;
+            inJail = true;
+            position = 10;
         }
 
-        public bool IsInJail()
+        public bool IsInJail() /* Used to determine wheter the player is in jail. Returns true if he/she is. */
         {
             return inJail;
         }
 
-        public void GetOutOfJail()
+        public void GetOutOfJail() /* Set inJail to values according to him/her being out of jail. */
         {
             inJail = false;
         }
 
-        public void SubtractMoney(int GiveAmount)
+        public void SubtractMoney(int amount) /* decreases the players money by the specified amount. */
         {
-            if (money >= GiveAmount)
+            if (money >= amount)
             {
-                money -= GiveAmount;
+                money -= amount;
             }
             else
             {
@@ -68,22 +62,22 @@ namespace MonopolyBoard
             }
         }
 
-        public void AddMoney(int TakenAmount)
+        public void AddMoney(int amount) /* Increases the players money by the specified amount. */
         {
-            money += TakenAmount;
+            money += amount;
         }
 
-        public int GetPosition()
+        public int GetPosition() /* Returns the players position (0 - 39) */
         {
             return position;
         }
 
-        public int GetMoney()
+        public int GetMoney() /* Returns the players avaliable money. */
         {
             return money;
         }
 
-        public bool TakeStep()
+        public bool TakeStep() /* stepsLeft is used when moving player to see how many steps he/she has left. */
         {
             stepsLeft--;
             bool moreSteps = (stepsLeft > 0);

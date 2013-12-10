@@ -5,32 +5,33 @@ namespace MonopolyBoard
     {
         public PowerStation()
         {
-            SetName("");
-            SetPrice(0);
-            SetOwner(5);
-            SetBlock (0);
+            name = "";
+            price = 0;
+            owner=5;
+            block = 0;
         }
 
         public PowerStation(string setName, int setPrice, int setBlock)
         {
-            SetName(setName);
-            SetPrice(setPrice);
-            SetOwner(5);
-            SetBlock(setBlock);
+            name = setName;
+            price = setPrice;
+            owner = 5;
+            block = setBlock;
         }
+
         public int GetRent(int dice)
         {
             return (100 * dice);
         }
 
-        new public string GetRents()
+        new public string GetRentOutput()
         {
             return "Äger du ETT kraftverk blir hyran 100 * värdet tärningarna visar.\nÄger du TVÅ kraftverk blir hyran 200 * värdet tärningarna visar."; 
         }
 
         new public string GetInfo()
         {
-            return GetName() + GetPrice() + GetRents();
+            return GetName() +"\n"+ GetPrice() +" kr\n"+ GetRentOutput();
         }
     }
 }

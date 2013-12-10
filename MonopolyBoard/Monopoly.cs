@@ -32,23 +32,23 @@ namespace MonopolyBoard
             InstantiatePowerStations();
 
             Squares = new BindingList<Square>(SquaresArray);
-
-
-
-            for (int i = 0; i < 4; i++)
-            {
-                Player[i] = new PlayerClass("Kalle");
             }
-        }
 
-        private void btnQuit_Click(object sender, EventArgs e) /* Make sure user really wants to quit. */
+        private void Monopoly_Load(object sender, EventArgs e) /* Monopoply loads, start new game. */
         {
+            New_game newGame = new New_game();
 
-            if (MessageBox.Show("Quit monopoly", "Quit?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (newGame.ShowDialog() == DialogResult.OK)
             {
-                Application.Exit();
+                Player = newGame.GetPlayers();
+                NextPlayer();
+                HideInactivePlayers();
             }
-        }
+            else
+                Application.Exit();
+
+
+            }
 
         private void pnlMainPanel_Paint(object sender, PaintEventArgs e) /* Paint monopoly board using GFX engine. */
         {
@@ -56,26 +56,8 @@ namespace MonopolyBoard
             GEngine = new GFX(panelToPaint);
         }
 
-        private void btnMove_Click(object sender, EventArgs e) /* Move the selected player the specified number of steps. */
-        {
-            ((Street)Squares[1]).ChangeOwner(0);
-            ((Street)Squares[3]).ChangeOwner(0);
-            ((Street)Squares[6]).ChangeOwner(0);
-            ((Street)Squares[8]).ChangeOwner(1);
-            ((Street)Squares[9]).ChangeOwner(1);
-            ((Street)Squares[11]).ChangeOwner(1);
-            ((Street)Squares[13]).ChangeOwner(2);
-            ((Street)Squares[14]).ChangeOwner(2);
-            ((Street)Squares[16]).ChangeOwner(2);
-            ((Street)Squares[18]).ChangeOwner(3);
-            ((Street)Squares[19]).ChangeOwner(3);
-            ((Street)Squares[21]).ChangeOwner(3);
-            Player[0].SetMoney(500);
-            Player[1].SetMoney(600);
-            Player[2].SetMoney(700);
-            Player[3].SetMoney(800);
-            RunSquareEvent();
-        }
+        /* Functions to animate and move player */
+        #region MovePlayer functions
 
         public void MovePlayer(int steps) /* Move active player the specified number of steps. */
         {
@@ -135,6 +117,30 @@ namespace MonopolyBoard
 
                 Console.WriteLine("Active player: {0}", activePlayer);
             }
+        }
+
+        public void MoveActivePlayerToJail()
+        {
+            int x = 30;
+            int y = 570;
+            if(activePlayer == 0)
+            {
+                picPlayer0.Location = new Point(x, y);
+            }
+            else if (activePlayer == 1)
+            {
+                picPlayer1.Location = new Point(x, y + 26);
+            }
+            else if (activePlayer == 2)
+            {
+                picPlayer2.Location = new Point(x + 26, y);
+            }
+            else if (activePlayer == 3)
+            {
+                picPlayer3.Location = new Point(x + 26, y + 26);
+            }
+
+            Player[activePlayer].MoveToJail();
         }
 
         private void MovePlayer0() /* Move player 0 one pace. */
@@ -246,18 +252,10 @@ namespace MonopolyBoard
             paces++;
         }
 
-        public void NextPlayer() /* Change activePlayer to next player. */
-        {
-            if (diceEqualCount == 0)
-            {
-                activePlayer++;
-            }
+        #endregion
 
-            if (activePlayer > 3 || Player[activePlayer].GetName() == "")
-            {
-                activePlayer = 0;
-            }
-        }
+        /* Instantiate squares, streets, stations and PowerStations */
+        #region Square instantiation
 
         public void InstantiateSquares() /* Instantiate all squares that are just squares. */
         {
@@ -279,49 +277,84 @@ namespace MonopolyBoard
 
         public void InstantiateStreets() /* Instantiate all squares that are streets. */
         {
-            SquaresArray[1] = new Street("Västerlångatan", 1200, 0,1);
-            SquaresArray[3] = new Street("Hornsgatan", 1200, 0,3);
+            SquaresArray[1] = new Street("Västerlångatan", 1200, 0);
+            SquaresArray[3] = new Street("Hornsgatan", 1200, 0);
 
-            SquaresArray[6] = new Street("Folkungagatan", 2000, 1,6);
-            SquaresArray[8] = new Street("Götgatan", 2000, 1,8);
-            SquaresArray[9] = new Street("Ringvägen", 2400, 1,9);
+            SquaresArray[6] = new Street("Folkungagatan", 2000, 1);
+            SquaresArray[8] = new Street("Götgatan", 2000, 1);
+            SquaresArray[9] = new Street("Ringvägen", 2400, 1);
 
-            SquaresArray[11] = new Street("S:t Eriksgatan", 2800, 2,11);
-            SquaresArray[13] = new Street("Odengatan", 2800, 2,13);
-            SquaresArray[14] = new Street("Valhallavägen", 3200, 2,14);
+            SquaresArray[11] = new Street("S:t Eriksgatan", 2800, 2);
+            SquaresArray[13] = new Street("Odengatan", 2800, 2);
+            SquaresArray[14] = new Street("Valhallavägen", 3200, 2);
 
-            SquaresArray[16] = new Street("Sturegatan", 3600, 3,16);
-            SquaresArray[18] = new Street("Karlavägen", 3600, 3,18);
-            SquaresArray[19] = new Street("Narvavägen", 4000, 3,19);
+            SquaresArray[16] = new Street("Sturegatan", 3600, 3);
+            SquaresArray[18] = new Street("Karlavägen", 3600, 3);
+            SquaresArray[19] = new Street("Narvavägen", 4000, 3);
 
-            SquaresArray[21] = new Street("Strandvägen", 4400, 4,21);
-            SquaresArray[23] = new Street("Kungsträdgårdsgatan", 4400, 4,23);
-            SquaresArray[24] = new Street("Hamngatan", 4800, 4,24);
+            SquaresArray[21] = new Street("Strandvägen", 4400, 4);
+            SquaresArray[23] = new Street("Kungsträdgårdsgatan", 4400, 4);
+            SquaresArray[24] = new Street("Hamngatan", 4800, 4);
 
-            SquaresArray[26] = new Street("Vasagatan", 5200, 5,26);
-            SquaresArray[27] = new Street("Kungsgatan", 5200, 5,27);
-            SquaresArray[29] = new Street("Stureplan", 5600, 5,29);
+            SquaresArray[26] = new Street("Vasagatan", 5200, 5);
+            SquaresArray[27] = new Street("Kungsgatan", 5200, 5);
+            SquaresArray[29] = new Street("Stureplan", 5600, 5);
 
-            SquaresArray[31] = new Street("Gustav Adolfs torg", 6000, 6,31);
-            SquaresArray[32] = new Street("Drottninggatan", 6000, 6,32);
-            SquaresArray[34] = new Street("Diplomatstaden", 6400, 6,34);
+            SquaresArray[31] = new Street("Gustav Adolfs torg", 6000, 6);
+            SquaresArray[32] = new Street("Drottninggatan", 6000, 6);
+            SquaresArray[34] = new Street("Diplomatstaden", 6400, 6);
 
-            SquaresArray[37] = new Street("Centrum", 7000, 7,37);
-            SquaresArray[39] = new Street("Norrmalmstorg", 8000, 7,39);
+            SquaresArray[37] = new Street("Centrum", 7000, 7);
+            SquaresArray[39] = new Street("Norrmalmstorg", 8000, 7);
         }
 
         public void InstantiateStations() /* Instantiate all squares that are stations. */
         {
-            SquaresArray[5] = new Station("Södra station", 4000, 8,5);
-            SquaresArray[15] = new Station("Östra station", 4000, 8,15);
-            SquaresArray[25] = new Station("Centralstation", 4000, 8,25);
-            SquaresArray[35] = new Station("Norra station", 4000, 8,35);
+            SquaresArray[5] = new Station("Södra station", 4000, 8);
+            SquaresArray[15] = new Station("Östra station", 4000, 8);
+            SquaresArray[25] = new Station("Centralstation", 4000, 8);
+            SquaresArray[35] = new Station("Norra station", 4000, 8);
         }
 
         public void InstantiatePowerStations()/* Instantiate all squares that are powerstations. */
         {
             SquaresArray[12] = new PowerStation("Elverket", 3000, 9);
             SquaresArray[28] = new PowerStation("Vattenledningsverket", 3000, 9);
+        }
+
+        #endregion
+
+        /* All button event handlers for frmMonopoly goes here */
+        #region Button event handlers
+
+        private void btnQuit_Click(object sender, EventArgs e) /* Make sure user really wants to quit. */
+        {
+            if (MessageBox.Show("Quit monopoly", "Quit?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
+
+        private void btnTest_Click(object sender, EventArgs e) /* Use this function to test anything, remove before release. */
+        {
+            ((Street)Squares[1]).ChangeOwner(0);
+            ((Street)Squares[3]).ChangeOwner(0);
+            ((Street)Squares[6]).ChangeOwner(0);
+            ((Street)Squares[8]).ChangeOwner(1);
+            ((Street)Squares[9]).ChangeOwner(1);
+            ((Street)Squares[11]).ChangeOwner(1);
+            ((Street)Squares[13]).ChangeOwner(2);
+            ((Street)Squares[14]).ChangeOwner(2);
+            ((Street)Squares[16]).ChangeOwner(2);
+            ((Street)Squares[18]).ChangeOwner(3);
+            ((Street)Squares[19]).ChangeOwner(3);
+            ((Street)Squares[21]).ChangeOwner(3);
+            // Player[0].SetMoney(500);
+            // Player[1].SetMoney(600);
+            // Player[2].SetMoney(700);
+            // Player[3].SetMoney(800);
+            
+            MoveActivePlayerToJail();
         }
 
         private void btnTurn_Click(object sender, EventArgs e) /* Roll dices and move active player. */
@@ -339,12 +372,21 @@ namespace MonopolyBoard
             int dice2 = random.Next(1, 7); //sätter ett nummer mellan 1 och 6.
             int result = dice1 + dice2; //räknar ihop tärningarna
 
+            lblDice1.Text = Convert.ToString(dice1);
+            lblDice2.Text = Convert.ToString(dice2);
+            lblTotal.Text = Convert.ToString(result);
+
             if (dice1 == dice2)
             {
                 diceEqualCount++;
 
                 lblDice1.BackColor = doubleDiceColor;
                 lblDice2.BackColor = doubleDiceColor;
+                
+                if(Player[activePlayer].IsInJail())
+                {
+                    Player[activePlayer].GetOutOfJail();
+                }
             }
             else
             {
@@ -353,34 +395,20 @@ namespace MonopolyBoard
                 lblDice1.BackColor = formColor;
                 lblDice2.BackColor = formColor;
 
+                if(Player[activePlayer].IsInJail())
+            {
+                    btnNextPlayer.Enabled = true;
+                    return;
             }
+        }
 
             if (diceEqualCount == 3)
             {
-                Player[activePlayer].MoveToJail();
+                MoveActivePlayerToJail();
+                return;
             }
-
-            lblDice1.Text = Convert.ToString(dice1);
-            lblDice2.Text = Convert.ToString(dice2);
-            lblTotal.Text = Convert.ToString(result);
 
             MovePlayer(result);
-
-        }
-
-        private void Monopoly_Load(object sender, EventArgs e) /* Monopoply loads, start new game. */
-        {
-            New_game newGame = new New_game();
-
-            if (newGame.ShowDialog() == DialogResult.OK)
-            {
-                Player = newGame.GetPlayers();
-                NextPlayer();
-                HideInactivePlayers();
-            }
-            else
-                Application.Exit();
-
 
         }
 
@@ -390,6 +418,15 @@ namespace MonopolyBoard
             TradeForm.board = this;
             TradeForm.Show();
         }
+
+        private void btnNextPlayer_Click(object sender, EventArgs e) /* Set activePlayer to the next one avaliable. */
+        {
+            btnRollDices.Enabled = true;
+            btnNextPlayer.Enabled = false;
+            NextPlayer();
+        }
+
+        #endregion
 
         public void HideInactivePlayers() /* Hide players that are not in the game. */
         {
@@ -404,12 +441,80 @@ namespace MonopolyBoard
             }
         }
 
-        public void TaxActivePlayer() /* Tax the active player and subtract the appropriate amount. */
+        public void NextPlayer() /* Change activePlayer to next player. */
         {
-            int positionprice = SquaresArray[Player[activePlayer].GetPosition()].GetPrice();
+            if (diceEqualCount == 0)
+            {
+                activePlayer++;
+            }
 
-            Player[activePlayer].SubtractMoney(positionprice);
-            Freepark.AddMoney(positionprice);
+            if (activePlayer > 3 || Player[activePlayer].GetName() == "")
+            {
+                activePlayer = 0;
+            }
+        }
+
+        public void RunSquareEvent() /* Checks what kind of square the player landed on and acts accordingly. */
+        {
+            int position = Player[activePlayer].GetPosition();
+            int owner = ((Street)Squares[position]).GetOwner();
+            
+            Type squareType = Squares[position].GetType();
+
+            if (squareType == typeof(Street))
+            {
+                if (owner != 5 || owner != activePlayer)
+                {
+                    int rent = ((Street)Squares[position]).GetRent();
+                    Player[activePlayer].SubtractMoney(rent);
+                }
+                else
+                {//Visa buy knapp
+                
+                }
+            }
+            else if (squareType == typeof(Square))
+            {
+                if (position == 4 || position == 38)
+                {
+                    TaxActivePlayer();
+                }
+
+                else if (position == 20)
+                {
+                    Player[activePlayer].AddMoney(Freepark.TakeMoney());
+                }
+
+                else if (position == 30)
+                {
+                    MoveActivePlayerToJail();
+                }
+
+            }
+            else if (squareType == typeof(Station))
+            {
+                if (owner != 5 || owner != activePlayer)
+                {
+                    int strent = ((Station)Squares[position]).GetRent();
+                    Player[activePlayer].SubtractMoney(strent);
+        }
+                else
+                {//Visa buy knapp
+
+                }
+            }
+            else if (squareType == typeof(PowerStation))
+            {
+                if (owner != 5 || owner != activePlayer)
+        {
+                    int psrent = ((PowerStation)Squares[position]).GetRent();
+                    Player[activePlayer].SubtractMoney(psrent);
+                }
+                else
+                {//Visa buy knapp
+
+                }
+            }
         }
 
         public void ShowSquareInfo() /* Show the squares info in lblSquareInfo. */
@@ -436,57 +541,15 @@ namespace MonopolyBoard
             lblSquareInfo.Text = info;
         }
 
-
-        private void btnNextPlayer_Click(object sender, EventArgs e) /* Set activePlayer to the next one avaliable */
+        public void TaxActivePlayer() /* Tax the active player and subtract the appropriate amount. */
         {
-            btnRollDices.Enabled = true;
-            btnNextPlayer.Enabled = false;
-            NextPlayer();
+            int positionprice = SquaresArray[Player[activePlayer].GetPosition()].GetPrice();
+
+            Player[activePlayer].SubtractMoney(positionprice);
+            Freepark.AddMoney(positionprice);
         }
 
-        public void RunSquareEvent() /* Checks what kind of square the player landed on and acts accordingly. */
-        {
-
-            Type squareType = Squares[Player[activePlayer].GetPosition()].GetType();
-
-            if (squareType == typeof(Street))
-            {
-                /*
-                 * Street:
-                 *  Ägd: pay rent
-                 *  Inte: buy?
-                 */
-            }
-            else if (squareType == typeof(Square))
-            {
-                /* 
-                 * Square:
-                 *  Possible squares: Gå, fängelse, skatt, fri parkering, gå till fängelse.
-                 *  Gå: Gör inget.
-                 *  Fängelse: HaD.
-                 *  Skatt: player.money = player.money - skatt.
-                 *  Fri parkering: ge spelaren pengar, töm fri park.
-                 *  Gå till fängelse: Player.position = 10, player.injail = true.
-                 *  #### Gör separat funktion för att skicka aktiv spelare till fängelse! ####
-                 */
-            }
-            else if (squareType == typeof(Station))
-            {
-                /*
-                 * Station:
-                 *  Som street, annan hyra.
-                 */
-            }
-            else if (squareType == typeof(PowerStation))
-            {
-                /*
-                 * PowerStation:
-                 *  Som street, annan hyra.
-                 */
-            }
-        }
-
-        public void UpdatePlayerInfo() /* Updates the on-screen info about the players */
+        public void UpdatePlayerInfo() /* Updates the on-screen info about the players. */
         {
             /*
              * Uppdatera information om alla spelare.
@@ -497,6 +560,8 @@ namespace MonopolyBoard
              *  I fängelse
              */
         }
+
+        /* Fixa husköparform Harry */
 
         /* Allow command line to be seen during normal execution */
         [DllImport("kernel32.dll", SetLastError = true)]
@@ -512,4 +577,3 @@ namespace MonopolyBoard
     }
 }
 
-        /* Fixa husköparform HaD */

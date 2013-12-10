@@ -133,7 +133,7 @@
             this.btnTest.TabIndex = 2;
             this.btnTest.Text = "Test";
             this.btnTest.UseVisualStyleBackColor = true;
-            this.btnTest.Click += new System.EventHandler(this.btnMove_Click);
+            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
             // tmrMovePlayer
             // 
@@ -154,7 +154,7 @@
             // 
             this.lblDice1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblDice1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDice1.Location = new System.Drawing.Point(686, 271);
+            this.lblDice1.Location = new System.Drawing.Point(654, 360);
             this.lblDice1.Name = "lblDice1";
             this.lblDice1.Size = new System.Drawing.Size(30, 30);
             this.lblDice1.TabIndex = 5;
@@ -164,7 +164,7 @@
             // 
             this.lblDice2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblDice2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDice2.Location = new System.Drawing.Point(716, 271);
+            this.lblDice2.Location = new System.Drawing.Point(684, 360);
             this.lblDice2.Name = "lblDice2";
             this.lblDice2.Size = new System.Drawing.Size(30, 30);
             this.lblDice2.TabIndex = 6;
@@ -174,7 +174,7 @@
             // 
             this.lblTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotal.Location = new System.Drawing.Point(686, 301);
+            this.lblTotal.Location = new System.Drawing.Point(654, 390);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(60, 30);
             this.lblTotal.TabIndex = 7;
@@ -193,10 +193,10 @@
             // lblSquareInfo
             // 
             this.lblSquareInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblSquareInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSquareInfo.Location = new System.Drawing.Point(654, 445);
+            this.lblSquareInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSquareInfo.Location = new System.Drawing.Point(654, 420);
             this.lblSquareInfo.Name = "lblSquareInfo";
-            this.lblSquareInfo.Size = new System.Drawing.Size(132, 194);
+            this.lblSquareInfo.Size = new System.Drawing.Size(132, 219);
             this.lblSquareInfo.TabIndex = 9;
             // 
             // btnNextPlayer
