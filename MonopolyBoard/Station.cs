@@ -61,7 +61,7 @@ namespace MonopolyBoard
             return GetName() + " \n" + GetPrice() + " kr\n" + GetRentOutput();
        }
        
-        private int Round(int value) /* Rounds to the nearest value of VALUE_TO_ROUND_TO */
+        protected int Round(int value) /* Rounds to the nearest value of VALUE_TO_ROUND_TO */
         {
             int newValue = 0;
             const int VALUE_TO_ROUND_TO = 50;
