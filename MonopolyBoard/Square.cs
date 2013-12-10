@@ -6,7 +6,7 @@ namespace MonopolyBoard
         private string name;
         private int price;
 
-        public Square()
+        public Square() /* Nödvändig? */
         {
             name = "";
             price = 0;
@@ -41,7 +41,7 @@ namespace MonopolyBoard
             if (price == 0)
                 return name;
             else
-                return name + " \n" + price;
+                return name + " \n" + price; /* Formatera för bättre visning. */
         }
     }
 

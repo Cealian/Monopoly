@@ -3,7 +3,7 @@ namespace MonopolyBoard
 {
     public class PowerStation:Station
     {
-        public PowerStation()
+        public PowerStation() /* Nödvändig? */
         {
             SetName("");
             SetPrice(0);
@@ -13,24 +13,31 @@ namespace MonopolyBoard
 
         public PowerStation(string setName, int setPrice, int setBlock)
         {
+            /*
+             * name = setName   ?
+             * price = setPrice ?
+             * owner = setOwner ?
+             * block = setBlock ?
+             */
             SetName(setName);
             SetPrice(setPrice);
             SetOwner(5);
             SetBlock(setBlock);
         }
+
         public int GetRent(int dice)
         {
             return (100 * dice);
         }
 
-        new public string GetRents()
+        new public string GetRents() /* Formatera om för bättre visning? */ /* GetRentOutput() ? */
         {
             return "Äger du ETT kraftverk blir hyran 100 * värdet tärningarna visar.\nÄger du TVÅ kraftverk blir hyran 200 * värdet tärningarna visar."; 
         }
 
         new public string GetInfo()
         {
-            return GetName() + GetPrice() + GetRents();
+            return GetName() +"\n"+ GetPrice() +" kr\n"+ GetRents();
         }
     }
 }
