@@ -647,6 +647,11 @@ namespace MonopolyBoard
             }
         }
 
+        private void btnSaveGame_Click(object sender, EventArgs e)
+        {
+            sfdSaveGame.ShowDialog();
+        }
+
 
     }
 }
