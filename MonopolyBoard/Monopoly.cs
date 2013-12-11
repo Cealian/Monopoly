@@ -601,6 +601,8 @@ namespace MonopolyBoard
             BuyHouseForm.ShowDialog();
         }
 
+
+
         /* Allow command line to be seen during normal execution */
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAsAttribute(UnmanagedType.Bool)]
