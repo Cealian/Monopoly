@@ -520,22 +520,23 @@ namespace MonopolyBoard
         public void ShowSquareInfo() /* Show the squares info in lblSquareInfo. */
         {
             string info = "";
+            int activePosition = Player[activePlayer].GetPosition();
 
-            if (Squares[Player[activePlayer].GetPosition()].GetType().ToString() == "MonopolyBoard.Square")
+            if (Squares[activePosition].GetType() == typeof(Street))
             {
-                info = ((Square)Squares[Player[activePlayer].GetPosition()]).GetInfo();
+                info = ((Square)Squares[activePosition]).GetInfo();
             }
-            else if (Squares[Player[activePlayer].GetPosition()].GetType().ToString() == "MonopolyBoard.Street")
+            else if (Squares[activePosition].GetType() == typeof(Street))
             {
-                info = ((Street)Squares[Player[activePlayer].GetPosition()]).GetInfo();
+                info = ((Street)Squares[activePosition]).GetInfo();
             }
-            else if (Squares[Player[activePlayer].GetPosition()].GetType().ToString() == "MonopolyBoard.Station")
+            else if (Squares[activePosition].GetType() == typeof(Station))
             {
-                info = ((Station)Squares[Player[activePlayer].GetPosition()]).GetInfo();
+                info = ((Station)Squares[activePosition]).GetInfo();
             }
-            else if (Squares[Player[activePlayer].GetPosition()].GetType().ToString() == "MonopolyBoard.PowerStation")
+            else if (Squares[activePosition].GetType() == typeof(PowerStation))
             {
-                info = ((PowerStation)Squares[Player[activePlayer].GetPosition()]).GetInfo();
+                info = ((PowerStation)Squares[activePosition]).GetInfo();
             }
 
             lblSquareInfo.Text = info;
@@ -576,4 +577,3 @@ namespace MonopolyBoard
 
     }
 }
-
