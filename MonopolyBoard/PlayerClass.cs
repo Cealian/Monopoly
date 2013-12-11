@@ -6,7 +6,7 @@ namespace MonopolyBoard
     {
         /* ----- Members ----- */
         private string name;
-        private int money = 30000;
+        private int money = 10000;
         private int position = 0;
         private bool jailCard = false;
         private bool inJail = false;
