@@ -32,7 +32,7 @@ namespace MonopolyBoard
             InstantiatePowerStations();
 
             Squares = new BindingList<Square>(SquaresArray);
-            }
+        }
 
         private void Monopoly_Load(object sender, EventArgs e) /* Monopoply loads, start new game. */
         {
@@ -48,7 +48,7 @@ namespace MonopolyBoard
                 Application.Exit();
 
 
-            }
+        }
 
         private void pnlMainPanel_Paint(object sender, PaintEventArgs e) /* Paint monopoly board using GFX engine. */
         {
@@ -123,7 +123,7 @@ namespace MonopolyBoard
         {
             int x = 30;
             int y = 570;
-            if(activePlayer == 0)
+            if (activePlayer == 0)
             {
                 picPlayer0.Location = new Point(x, y);
             }
@@ -353,7 +353,7 @@ namespace MonopolyBoard
             // Player[1].SetMoney(600);
             // Player[2].SetMoney(700);
             // Player[3].SetMoney(800);
-            
+
             MoveActivePlayerToJail();
         }
 
@@ -382,8 +382,8 @@ namespace MonopolyBoard
 
                 lblDice1.BackColor = doubleDiceColor;
                 lblDice2.BackColor = doubleDiceColor;
-                
-                if(Player[activePlayer].IsInJail())
+
+                if (Player[activePlayer].IsInJail())
                 {
                     Player[activePlayer].GetOutOfJail();
                 }
@@ -395,12 +395,12 @@ namespace MonopolyBoard
                 lblDice1.BackColor = formColor;
                 lblDice2.BackColor = formColor;
 
-                if(Player[activePlayer].IsInJail())
-            {
+                if (Player[activePlayer].IsInJail())
+                {
                     btnNextPlayer.Enabled = true;
                     return;
+                }
             }
-        }
 
             if (diceEqualCount == 3)
             {
@@ -458,7 +458,7 @@ namespace MonopolyBoard
         {
             int position = Player[activePlayer].GetPosition();
             int owner = ((Street)Squares[position]).GetOwner();
-            
+
             Type squareType = Squares[position].GetType();
 
             if (squareType == typeof(Street))
@@ -470,7 +470,7 @@ namespace MonopolyBoard
                 }
                 else
                 {//Visa buy knapp
-                
+
                 }
             }
             else if (squareType == typeof(Square))
@@ -497,7 +497,7 @@ namespace MonopolyBoard
                 {
                     int strent = ((Station)Squares[position]).GetRent();
                     Player[activePlayer].SubtractMoney(strent);
-        }
+                }
                 else
                 {//Visa buy knapp
 
@@ -506,7 +506,7 @@ namespace MonopolyBoard
             else if (squareType == typeof(PowerStation))
             {
                 if (owner != 5 || owner != activePlayer)
-        {
+                {
                     int psrent = ((PowerStation)Squares[position]).GetRent();
                     Player[activePlayer].SubtractMoney(psrent);
                 }
