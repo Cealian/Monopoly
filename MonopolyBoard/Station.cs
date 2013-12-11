@@ -4,6 +4,7 @@ namespace MonopolyBoard
     public class Station : Square
     {
         protected int owner, block;
+        protected frmMonopoly board;
 
         public Station()
         {
@@ -53,14 +54,19 @@ namespace MonopolyBoard
 
         public string GetRentOutput()
         {
-            return "Äger du en station: " + GetRent() + " kr\nÄger du två stationer: " + GetRent() * 2 + " kr\nÄger du tre stationer: " + GetRent() * 3 + " kr\nÄger du fyra stationer: " + GetRent() * 4+" kr";
+            return "Äger du en station: " + GetRent() + " kr\nÄger du två stationer: " + GetRent() * 2 + " kr\nÄger du tre stationer: " + GetRent() * 3 + " kr\nÄger du fyra stationer: " + GetRent() * 4 + " kr";
         }
 
         new public string GetInfo()
-       {
-            return GetName() + " \n" + GetPrice() + " kr\n" + GetRentOutput();
-       }
-       
+        {
+            string ownerName = "";
+            if (owner != 5)
+            {
+                ownerName = "Ägare: "+board.Player[owner].GetName();
+            }
+            return GetName() + " \n" + GetPrice() + " kr\n" + GetRentOutput()+"\n" + ownerName;
+        }
+
         protected int Round(int value) /* Rounds to the nearest value of VALUE_TO_ROUND_TO */
         {
             int newValue = 0;
