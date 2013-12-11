@@ -31,12 +31,7 @@ namespace MonopolyBoard
 
         new public string GetInfo()
         {
-            string ownerName = "";
-            if (owner != 5)
-            {
-                ownerName = "Ägare: " + board.Player[owner].GetName();
-            }
-            return GetName() +"\n"+ GetPrice() +" kr\n"+ GetRentOutput()+"\n"+ownerName;
+            return GetName() +"\n"+ GetPrice() +"kr\n"+ GetRentOutput();
         }
     }
 }

@@ -520,25 +520,38 @@ namespace MonopolyBoard
         public void ShowSquareInfo() /* Show the squares info in lblSquareInfo. */
         {
             string info = "";
+            string ownerName = "";
             int activePosition = Player[activePlayer].GetPosition();
 
             if (Squares[activePosition].GetType() == typeof(Street))
             {
-                info = ((Square)Squares[activePosition]).GetInfo();
+                if (((Street)Squares[activePosition]).GetOwner() != 5)
+                {
+                    ownerName = "\nÄgare: " + Player[((Street)Squares[activePosition]).GetOwner()].GetName();
+                }
+                info = ((Street)Squares[activePosition]).GetInfo() + ownerName;
             }
-            else if (Squares[activePosition].GetType() == typeof(Street))
+            else if(Squares[activePosition].GetType() == typeof(Square))
             {
-                info = ((Street)Squares[activePosition]).GetInfo();
+                info = ((Square)Squares[activePosition]).GetInfo();
             }
             else if (Squares[activePosition].GetType() == typeof(Station))
             {
-                info = ((Station)Squares[activePosition]).GetInfo();
+                if (((Station)Squares[activePosition]).GetOwner() != 5)
+                {
+                    ownerName = "\nÄgare: " + Player[((Station)Squares[activePosition]).GetOwner()].GetName();
+                }
+                info = ((Station)Squares[activePosition]).GetInfo() + ownerName;
             }
             else if (Squares[activePosition].GetType() == typeof(PowerStation))
             {
-                info = ((PowerStation)Squares[activePosition]).GetInfo();
+                if (((PowerStation)Squares[activePosition]).GetOwner() != 5)
+                {
+                    ownerName = "\nÄgare: " + Player[((PowerStation)Squares[activePosition]).GetOwner()].GetName();
+                }
+                info = ((PowerStation)Squares[activePosition]).GetInfo() + ownerName;
             }
-
+            
             lblSquareInfo.Text = info;
         }
 
