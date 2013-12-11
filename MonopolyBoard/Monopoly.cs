@@ -37,7 +37,7 @@ namespace MonopolyBoard
             Chances[2] = new ChanceCards("Du kommer ut ur fängelset", 0, true);
 
             Squares = new BindingList<Square>(SquaresArray);
-            }
+        }
 
         private void Monopoly_Load(object sender, EventArgs e) /* Monopoply loads, start new game. */
         {
@@ -53,7 +53,7 @@ namespace MonopolyBoard
                 Application.Exit();
 
 
-            }
+        }
 
         private void pnlMainPanel_Paint(object sender, PaintEventArgs e) /* Paint monopoly board using GFX engine. */
         {
@@ -359,7 +359,7 @@ namespace MonopolyBoard
             // Player[1].SetMoney(600);
             // Player[2].SetMoney(700);
             // Player[3].SetMoney(800);
-            
+
             MoveActivePlayerToJail();
         }
 
@@ -388,7 +388,7 @@ namespace MonopolyBoard
 
                 lblDice1.BackColor = doubleDiceColor;
                 lblDice2.BackColor = doubleDiceColor;
-                
+
                 if (Player[activePlayer].IsInJail())
                 {
                     Player[activePlayer].GetOutOfJail();
@@ -402,11 +402,11 @@ namespace MonopolyBoard
                 lblDice2.BackColor = formColor;
 
                 if (Player[activePlayer].IsInJail())
-            {
+                {
                     btnNextPlayer.Enabled = true;
                     return;
+                }
             }
-        }
 
             if (diceEqualCount == 3)
             {
@@ -422,7 +422,7 @@ namespace MonopolyBoard
         {
             Trade TradeForm = new Trade();
             TradeForm.board = this;
-            TradeForm.Show();
+            TradeForm.ShowDialog();
         }
 
         private void btnNextPlayer_Click(object sender, EventArgs e) /* Set activePlayer to the next one avaliable. */
@@ -465,7 +465,7 @@ namespace MonopolyBoard
         {
             int position = Player[activePlayer].GetPosition();
             int owner = 0;
-            
+
             try
             {
                 owner = ((Station)Squares[position]).GetOwner();
@@ -488,7 +488,7 @@ namespace MonopolyBoard
                     int rent = ((Street)Squares[position]).GetRent();
                     Player[activePlayer].SubtractMoney(rent);
                 }
-                }
+            }
             else if (squareType == typeof(Square))
             {
                 if (position == 4 || position == 38)
@@ -509,26 +509,26 @@ namespace MonopolyBoard
             }
             else if (squareType == typeof(Station))
             {
-                if (owner != 5 || owner != activePlayer)
+                if (owner == 5)
+                {
+                    btnBuyStreet.Show();
+                }
+                else if (owner != activePlayer)
                 {
                     int strent = ((Station)Squares[position]).GetRent();
                     Player[activePlayer].SubtractMoney(strent);
-        }
-                else
-                {
-                    btnBuyStreet.Show();
                 }
             }
             else if (squareType == typeof(PowerStation))
             {
-                if (owner != 5 || owner != activePlayer)
-        {
-                    int psrent = ((PowerStation)Squares[position]).GetRent();
-                    Player[activePlayer].SubtractMoney(psrent);
-                }
-                else
+                if (owner == 5)
                 {
                     btnBuyStreet.Show();
+                }
+                else if (owner != activePlayer)
+                {
+                    int psrent = ((PowerStation)Squares[position]).GetRent();
+                    Player[activePlayer].SubtractMoney(psrent);
                 }
             }
         }
@@ -595,7 +595,7 @@ namespace MonopolyBoard
         {
             BuyHouse BuyHouseForm = new BuyHouse();
             BuyHouseForm.board = this;
-            BuyHouseForm.Show();
+            BuyHouseForm.ShowDialog();
         }
 
         /* Allow command line to be seen during normal execution */
@@ -615,11 +615,28 @@ namespace MonopolyBoard
             }
             else
             {
-                string prompt = "Vill du köpa " + streetName + " för " + streetPrice + " kr\nDu har"+ playerMoney+ " kr";
+                string prompt = "Vill du köpa " + streetName + " för " + streetPrice + " kr\nDu har "+ playerMoney+ " kr";
                 if (MessageBox.Show(prompt, "Köpa gata", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
+                    Type squareType = Squares[position].GetType();
+
+                    if (squareType == typeof(Street))
+                    {
                     ((Street)Squares[position]).ChangeOwner(activePlayer);
+                    }
+                    else if (squareType == typeof(Station))
+                    {
+                        ((Station)Squares[position]).ChangeOwner(activePlayer);
+                    }
+                    else if (squareType == typeof(PowerStation))
+                    {
+                        ((PowerStation)Squares[position]).ChangeOwner(activePlayer);
+                    }
+
+                    
                     Player[activePlayer].SubtractMoney(streetPrice);
+                    btnBuyStreet.Hide();
+                    ShowSquareInfo();
                 }   
                 
             }
