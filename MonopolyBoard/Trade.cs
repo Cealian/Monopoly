@@ -18,47 +18,78 @@ namespace MonopolyBoard
             InitializeComponent();
         }
 
-        private void AtoB_Click(object sender, EventArgs e)
+        private void MoneyToMove()
         {
-            if (cbMoneyA.Checked)
+            string[] text = new string[2];
+            int[] moneyToMove = new int[2] {0,0};
+            text[0] = txtMoneyA.Text;
+            text[1] = txtMoneyB.Text;
+            try
             {
-                int moneyToMove = 0;
-                try
+                if (cbMoneyA.Checked && cbMoneyB.Checked)
                 {
-                    moneyToMove = int.Parse(txtMoneyA.Text);
+                    moneyToMove[0] = int.Parse(txtMoneyA.Text);
+                    moneyToMove[1] = int.Parse(txtMoneyB.Text);
                 }
-                catch (FormatException)
-                {
-                    moneyToMove = 0;
-                    txtMoneyA.Text = "";
-                    MessageBox.Show("Skriv in ett heltal");
-                }
-                MoveMoney(board.activePlayer, GetSelectedPlayer(), moneyToMove);
+                else if (cbMoneyA.Checked)
+                    moneyToMove[0] = int.Parse(txtMoneyA.Text);
+                else if (cbMoneyB.Checked)
+                    moneyToMove[1] = int.Parse(txtMoneyB.Text);
+                
             }
-            MoveStreets(GetSelectedPlayer());
-            ChangePlayers();
-        }   //Move money and streets from PlayerA to PlayerB.
-
-        private void BtoA_Click(object sender, EventArgs e)
-        {
-            if (cbMoneyB.Checked)
+            catch (FormatException)
             {
-                int moneyToMove = 0;
-                try
+                if (cbMoneyA.Checked && cbMoneyB.Checked)
                 {
-                    moneyToMove = int.Parse(txtMoneyB.Text);
+                    moneyToMove[0] = 0;
+                    moneyToMove[1] = 0;
+                    txtMoneyA.Text = "";
+                    txtMoneyB.Text = "";
+                    MessageBox.Show("Skriv in ett heltal.");
                 }
-                catch (FormatException)
+                else if (cbMoneyA.Checked)
                 {
-                    moneyToMove = 0;
+                    moneyToMove[0] = 0;
+                    txtMoneyA.Text = "";
+                    MessageBox.Show("Skriv in ett heltal.");
+                }
+                else if (cbMoneyB.Checked)
+                {
+                    moneyToMove[1] = 0;
                     txtMoneyB.Text = "";
                     MessageBox.Show("Skriv in ett heltal");
                 }
-                MoveMoney(GetSelectedPlayer(), board.activePlayer, moneyToMove);
             }
-            MoveStreets(board.activePlayer);
-            ChangePlayers();
-        }   //Move money and streets from PlayerB to PlayerA.
+
+            if (cbMoneyA.Checked && cbMoneyB.Checked)
+            {
+                board.Player[board.activePlayer].SubtractMoney(moneyToMove[0]);
+                board.Player[GetSelectedPlayer()].AddMoney(moneyToMove[0]);
+                board.Player[GetSelectedPlayer()].SubtractMoney(moneyToMove[1]);
+                board.Player[board.activePlayer].AddMoney(moneyToMove[1]);
+                txtMoneyA.Text = "";
+                txtMoneyB.Text = "";
+                cbMoneyA.Checked = false;
+                cbMoneyB.Checked = false;
+            }
+            else if (cbMoneyA.Checked)
+            {
+                board.Player[board.activePlayer].SubtractMoney(moneyToMove[0]);
+                board.Player[GetSelectedPlayer()].AddMoney(moneyToMove[0]);
+                txtMoneyA.Text = "";
+                cbMoneyA.Checked = false;
+            }
+            else if (cbMoneyB.Checked)
+            {
+                board.Player[GetSelectedPlayer()].SubtractMoney(moneyToMove[1]);
+                board.Player[board.activePlayer].AddMoney(moneyToMove[1]);
+                txtMoneyB.Text = "";
+                cbMoneyB.Checked = false;
+            }
+            
+            
+            ChangePlayers(); 
+        }
 
         private void cbMoneyA_CheckedChanged(object sender, EventArgs e)
         {
@@ -72,39 +103,8 @@ namespace MonopolyBoard
 
         private void trade_Click(object sender, EventArgs e)
         {
-
-            if (cbMoneyA.Checked)
-            {
-                int moneyToMove = 0;
-                try
-                {
-                    moneyToMove = int.Parse(txtMoneyA.Text);
-                }
-                catch (FormatException)
-                {
-                    moneyToMove = 0;
-                    txtMoneyA.Text = "";
-                    MessageBox.Show("Skriv in ett heltal");
-                }
-                MoveMoney(board.activePlayer, GetSelectedPlayer(), moneyToMove);
-            }
+            MoneyToMove();
             MoveStreets(GetSelectedPlayer());
-
-            if (cbMoneyB.Checked)
-            {
-                int moneyToMove = 0;
-                try
-                {
-                    moneyToMove = int.Parse(txtMoneyB.Text);
-                }
-                catch (FormatException)
-                {
-                    moneyToMove = 0;
-                    txtMoneyB.Text = "";
-                    MessageBox.Show("Skriv in ett heltal");
-                }
-                MoveMoney(GetSelectedPlayer(), board.activePlayer, moneyToMove);
-            }
             MoveStreets(board.activePlayer);
             ChangePlayers();
         }   //Moves money and streets from PlayerA to B and from B to A.
@@ -224,19 +224,5 @@ namespace MonopolyBoard
                 }
             }
         }   //Moves the checked streets from one player to another.
-
-        private void MoveMoney(int fromPlayer, int toPlayer, int moveMoney)
-        {
-
-            board.Player[fromPlayer].SubtractMoney(moveMoney);
-            board.Player[toPlayer].AddMoney(moveMoney);
-            mtxtMoneyB.Text = board.Player[GetSelectedPlayer()].GetMoney().ToString();
-            txtMoneyA.Text = "";
-            txtMoneyB.Text = "";
-            mtxtMoneyA.Text = board.Player[board.activePlayer].GetMoney().ToString();
-            cbMoneyA.Checked = false;
-            cbMoneyB.Checked = false;
-            ChangePlayers();
-        }   //Moves money from one player to another.
     }
 }

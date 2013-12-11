@@ -38,8 +38,6 @@
             this.txtMoneyB = new System.Windows.Forms.TextBox();
             this.cbMoneyB = new System.Windows.Forms.CheckBox();
             this.clbPlayerB = new System.Windows.Forms.CheckedListBox();
-            this.AtoB = new System.Windows.Forms.Button();
-            this.BtoA = new System.Windows.Forms.Button();
             this.btnTrade = new System.Windows.Forms.Button();
             this.lbPlayers = new System.Windows.Forms.ListBox();
             this.gbAPlayer.SuspendLayout();
@@ -140,33 +138,13 @@
             this.clbPlayerB.Size = new System.Drawing.Size(188, 199);
             this.clbPlayerB.TabIndex = 0;
             // 
-            // AtoB
-            // 
-            this.AtoB.Location = new System.Drawing.Point(246, 173);
-            this.AtoB.Name = "AtoB";
-            this.AtoB.Size = new System.Drawing.Size(75, 23);
-            this.AtoB.TabIndex = 2;
-            this.AtoB.Text = "-->";
-            this.AtoB.UseVisualStyleBackColor = true;
-            this.AtoB.Click += new System.EventHandler(this.AtoB_Click);
-            // 
-            // BtoA
-            // 
-            this.BtoA.Location = new System.Drawing.Point(246, 202);
-            this.BtoA.Name = "BtoA";
-            this.BtoA.Size = new System.Drawing.Size(75, 23);
-            this.BtoA.TabIndex = 3;
-            this.BtoA.Text = "<--";
-            this.BtoA.UseVisualStyleBackColor = true;
-            this.BtoA.Click += new System.EventHandler(this.BtoA_Click);
-            // 
             // btnTrade
             // 
-            this.btnTrade.Location = new System.Drawing.Point(246, 231);
+            this.btnTrade.Location = new System.Drawing.Point(246, 198);
             this.btnTrade.Name = "btnTrade";
             this.btnTrade.Size = new System.Drawing.Size(75, 23);
             this.btnTrade.TabIndex = 4;
-            this.btnTrade.Text = "<-->";
+            this.btnTrade.Text = "Trade";
             this.btnTrade.UseVisualStyleBackColor = true;
             this.btnTrade.Click += new System.EventHandler(this.trade_Click);
             // 
@@ -186,8 +164,6 @@
             this.ClientSize = new System.Drawing.Size(585, 342);
             this.Controls.Add(this.lbPlayers);
             this.Controls.Add(this.btnTrade);
-            this.Controls.Add(this.BtoA);
-            this.Controls.Add(this.AtoB);
             this.Controls.Add(this.gbSPlayer);
             this.Controls.Add(this.gbAPlayer);
             this.Name = "Trade";
@@ -211,8 +187,6 @@
         private System.Windows.Forms.TextBox txtMoneyB;
         private System.Windows.Forms.CheckBox cbMoneyB;
         private System.Windows.Forms.CheckedListBox clbPlayerB;
-        private System.Windows.Forms.Button AtoB;
-        private System.Windows.Forms.Button BtoA;
         private System.Windows.Forms.Button btnTrade;
         private System.Windows.Forms.MaskedTextBox mtxtMoneyA;
         private System.Windows.Forms.MaskedTextBox mtxtMoneyB;

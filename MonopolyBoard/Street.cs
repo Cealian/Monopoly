@@ -73,8 +73,7 @@ namespace MonopolyBoard
 
         new public string GetInfo()
         {
-            return GetName() + " \n" + GetPrice() + " kr\n" + GetRentOutput() + " \nHus kostar: " + GetHousePrice() + " kr";
+            return GetName() + " \n" + GetPrice() + " kr\n" + GetRentOutput() + "\nHus kostar: " + GetHousePrice() + " kr";
         }
-
     }
 }

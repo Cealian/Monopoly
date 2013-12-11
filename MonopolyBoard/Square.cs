@@ -33,8 +33,7 @@ namespace MonopolyBoard
             if (price == 0)
                 return name;
             else
-                return name + " \n" + price; /* Formatera för bättre visning. */
+                return name + " \n" + price + " kr"; /* Formatera för bättre visning. */
         }
     }
-
 }
