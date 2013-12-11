@@ -580,6 +580,7 @@ namespace MonopolyBoard
 
             Player[activePlayer].SubtractMoney(positionprice);
             Freepark.AddMoney(positionprice);
+            UpdateFreeParkValue();
         }
 
         public void UpdatePlayerInfo() /* Updates the on-screen info about the players. */
@@ -647,6 +648,9 @@ namespace MonopolyBoard
             }
         }
 
-
+        private void UpdateFreeParkValue()
+        {
+            lblFreePark.Text = Freepark.GetValue().ToString();
+        }
     }
 }
