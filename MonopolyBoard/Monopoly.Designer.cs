@@ -46,6 +46,7 @@
             this.lblSquareInfo = new System.Windows.Forms.Label();
             this.btnNextPlayer = new System.Windows.Forms.Button();
             this.btnBuyHouses = new System.Windows.Forms.Button();
+            this.btnSellStreet = new System.Windows.Forms.Button();
             this.pnlMainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer2)).BeginInit();
@@ -220,6 +221,15 @@
             this.btnBuyHouses.UseVisualStyleBackColor = true;
             this.btnBuyHouses.Click += new System.EventHandler(this.btnBuyHouses_Click);
             // 
+            // btnSellStreet
+            // 
+            this.btnSellStreet.Location = new System.Drawing.Point(700, 128);
+            this.btnSellStreet.Name = "btnSellStreet";
+            this.btnSellStreet.Size = new System.Drawing.Size(75, 23);
+            this.btnSellStreet.TabIndex = 12;
+            this.btnSellStreet.Text = "Sälj gator";
+            this.btnSellStreet.UseVisualStyleBackColor = true;
+            // 
             // frmMonopoly
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -227,6 +237,7 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.CancelButton = this.btnQuit;
             this.ClientSize = new System.Drawing.Size(798, 648);
+            this.Controls.Add(this.btnSellStreet);
             this.Controls.Add(this.btnBuyHouses);
             this.Controls.Add(this.btnNextPlayer);
             this.Controls.Add(this.lblSquareInfo);
@@ -271,6 +282,7 @@
         private System.Windows.Forms.Label lblSquareInfo;
         private System.Windows.Forms.Button btnNextPlayer;
         private System.Windows.Forms.Button btnBuyHouses;
+        private System.Windows.Forms.Button btnSellStreet;
     }
 }
 
