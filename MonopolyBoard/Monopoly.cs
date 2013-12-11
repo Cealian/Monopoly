@@ -11,6 +11,7 @@ namespace MonopolyBoard
         public GFX GEngine; /* GFX engine */
         public PlayerClass[] Player = new PlayerClass[4]; /* Players */
         public Square[] SquaresArray = new Square[40];
+        public ChanceCards[] Chances = new ChanceCards[5];
         public BindingList<Square> Squares;
         public FreeParking Freepark = new FreeParking();
 
@@ -30,6 +31,10 @@ namespace MonopolyBoard
             InstantiateStreets();
             InstantiateStations();
             InstantiatePowerStations();
+
+            Chances[0] = new ChanceCards("Du vann i en skönhetstävling, inkassera 2000 kr", 2000);
+            Chances[1] = new ChanceCards("Gå till fängelse", 0, false, -1);
+            Chances[2] = new ChanceCards("Du kommer ut ur fängelset", 0, true);
 
             Squares = new BindingList<Square>(SquaresArray);
         }
@@ -536,19 +541,19 @@ namespace MonopolyBoard
 
             if (Squares[activePosition].GetType() == typeof(Street))
             {
-                if (((Street)Squares[activePosition]).GetOwner() != 5)
+                if (((Street)Squares[activePosition]).GetOwner() != 5 && Player[((Street)Squares[activePosition]).GetOwner()].GetName() != "")
                 {
                     ownerName = "\nÄgare: " + Player[((Street)Squares[activePosition]).GetOwner()].GetName();
                 }
                 info = ((Street)Squares[activePosition]).GetInfo() + ownerName;
             }
-            else if(Squares[activePosition].GetType() == typeof(Square))
+            else if (Squares[activePosition].GetType() == typeof(Square))
             {
                 info = ((Square)Squares[activePosition]).GetInfo();
             }
             else if (Squares[activePosition].GetType() == typeof(Station))
             {
-                if (((Station)Squares[activePosition]).GetOwner() != 5)
+                if (((Station)Squares[activePosition]).GetOwner() != 5 && Player[((Station)Squares[activePosition]).GetOwner()].GetName() != "")
                 {
                     ownerName = "\nÄgare: " + Player[((Station)Squares[activePosition]).GetOwner()].GetName();
                 }
@@ -556,7 +561,7 @@ namespace MonopolyBoard
             }
             else if (Squares[activePosition].GetType() == typeof(PowerStation))
             {
-                if (((PowerStation)Squares[activePosition]).GetOwner() != 5)
+                if (((PowerStation)Squares[activePosition]).GetOwner() != 5 && Player[((PowerStation)Squares[activePosition]).GetOwner()].GetName() != "")
                 {
                     ownerName = "\nÄgare: " + Player[((PowerStation)Squares[activePosition]).GetOwner()].GetName();
                 }
@@ -619,7 +624,7 @@ namespace MonopolyBoard
 
                     if (squareType == typeof(Street))
                     {
-                        ((Street)Squares[position]).ChangeOwner(activePlayer);
+                    ((Street)Squares[position]).ChangeOwner(activePlayer);
                     }
                     else if (squareType == typeof(Station))
                     {

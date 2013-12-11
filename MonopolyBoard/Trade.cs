@@ -135,6 +135,8 @@ namespace MonopolyBoard
 
             string selectedPlayerList = lbPlayers.SelectedItem.ToString();
             string selectedPlayerName = board.Player[GetSelectedPlayer()].GetName();
+
+            board.ShowSquareInfo();
             
             foreach (Square square in board.SquaresArray)
             {
@@ -220,6 +222,6 @@ namespace MonopolyBoard
                     }
                 }
             }
-        }   //Moves the checked streets from one player to another.
+        }
     }
 }

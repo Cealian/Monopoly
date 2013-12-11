@@ -85,6 +85,7 @@
             // 
             // clbPlayerA
             // 
+            this.clbPlayerA.CheckOnClick = true;
             this.clbPlayerA.FormattingEnabled = true;
             this.clbPlayerA.Location = new System.Drawing.Point(6, 19);
             this.clbPlayerA.Name = "clbPlayerA";
@@ -132,6 +133,7 @@
             // 
             // clbPlayerB
             // 
+            this.clbPlayerB.CheckOnClick = true;
             this.clbPlayerB.FormattingEnabled = true;
             this.clbPlayerB.Location = new System.Drawing.Point(6, 19);
             this.clbPlayerB.Name = "clbPlayerB";

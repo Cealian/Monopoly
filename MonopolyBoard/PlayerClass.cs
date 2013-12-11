@@ -8,6 +8,7 @@ namespace MonopolyBoard
         private string name;
         private int money = 10000;
         private int position = 0;
+        private bool jailCard = false;
         private bool inJail = false;
         private int stepsLeft; // Used when moving player to see how many steps he/she has left.
 
@@ -83,6 +84,21 @@ namespace MonopolyBoard
             bool moreSteps = (stepsLeft > 0);
 
             return moreSteps;
+        }
+
+        public bool HasJailCard()
+        {
+            return jailCard;
+        }
+
+        public void GetJailCard()
+        {
+            jailCard = true;
+        }
+
+        public void UseJailCard()
+        {
+            jailCard = false;
         }
 
         //SETMONEY Ta bort sen
