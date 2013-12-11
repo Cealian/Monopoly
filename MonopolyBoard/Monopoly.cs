@@ -12,6 +12,7 @@ namespace MonopolyBoard
         public PlayerClass[] Player = new PlayerClass[4]; /* Players */
         public Square[] SquaresArray = new Square[40];
         public ChanceCards[] Chances = new ChanceCards[5];
+        public CommunityCards[] ComCard = new CommunityCards[5];
         public BindingList<Square> Squares;
         public FreeParking Freepark = new FreeParking();
 
@@ -34,7 +35,9 @@ namespace MonopolyBoard
 
             Chances[0] = new ChanceCards("Du vann i en skönhetstävling, inkassera 2000 kr", 2000);
             Chances[1] = new ChanceCards("Gå till fängelse", 0, false, -1);
-            Chances[2] = new ChanceCards("Du kommer ut ur fängelset", 0, true);
+            Chances[2] = new ChanceCards ("Du kommer ut ur fängelset", 0, true);
+
+            ComCard[0] = new CommunityCards("Hej", 0);
 
             Squares = new BindingList<Square>(SquaresArray);
         }

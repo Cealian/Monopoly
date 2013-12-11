@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MonopolyBoard
 {
-    class ChanceCards
+    public class ChanceCards
     {
         /* ----- Members ----- */
         public frmMonopoly board;
