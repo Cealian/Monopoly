@@ -222,15 +222,6 @@
             this.btnBuyHouses.UseVisualStyleBackColor = true;
             this.btnBuyHouses.Click += new System.EventHandler(this.btnBuyHouses_Click);
             // 
-            // btnSellStreet
-            // 
-            this.btnSellStreet.Location = new System.Drawing.Point(700, 128);
-            this.btnSellStreet.Name = "btnSellStreet";
-            this.btnSellStreet.Size = new System.Drawing.Size(75, 23);
-            this.btnSellStreet.TabIndex = 12;
-            this.btnSellStreet.Text = "Sälj gator";
-            this.btnSellStreet.UseVisualStyleBackColor = true;
-            // 
             // btnBuyStreet
             // 
             this.btnBuyStreet.Location = new System.Drawing.Point(700, 128);
@@ -241,6 +232,15 @@
             this.btnBuyStreet.UseVisualStyleBackColor = true;
             this.btnBuyStreet.Visible = false;
             this.btnBuyStreet.Click += new System.EventHandler(this.btnBuyStreet_Click);
+            // 
+            // btnSellStreet
+            // 
+            this.btnSellStreet.Location = new System.Drawing.Point(700, 157);
+            this.btnSellStreet.Name = "btnSellStreet";
+            this.btnSellStreet.Size = new System.Drawing.Size(75, 23);
+            this.btnSellStreet.TabIndex = 12;
+            this.btnSellStreet.Text = "Sälj gator";
+            this.btnSellStreet.UseVisualStyleBackColor = true;
             // 
             // frmMonopoly
             // 
