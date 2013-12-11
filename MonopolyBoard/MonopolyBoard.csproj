@@ -50,7 +50,8 @@
     <Compile Include="BuyHouse.Designer.cs">
       <DependentUpon>BuyHouse.cs</DependentUpon>
     </Compile>
-    <Compile Include="Cards.cs" />
+    <Compile Include="ChanceCards.cs" />
+    <Compile Include="CommunityCards.cs" />
     <Compile Include="FreeParking.cs" />
     <Compile Include="Monopoly.cs">
       <SubType>Form</SubType>
