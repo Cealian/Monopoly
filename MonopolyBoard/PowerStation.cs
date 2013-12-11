@@ -31,7 +31,7 @@ namespace MonopolyBoard
 
         new public string GetInfo()
         {
-            return GetName() +"\n"+ GetPrice() +" kr\n"+ GetRentOutput();
+            return GetName() +"\n"+ GetPrice() +"kr\n"+ GetRentOutput();
         }
     }
 }
