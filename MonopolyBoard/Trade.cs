@@ -126,8 +126,8 @@ namespace MonopolyBoard
         {
             ChangePlayers();
         }   //Change the second player so you can trade with the player you want.
-
-        private void ChangePlayers()
+        
+        private void ChangePlayers() //Här ska du kolla Herman
         {
             clbPlayerA.Items.Clear();
             clbPlayerB.Items.Clear();
@@ -143,12 +143,12 @@ namespace MonopolyBoard
 
             board.ShowSquareInfo();
 
-            foreach (Square square in board.SquaresArray)
-            {
-                if (square.GetType() == typeof(Street))
-                {
-                    if (((Street)square).GetOwner() == board.activePlayer)
-                        clbPlayerA.Items.Add(((Street)square).GetName());
+            foreach (Square square in board.SquaresArray)//Här ska du kolla, här laddar jag in allt i 
+            {                                            //listboxen, men du har ju bara en och behöver
+                if (square.GetType() == typeof(Street))  //inte ha med stationer och kraftverk, då de inte
+                {                                        //har några hus. Borde inte vara så svårt, dock kan du gärna försöka fixa så det bara är de 
+                    if (((Street)square).GetOwner() == board.activePlayer)//gator där man äger ett helt kvarter som visas, de andra kan man ju inte
+                        clbPlayerA.Items.Add(((Street)square).GetName());//bygga hus på. Sen får du gärna ta bort denna låååånga fula komentar igen. :D
                     else if (selectedPlayerList == selectedPlayerName
                         && ((Street)square).GetOwner() == GetSelectedPlayer())
                         clbPlayerB.Items.Add(((Street)square).GetName());
