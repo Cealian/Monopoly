@@ -48,6 +48,9 @@
             this.btnBuyHouses = new System.Windows.Forms.Button();
             this.btnBuyStreet = new System.Windows.Forms.Button();
             this.btnSellStreet = new System.Windows.Forms.Button();
+            this.btnSaveGame = new System.Windows.Forms.Button();
+            this.sfdSaveGame = new System.Windows.Forms.SaveFileDialog();
+            this.lblFreePark = new System.Windows.Forms.Label();
             this.pnlMainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer2)).BeginInit();
@@ -62,6 +65,7 @@
             this.pnlMainPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pnlMainPanel.BackgroundImage")));
             this.pnlMainPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnlMainPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlMainPanel.Controls.Add(this.lblFreePark);
             this.pnlMainPanel.Controls.Add(this.picPlayer3);
             this.pnlMainPanel.Controls.Add(this.picPlayer2);
             this.pnlMainPanel.Controls.Add(this.picPlayer1);
@@ -74,6 +78,7 @@
             // 
             // picPlayer3
             // 
+            this.picPlayer3.BackColor = System.Drawing.Color.Transparent;
             this.picPlayer3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.picPlayer3.Image = ((System.Drawing.Image)(resources.GetObject("picPlayer3.Image")));
             this.picPlayer3.InitialImage = null;
@@ -85,6 +90,7 @@
             // 
             // picPlayer2
             // 
+            this.picPlayer2.BackColor = System.Drawing.Color.Transparent;
             this.picPlayer2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.picPlayer2.Image = ((System.Drawing.Image)(resources.GetObject("picPlayer2.Image")));
             this.picPlayer2.InitialImage = null;
@@ -96,6 +102,7 @@
             // 
             // picPlayer1
             // 
+            this.picPlayer1.BackColor = System.Drawing.Color.Transparent;
             this.picPlayer1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.picPlayer1.Image = ((System.Drawing.Image)(resources.GetObject("picPlayer1.Image")));
             this.picPlayer1.InitialImage = null;
@@ -107,6 +114,7 @@
             // 
             // picPlayer0
             // 
+            this.picPlayer0.BackColor = System.Drawing.Color.Transparent;
             this.picPlayer0.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.picPlayer0.Image = ((System.Drawing.Image)(resources.GetObject("picPlayer0.Image")));
             this.picPlayer0.InitialImage = null;
@@ -242,6 +250,31 @@
             this.btnSellStreet.Text = "Sälj gator";
             this.btnSellStreet.UseVisualStyleBackColor = true;
             // 
+            // btnSaveGame
+            // 
+            this.btnSaveGame.Location = new System.Drawing.Point(700, 186);
+            this.btnSaveGame.Name = "btnSaveGame";
+            this.btnSaveGame.Size = new System.Drawing.Size(75, 23);
+            this.btnSaveGame.TabIndex = 13;
+            this.btnSaveGame.Text = "Spara spelet";
+            this.btnSaveGame.UseVisualStyleBackColor = true;
+            this.btnSaveGame.Click += new System.EventHandler(this.btnSaveGame_Click);
+            // 
+            // sfdSaveGame
+            // 
+            this.sfdSaveGame.DefaultExt = "mon";
+            this.sfdSaveGame.Filter = "Monopol save file(*.mon)|*.mon";
+            // 
+            // lblFreePark
+            // 
+            this.lblFreePark.AutoSize = true;
+            this.lblFreePark.BackColor = System.Drawing.Color.Transparent;
+            this.lblFreePark.Location = new System.Drawing.Point(4, 4);
+            this.lblFreePark.Name = "lblFreePark";
+            this.lblFreePark.Size = new System.Drawing.Size(13, 13);
+            this.lblFreePark.TabIndex = 4;
+            this.lblFreePark.Text = "0";
+            // 
             // frmMonopoly
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -249,6 +282,7 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.CancelButton = this.btnQuit;
             this.ClientSize = new System.Drawing.Size(798, 648);
+            this.Controls.Add(this.btnSaveGame);
             this.Controls.Add(this.btnSellStreet);
             this.Controls.Add(this.btnBuyStreet);
             this.Controls.Add(this.btnBuyHouses);
@@ -269,6 +303,7 @@
             this.Text = "Monopol";
             this.Load += new System.EventHandler(this.Monopoly_Load);
             this.pnlMainPanel.ResumeLayout(false);
+            this.pnlMainPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer1)).EndInit();
@@ -297,6 +332,9 @@
         private System.Windows.Forms.Button btnBuyHouses;
         private System.Windows.Forms.Button btnSellStreet;
         private System.Windows.Forms.Button btnBuyStreet;
+        private System.Windows.Forms.Button btnSaveGame;
+        private System.Windows.Forms.SaveFileDialog sfdSaveGame;
+        private System.Windows.Forms.Label lblFreePark;
     }
 }
 
