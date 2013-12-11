@@ -21,7 +21,7 @@ namespace MonopolyBoard
         private void MoneyToMove()
         {
             string[] text = new string[2];
-            int[] moneyToMove = new int[2] {0,0};
+            int[] moneyToMove = new int[2] { 0, 0 };
             text[0] = txtMoneyA.Text;
             text[1] = txtMoneyB.Text;
             try
@@ -35,7 +35,7 @@ namespace MonopolyBoard
                     moneyToMove[0] = int.Parse(txtMoneyA.Text);
                 else if (cbMoneyB.Checked)
                     moneyToMove[1] = int.Parse(txtMoneyB.Text);
-                
+
             }
             catch (FormatException)
             {
@@ -60,6 +60,11 @@ namespace MonopolyBoard
                     MessageBox.Show("Skriv in ett heltal");
                 }
             }
+
+            if (moneyToMove[0] < 0)
+                moneyToMove[0] = 0;
+            if (moneyToMove[1] < 0)
+                moneyToMove[1] = 0;
 
             if (cbMoneyA.Checked && cbMoneyB.Checked)
             {
@@ -110,7 +115,7 @@ namespace MonopolyBoard
         {
             for (int i = 0; i < board.Player.Length; i++)
             {
-                if (i != board.activePlayer && board.Player[i].GetName()!="")
+                if (i != board.activePlayer && board.Player[i].GetName() != "")
                     lbPlayers.Items.Add(board.Player[i].GetName());
             }
             lbPlayers.SetSelected(0, true);
@@ -137,7 +142,7 @@ namespace MonopolyBoard
             string selectedPlayerName = board.Player[GetSelectedPlayer()].GetName();
 
             board.ShowSquareInfo();
-            
+
             foreach (Square square in board.SquaresArray)
             {
                 if (square.GetType() == typeof(Street))
