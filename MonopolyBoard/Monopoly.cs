@@ -474,14 +474,14 @@ namespace MonopolyBoard
 
             if (squareType == typeof(Street))
             {
-                if (owner != 5 || owner != activePlayer)
+                if (owner == 5)
+                {
+                    btnBuyStreet.Show();
+                }
+                else if(owner != activePlayer)
                 {
                     int rent = ((Street)Squares[position]).GetRent();
                     Player[activePlayer].SubtractMoney(rent);
-                }
-                else
-                {
-                    btnBuyStreet.Show();
                 }
             }
             else if (squareType == typeof(Square))
