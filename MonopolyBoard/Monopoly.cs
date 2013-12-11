@@ -423,6 +423,7 @@ namespace MonopolyBoard
         {
             btnRollDices.Enabled = true;
             btnNextPlayer.Enabled = false;
+            btnBuyStreet.Hide();
             NextPlayer();
         }
 
@@ -469,8 +470,8 @@ namespace MonopolyBoard
                     Player[activePlayer].SubtractMoney(rent);
                 }
                 else
-                {//Visa buy knapp
-
+                {
+                    btnBuyStreet.Show();
                 }
             }
             else if (squareType == typeof(Square))
@@ -499,8 +500,8 @@ namespace MonopolyBoard
                     Player[activePlayer].SubtractMoney(strent);
                 }
                 else
-                {//Visa buy knapp
-
+                {
+                    btnBuyStreet.Show();
                 }
             }
             else if (squareType == typeof(PowerStation))
@@ -511,8 +512,8 @@ namespace MonopolyBoard
                     Player[activePlayer].SubtractMoney(psrent);
                 }
                 else
-                {//Visa buy knapp
-
+                {
+                    btnBuyStreet.Show();
                 }
             }
         }
@@ -586,6 +587,28 @@ namespace MonopolyBoard
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAsAttribute(UnmanagedType.Bool)]
         static extern bool AllocConsole();
+
+        private void btnBuyStreet_Click(object sender, EventArgs e)
+        {
+            int playerMoney = Player[activePlayer].GetMoney();
+            int position = Player[activePlayer].GetPosition();
+            int streetPrice = Squares[position].GetPrice();
+            string streetName = Squares[position].GetName();
+            if (playerMoney < streetPrice)
+            {
+                MessageBox.Show("Du har inte råd att köpa denna gatan");
+            }
+            else
+            {
+                string prompt = "Vill du köpa " + streetName + " för " + streetPrice + " kr\nDu har"+ playerMoney+ " kr";
+                if (MessageBox.Show(prompt, "Köpa gata", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    ((Street)Squares[position]).ChangeOwner(activePlayer);
+                    Player[activePlayer].SubtractMoney(streetPrice);
+                }   
+                
+            }
+        }
 
 
     }
