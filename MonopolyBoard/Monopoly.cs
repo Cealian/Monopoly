@@ -504,26 +504,26 @@ namespace MonopolyBoard
             }
             else if (squareType == typeof(Station))
             {
-                if (owner != 5 || owner != activePlayer)
+                if (owner == 5)
+                {
+                    btnBuyStreet.Show();
+                }
+                else if (owner != activePlayer)
                 {
                     int strent = ((Station)Squares[position]).GetRent();
                     Player[activePlayer].SubtractMoney(strent);
                 }
-                else
-                {
-                    btnBuyStreet.Show();
-                }
             }
             else if (squareType == typeof(PowerStation))
             {
-                if (owner != 5 || owner != activePlayer)
+                if (owner == 5)
+                {
+                    btnBuyStreet.Show();
+                }
+                else if (owner != activePlayer)
                 {
                     int psrent = ((PowerStation)Squares[position]).GetRent();
                     Player[activePlayer].SubtractMoney(psrent);
-                }
-                else
-                {
-                    btnBuyStreet.Show();
                 }
             }
         }
@@ -610,11 +610,28 @@ namespace MonopolyBoard
             }
             else
             {
-                string prompt = "Vill du köpa " + streetName + " för " + streetPrice + " kr\nDu har"+ playerMoney+ " kr";
+                string prompt = "Vill du köpa " + streetName + " för " + streetPrice + " kr\nDu har "+ playerMoney+ " kr";
                 if (MessageBox.Show(prompt, "Köpa gata", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    ((Street)Squares[position]).ChangeOwner(activePlayer);
+                    Type squareType = Squares[position].GetType();
+
+                    if (squareType == typeof(Street))
+                    {
+                        ((Street)Squares[position]).ChangeOwner(activePlayer);
+                    }
+                    else if (squareType == typeof(Station))
+                    {
+                        ((Station)Squares[position]).ChangeOwner(activePlayer);
+                    }
+                    else if (squareType == typeof(PowerStation))
+                    {
+                        ((PowerStation)Squares[position]).ChangeOwner(activePlayer);
+                    }
+
+                    
                     Player[activePlayer].SubtractMoney(streetPrice);
+                    btnBuyStreet.Hide();
+                    ShowSquareInfo();
                 }   
                 
             }
