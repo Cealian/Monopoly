@@ -86,9 +86,6 @@ namespace MonopolyBoard
                 txtMoneyB.Text = "";
                 cbMoneyB.Checked = false;
             }
-            
-            
-            ChangePlayers(); 
         }
 
         private void cbMoneyA_CheckedChanged(object sender, EventArgs e)
