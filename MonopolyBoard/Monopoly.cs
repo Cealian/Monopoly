@@ -417,7 +417,7 @@ namespace MonopolyBoard
         {
             Trade TradeForm = new Trade();
             TradeForm.board = this;
-            TradeForm.Show();
+            TradeForm.ShowDialog();
         }
 
         private void btnNextPlayer_Click(object sender, EventArgs e) /* Set activePlayer to the next one avaliable. */
@@ -590,7 +590,7 @@ namespace MonopolyBoard
         {
             BuyHouse BuyHouseForm = new BuyHouse();
             BuyHouseForm.board = this;
-            BuyHouseForm.Show();
+            BuyHouseForm.ShowDialog();
         }
 
         /* Allow command line to be seen during normal execution */
