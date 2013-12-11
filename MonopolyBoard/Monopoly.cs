@@ -114,6 +114,7 @@ namespace MonopolyBoard
                 Console.WriteLine(picPlayer2.Location.X + " - " + picPlayer2.Location.Y);
 
                 ShowSquareInfo();
+                RunSquareEvent();
 
                 Console.WriteLine("Active player: {0}", activePlayer);
             }
@@ -458,7 +459,16 @@ namespace MonopolyBoard
         public void RunSquareEvent() /* Checks what kind of square the player landed on and acts accordingly. */
         {
             int position = Player[activePlayer].GetPosition();
-            int owner = ((Street)Squares[position]).GetOwner();
+            int owner = 0;
+
+            try
+            {
+                owner = ((Station)Squares[position]).GetOwner();
+            }
+            catch (InvalidCastException)
+            {
+                // Ingen ägare, alltså Square.
+            }
 
             Type squareType = Squares[position].GetType();
 
