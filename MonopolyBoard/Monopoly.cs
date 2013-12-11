@@ -11,8 +11,8 @@ namespace MonopolyBoard
         public GFX GEngine; /* GFX engine */
         public PlayerClass[] Player = new PlayerClass[4]; /* Players */
         public Square[] SquaresArray = new Square[40];
-        public ChanceCards[] Chances = new ChanceCards[5];
-        public CommunityCards[] ComCard = new CommunityCards[5];
+        public ChanceCards[] Chances = new ChanceCards[16];
+        public CommunityCards[] ComCard = new CommunityCards[16];
         public BindingList<Square> Squares;
         public FreeParking Freepark = new FreeParking();
 
@@ -21,6 +21,7 @@ namespace MonopolyBoard
         const int PX_PER_PACE = 9;
         public int activePlayer = new Random().Next(0, 4);
         int diceEqualCount = 0;
+        int chanceCard = 0, comCard = 0;
 
         public frmMonopoly()
         {
@@ -32,12 +33,8 @@ namespace MonopolyBoard
             InstantiateStreets();
             InstantiateStations();
             InstantiatePowerStations();
-
-            Chances[0] = new ChanceCards("Du vann i en skönhetstävling, inkassera 2000 kr", 2000);
-            Chances[1] = new ChanceCards("Gå till fängelse", 0, false, -1);
-            Chances[2] = new ChanceCards ("Du kommer ut ur fängelset", 0, true);
-
-            ComCard[0] = new CommunityCards("Hej", 0);
+            InstantiateChanceCards();
+            InstantiateCommunityCards();
 
             Squares = new BindingList<Square>(SquaresArray);
         }
@@ -333,6 +330,50 @@ namespace MonopolyBoard
 
         #endregion
 
+        #region Cards instantiation
+
+        public void InstantiateChanceCards()
+        {
+            Chances[0] = new ChanceCards("Gå vidare till Hamngatan.", 0,false, 24);
+            Chances[1] = new ChanceCards("Gå till fängelset.", 0, false, -1);
+            Chances[2] = new ChanceCards("Du kommer ut ur fängelset.", 0, true);
+            Chances[3] = new ChanceCards("Du vann i en skönhetstävling, inkassera 2000 kr.", 2000);
+            Chances[4] = new ChanceCards("Gå vidare till Gå.", 0, false, 0);
+            Chances[5] = new ChanceCards("Gå vidare till S:t Eriksgatan", 0, false, 11);
+            Chances[6] = new ChanceCards("Betala parkeringsbörter 150 kr", -150);
+            Chances[7] = new ChanceCards("Banken har räknat fel, inkassera 2000", 2000);
+            Chances[8] = new ChanceCards("Du kommer ut ur fängelset", 0, true);
+            Chances[9] = new ChanceCards("Du vann i en skönhetstävling, inkassera 2000 kr", 2000);
+            Chances[10] = new ChanceCards("Gå till fängelse", 0, false, -1);
+            Chances[11] = new ChanceCards("Du kommer ut ur fängelset", 0, true);
+            Chances[12] = new ChanceCards("Du vann i en skönhetstävling, inkassera 2000 kr", 2000);
+            Chances[13] = new ChanceCards("Gå till fängelse", 0, false, -1);
+            Chances[14] = new ChanceCards("Du kommer ut ur fängelset", 0, true);
+            Chances[15] = new ChanceCards("Du kommer ut ur fängelset", 0, true);
+        }
+
+        public void InstantiateCommunityCards()
+        {
+            ComCard[0] = new CommunityCards("Hej", 0);
+            ComCard[1] = new CommunityCards("Hej", 0);
+            ComCard[2] = new CommunityCards("Hej", 0);
+            ComCard[3] = new CommunityCards("Hej", 0);
+            ComCard[4] = new CommunityCards("Hej", 0);
+            ComCard[5] = new CommunityCards("Hej", 0);
+            ComCard[6] = new CommunityCards("Hej", 0);
+            ComCard[7] = new CommunityCards("Hej", 0);
+            ComCard[8] = new CommunityCards("Hej", 0);
+            ComCard[9] = new CommunityCards("Hej", 0);
+            ComCard[10] = new CommunityCards("Hej", 0);
+            ComCard[11] = new CommunityCards("Hej", 0);
+            ComCard[12] = new CommunityCards("Hej", 0);
+            ComCard[13] = new CommunityCards("Hej", 0);
+            ComCard[14] = new CommunityCards("Hej", 0);
+            ComCard[15] = new CommunityCards("Hej", 0);
+        }
+
+        #endregion
+
         /* All button event handlers for frmMonopoly goes here */
         #region Button event handlers
 
@@ -508,7 +549,22 @@ namespace MonopolyBoard
                 {
                     MoveActivePlayerToJail();
                 }
-
+                else if (position == 7 || position == 22 || position == 36)
+                {
+                    MessageBox.Show(Chances[chanceCard].GetText());
+                    if (chanceCard <= 15)
+                        chanceCard = 0;
+                    else
+                        chanceCard++;
+                }
+                else if (position == 2 || position == 17 || position == 33)
+                {
+                    MessageBox.Show(ComCard[comCard].GetText());
+                    if (comCard <= 15)
+                        comCard = 0;
+                    else
+                        comCard++;
+                }
             }
             else if (squareType == typeof(Station))
             {
