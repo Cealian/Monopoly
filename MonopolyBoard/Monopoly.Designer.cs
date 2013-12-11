@@ -50,6 +50,7 @@
             this.btnSellStreet = new System.Windows.Forms.Button();
             this.btnSaveGame = new System.Windows.Forms.Button();
             this.sfdSaveGame = new System.Windows.Forms.SaveFileDialog();
+            this.lblFreePark = new System.Windows.Forms.Label();
             this.pnlMainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer2)).BeginInit();
@@ -64,6 +65,7 @@
             this.pnlMainPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pnlMainPanel.BackgroundImage")));
             this.pnlMainPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnlMainPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlMainPanel.Controls.Add(this.lblFreePark);
             this.pnlMainPanel.Controls.Add(this.picPlayer3);
             this.pnlMainPanel.Controls.Add(this.picPlayer2);
             this.pnlMainPanel.Controls.Add(this.picPlayer1);
@@ -263,6 +265,16 @@
             this.sfdSaveGame.DefaultExt = "mon";
             this.sfdSaveGame.Filter = "Monopol save file(*.mon)|*.mon";
             // 
+            // lblFreePark
+            // 
+            this.lblFreePark.AutoSize = true;
+            this.lblFreePark.BackColor = System.Drawing.Color.Transparent;
+            this.lblFreePark.Location = new System.Drawing.Point(4, 4);
+            this.lblFreePark.Name = "lblFreePark";
+            this.lblFreePark.Size = new System.Drawing.Size(13, 13);
+            this.lblFreePark.TabIndex = 4;
+            this.lblFreePark.Text = "0";
+            // 
             // frmMonopoly
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -291,6 +303,7 @@
             this.Text = "Monopol";
             this.Load += new System.EventHandler(this.Monopoly_Load);
             this.pnlMainPanel.ResumeLayout(false);
+            this.pnlMainPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer1)).EndInit();
@@ -321,6 +334,7 @@
         private System.Windows.Forms.Button btnBuyStreet;
         private System.Windows.Forms.Button btnSaveGame;
         private System.Windows.Forms.SaveFileDialog sfdSaveGame;
+        private System.Windows.Forms.Label lblFreePark;
     }
 }
 
