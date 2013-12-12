@@ -52,6 +52,7 @@ namespace MonopolyBoard
             else
                 Application.Exit();
 
+            UpdatePlayerInfo();
 
         }
 
@@ -73,6 +74,22 @@ namespace MonopolyBoard
         private void tmrMovePlayer_Tick(object sender, EventArgs e) /* Move player until its remaining steps = 0. */
         {
             MoveActivePlayer();
+
+            switch (activePlayer)
+            {
+                case 0:
+                    picPlayer0.BackColor = Color.Transparent;
+                    break;
+                case 1:
+                    picPlayer1.BackColor = Color.Transparent;
+                    break;
+                case 2:
+                    picPlayer2.BackColor = Color.Transparent;
+                    break;
+                case 3:
+                    picPlayer3.BackColor = Color.Transparent;
+                    break;
+            }
         }
 
         public void MoveActivePlayer() /* Move the active player. */
@@ -120,6 +137,7 @@ namespace MonopolyBoard
 
                 ShowSquareInfo();
                 RunSquareEvent();
+                UpdatePlayerInfo();
 
                 Console.WriteLine("Active player: {0}", activePlayer);
             }
@@ -147,6 +165,7 @@ namespace MonopolyBoard
             }
 
             Player[activePlayer].MoveToJail();
+            UpdatePlayerInfo();
         }
 
         private void MovePlayer0() /* Move player 0 one pace. */
@@ -337,18 +356,18 @@ namespace MonopolyBoard
         {
             Chances[0] = new ChanceCards("Betala skolavgifter 3000 kr.", -3000);
             Chances[1] = new ChanceCards("Gå i fängelset! Gå direkt till fängelset utan att passera Gå.", 0, false, -1);
-            Chances[2] = new ChanceCards("Ta en tripp till Östra station och om ni passerar Gå så inkassera 4000 kr.", 0, false,15);
+            Chances[2] = new ChanceCards("Ta en tripp till Östra station och om ni passerar Gå så inkassera 4000 kr.", 0, false, 15);
             Chances[3] = new ChanceCards("Betala böter för fortkörningsböter, 300 kr", -300);
             Chances[4] = new ChanceCards("Gå vidare till Gå.", 0, false, 0);
             Chances[5] = new ChanceCards("Gå vidare till Hamngatan. Om ni passerar Gå så inkassera 4000 kr.", 0, false, 24);
             Chances[6] = new ChanceCards("Ni lyfter sparkasseräntan från banken, inkassera 1000 kr", 1000);
-            Chances[7] = new ChanceCards("Gå vidare till Norrmalmstorg.", 0,false,39);
+            Chances[7] = new ChanceCards("Gå vidare till Norrmalmstorg.", 0, false, 39);
             Chances[8] = new ChanceCards("Gå vidare till S:t Eriksgatan. Om ni passerar Gå så inkassera 4000 kr", 0, false, 11);
             Chances[9] = new ChanceCards("Utbetalning på ert byggnadslån, inkassera 3000 kr", 3000);
             Chances[10] = new ChanceCards("Ni har vunnit en korsordstävling, inkassera 2000 kr", 2000);
             Chances[11] = new ChanceCards("Ni slipper ut ur fängelset, detta kort får behålla tills det används eller säljs.", 0, true);
             Chances[12] = new ChanceCards("Du vann i en skönhetstävling, inkassera 2000 kr", 2000);
-            Chances[13] = new ChanceCards("Du fyller år, inkassera 200 kr från varje motspelare.", 200,false,-2);
+            Chances[13] = new ChanceCards("Du fyller år, inkassera 200 kr från varje motspelare.", 200, false, -2);
             Chances[14] = new ChanceCards("Oförstånd i ämbetet, böta 400 kr", -400, false, 0);
             Chances[15] = new ChanceCards("Betala trängselskatt, betala 200 kr", -200);
         }
@@ -357,19 +376,19 @@ namespace MonopolyBoard
         {
             ComCard[0] = new CommunityCards("Gå vidare till Gå.", 0, false, 0);
             ComCard[1] = new CommunityCards("Betala sjukhusräkning, 2000 kr.", -2000);
-            ComCard[2] = new CommunityCards("Ni slipper ut ur fängelset, detta kort får sparas tills det används eller säljs.",0,true);
+            ComCard[2] = new CommunityCards("Ni slipper ut ur fängelset, detta kort får sparas tills det används eller säljs.", 0, true);
             ComCard[3] = new CommunityCards("Livsräntan förfaller, inkassera 2000.", 2000);
             ComCard[4] = new CommunityCards("Betala försäkringspremie 1000 kr.", -1000);
             ComCard[5] = new CommunityCards("Det är din födelsedag, inkassera 200 kr från varje motspelare.", 200, false, -2);
             ComCard[6] = new CommunityCards("Ni ärver 2000 kr.", 2000);
             ComCard[7] = new CommunityCards("Felräkning i banken till er favör, inkassera 4000 kr.", 4000);
             ComCard[8] = new CommunityCards("Läkararvode, betala 1000 kr.", -1000);
-            ComCard[9] = new CommunityCards("Gå till Västerlånggatan, om ni passerar Gå så inkassera 4000 kr.", 0,false,1);
+            ComCard[9] = new CommunityCards("Gå till Västerlånggatan, om ni passerar Gå så inkassera 4000 kr.", 0, false, 1);
             ComCard[10] = new CommunityCards("Återbäring av skatt, inkassera 400 kr.", 400);
             ComCard[11] = new CommunityCards("Utdelning på 7% preferensaktier, inkassera 500 kr.", 500);
             ComCard[12] = new CommunityCards("Likvid för försålda aktier, inkassera 1000 kr", 1000);
             ComCard[13] = new CommunityCards("Ni har vunnit andra pris i en skönhetstävling, inkassera 200 kr", 200);
-            ComCard[14] = new CommunityCards("Gå i fängelse! Gå direkt till fängelset utan att passera Gå.", 0,false,-1);
+            ComCard[14] = new CommunityCards("Gå i fängelse! Gå direkt till fängelset utan att passera Gå.", 0, false, -1);
             ComCard[15] = new CommunityCards("Gå till friparkering.", 0, false, 20);
         }
 
@@ -403,18 +422,14 @@ namespace MonopolyBoard
             //((Street)Squares[18]).ChangeOwner(3);
             //((Street)Squares[19]).ChangeOwner(3);
             //((Street)Squares[21]).ChangeOwner(3);
-            // Player[0].SetMoney(500);
-            // Player[1].SetMoney(600);
-            // Player[2].SetMoney(700);
-            // Player[3].SetMoney(800);
+            //Player[0].SetMoney(500);
+            //Player[1].SetMoney(600);
+            //Player[2].SetMoney(700);
+            //Player[3].SetMoney(800);
             //MovePlayer(7);
             //MoveActivePlayerToJail();
 
             UpdatePlayerInfo();
-            GEngine.UpdateOwner(1, 2);
-            GEngine.UpdateOwner(5, 2);
-            GEngine.UpdateOwner(6, 2);
-            GEngine.UpdateOwner(13, 2);
         }
 
         private void btnTurn_Click(object sender, EventArgs e) /* Roll dices and move active player. */
@@ -470,6 +485,8 @@ namespace MonopolyBoard
 
             MovePlayer(result);
 
+            UpdatePlayerInfo();
+
         }
 
         private void btnTrade_Click(object sender, EventArgs e) /* Open trade window. */
@@ -477,6 +494,8 @@ namespace MonopolyBoard
             Trade TradeForm = new Trade();
             TradeForm.board = this;
             TradeForm.ShowDialog();
+
+            UpdatePlayerInfo();
         }
 
         private void btnNextPlayer_Click(object sender, EventArgs e) /* Set activePlayer to the next one avaliable. */
@@ -485,6 +504,7 @@ namespace MonopolyBoard
             btnNextPlayer.Enabled = false;
             btnBuyStreet.Hide();
             NextPlayer();
+            UpdatePlayerInfo();
         }
 
         #endregion
@@ -524,111 +544,152 @@ namespace MonopolyBoard
             {
                 owner = ((Station)Squares[position]).GetOwner();
             }
-            catch (InvalidCastException)
+            catch (InvalidCastException) /* No GetOwner() function, it's a Square. */
             {
-                // Ingen ägarfunktion, alltså Square.
+                if (position == 4 || position == 38) /* It's a tax square */
+                {
+                    MessageBox.Show("Skatt " + Squares[position].GetPrice() + " kr.");
+                    TaxActivePlayer();
+                }
+
+                else if (position == 20) /* Free parking, money! */
+                {
+                    MessageBox.Show("Fri parkering!\nDu får " + Freepark.GetValue() + " kr.");
+                    Player[activePlayer].AddMoney(Freepark.TakeMoney());
+                }
+
+                else if (position == 30) /* It's jailtime for you boy! */
+                {
+                    MessageBox.Show("Du får stå i fängelse tills du slår jämnt.");
+                    MoveActivePlayerToJail();
+                }
+                else if (position == 7 || position == 22 || position == 36) /* Take a chance card and hope for something good. */
+                {
+
+                    ChanceCards card = Chances[chanceCard];
+                    card.board = this;
+
+                    MessageBox.Show(card.GetText());
+
+                    if (card.GetJailCard())
+                    {
+                        card.GiveJailCard();
+                    }
+                    else if (card.GetPosition() == -1)
+                    {
+                        card.GoToJail();
+                    }
+                    else if (card.GetPosition() == -2)
+                    {
+                        card.GetMoneyFromAll();
+                    }
+                    else if (card.GetValue() == 0)
+                    {
+                        card.ChangePosition(Player[activePlayer].GetPosition());
+                    }
+                    else
+                    {
+                        card.GetOrPay();
+                    }
+
+                    if (chanceCard >= 15)
+                    {
+                        chanceCard = 0;
+                    }
+                    else
+                    {
+                        chanceCard++;
+                    }
+                }
+                else if (position == 2 || position == 17 || position == 33) /* Take a community card and hope for something good. */
+                {
+                    CommunityCards card = ComCard[comCard];
+                    card.board = this;
+
+                    MessageBox.Show(card.GetText());
+
+                    if (card.GetJailCard())
+                    {
+                        card.GiveJailCard();
+                    }
+                    else if (card.GetPosition() == -1)
+                    {
+                        card.GoToJail();
+                    }
+                    else if (card.GetPosition() == -2)
+                    {
+                        card.GetMoneyFromAll();
+                    }
+                    else if (card.GetValue() == 0)
+                    {
+                        card.ChangePosition(Player[activePlayer].GetPosition());
+                    }
+                    else
+                    {
+                        card.GetOrPay();
+                    }
+
+                    if (comCard >= 15)
+                    {
+                        comCard = 0;
+                    }
+                    else
+                    {
+                        comCard++;
+                    }
+                }
+                return;
             }
 
             Type squareType = Squares[position].GetType();
+            int rent = 0;
 
             if (squareType == typeof(Street))
             {
                 if (owner == 5)
                 {
-                    btnBuyStreet.Show();
+                    if (owner != activePlayer)
+                    {
+                        btnBuyStreet.Show();
+                    }
+                    return;
                 }
-                else if (owner != activePlayer)
-                {
-                    int rent = ((Street)Squares[position]).GetRent();
-                    Player[activePlayer].SubtractMoney(rent);
-                }
-            }
-            else if (squareType == typeof(Square))
-            {
-                if (position == 4 || position == 38)
-                {
-                    TaxActivePlayer();
-                }
-
-                else if (position == 20)
-                {
-                    Player[activePlayer].AddMoney(Freepark.TakeMoney());
-                }
-
-                else if (position == 30)
-                {
-                    MoveActivePlayerToJail();
-                }
-                else if (position == 7 || position == 22 || position == 36)
-                {
-
-                    ChanceCards card = Chances[chanceCard];
-                    card.board = this;
-                    MessageBox.Show(card.GetText());
-                    if (card.GetJailCard())
-                        card.GiveJailCard();
-                    else if (card.GetPosition() == -1)
-                        card.GoToJail();
-                    else if (card.GetPosition() == -2)
-                        card.GetMoneyFromAll();
-                    else if (card.GetValue() == 0)
-                        card.ChangePosition(Player[activePlayer].GetPosition());
-                    else
-                        card.GetOrPay();
-
-                    if (chanceCard >= 15)
-                        chanceCard = 0;
-                    else
-                        chanceCard++;
-                }
-                else if (position == 2 || position == 17 || position == 33)
-                {
-                    CommunityCards card = ComCard[comCard];
-                    card.board = this;
-                    MessageBox.Show(card.GetText());
-                    if (card.GetJailCard())
-                        card.GiveJailCard();
-                    else if (card.GetPosition() == -1)
-                        card.GoToJail();
-                    else if (card.GetPosition() == -2)
-                        card.GetMoneyFromAll();
-                    else if (card.GetValue() == 0)
-                        card.ChangePosition(Player[activePlayer].GetPosition());
-                    else
-                        card.GetOrPay();
-
-                    if (comCard >= 15)
-                        comCard = 0;
-                    else
-                        comCard++;
-                }
+                
+                rent = ((Street)Squares[position]).GetRent();
             }
             else if (squareType == typeof(Station))
             {
                 if (owner == 5)
                 {
-                    btnBuyStreet.Show();
+                    if (owner != activePlayer)
+                    {
+                        btnBuyStreet.Show();
+                    }
+                    return;
                 }
-                else if (owner != activePlayer)
-                {
-                    int rent = ((Station)Squares[position]).GetRent();
-                    Player[activePlayer].SubtractMoney(rent);
-                    Player[owner].AddMoney(rent);
-                }
+                
+                rent = ((Station)Squares[position]).GetRent();
             }
             else if (squareType == typeof(PowerStation))
             {
                 if (owner == 5)
                 {
-                    btnBuyStreet.Show();
+                    if (owner != activePlayer)
+                    {
+                        btnBuyStreet.Show();
+                    }
+                    return;
                 }
-                else if (owner != activePlayer)
-                {
-                    int rent = ((PowerStation)Squares[position]).GetRent();
-                    Player[activePlayer].SubtractMoney(rent);
-                    Player[owner].AddMoney(rent);
-                }
+                
+                rent = ((PowerStation)Squares[position]).GetRent();
             }
+
+
+
+            MessageBox.Show("Du hamnade på " + Squares[position].GetName() + "\nHyra: " + rent + " betalas till " + Player[owner].GetName());
+
+            Player[activePlayer].SubtractMoney(rent);
+            Player[owner].AddMoney(rent);
 
             UpdatePlayerInfo();
         }
@@ -647,10 +708,12 @@ namespace MonopolyBoard
                 }
                 info = ((Street)Squares[activePosition]).GetInfo() + ownerName;
             }
+
             else if (Squares[activePosition].GetType() == typeof(Square))
             {
                 info = ((Square)Squares[activePosition]).GetInfo();
             }
+
             else if (Squares[activePosition].GetType() == typeof(Station))
             {
                 if (((Station)Squares[activePosition]).GetOwner() != 5 && Player[((Station)Squares[activePosition]).GetOwner()].GetName() != "")
@@ -659,6 +722,7 @@ namespace MonopolyBoard
                 }
                 info = ((Station)Squares[activePosition]).GetInfo() + ownerName;
             }
+
             else if (Squares[activePosition].GetType() == typeof(PowerStation))
             {
                 if (((PowerStation)Squares[activePosition]).GetOwner() != 5 && Player[((PowerStation)Squares[activePosition]).GetOwner()].GetName() != "")
@@ -685,7 +749,7 @@ namespace MonopolyBoard
         public void UpdatePlayerInfo() /* Updates the on-screen info about the players. */
         {
             string playerInfo;
-            
+
             playerInfo = Player[0].GetName() + ": " + Player[0].GetMoney() + "\n";
             playerInfo += Player[1].GetName() + ": " + Player[1].GetMoney() + "\n";
 
@@ -699,30 +763,30 @@ namespace MonopolyBoard
                 playerInfo += Player[3].GetName() + ": " + Player[3].GetMoney() + "\n";
             }
 
-            lblPlayerInfo.Text = playerInfo;
+            lblPlayerInfo.Text = Player[activePlayer].GetName() + "\n" + playerInfo;
+            lblPlayerInfo.ForeColor = GetPlayerColor(activePlayer);
+            UpdateFreeParkValue();
+
+            Console.WriteLine(GetPlayerColor(activePlayer).ToString());
+
             /*
              * Uppdatera information om alla spelare.
              * Visa:
-             *  Namn
-             *  Pengar
-             *  Ägda gator (Visa vilka som tillhör samma kvarter)
-             *  I fängelse
+             *  Namn (Ett namn per splare...)
+             *  Pengar (Hur många pengar har han?)
+             *  Ägda gator (Visa vilka som tillhör samma kvarter) (ELLER?!)
+             *  I fängelse (gör det coolt).
              */
         }
 
-        private void btnBuyHouses_Click(object sender, EventArgs e) 
+        private void btnBuyHouses_Click(object sender, EventArgs e)
         {
             BuyHouse BuyHouseForm = new BuyHouse();
             BuyHouseForm.board = this;
             BuyHouseForm.ShowDialog();
+
+            UpdatePlayerInfo();
         }
-
-
-
-        /* Allow command line to be seen during normal execution */
-        [DllImport("kernel32.dll", SetLastError = true)]
-        [return: MarshalAsAttribute(UnmanagedType.Bool)]
-        static extern bool AllocConsole();
 
         private void btnBuyStreet_Click(object sender, EventArgs e)
         {
@@ -730,6 +794,7 @@ namespace MonopolyBoard
             int position = Player[activePlayer].GetPosition();
             int streetPrice = Squares[position].GetPrice();
             string streetName = Squares[position].GetName();
+
             if (playerMoney < streetPrice)
             {
                 MessageBox.Show("Du har inte råd att köpa denna gatan");
@@ -759,15 +824,16 @@ namespace MonopolyBoard
                     btnBuyStreet.Hide();
                     ShowSquareInfo();
                 }
-
             }
+
+            GEngine.UpdateOwner(position, activePlayer);
+
         }
 
         private void btnSaveGame_Click(object sender, EventArgs e)
         {
             sfdSaveGame.ShowDialog();
         }
-
 
         private void UpdateFreeParkValue()
         {
@@ -780,5 +846,35 @@ namespace MonopolyBoard
             sellStreet.board = this;
             sellStreet.Show();
         }
+
+
+        public Color GetPlayerColor(int player)
+        {
+            Color playerColor = Color.Transparent;
+
+            if (player == 0)
+            {
+                playerColor = Color.Pink;
+            }
+            else if (player == 1)
+            {
+                playerColor = Color.Blue;
+            }
+            else if (player == 2)
+            {
+                playerColor = Color.Green;
+            }
+            else if (player == 3)
+            {
+                playerColor = Color.DarkOrange;
+            }
+
+            return playerColor;
+        }
+
+        /* Allow command line to be seen during normal execution */
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAsAttribute(UnmanagedType.Bool)]
+        static extern bool AllocConsole();
     }
 }

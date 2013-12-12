@@ -1,13 +1,15 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace MonopolyBoard
 {
     public class GFX
     {
+        /* ----- Members ----- */
         private static Graphics gObject;
+        frmMonopoly board = new frmMonopoly();
 
-        frmMonopoly frm = new frmMonopoly();
-
+        /* ----- Constructors ----- */
         public GFX(Graphics g)
         {
             gObject = g;
@@ -15,6 +17,7 @@ namespace MonopolyBoard
 
         }
 
+        /* ----- Functions ----- */
         public void setUpCanvas()
         {
             Pen lines = new Pen(Color.Gray);
@@ -22,8 +25,6 @@ namespace MonopolyBoard
             /* Draw monopoly board */
             drawVerticalLines(lines);
             drawHorisontalLines(lines);
-
-            frm.picPlayer0.Location = new Point(500, 500);
         }
 
         private static void drawVerticalLines(Pen lines) /* Draws the vertical lines for the monopoly board */
@@ -61,37 +62,30 @@ namespace MonopolyBoard
             int markPositionX = 0;
             int markPositionY = 0;
 
-            if (player == 0)
-            {
-                playerColor = Color.Red;
-            }
-            else if (player == 1)
-            {
-                playerColor = Color.Blue;
-            }
-            else if (player == 2)
-            {
-                playerColor = Color.Green;
-            }
-            else if (player == 3)
-            {
-                playerColor = Color.Yellow;
-            }
-
-
             if(squarePosition > 0 && squarePosition < 10)
             {
                 markPositionX = 567 - (54 * squarePosition);
-                markPositionY = 567;
+                markPositionY = 638;
             }
             else if (squarePosition > 10 && squarePosition < 20)
             {
-                markPositionX = 81 - 10;
+                markPositionX = 0;
                 markPositionY = 567 - (54 * (squarePosition - 10));
             }
+            else if (squarePosition > 20 && squarePosition < 30)
+            {
+                markPositionX = 27 + (54 * (squarePosition - 20));
+                markPositionY = 0;
+            }
+            else if (squarePosition > 30 && squarePosition < 40)
+            {
+                markPositionX = 638;
+                markPositionY = 27 + (54 * (squarePosition - 30));
+            }
 
-            SolidBrush myBrush = new SolidBrush(playerColor);
-            gObject.FillRectangle(myBrush, markPositionX, markPositionY, 10, 10);
+            SolidBrush brush = new SolidBrush(board.GetPlayerColor(player));
+
+            gObject.FillRectangle(brush, markPositionX, markPositionY, 10, 10);
         }
     }
 }
