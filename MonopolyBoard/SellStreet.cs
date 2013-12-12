@@ -20,6 +20,25 @@ namespace MonopolyBoard
 
         private void SellStreet_Load(object sender, EventArgs e)
         {
+            UpdatePrice();
+            UpdateSquares();
+        }
+
+        private void btnSell_Click(object sender, EventArgs e)
+        {
+            Sell();
+            UpdateSquares();
+            UpdatePrice();
+        }
+
+        private void clbStreets_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdatePrice();
+        }
+
+        private void UpdateSquares()
+        {
+            clbStreets.Items.Clear();
             int player = board.activePlayer;
             foreach (Square square in board.SquaresArray)
             {
@@ -38,26 +57,52 @@ namespace MonopolyBoard
             }
         }
 
-        private void btnSell_Click(object sender, EventArgs e)
+        private void UpdatePrice()
+        {
+            int price = 0;
+            for (int i = 0; i < board.SquaresArray.Length; i++)
+            {
+                string name = board.SquaresArray[i].GetName();
+                Type squareType = board.SquaresArray[i].GetType();
+                foreach (object street in clbStreets.CheckedItems)
+                {
+                    if (street.ToString() == name && squareType == typeof(Street))
+                    {
+                        price += ((Street)board.SquaresArray[i]).GetSellPrice();
+                    }
+                    else if (street.ToString() == name && squareType == typeof(Station))
+                    {
+                        price += ((Station)board.SquaresArray[i]).GetSellPrice();
+                    }
+                    else if (street.ToString() == name && squareType == typeof(PowerStation))
+                    {
+                        price += ((PowerStation)board.SquaresArray[i]).GetSellPrice();
+                    }
+                }
+            }
+            lbPrice.Text = price.ToString();
+        }
+
+        private void Sell()
         {
             for (int i = 0; i < board.SquaresArray.Length; i++)
             {
                 Square sellSquare = board.SquaresArray[i];
                 foreach (object square in clbStreets.CheckedItems)
                 {
-                    if (square.ToString() == board.SquaresArray[i].GetName())
+                    if (square.ToString() == sellSquare.GetName())
                     {
-                        if (square.GetType() == typeof(Street))
+                        if (sellSquare.GetType() == typeof(Street))
                         {
                             ((Street)sellSquare).ChangeOwner(5);
                             board.Player[board.activePlayer].AddMoney(((Street)sellSquare).GetSellPrice());
                         }
-                        else if (square.GetType() == typeof(Station))
+                        else if (sellSquare.GetType() == typeof(Station))
                         {
                             ((Station)sellSquare).ChangeOwner(5);
                             board.Player[board.activePlayer].AddMoney(((Station)sellSquare).GetSellPrice());
                         }
-                        else if (square.GetType() == typeof(PowerStation))
+                        else if (sellSquare.GetType() == typeof(PowerStation))
                         {
                             ((PowerStation)sellSquare).ChangeOwner(5);
                             board.Player[board.activePlayer].AddMoney(((PowerStation)sellSquare).GetSellPrice());
@@ -65,12 +110,6 @@ namespace MonopolyBoard
                     }
                 }
             }
-
-        }
-
-        private void clbStreets_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
         }
     }
 }
