@@ -387,9 +387,12 @@ namespace MonopolyBoard
 
         private void btnTest_Click(object sender, EventArgs e) /* Use this function to test anything, remove before release. */
         {
-            /*((Street)Squares[1]).ChangeOwner(0);
+            ((Street)Squares[1]).ChangeOwner(0);
             ((Street)Squares[3]).ChangeOwner(0);
             ((Street)Squares[6]).ChangeOwner(0);
+            ((Station)Squares[5]).ChangeOwner(0);
+            ((Station)Squares[15]).ChangeOwner(0);
+            ((PowerStation)Squares[12]).ChangeOwner(0);
             ((Street)Squares[8]).ChangeOwner(1);
             ((Street)Squares[9]).ChangeOwner(1);
             ((Street)Squares[11]).ChangeOwner(1);
@@ -398,12 +401,12 @@ namespace MonopolyBoard
             ((Street)Squares[16]).ChangeOwner(2);
             ((Street)Squares[18]).ChangeOwner(3);
             ((Street)Squares[19]).ChangeOwner(3);
-            ((Street)Squares[21]).ChangeOwner(3);*/
+            ((Street)Squares[21]).ChangeOwner(3);
             // Player[0].SetMoney(500);
             // Player[1].SetMoney(600);
             // Player[2].SetMoney(700);
             // Player[3].SetMoney(800);
-            MovePlayer(7);
+            //MovePlayer(7);
             //MoveActivePlayerToJail();
         }
 
@@ -740,6 +743,13 @@ namespace MonopolyBoard
         private void UpdateFreeParkValue()
         {
             lblFreePark.Text = Freepark.GetValue().ToString();
+        }
+
+        private void btnSellStreet_Click(object sender, EventArgs e)
+        {
+            SellStreet sellStreet = new SellStreet();
+            sellStreet.board = this;
+            sellStreet.Show();
         }
     }
 }

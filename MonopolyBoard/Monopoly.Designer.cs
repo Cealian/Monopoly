@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMonopoly));
             this.pnlMainPanel = new System.Windows.Forms.Panel();
+            this.lblFreePark = new System.Windows.Forms.Label();
             this.picPlayer3 = new System.Windows.Forms.PictureBox();
             this.picPlayer2 = new System.Windows.Forms.PictureBox();
             this.picPlayer1 = new System.Windows.Forms.PictureBox();
@@ -50,7 +51,6 @@
             this.btnSellStreet = new System.Windows.Forms.Button();
             this.btnSaveGame = new System.Windows.Forms.Button();
             this.sfdSaveGame = new System.Windows.Forms.SaveFileDialog();
-            this.lblFreePark = new System.Windows.Forms.Label();
             this.pnlMainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer2)).BeginInit();
@@ -75,6 +75,16 @@
             this.pnlMainPanel.Size = new System.Drawing.Size(648, 648);
             this.pnlMainPanel.TabIndex = 0;
             this.pnlMainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMainPanel_Paint);
+            // 
+            // lblFreePark
+            // 
+            this.lblFreePark.AutoSize = true;
+            this.lblFreePark.BackColor = System.Drawing.Color.Transparent;
+            this.lblFreePark.Location = new System.Drawing.Point(4, 4);
+            this.lblFreePark.Name = "lblFreePark";
+            this.lblFreePark.Size = new System.Drawing.Size(13, 13);
+            this.lblFreePark.TabIndex = 4;
+            this.lblFreePark.Text = "0";
             // 
             // picPlayer3
             // 
@@ -249,6 +259,7 @@
             this.btnSellStreet.TabIndex = 12;
             this.btnSellStreet.Text = "Sälj gator";
             this.btnSellStreet.UseVisualStyleBackColor = true;
+            this.btnSellStreet.Click += new System.EventHandler(this.btnSellStreet_Click);
             // 
             // btnSaveGame
             // 
@@ -264,16 +275,6 @@
             // 
             this.sfdSaveGame.DefaultExt = "mon";
             this.sfdSaveGame.Filter = "Monopol save file(*.mon)|*.mon";
-            // 
-            // lblFreePark
-            // 
-            this.lblFreePark.AutoSize = true;
-            this.lblFreePark.BackColor = System.Drawing.Color.Transparent;
-            this.lblFreePark.Location = new System.Drawing.Point(4, 4);
-            this.lblFreePark.Name = "lblFreePark";
-            this.lblFreePark.Size = new System.Drawing.Size(13, 13);
-            this.lblFreePark.TabIndex = 4;
-            this.lblFreePark.Text = "0";
             // 
             // frmMonopoly
             // 
