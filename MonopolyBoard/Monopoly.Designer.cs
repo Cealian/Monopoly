@@ -51,6 +51,7 @@
             this.btnSellStreet = new System.Windows.Forms.Button();
             this.btnSaveGame = new System.Windows.Forms.Button();
             this.sfdSaveGame = new System.Windows.Forms.SaveFileDialog();
+            this.lblPlayerInfo = new System.Windows.Forms.Label();
             this.pnlMainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer2)).BeginInit();
@@ -65,6 +66,7 @@
             this.pnlMainPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pnlMainPanel.BackgroundImage")));
             this.pnlMainPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnlMainPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlMainPanel.Controls.Add(this.lblPlayerInfo);
             this.pnlMainPanel.Controls.Add(this.lblFreePark);
             this.pnlMainPanel.Controls.Add(this.picPlayer3);
             this.pnlMainPanel.Controls.Add(this.picPlayer2);
@@ -276,6 +278,17 @@
             this.sfdSaveGame.DefaultExt = "mon";
             this.sfdSaveGame.Filter = "Monopol save file(*.mon)|*.mon";
             // 
+            // lblPlayerInfo
+            // 
+            this.lblPlayerInfo.BackColor = System.Drawing.Color.Transparent;
+            this.lblPlayerInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblPlayerInfo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.lblPlayerInfo.Font = new System.Drawing.Font("Segoe Marker", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPlayerInfo.Location = new System.Drawing.Point(219, 139);
+            this.lblPlayerInfo.Name = "lblPlayerInfo";
+            this.lblPlayerInfo.Size = new System.Drawing.Size(173, 146);
+            this.lblPlayerInfo.TabIndex = 14;
+            // 
             // frmMonopoly
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -336,6 +349,7 @@
         private System.Windows.Forms.Button btnSaveGame;
         private System.Windows.Forms.SaveFileDialog sfdSaveGame;
         private System.Windows.Forms.Label lblFreePark;
+        private System.Windows.Forms.Label lblPlayerInfo;
     }
 }
 

@@ -44,6 +44,7 @@
             this.btnBuy.TabIndex = 1;
             this.btnBuy.Text = "Köp";
             this.btnBuy.UseVisualStyleBackColor = true;
+            this.btnBuy.Click += new System.EventHandler(this.btnBuy_Click);
             // 
             // btnCancel
             // 
@@ -88,7 +89,7 @@
             this.lbStreets.Location = new System.Drawing.Point(12, 35);
             this.lbStreets.Name = "lbStreets";
             this.lbStreets.Size = new System.Drawing.Size(125, 121);
-            this.lbStreets.TabIndex = 6;
+            this.lbStreets.TabIndex = 0;
             this.lbStreets.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // BuyHouse

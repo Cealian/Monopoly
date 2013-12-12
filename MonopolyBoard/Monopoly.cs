@@ -330,6 +330,7 @@ namespace MonopolyBoard
 
         #endregion
 
+        /* Instantiation of all chance and community cards */
         #region Cards instantiation
 
         public void InstantiateChanceCards()
@@ -387,27 +388,33 @@ namespace MonopolyBoard
 
         private void btnTest_Click(object sender, EventArgs e) /* Use this function to test anything, remove before release. */
         {
-            ((Street)Squares[1]).ChangeOwner(0);
-            ((Street)Squares[3]).ChangeOwner(0);
-            ((Street)Squares[6]).ChangeOwner(0);
-            ((Station)Squares[5]).ChangeOwner(0);
-            ((Station)Squares[15]).ChangeOwner(0);
-            ((PowerStation)Squares[12]).ChangeOwner(0);
-            ((Street)Squares[8]).ChangeOwner(1);
-            ((Street)Squares[9]).ChangeOwner(1);
-            ((Street)Squares[11]).ChangeOwner(1);
-            ((Street)Squares[13]).ChangeOwner(2);
-            ((Street)Squares[14]).ChangeOwner(2);
-            ((Street)Squares[16]).ChangeOwner(2);
-            ((Street)Squares[18]).ChangeOwner(3);
-            ((Street)Squares[19]).ChangeOwner(3);
-            ((Street)Squares[21]).ChangeOwner(3);
+            //((Street)Squares[1]).ChangeOwner(0);
+            //((Street)Squares[3]).ChangeOwner(0);
+            //((Street)Squares[6]).ChangeOwner(0);
+            //((Station)Squares[5]).ChangeOwner(0);
+            //((Station)Squares[15]).ChangeOwner(0);
+            //((PowerStation)Squares[12]).ChangeOwner(0);
+            //((Street)Squares[8]).ChangeOwner(1);
+            //((Street)Squares[9]).ChangeOwner(1);
+            //((Street)Squares[11]).ChangeOwner(1);
+            //((Street)Squares[13]).ChangeOwner(2);
+            //((Street)Squares[14]).ChangeOwner(2);
+            //((Street)Squares[16]).ChangeOwner(2);
+            //((Street)Squares[18]).ChangeOwner(3);
+            //((Street)Squares[19]).ChangeOwner(3);
+            //((Street)Squares[21]).ChangeOwner(3);
             // Player[0].SetMoney(500);
             // Player[1].SetMoney(600);
             // Player[2].SetMoney(700);
             // Player[3].SetMoney(800);
             //MovePlayer(7);
             //MoveActivePlayerToJail();
+
+            UpdatePlayerInfo();
+            GEngine.UpdateOwner(1, 2);
+            GEngine.UpdateOwner(5, 2);
+            GEngine.UpdateOwner(6, 2);
+            GEngine.UpdateOwner(13, 2);
         }
 
         private void btnTurn_Click(object sender, EventArgs e) /* Roll dices and move active player. */
@@ -519,7 +526,7 @@ namespace MonopolyBoard
             }
             catch (InvalidCastException)
             {
-                // Ingen ägare, alltså Square.
+                // Ingen ägarfunktion, alltså Square.
             }
 
             Type squareType = Squares[position].GetType();
@@ -604,8 +611,9 @@ namespace MonopolyBoard
                 }
                 else if (owner != activePlayer)
                 {
-                    int strent = ((Station)Squares[position]).GetRent();
-                    Player[activePlayer].SubtractMoney(strent);
+                    int rent = ((Station)Squares[position]).GetRent();
+                    Player[activePlayer].SubtractMoney(rent);
+                    Player[owner].AddMoney(rent);
                 }
             }
             else if (squareType == typeof(PowerStation))
@@ -616,10 +624,13 @@ namespace MonopolyBoard
                 }
                 else if (owner != activePlayer)
                 {
-                    int psrent = ((PowerStation)Squares[position]).GetRent();
-                    Player[activePlayer].SubtractMoney(psrent);
+                    int rent = ((PowerStation)Squares[position]).GetRent();
+                    Player[activePlayer].SubtractMoney(rent);
+                    Player[owner].AddMoney(rent);
                 }
             }
+
+            UpdatePlayerInfo();
         }
 
         public void ShowSquareInfo() /* Show the squares info in lblSquareInfo. */
@@ -658,6 +669,8 @@ namespace MonopolyBoard
             }
 
             lblSquareInfo.Text = info;
+
+            UpdatePlayerInfo();
         }
 
         public void TaxActivePlayer() /* Tax the active player and subtract the appropriate amount. */
@@ -671,6 +684,22 @@ namespace MonopolyBoard
 
         public void UpdatePlayerInfo() /* Updates the on-screen info about the players. */
         {
+            string playerInfo;
+            
+            playerInfo = Player[0].GetName() + ": " + Player[0].GetMoney() + "\n";
+            playerInfo += Player[1].GetName() + ": " + Player[1].GetMoney() + "\n";
+
+            if (Player[2].GetName() != "")
+            {
+                playerInfo += Player[2].GetName() + ": " + Player[2].GetMoney() + "\n";
+            }
+
+            if (Player[3].GetName() != "")
+            {
+                playerInfo += Player[3].GetName() + ": " + Player[3].GetMoney() + "\n";
+            }
+
+            lblPlayerInfo.Text = playerInfo;
             /*
              * Uppdatera information om alla spelare.
              * Visa:
@@ -681,7 +710,7 @@ namespace MonopolyBoard
              */
         }
 
-        private void btnBuyHouses_Click(object sender, EventArgs e) // Hjälp mig inne i formen
+        private void btnBuyHouses_Click(object sender, EventArgs e) 
         {
             BuyHouse BuyHouseForm = new BuyHouse();
             BuyHouseForm.board = this;
