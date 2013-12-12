@@ -62,6 +62,7 @@
             this.btnBuyHouse.TabIndex = 3;
             this.btnBuyHouse.Text = "Köp hus";
             this.btnBuyHouse.UseVisualStyleBackColor = true;
+            this.btnBuyHouse.Click += new System.EventHandler(this.btnBuyHouse_Click);
             // 
             // btnSellHouse
             // 
@@ -72,6 +73,7 @@
             this.btnSellHouse.TabIndex = 4;
             this.btnSellHouse.Text = "Sälj hus";
             this.btnSellHouse.UseVisualStyleBackColor = true;
+            this.btnSellHouse.Click += new System.EventHandler(this.btnSellHouse_Click);
             // 
             // lbStreets
             // 
