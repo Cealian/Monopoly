@@ -52,6 +52,46 @@ namespace MonopolyBoard
 
                 gObject.DrawLine(lines, new Point(567, yVal), new Point(648, yVal)); // Lower street vertical lines
             }
+
+        }
+
+        public void UpdateOwner(int squarePosition, int player)
+        {
+            Color playerColor = new Color();
+            int markPositionX = 0;
+            int markPositionY = 0;
+
+            if (player == 0)
+            {
+                playerColor = Color.Red;
+            }
+            else if (player == 1)
+            {
+                playerColor = Color.Blue;
+            }
+            else if (player == 2)
+            {
+                playerColor = Color.Green;
+            }
+            else if (player == 3)
+            {
+                playerColor = Color.Yellow;
+            }
+
+
+            if(squarePosition > 0 && squarePosition < 10)
+            {
+                markPositionX = 567 - (54 * squarePosition);
+                markPositionY = 567;
+            }
+            else if (squarePosition > 10 && squarePosition < 20)
+            {
+                markPositionX = 81 - 10;
+                markPositionY = 567 - (54 * (squarePosition - 10));
+            }
+
+            SolidBrush myBrush = new SolidBrush(playerColor);
+            gObject.FillRectangle(myBrush, markPositionX, markPositionY, 10, 10);
         }
     }
 }
