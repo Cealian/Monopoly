@@ -681,7 +681,7 @@ namespace MonopolyBoard
              */
         }
 
-        private void btnBuyHouses_Click(object sender, EventArgs e) // Hjälp mig inne i formen
+        private void btnBuyHouses_Click(object sender, EventArgs e) 
         {
             BuyHouse BuyHouseForm = new BuyHouse();
             BuyHouseForm.board = this;
