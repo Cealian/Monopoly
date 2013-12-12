@@ -28,48 +28,70 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.clbStreets = new System.Windows.Forms.CheckedListBox();
-            this.btnSell = new System.Windows.Forms.Button();
-            this.lbPrice = new System.Windows.Forms.Label();
+            this.btnMortgage = new System.Windows.Forms.Button();
+            this.lbInfo = new System.Windows.Forms.Label();
+            this.btnBuyHouse = new System.Windows.Forms.Button();
+            this.btnSellHouse = new System.Windows.Forms.Button();
+            this.lbStreets = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
-            // clbStreets
+            // btnMortgage
             // 
-            this.clbStreets.CheckOnClick = true;
-            this.clbStreets.FormattingEnabled = true;
-            this.clbStreets.Location = new System.Drawing.Point(12, 12);
-            this.clbStreets.Name = "clbStreets";
-            this.clbStreets.Size = new System.Drawing.Size(195, 154);
-            this.clbStreets.TabIndex = 0;
-            this.clbStreets.SelectedIndexChanged += new System.EventHandler(this.clbStreets_SelectedIndexChanged);
+            this.btnMortgage.Location = new System.Drawing.Point(158, 26);
+            this.btnMortgage.Name = "btnMortgage";
+            this.btnMortgage.Size = new System.Drawing.Size(83, 23);
+            this.btnMortgage.TabIndex = 1;
+            this.btnMortgage.Text = "Inteckna gata";
+            this.btnMortgage.UseVisualStyleBackColor = true;
+            this.btnMortgage.Click += new System.EventHandler(this.btnSell_Click);
             // 
-            // btnSell
+            // lbInfo
             // 
-            this.btnSell.Location = new System.Drawing.Point(216, 37);
-            this.btnSell.Name = "btnSell";
-            this.btnSell.Size = new System.Drawing.Size(75, 23);
-            this.btnSell.TabIndex = 1;
-            this.btnSell.Text = "Sälj gata";
-            this.btnSell.UseVisualStyleBackColor = true;
-            this.btnSell.Click += new System.EventHandler(this.btnSell_Click);
+            this.lbInfo.Location = new System.Drawing.Point(311, 12);
+            this.lbInfo.Name = "lbInfo";
+            this.lbInfo.Size = new System.Drawing.Size(149, 173);
+            this.lbInfo.TabIndex = 2;
+            this.lbInfo.Text = "label1";
             // 
-            // lbPrice
+            // btnBuyHouse
             // 
-            this.lbPrice.AutoSize = true;
-            this.lbPrice.Location = new System.Drawing.Point(234, 103);
-            this.lbPrice.Name = "lbPrice";
-            this.lbPrice.Size = new System.Drawing.Size(35, 13);
-            this.lbPrice.TabIndex = 2;
-            this.lbPrice.Text = "label1";
+            this.btnBuyHouse.Enabled = false;
+            this.btnBuyHouse.Location = new System.Drawing.Point(158, 55);
+            this.btnBuyHouse.Name = "btnBuyHouse";
+            this.btnBuyHouse.Size = new System.Drawing.Size(83, 23);
+            this.btnBuyHouse.TabIndex = 3;
+            this.btnBuyHouse.Text = "Köp hus";
+            this.btnBuyHouse.UseVisualStyleBackColor = true;
+            // 
+            // btnSellHouse
+            // 
+            this.btnSellHouse.Enabled = false;
+            this.btnSellHouse.Location = new System.Drawing.Point(158, 84);
+            this.btnSellHouse.Name = "btnSellHouse";
+            this.btnSellHouse.Size = new System.Drawing.Size(83, 23);
+            this.btnSellHouse.TabIndex = 4;
+            this.btnSellHouse.Text = "Sälj hus";
+            this.btnSellHouse.UseVisualStyleBackColor = true;
+            // 
+            // lbStreets
+            // 
+            this.lbStreets.FormattingEnabled = true;
+            this.lbStreets.Location = new System.Drawing.Point(12, 12);
+            this.lbStreets.Name = "lbStreets";
+            this.lbStreets.Size = new System.Drawing.Size(140, 173);
+            this.lbStreets.TabIndex = 5;
+            this.lbStreets.SelectedIndexChanged += new System.EventHandler(this.lbStreets_SelectedIndexChanged);
             // 
             // SellStreet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(347, 176);
-            this.Controls.Add(this.lbPrice);
-            this.Controls.Add(this.btnSell);
-            this.Controls.Add(this.clbStreets);
+            this.ClientSize = new System.Drawing.Size(472, 194);
+            this.Controls.Add(this.lbStreets);
+            this.Controls.Add(this.btnSellHouse);
+            this.Controls.Add(this.btnBuyHouse);
+            this.Controls.Add(this.lbInfo);
+            this.Controls.Add(this.btnMortgage);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "SellStreet";
             this.ShowInTaskbar = false;
@@ -78,14 +100,15 @@
             this.TopMost = true;
             this.Load += new System.EventHandler(this.SellStreet_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.CheckedListBox clbStreets;
-        private System.Windows.Forms.Button btnSell;
-        private System.Windows.Forms.Label lbPrice;
+        private System.Windows.Forms.Button btnMortgage;
+        private System.Windows.Forms.Label lbInfo;
+        private System.Windows.Forms.Button btnBuyHouse;
+        private System.Windows.Forms.Button btnSellHouse;
+        private System.Windows.Forms.ListBox lbStreets;
     }
 }

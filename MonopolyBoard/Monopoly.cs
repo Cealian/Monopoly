@@ -21,7 +21,7 @@ namespace MonopolyBoard
         const int PX_PER_PACE = 9;
         public int activePlayer = new Random().Next(0, 4);
         int diceEqualCount = 0;
-        int chanceCard = 0, comCard = 0;
+        int chanceCard = new Random().Next(0, 16), comCard = new Random().Next(0, 16);
 
         public frmMonopoly()
         {
@@ -334,41 +334,41 @@ namespace MonopolyBoard
 
         public void InstantiateChanceCards()
         {
-            Chances[0] = new ChanceCards("Gå vidare till Hamngatan.", 0, false, 24);
-            Chances[1] = new ChanceCards("Gå till fängelset.", 0, false, -1);
-            Chances[2] = new ChanceCards("Du kommer ut ur fängelset.", 0, true);
-            Chances[3] = new ChanceCards("Du vann i en skönhetstävling, inkassera 2000 kr.", 2000);
+            Chances[0] = new ChanceCards("Betala skolavgifter 3000 kr.", -3000);
+            Chances[1] = new ChanceCards("Gå i fängelset! Gå direkt till fängelset utan att passera Gå.", 0, false, -1);
+            Chances[2] = new ChanceCards("Ta en tripp till Östra station och om ni passerar Gå så inkassera 4000 kr.", 0, false,15);
+            Chances[3] = new ChanceCards("Betala böter för fortkörningsböter, 300 kr", -300);
             Chances[4] = new ChanceCards("Gå vidare till Gå.", 0, false, 0);
-            Chances[5] = new ChanceCards("Gå vidare till S:t Eriksgatan", 0, false, 11);
-            Chances[6] = new ChanceCards("Betala parkeringsbörter 150 kr", -150);
-            Chances[7] = new ChanceCards("Banken har räknat fel, inkassera 2000", 2000);
-            Chances[8] = new ChanceCards("Gå till södra station", 0, false, 5);
-            Chances[9] = new ChanceCards("Du vann i en skönhetstävling, inkassera 2000 kr", 2000);
-            Chances[10] = new ChanceCards("Du fyller år, inkassera 200 från varje spelare", 200, false, -2);
-            Chances[11] = new ChanceCards("Gå vidare till Norrmalmstorh", 0, false, 39);
+            Chances[5] = new ChanceCards("Gå vidare till Hamngatan. Om ni passerar Gå så inkassera 4000 kr.", 0, false, 24);
+            Chances[6] = new ChanceCards("Ni lyfter sparkasseräntan från banken, inkassera 1000 kr", 1000);
+            Chances[7] = new ChanceCards("Gå vidare till Norrmalmstorg.", 0,false,39);
+            Chances[8] = new ChanceCards("Gå vidare till S:t Eriksgatan. Om ni passerar Gå så inkassera 4000 kr", 0, false, 11);
+            Chances[9] = new ChanceCards("Utbetalning på ert byggnadslån, inkassera 3000 kr", 3000);
+            Chances[10] = new ChanceCards("Ni har vunnit en korsordstävling, inkassera 2000 kr", 2000);
+            Chances[11] = new ChanceCards("Ni slipper ut ur fängelset, detta kort får behålla tills det används eller säljs.", 0, true);
             Chances[12] = new ChanceCards("Du vann i en skönhetstävling, inkassera 2000 kr", 2000);
-            Chances[13] = new ChanceCards("Fortkörningsböter, betala 200 kr", -200);
-            Chances[14] = new ChanceCards("Gå vidare till Gå", 0, false, 0);
+            Chances[13] = new ChanceCards("Du fyller år, inkassera 200 kr från varje motspelare.", 200,false,-2);
+            Chances[14] = new ChanceCards("Oförstånd i ämbetet, böta 400 kr", -400, false, 0);
             Chances[15] = new ChanceCards("Betala trängselskatt, betala 200 kr", -200);
         }
 
         public void InstantiateCommunityCards()
         {
-            ComCard[0] = new CommunityCards("Gå vidare till Gå", 0, false, 0);
-            ComCard[1] = new CommunityCards("Banken har räknat fel till din favör, inkassera 2000 kr", 2000);
-            ComCard[2] = new CommunityCards("Läkarkostnader, betala 500 kr.", -500);
-            ComCard[3] = new CommunityCards("Du slipper ut ur fängelset, kortet får behållas tills det används eller säljs.", 0, true);
-            ComCard[4] = new CommunityCards("Gå direkt till fängelset utan att passera gå.", 0, false, -1);
+            ComCard[0] = new CommunityCards("Gå vidare till Gå.", 0, false, 0);
+            ComCard[1] = new CommunityCards("Betala sjukhusräkning, 2000 kr.", -2000);
+            ComCard[2] = new CommunityCards("Ni slipper ut ur fängelset, detta kort får sparas tills det används eller säljs.",0,true);
+            ComCard[3] = new CommunityCards("Livsräntan förfaller, inkassera 2000.", 2000);
+            ComCard[4] = new CommunityCards("Betala försäkringspremie 1000 kr.", -1000);
             ComCard[5] = new CommunityCards("Det är din födelsedag, inkassera 200 kr från varje motspelare.", 200, false, -2);
-            ComCard[6] = new CommunityCards("Skatteåterbäring, inkassera 200 kr", 200);
-            ComCard[7] = new CommunityCards("Gå vidare till Gå", 0, false, 0);
-            ComCard[8] = new CommunityCards("Banken har räknat fel till din favör, inkassera 2000 kr", 2000);
-            ComCard[9] = new CommunityCards("Läkarkostnader, betala 500 kr.", -500);
-            ComCard[10] = new CommunityCards("Du slipper ut ur fängelset, kortet får behållas tills det används eller säljs.", 0, true);
-            ComCard[11] = new CommunityCards("Gå direkt till fängelset utan att passera gå.", 0, false, -1);
-            ComCard[12] = new CommunityCards("Det är din födelsedag, inkassera 200 kr från varje motspelare.", 200, false, -2);
-            ComCard[13] = new CommunityCards("Skatteåterbäring, inkassera 200 kr", 200);
-            ComCard[14] = new CommunityCards("Trängselskatt, betala 200 kr.", -200);
+            ComCard[6] = new CommunityCards("Ni ärver 2000 kr.", 2000);
+            ComCard[7] = new CommunityCards("Felräkning i banken till er favör, inkassera 4000 kr.", 4000);
+            ComCard[8] = new CommunityCards("Läkararvode, betala 1000 kr.", -1000);
+            ComCard[9] = new CommunityCards("Gå till Västerlånggatan, om ni passerar Gå så inkassera 4000 kr.", 0,false,1);
+            ComCard[10] = new CommunityCards("Återbäring av skatt, inkassera 400 kr.", 400);
+            ComCard[11] = new CommunityCards("Utdelning på 7% preferensaktier, inkassera 500 kr.", 500);
+            ComCard[12] = new CommunityCards("Likvid för försålda aktier, inkassera 1000 kr", 1000);
+            ComCard[13] = new CommunityCards("Ni har vunnit andra pris i en skönhetstävling, inkassera 200 kr", 200);
+            ComCard[14] = new CommunityCards("Gå i fängelse! Gå direkt till fängelset utan att passera Gå.", 0,false,-1);
             ComCard[15] = new CommunityCards("Gå till friparkering.", 0, false, 20);
         }
 

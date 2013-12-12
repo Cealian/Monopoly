@@ -20,67 +20,93 @@ namespace MonopolyBoard
 
         private void SellStreet_Load(object sender, EventArgs e)
         {
-            UpdatePrice();
             UpdateSquares();
+            lbStreets.SetSelected(0, true);
+            UpdateInfo();
         }
 
         private void btnSell_Click(object sender, EventArgs e)
         {
             Sell();
-            UpdateSquares();
-            UpdatePrice();
-        }
-
-        private void clbStreets_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            UpdatePrice();
+            UpdateInfo();
         }
 
         private void UpdateSquares()
         {
-            clbStreets.Items.Clear();
+            lbStreets.Items.Clear();
             int player = board.activePlayer;
             foreach (Square square in board.SquaresArray)
             {
                 if (square.GetType() == typeof(Street) && ((Street)square).GetOwner() == player)
                 {
-                    clbStreets.Items.Add(((Street)square).GetName());
+                    lbStreets.Items.Add(((Street)square).GetName());
                 }
                 else if (square.GetType() == typeof(Station) && ((Station)square).GetOwner() == player)
                 {
-                    clbStreets.Items.Add(((Station)square).GetName());
+                    lbStreets.Items.Add(((Station)square).GetName());
                 }
                 else if (square.GetType() == typeof(PowerStation) && ((PowerStation)square).GetOwner() == player)
                 {
-                    clbStreets.Items.Add(((PowerStation)square).GetName());
+                    lbStreets.Items.Add(((PowerStation)square).GetName());
                 }
             }
         }
 
-        private void UpdatePrice()
+        private void UpdateInfo()
         {
-            int price = 0;
+            string info = "";
+            int block = 10;
             for (int i = 0; i < board.SquaresArray.Length; i++)
             {
                 string name = board.SquaresArray[i].GetName();
                 Type squareType = board.SquaresArray[i].GetType();
-                foreach (object street in clbStreets.CheckedItems)
+                if (lbStreets.SelectedItem.ToString() == name && squareType == typeof(Street))
                 {
-                    if (street.ToString() == name && squareType == typeof(Street))
-                    {
-                        price += ((Street)board.SquaresArray[i]).GetSellPrice();
-                    }
-                    else if (street.ToString() == name && squareType == typeof(Station))
-                    {
-                        price += ((Station)board.SquaresArray[i]).GetSellPrice();
-                    }
-                    else if (street.ToString() == name && squareType == typeof(PowerStation))
-                    {
-                        price += ((PowerStation)board.SquaresArray[i]).GetSellPrice();
-                    }
+                    if (((Street)board.SquaresArray[i]).GetNoOfHouses() > 0)
+                        btnSellHouse.Enabled = true;
+                    else
+                        btnSellHouse.Enabled = false;
+
+                    if (((Street)board.SquaresArray[i]).GetMortgaged())
+                        btnMortgage.Text = "Lös ut";
+                    else
+                        btnMortgage.Text = "Inteckna";
+                    block = ((Street)board.SquaresArray[i]).GetBlock();
+                    info = ((Street)board.SquaresArray[i]).GetInfo();
+                }
+                else if (lbStreets.SelectedItem.ToString() == name && squareType == typeof(Station))
+                {
+                    btnBuyHouse.Enabled = false;
+                    btnSellHouse.Enabled = false;
+                    if (((Station)board.SquaresArray[i]).GetMortgaged())
+                        btnMortgage.Text = "Lös ut";
+                    else
+                        btnMortgage.Text = "Inteckna";
+                    info = ((Station)board.SquaresArray[i]).GetInfo();
+                }
+                else if (lbStreets.SelectedItem.ToString() == name && squareType == typeof(PowerStation))
+                {
+                    btnBuyHouse.Enabled = false;
+                    btnSellHouse.Enabled = false;
+                    if (((PowerStation)board.SquaresArray[i]).GetMortgaged())
+                        btnMortgage.Text = "Lös ut";
+                    else
+                        btnMortgage.Text = "Inteckna";
+                    info = ((PowerStation)board.SquaresArray[i]).GetInfo();
                 }
             }
-            lbPrice.Text = price.ToString();
+            lbInfo.Text = info;
+            for (int i = 0; i < board.SquaresArray.Length; i++)
+            {
+                Type squareType = board.SquaresArray[i].GetType();
+                if (squareType == typeof(Street) && ((Street)board.SquaresArray[i]).GetBlock() == block)
+                {
+                    if (((Street)board.SquaresArray[i]).GetOwner() != board.activePlayer)
+                        btnBuyHouse.Enabled = false;
+                    else
+                        btnBuyHouse.Enabled = true;
+                }
+            }
         }
 
         private void Sell()
@@ -88,28 +114,56 @@ namespace MonopolyBoard
             for (int i = 0; i < board.SquaresArray.Length; i++)
             {
                 Square sellSquare = board.SquaresArray[i];
-                foreach (object square in clbStreets.CheckedItems)
+
+                if (lbStreets.SelectedItem.ToString() == sellSquare.GetName())
                 {
-                    if (square.ToString() == sellSquare.GetName())
+                    if (sellSquare.GetType() == typeof(Street))
                     {
-                        if (sellSquare.GetType() == typeof(Street))
+                        if (((Street)sellSquare).GetMortgaged())
                         {
-                            ((Street)sellSquare).ChangeOwner(5);
-                            board.Player[board.activePlayer].AddMoney(((Street)sellSquare).GetSellPrice());
+                            ((Street)sellSquare).ToggleMortage();
+                            board.Player[board.activePlayer].SubtractMoney(((Street)sellSquare).GetMortgagePrice());
                         }
-                        else if (sellSquare.GetType() == typeof(Station))
+                        else
                         {
-                            ((Station)sellSquare).ChangeOwner(5);
-                            board.Player[board.activePlayer].AddMoney(((Station)sellSquare).GetSellPrice());
+                            ((Street)sellSquare).ToggleMortage();
+                            board.Player[board.activePlayer].AddMoney(((Street)sellSquare).GetMortgagePrice());
                         }
-                        else if (sellSquare.GetType() == typeof(PowerStation))
+                    }
+                    else if (sellSquare.GetType() == typeof(Station))
+                    {
+                        if (((Station)sellSquare).GetMortgaged())
                         {
-                            ((PowerStation)sellSquare).ChangeOwner(5);
-                            board.Player[board.activePlayer].AddMoney(((PowerStation)sellSquare).GetSellPrice());
+                            ((Station)sellSquare).ToggleMortage();
+                            board.Player[board.activePlayer].SubtractMoney(((Station)sellSquare).GetMortgagePrice());
+                        }
+                        else
+                        {
+                            ((Station)sellSquare).ToggleMortage();
+                            board.Player[board.activePlayer].AddMoney(((Station)sellSquare).GetMortgagePrice());
+                        }
+                    }
+                    else if (sellSquare.GetType() == typeof(PowerStation))
+                    {
+                        if (((PowerStation)sellSquare).GetMortgaged())
+                        {
+                            ((PowerStation)sellSquare).ToggleMortage();
+                            board.Player[board.activePlayer].SubtractMoney(((PowerStation)sellSquare).GetMortgagePrice());
+                        }
+                        else
+                        {
+                            ((PowerStation)sellSquare).ToggleMortage();
+                            board.Player[board.activePlayer].AddMoney(((PowerStation)sellSquare).GetMortgagePrice());
                         }
                     }
                 }
+
             }
+        }
+
+        private void lbStreets_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateInfo();
         }
     }
 }

@@ -9,6 +9,7 @@ namespace MonopolyBoard
             price = 0;
             owner=5;
             block = 0;
+            mortgaged = false;
         }
 
         public PowerStation(string setName, int setPrice, int setBlock)
@@ -17,6 +18,7 @@ namespace MonopolyBoard
             price = setPrice;
             owner = 5;
             block = setBlock;
+            mortgaged = false;
         }
 
         public int GetRent(int dice)
@@ -31,7 +33,12 @@ namespace MonopolyBoard
 
         new public string GetInfo()
         {
-            return GetName() +"\n"+ GetPrice() +"kr\n"+ GetRentOutput();
+            string info=GetName() +"\n"+ GetPrice() +"kr\n"+ GetRentOutput();
+
+            if (GetMortgaged())
+                info += "\nIntecknad";
+
+            return info;
         }
     }
 }

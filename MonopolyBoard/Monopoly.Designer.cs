@@ -213,7 +213,7 @@
             // lblSquareInfo
             // 
             this.lblSquareInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblSquareInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSquareInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSquareInfo.Location = new System.Drawing.Point(654, 420);
             this.lblSquareInfo.Name = "lblSquareInfo";
             this.lblSquareInfo.Size = new System.Drawing.Size(132, 219);
