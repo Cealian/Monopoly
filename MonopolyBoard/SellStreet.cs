@@ -72,7 +72,10 @@ namespace MonopolyBoard
                     else
                         btnMortgage.Text = "Inteckna";
                     block = ((Street)board.SquaresArray[i]).GetBlock();
-                    info = ((Street)board.SquaresArray[i]).GetInfo();
+                    if (((Street)board.SquaresArray[i]).GetNoOfHouses() == 5)
+                        info = ((Street)board.SquaresArray[i]).GetInfo() + "\nEtt Hotell";
+                    else
+                        info = ((Street)board.SquaresArray[i]).GetInfo() + "\nAntal hus: " + ((Street)board.SquaresArray[i]).GetNoOfHouses();
                 }
                 else if (lbStreets.SelectedItem.ToString() == name && squareType == typeof(Station))
                 {
@@ -101,10 +104,14 @@ namespace MonopolyBoard
                 Type squareType = board.SquaresArray[i].GetType();
                 if (squareType == typeof(Street) && ((Street)board.SquaresArray[i]).GetBlock() == block)
                 {
-                    if (((Street)board.SquaresArray[i]).GetOwner() != board.activePlayer)
-                        btnBuyHouse.Enabled = false;
-                    else
+                    Street street = ((Street)board.SquaresArray[i]);
+                    if (street.GetOwner() == board.activePlayer && street.GetNoOfHouses() < 5)
                         btnBuyHouse.Enabled = true;
+                    else
+                    {
+                        btnBuyHouse.Enabled = false;
+                        break;
+                    }
                 }
             }
         }
@@ -163,6 +170,42 @@ namespace MonopolyBoard
 
         private void lbStreets_SelectedIndexChanged(object sender, EventArgs e)
         {
+            UpdateInfo();
+        }
+
+        private void btnBuyHouse_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < board.SquaresArray.Length; i++)
+            {
+                Type streetType = board.SquaresArray[i].GetType();
+                if (streetType == typeof(Street))
+                {
+                    Street street = ((Street)board.SquaresArray[i]);
+                    if (lbStreets.SelectedItem.ToString() == street.GetName())
+                    {
+                        street.BuildHouse();
+                        board.Player[board.activePlayer].SubtractMoney(street.GetHousePrice());
+                    }
+                }
+            }
+            UpdateInfo();
+        }
+
+        private void btnSellHouse_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < board.SquaresArray.Length; i++)
+            {
+                Type streetType = board.SquaresArray[i].GetType();
+                if (streetType == typeof(Street))
+                {
+                    Street street = ((Street)board.SquaresArray[i]);
+                    if (lbStreets.SelectedItem.ToString() == street.GetName())
+                    {
+                        street.SellHouse();
+                        board.Player[board.activePlayer].AddMoney(street.GetSellHousePrice());
+                    }
+                }
+            }
             UpdateInfo();
         }
     }
