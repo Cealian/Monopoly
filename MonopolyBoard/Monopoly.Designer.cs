@@ -308,6 +308,7 @@ namespace MonopolyBoard
             this.btnBankrupt.Text = "Gå i konkurs";
             this.btnBankrupt.UseVisualStyleBackColor = true;
             this.btnBankrupt.Visible = false;
+            this.btnBankrupt.Click += new System.EventHandler(this.btnBankrupt_Click);
             // 
             // frmMonopoly
             // 

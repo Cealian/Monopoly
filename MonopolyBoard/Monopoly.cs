@@ -938,5 +938,10 @@ namespace MonopolyBoard
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAsAttribute(UnmanagedType.Bool)]
         static extern bool AllocConsole();
+
+        private void btnBankrupt_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
