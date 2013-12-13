@@ -279,7 +279,7 @@ namespace MonopolyBoard
             this.btnSellStreet.Name = "btnSellStreet";
             this.btnSellStreet.Size = new System.Drawing.Size(75, 23);
             this.btnSellStreet.TabIndex = 12;
-            this.btnSellStreet.Text = "Sälj gator";
+            this.btnSellStreet.Text = "Hantera gator";
             this.btnSellStreet.UseVisualStyleBackColor = true;
             this.btnSellStreet.Click += new System.EventHandler(this.btnSellStreet_Click);
             // 

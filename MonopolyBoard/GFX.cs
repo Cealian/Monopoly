@@ -58,7 +58,6 @@ namespace MonopolyBoard
 
         public void UpdateOwner(int squarePosition, int player)
         {
-            Color playerColor = new Color();
             int markPositionX = 0;
             int markPositionY = 0;
 
@@ -86,6 +85,8 @@ namespace MonopolyBoard
             SolidBrush brush = new SolidBrush(board.GetPlayerColor(player));
 
             gObject.FillRectangle(brush, markPositionX, markPositionY, 10, 10);
+            Console.WriteLine("New player: "+ player + " New pos: " + squarePosition);
+
         }
     }
 }

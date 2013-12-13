@@ -93,20 +93,14 @@ namespace MonopolyBoard
 
         private void cbMoneyA_CheckedChanged(object sender, EventArgs e)//Sets txtMoneyA into focus and sets the second checkbox to false.
         {
+            cbMoneyB.Checked = !cbMoneyA.Checked;
             txtMoneyA.Focus();
-            if (cbMoneyB.Checked)
-            {
-                cbMoneyB.Checked = false;
-            }
         }
 
         private void cbMoneyB_CheckedChanged(object sender, EventArgs e)//Sets txtMoneyB into focus and sets the first checkbox to false.
         {
+            cbMoneyA.Checked = !cbMoneyB.Checked;
             txtMoneyB.Focus();
-            if (cbMoneyA.Checked)
-            {
-                cbMoneyA.Checked = false;
-            }
         }
 
         private void trade_Click(object sender, EventArgs e)//Moves money and streets between the players.
@@ -140,6 +134,11 @@ namespace MonopolyBoard
 
             mtxtMoneyA.Text = board.Player[board.activePlayer].GetMoney().ToString();
             mtxtMoneyB.Text = board.Player[GetSelectedPlayer()].GetMoney().ToString();
+
+            txtMoneyA.Text = "0";
+            txtMoneyB.Text = "0";
+
+            cbMoneyA.Checked = true;
 
             gbAPlayer.Text = board.Player[board.activePlayer].GetName();
             gbSPlayer.Text = lbPlayers.SelectedItem.ToString();
@@ -204,14 +203,17 @@ namespace MonopolyBoard
                         if (board.SquaresArray[i].GetType() == typeof(Street))
                         {
                             ((Street)board.SquaresArray[i]).ChangeOwner(toPlayer);
+                            board.GEngine.UpdateOwner(i, toPlayer);
                         }
                         else if (board.SquaresArray[i].GetType() == typeof(Station))
                         {
                             ((Station)board.SquaresArray[i]).ChangeOwner(toPlayer);
+                            board.GEngine.UpdateOwner(i, toPlayer);
                         }
                         else if (board.SquaresArray[i].GetType() == typeof(PowerStation))
                         {
                             ((PowerStation)board.SquaresArray[i]).ChangeOwner(toPlayer);
+                            board.GEngine.UpdateOwner(i, toPlayer);
                         }
                     }
                 }
@@ -222,14 +224,17 @@ namespace MonopolyBoard
                         if (board.SquaresArray[i].GetType() == typeof(Street))
                         {
                             ((Street)board.SquaresArray[i]).ChangeOwner(toPlayer);
+                            board.GEngine.UpdateOwner(i, toPlayer);
                         }
                         else if (board.SquaresArray[i].GetType() == typeof(Station))
                         {
                             ((Station)board.SquaresArray[i]).ChangeOwner(toPlayer);
+                            board.GEngine.UpdateOwner(i, toPlayer);
                         }
                         else if (board.SquaresArray[i].GetType() == typeof(PowerStation))
                         {
                             ((PowerStation)board.SquaresArray[i]).ChangeOwner(toPlayer);
+                            board.GEngine.UpdateOwner(i, toPlayer);
                         }
                     }
                 }

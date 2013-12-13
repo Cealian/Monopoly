@@ -14,9 +14,11 @@ namespace MonopolyBoard
         private void SellStreet_Load(object sender, EventArgs e)
         {
             UpdateSquares();
-            if(lbStreets.Items.Count<0)
+            if (lbStreets.Items.Count > 0)
+            {
                 lbStreets.SetSelected(0, true);
-            UpdateInfo();
+                UpdateInfo();
+            }
         }
 
         private void btnSell_Click(object sender, EventArgs e)
@@ -27,6 +29,7 @@ namespace MonopolyBoard
 
         private void UpdateSquares()
         {
+            lbInfo.Text = "";
             lbStreets.Items.Clear();
             int player = board.activePlayer;
             foreach (Square square in board.SquaresArray)
@@ -108,6 +111,8 @@ namespace MonopolyBoard
                     }
                 }
             }
+            board.ShowSquareInfo();
+            board.UpdatePlayerInfo();
         }
 
         private void Sell()

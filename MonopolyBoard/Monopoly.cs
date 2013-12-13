@@ -653,6 +653,7 @@ namespace MonopolyBoard
 
             Type squareType = Squares[position].GetType();
             int rent = 0;
+            bool isMortgaged = false;
 
             if (owner == activePlayer)
             {
@@ -666,7 +667,7 @@ namespace MonopolyBoard
                     btnBuyStreet.Show();
                     return;
                 }
-
+                isMortgaged = ((Street)Squares[position]).GetMortgaged();
                 rent = ((Street)Squares[position]).GetRent();
             }
             else if (squareType == typeof(Station))
@@ -677,7 +678,7 @@ namespace MonopolyBoard
                     btnBuyStreet.Show();
                     return;
                 }
-
+                isMortgaged = ((Station)Squares[position]).GetMortgaged();
                 rent = ((Station)Squares[position]).GetRent();
             }
             else if (squareType == typeof(PowerStation))
@@ -687,14 +688,17 @@ namespace MonopolyBoard
                     btnBuyStreet.Show();
                     return;
                 }
-
+                isMortgaged = ((PowerStation)Squares[position]).GetMortgaged();
                 rent = ((PowerStation)Squares[position]).GetRent();
             }
 
 
-
+            if (isMortgaged)
+            {
+                MessageBox.Show("Du hamnade på " + Squares[position].GetName() + "\nInteknad.");
+                return;
+            }
             MessageBox.Show("Du hamnade på " + Squares[position].GetName() + "\nHyra: " + rent + " betalas till " + Player[owner].GetName());
-
             Player[activePlayer].SubtractMoney(rent);
             Player[owner].AddMoney(rent);
 

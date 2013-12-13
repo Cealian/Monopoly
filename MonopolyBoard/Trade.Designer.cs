@@ -71,10 +71,13 @@
             this.txtMoneyA.Name = "txtMoneyA";
             this.txtMoneyA.Size = new System.Drawing.Size(55, 20);
             this.txtMoneyA.TabIndex = 2;
+            this.txtMoneyA.Text = "0";
             // 
             // cbMoneyA
             // 
             this.cbMoneyA.AutoSize = true;
+            this.cbMoneyA.Checked = true;
+            this.cbMoneyA.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbMoneyA.Location = new System.Drawing.Point(6, 227);
             this.cbMoneyA.Name = "cbMoneyA";
             this.cbMoneyA.Size = new System.Drawing.Size(58, 17);
@@ -119,6 +122,7 @@
             this.txtMoneyB.Name = "txtMoneyB";
             this.txtMoneyB.Size = new System.Drawing.Size(55, 20);
             this.txtMoneyB.TabIndex = 2;
+            this.txtMoneyB.Text = "0";
             // 
             // cbMoneyB
             // 
