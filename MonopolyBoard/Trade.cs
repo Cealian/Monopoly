@@ -18,100 +18,108 @@ namespace MonopolyBoard
             InitializeComponent();
         }
 
-        private void MoneyToMove()
+        private void MoneyToMove()//Moves money between the players.
         {
             string[] text = new string[2];
-            int[] moneyToMove = new int[2] { 0, 0 };
+            int moneyToMove = 0;
             text[0] = txtMoneyA.Text;
             text[1] = txtMoneyB.Text;
             try
             {
-                if (cbMoneyA.Checked && cbMoneyB.Checked)
-                {
-                    moneyToMove[0] = int.Parse(txtMoneyA.Text);
-                    moneyToMove[1] = int.Parse(txtMoneyB.Text);
-                }
-                else if (cbMoneyA.Checked)
-                    moneyToMove[0] = int.Parse(txtMoneyA.Text);
+                //if (cbMoneyA.Checked && cbMoneyB.Checked)
+                //{
+                //    moneyToMove[0] = int.Parse(txtMoneyA.Text);
+                //    moneyToMove[1] = int.Parse(txtMoneyB.Text);
+                //}
+                if (cbMoneyA.Checked)
+                    moneyToMove = int.Parse(txtMoneyA.Text);
                 else if (cbMoneyB.Checked)
-                    moneyToMove[1] = int.Parse(txtMoneyB.Text);
+                    moneyToMove = int.Parse(txtMoneyB.Text);
 
             }
             catch (FormatException)
             {
-                if (cbMoneyA.Checked && cbMoneyB.Checked)
+                //if (cbMoneyA.Checked && cbMoneyB.Checked)
+                //{
+                //    moneyToMove[0] = 0;
+                //    moneyToMove[1] = 0;
+                //    txtMoneyA.Text = "";
+                //    txtMoneyB.Text = "";
+                //    MessageBox.Show("Skriv in ett heltal.");
+                //}
+                if (cbMoneyA.Checked)
                 {
-                    moneyToMove[0] = 0;
-                    moneyToMove[1] = 0;
-                    txtMoneyA.Text = "";
-                    txtMoneyB.Text = "";
-                    MessageBox.Show("Skriv in ett heltal.");
-                }
-                else if (cbMoneyA.Checked)
-                {
-                    moneyToMove[0] = 0;
+                    moneyToMove = 0;
                     txtMoneyA.Text = "";
                     MessageBox.Show("Skriv in ett heltal.");
                 }
                 else if (cbMoneyB.Checked)
                 {
-                    moneyToMove[1] = 0;
+                    moneyToMove = 0;
                     txtMoneyB.Text = "";
                     MessageBox.Show("Skriv in ett heltal");
                 }
             }
 
-            if (moneyToMove[0] < 0)
-                moneyToMove[0] = 0;
-            if (moneyToMove[1] < 0)
-                moneyToMove[1] = 0;
+            if (moneyToMove < 0)
+                moneyToMove = 0;
 
-            if (cbMoneyA.Checked && cbMoneyB.Checked)
+            //if (cbMoneyA.Checked && cbMoneyB.Checked)
+            //{
+            //    board.Player[board.activePlayer].SubtractMoney(moneyToMove[0]);
+            //    board.Player[GetSelectedPlayer()].AddMoney(moneyToMove[0]);
+            //    board.Player[GetSelectedPlayer()].SubtractMoney(moneyToMove[1]);
+            //    board.Player[board.activePlayer].AddMoney(moneyToMove[1]);
+            //    txtMoneyA.Text = "";
+            //    txtMoneyB.Text = "";
+            //    cbMoneyA.Checked = false;
+            //    cbMoneyB.Checked = false;
+            //}
+            if (cbMoneyA.Checked)
             {
-                board.Player[board.activePlayer].SubtractMoney(moneyToMove[0]);
-                board.Player[GetSelectedPlayer()].AddMoney(moneyToMove[0]);
-                board.Player[GetSelectedPlayer()].SubtractMoney(moneyToMove[1]);
-                board.Player[board.activePlayer].AddMoney(moneyToMove[1]);
-                txtMoneyA.Text = "";
-                txtMoneyB.Text = "";
-                cbMoneyA.Checked = false;
-                cbMoneyB.Checked = false;
-            }
-            else if (cbMoneyA.Checked)
-            {
-                board.Player[board.activePlayer].SubtractMoney(moneyToMove[0]);
-                board.Player[GetSelectedPlayer()].AddMoney(moneyToMove[0]);
+                board.Player[board.activePlayer].SubtractMoney(moneyToMove);
+                board.Player[GetSelectedPlayer()].AddMoney(moneyToMove);
                 txtMoneyA.Text = "";
                 cbMoneyA.Checked = false;
             }
             else if (cbMoneyB.Checked)
             {
-                board.Player[GetSelectedPlayer()].SubtractMoney(moneyToMove[1]);
-                board.Player[board.activePlayer].AddMoney(moneyToMove[1]);
+                board.Player[GetSelectedPlayer()].SubtractMoney(moneyToMove);
+                board.Player[board.activePlayer].AddMoney(moneyToMove);
                 txtMoneyB.Text = "";
                 cbMoneyB.Checked = false;
             }
         }
 
-        private void cbMoneyA_CheckedChanged(object sender, EventArgs e)
+        private void cbMoneyA_CheckedChanged(object sender, EventArgs e)//Sets txtMoneyA into focus and sets the second checkbox to false.
         {
             txtMoneyA.Focus();
-        }   //Sets txtMoneyA into focus.
+            if (cbMoneyB.Checked==true && cbMoneyA.Checked==false)
+            {
+                cbMoneyB.Checked = false;
+                cbMoneyA.Checked = true;
+            }
+        }
 
-        private void cbMoneyB_CheckedChanged(object sender, EventArgs e)
+        private void cbMoneyB_CheckedChanged(object sender, EventArgs e)//Sets txtMoneyB into focus and sets the first checkbox to false.
         {
             txtMoneyB.Focus();
-        }   //Sets txtMoneyB into focus.
+            if (cbMoneyA.Checked==true && cbMoneyB.Checked==false)
+            {
+                cbMoneyA.Checked = false;
+                cbMoneyB.Checked = true;
+            }
+        }
 
-        private void trade_Click(object sender, EventArgs e)
+        private void trade_Click(object sender, EventArgs e)//Moves money and streets between the players.
         {
             MoneyToMove();
             MoveStreets(GetSelectedPlayer());
             MoveStreets(board.activePlayer);
             ChangePlayers();
-        }   //Moves money and streets from PlayerA to B and from B to A.
+        }
 
-        private void Trade_Load(object sender, EventArgs e)
+        private void Trade_Load(object sender, EventArgs e)//Loads all veribles that we need when the form opens.
         {
             for (int i = 0; i < board.Player.Length; i++)
             {
@@ -120,14 +128,14 @@ namespace MonopolyBoard
             }
             lbPlayers.SetSelected(0, true);
             ChangePlayers();
-        }   //Loads all veribles that we need from the mainprogram and insert them where they should be.
+        }
 
-        private void lbPlayers_SelectedIndexChanged(object sender, EventArgs e)
+        private void lbPlayers_SelectedIndexChanged(object sender, EventArgs e)//Change the second player so you can trade with the player you want.
         {
             ChangePlayers();
-        }   //Change the second player so you can trade with the player you want.
-        
-        private void ChangePlayers() //Här ska du kolla Herman
+        }
+
+        private void ChangePlayers()//Updates all listbox and textfields with the correct data.
         {
             clbPlayerA.Items.Clear();
             clbPlayerB.Items.Clear();
@@ -142,13 +150,14 @@ namespace MonopolyBoard
             string selectedPlayerName = board.Player[GetSelectedPlayer()].GetName();
 
             board.ShowSquareInfo();
+            board.UpdatePlayerInfo();
 
-            foreach (Square square in board.SquaresArray)//Här ska du kolla, här laddar jag in allt i 
-            {                                            //listboxen, men du har ju bara en och behöver
-                if (square.GetType() == typeof(Street))  //inte ha med stationer och kraftverk, då de inte
-                {                                        //har några hus. Borde inte vara så svårt, dock kan du gärna försöka fixa så det bara är de 
-                    if (((Street)square).GetOwner() == board.activePlayer)//gator där man äger ett helt kvarter som visas, de andra kan man ju inte
-                        clbPlayerA.Items.Add(((Street)square).GetName());//bygga hus på. Sen får du gärna ta bort denna låååånga fula komentar igen. :D
+            foreach (Square square in board.SquaresArray)
+            {
+                if (square.GetType() == typeof(Street))
+                {
+                    if (((Street)square).GetOwner() == board.activePlayer)
+                        clbPlayerA.Items.Add(((Street)square).GetName());
                     else if (selectedPlayerList == selectedPlayerName
                         && ((Street)square).GetOwner() == GetSelectedPlayer())
                         clbPlayerB.Items.Add(((Street)square).GetName());
@@ -170,9 +179,9 @@ namespace MonopolyBoard
                         clbPlayerB.Items.Add(((Station)square).GetName());
                 }
             }
-        }   //Reloads all listbox and textfields with the corect data.
+        }
 
-        private int GetSelectedPlayer()
+        private int GetSelectedPlayer()//Return the index of the player you are trading with.
         {
             int player = 0;
             for (int j = 0; j < board.Player.Length; j++)
@@ -183,9 +192,9 @@ namespace MonopolyBoard
                 }
             }
             return player;
-        }   //Return the index of the player you are trading with.
+        }
 
-        private void MoveStreets(int toPlayer)
+        private void MoveStreets(int toPlayer)//Moves streets between players.
         {
             for (int i = 0; i < board.SquaresArray.Length; i++)
             {

@@ -3,10 +3,10 @@ using System.Windows.Forms;
 
 namespace MonopolyBoard
 {
-    public partial class SellStreet : Form
+    public partial class BuildHouses : Form
     {
         public frmMonopoly board;
-        public SellStreet()
+        public BuildHouses()
         {
             InitializeComponent();
         }

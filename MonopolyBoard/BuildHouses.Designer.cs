@@ -1,6 +1,6 @@
 ﻿namespace MonopolyBoard
 {
-    partial class SellStreet
+    partial class BuildHouses
     {
         /// <summary>
         /// Required designer variable.
