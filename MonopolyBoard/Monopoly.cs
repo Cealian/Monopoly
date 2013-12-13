@@ -910,7 +910,7 @@ namespace MonopolyBoard
 
         private void btnBankrupt_Click(object sender, EventArgs e)
         {
-
+            
         }
     }
 }
