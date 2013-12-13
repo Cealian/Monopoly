@@ -539,8 +539,12 @@ namespace MonopolyBoard
                 }
                 else if (owner != activePlayer)
                 {
-                    int rent = ((Street)Squares[position]).GetRent();
-                    Player[activePlayer].SubtractMoney(rent);
+                    if (!((Street)Squares[position]).GetMortgaged())
+                    {
+                        int rent = ((Street)Squares[position]).GetRent();
+                        Player[activePlayer].SubtractMoney(rent);
+                        Player[owner].AddMoney(rent);
+                    }
                 }
             }
             else if (squareType == typeof(Square))
@@ -611,9 +615,12 @@ namespace MonopolyBoard
                 }
                 else if (owner != activePlayer)
                 {
-                    int rent = ((Station)Squares[position]).GetRent();
-                    Player[activePlayer].SubtractMoney(rent);
-                    Player[owner].AddMoney(rent);
+                    if (!((Street)Squares[position]).GetMortgaged())
+                    {
+                        int rent = ((Station)Squares[position]).GetRent();
+                        Player[activePlayer].SubtractMoney(rent);
+                        Player[owner].AddMoney(rent);
+                    }
                 }
             }
             else if (squareType == typeof(PowerStation))
@@ -624,9 +631,12 @@ namespace MonopolyBoard
                 }
                 else if (owner != activePlayer)
                 {
-                    int rent = ((PowerStation)Squares[position]).GetRent();
-                    Player[activePlayer].SubtractMoney(rent);
-                    Player[owner].AddMoney(rent);
+                    if (!((Street)Squares[position]).GetMortgaged())
+                    {
+                        int rent = ((PowerStation)Squares[position]).GetRent();
+                        Player[activePlayer].SubtractMoney(rent);
+                        Player[owner].AddMoney(rent);
+                    }
                 }
             }
 
@@ -776,7 +786,7 @@ namespace MonopolyBoard
 
         private void btnSellStreet_Click(object sender, EventArgs e)
         {
-            SellStreet sellStreet = new SellStreet();
+            BuildHouses sellStreet = new BuildHouses();
             sellStreet.board = this;
             sellStreet.Show();
         }
