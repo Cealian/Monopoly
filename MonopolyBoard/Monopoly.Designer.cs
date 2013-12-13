@@ -1,4 +1,5 @@
-﻿namespace MonopolyBoard
+﻿using System.Windows.Forms;
+namespace MonopolyBoard
 {
     partial class frmMonopoly
     {
@@ -18,6 +19,13 @@
                 components.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        protected override void WndProc(ref Message m) /* Make sure the form doesn't repaint on alt press. */
+        {
+            // Suppress the WM_UPDATEUISTATE message
+            if (m.Msg == 0x128) return;
+            base.WndProc(ref m);
         }
 
         #region Windows Form Designer generated code
@@ -287,7 +295,8 @@
             // sfdSaveGame
             // 
             this.sfdSaveGame.DefaultExt = "mon";
-            this.sfdSaveGame.Filter = "Monopol save file(*.mon)|*.mon";
+            this.sfdSaveGame.Filter = "Monopol sparfil(*.mon)|*.mon";
+            this.sfdSaveGame.Title = "Spara ditt monopolspel";
             // 
             // frmMonopoly
             // 

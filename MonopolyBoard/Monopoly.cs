@@ -3,6 +3,8 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.IO;
+using System.Text;
 
 namespace MonopolyBoard
 {
@@ -89,7 +91,7 @@ namespace MonopolyBoard
                 case 3:
                     picPlayer3.BackColor = Color.Transparent;
                     break;
-        }
+            }
         }
 
         public void MoveActivePlayer() /* Move the active player. */
@@ -571,7 +573,7 @@ namespace MonopolyBoard
             catch (InvalidCastException) /* No GetOwner() function, it's a Square. */
             {
                 if (position == 4 || position == 38) /* It's a tax square */
-            {
+                {
                     MessageBox.Show("Skatt " + Squares[position].GetPrice() + " kr.");
                     TaxActivePlayer();
                 }
@@ -623,7 +625,7 @@ namespace MonopolyBoard
                     else
                     {
                         chanceCard++;
-                }
+                    }
                 }
                 else if (position == 2 || position == 17 || position == 33) /* Take a community card and hope for something good. */
                 {
@@ -660,7 +662,7 @@ namespace MonopolyBoard
                     else
                     {
                         comCard++;
-                }
+                    }
                 }
                 return;
             }
@@ -668,43 +670,40 @@ namespace MonopolyBoard
             Type squareType = Squares[position].GetType();
             int rent = 0;
 
+            if (owner == activePlayer)
+            {
+                return;
+            }
+
             if (squareType == typeof(Street))
             {
                 if (owner == 5)
                 {
-                    if (owner != activePlayer)
-                    {
-                        btnBuyStreet.Show();
-                    }
+                    btnBuyStreet.Show();
                     return;
                 }
-                
+
                 rent = ((Street)Squares[position]).GetRent();
             }
             else if (squareType == typeof(Station))
             {
                 if (owner == 5)
                 {
-                    if (owner != activePlayer)
-                    {
+
                     btnBuyStreet.Show();
-                }
                     return;
                 }
-                
+
                 rent = ((Station)Squares[position]).GetRent();
             }
             else if (squareType == typeof(PowerStation))
             {
                 if (owner == 5)
                 {
-                    if (owner != activePlayer)
-                    {
                     btnBuyStreet.Show();
-                }
                     return;
                 }
-                
+
                 rent = ((PowerStation)Squares[position]).GetRent();
             }
 
@@ -712,8 +711,8 @@ namespace MonopolyBoard
 
             MessageBox.Show("Du hamnade på " + Squares[position].GetName() + "\nHyra: " + rent + " betalas till " + Player[owner].GetName());
 
-                    Player[activePlayer].SubtractMoney(rent);
-                    Player[owner].AddMoney(rent);
+            Player[activePlayer].SubtractMoney(rent);
+            Player[owner].AddMoney(rent);
 
             UpdatePlayerInfo();
         }
@@ -773,7 +772,7 @@ namespace MonopolyBoard
         public void UpdatePlayerInfo() /* Updates the on-screen info about the players. */
         {
             string playerInfo;
-            
+
             playerInfo = Player[0].GetName() + ": " + Player[0].GetMoney() + "\n";
             playerInfo += Player[1].GetName() + ": " + Player[1].GetMoney() + "\n";
 
@@ -803,7 +802,7 @@ namespace MonopolyBoard
              */
         }
 
-        private void btnBuyHouses_Click(object sender, EventArgs e) 
+        private void btnBuyHouses_Click(object sender, EventArgs e)
         {
             BuyHouse BuyHouseForm = new BuyHouse();
             BuyHouseForm.board = this;
@@ -822,47 +821,59 @@ namespace MonopolyBoard
             if (playerMoney < streetPrice)
             {
                 MessageBox.Show("Du har inte råd att köpa denna gatan");
+                return;
             }
-            else
+
+            string prompt = "Vill du köpa " + streetName + " för " + streetPrice + " kr\nDu har " + playerMoney + " kr";
+
+            if (MessageBox.Show(prompt, "Köpa gata", MessageBoxButtons.YesNo) == DialogResult.No)
             {
-                string prompt = "Vill du köpa " + streetName + " för " + streetPrice + " kr\nDu har " + playerMoney + " kr";
-                if (MessageBox.Show(prompt, "Köpa gata", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    Type squareType = Squares[position].GetType();
-
-                    if (squareType == typeof(Street))
-                    {
-                        ((Street)Squares[position]).ChangeOwner(activePlayer);
-                    }
-                    else if (squareType == typeof(Station))
-                    {
-                        ((Station)Squares[position]).ChangeOwner(activePlayer);
-                    }
-                    else if (squareType == typeof(PowerStation))
-                    {
-                        ((PowerStation)Squares[position]).ChangeOwner(activePlayer);
-                    }
-
-
-                    Player[activePlayer].SubtractMoney(streetPrice);
-                    btnBuyStreet.Hide();
-                    ShowSquareInfo();
-                }
+                return;
             }
+
+            Type squareType = Squares[position].GetType();
+
+            if (squareType == typeof(Street))
+            {
+                ((Street)Squares[position]).ChangeOwner(activePlayer);
+            }
+            else if (squareType == typeof(Station))
+            {
+                ((Station)Squares[position]).ChangeOwner(activePlayer);
+            }
+            else if (squareType == typeof(PowerStation))
+            {
+                ((PowerStation)Squares[position]).ChangeOwner(activePlayer);
+            }
+
+
+            Player[activePlayer].SubtractMoney(streetPrice);
+            btnBuyStreet.Hide();
+            ShowSquareInfo();
 
             GEngine.UpdateOwner(position, activePlayer);
 
-            }
+        }
 
-        private void btnSaveGame_Click(object sender, EventArgs e)
+        private void btnSaveGame_Click(object sender, EventArgs e) /* Save the current monopoly game to be able to continue later */
         {
             sfdSaveGame.ShowDialog();
+            if (sfdSaveGame.FileName != "")
+            {
+                FileStream fs = (FileStream)sfdSaveGame.OpenFile();
+
+                GameSave newSave = new GameSave(ref fs);
+                newSave.Save();
+
+                fs.Close();
+            }
         }
 
         private void UpdateFreeParkValue()
         {
             lblFreePark.Text = Freepark.GetValue().ToString();
         }
+
 
         private void btnSellStreet_Click(object sender, EventArgs e)
         {
