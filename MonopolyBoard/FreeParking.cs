@@ -2,26 +2,26 @@
 {
     public class FreeParking
     {
-        /*Classen skapar metod för att registrera in pengar i friparkering och 
-         * metod för att skicka friparkerings pengar över till spelaren 
-         
-         Kod av : Elias Johansson */
+        /*This class is storing methods for handling the freeparking square on the monopoly board.*/
         
-        private int value = 0; //Value är bankens nuvarande pengar
+        private int value = 0; 
         
+        /*Method for addíng money to freeparking*/
         public void AddMoney(int amount)
         {
-            value += amount; //Lägg till det som skickas in i metoden till bankens pengar (value)
+            value += amount;
         }
         
+        /*Method for taking the money from freeparking and store the amount of money in a variable
+         The variable will be used in main prog for adding the money to the player who lands on freeparking*/
         public int TakeMoney()
         {
-            int save = value; //Sparar ner bankens pengar till en variabel "save"
-            value = 0;  // Nollställer bankens pengar
-            return save; //Returnerar det som ligger sparat i "save"
+            int save = value; // Saves the current money to the save variable
+            value = 0;  // Reset the freeparking money
+            return save; //Returns the saved money
         }
         
-        /*Här skapas en metod GetValue som enbart returnerar det belopp som ligger i bankens pengar*/
+        /*Method that just returns the current amount of money in freeparking*/
         public int GetValue()
         {
             return value;

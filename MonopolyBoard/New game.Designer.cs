@@ -68,6 +68,7 @@
             // 
             // txtBoxPlayer1
             // 
+            this.txtBoxPlayer1.BackColor = System.Drawing.Color.Pink;
             this.txtBoxPlayer1.Location = new System.Drawing.Point(20, 61);
             this.txtBoxPlayer1.Name = "txtBoxPlayer1";
             this.txtBoxPlayer1.Size = new System.Drawing.Size(151, 20);
@@ -76,7 +77,9 @@
             // 
             // txtBoxPlayer2
             // 
+            this.txtBoxPlayer2.BackColor = System.Drawing.Color.Gray;
             this.txtBoxPlayer2.Enabled = false;
+            this.txtBoxPlayer2.ForeColor = System.Drawing.SystemColors.Info;
             this.txtBoxPlayer2.Location = new System.Drawing.Point(20, 102);
             this.txtBoxPlayer2.Name = "txtBoxPlayer2";
             this.txtBoxPlayer2.Size = new System.Drawing.Size(151, 20);
@@ -85,6 +88,7 @@
             // 
             // txtBoxPlayer3
             // 
+            this.txtBoxPlayer3.BackColor = System.Drawing.Color.Gray;
             this.txtBoxPlayer3.Enabled = false;
             this.txtBoxPlayer3.Location = new System.Drawing.Point(20, 146);
             this.txtBoxPlayer3.Name = "txtBoxPlayer3";
@@ -94,6 +98,7 @@
             // 
             // txtBoxPlayer4
             // 
+            this.txtBoxPlayer4.BackColor = System.Drawing.Color.Gray;
             this.txtBoxPlayer4.Enabled = false;
             this.txtBoxPlayer4.Location = new System.Drawing.Point(20, 191);
             this.txtBoxPlayer4.Name = "txtBoxPlayer4";

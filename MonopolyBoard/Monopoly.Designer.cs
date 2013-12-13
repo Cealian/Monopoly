@@ -1,4 +1,5 @@
-﻿namespace MonopolyBoard
+﻿using System.Windows.Forms;
+namespace MonopolyBoard
 {
     partial class frmMonopoly
     {
@@ -20,6 +21,13 @@
             base.Dispose(disposing);
         }
 
+        protected override void WndProc(ref Message m) /* Make sure the form doesn't repaint on alt press. */
+        {
+            // Suppress the WM_UPDATEUISTATE message
+            if (m.Msg == 0x128) return;
+            base.WndProc(ref m);
+        }
+
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -31,6 +39,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMonopoly));
             this.pnlMainPanel = new System.Windows.Forms.Panel();
+            this.lblPlayerInfo = new System.Windows.Forms.Label();
             this.lblFreePark = new System.Windows.Forms.Label();
             this.picPlayer3 = new System.Windows.Forms.PictureBox();
             this.picPlayer2 = new System.Windows.Forms.PictureBox();
@@ -51,7 +60,7 @@
             this.btnSellStreet = new System.Windows.Forms.Button();
             this.btnSaveGame = new System.Windows.Forms.Button();
             this.sfdSaveGame = new System.Windows.Forms.SaveFileDialog();
-            this.lblPlayerInfo = new System.Windows.Forms.Label();
+            this.btnBankrupt = new System.Windows.Forms.Button();
             this.pnlMainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer2)).BeginInit();
@@ -77,6 +86,17 @@
             this.pnlMainPanel.Size = new System.Drawing.Size(648, 648);
             this.pnlMainPanel.TabIndex = 0;
             this.pnlMainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMainPanel_Paint);
+            // 
+            // lblPlayerInfo
+            // 
+            this.lblPlayerInfo.BackColor = System.Drawing.Color.Black;
+            this.lblPlayerInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblPlayerInfo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.lblPlayerInfo.Font = new System.Drawing.Font("Segoe Marker", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPlayerInfo.Location = new System.Drawing.Point(242, 98);
+            this.lblPlayerInfo.Name = "lblPlayerInfo";
+            this.lblPlayerInfo.Size = new System.Drawing.Size(162, 116);
+            this.lblPlayerInfo.TabIndex = 14;
             // 
             // lblFreePark
             // 
@@ -234,7 +254,7 @@
             // 
             // btnBuyHouses
             // 
-            this.btnBuyHouses.Location = new System.Drawing.Point(700, 99);
+            this.btnBuyHouses.Location = new System.Drawing.Point(720, 332);
             this.btnBuyHouses.Name = "btnBuyHouses";
             this.btnBuyHouses.Size = new System.Drawing.Size(75, 23);
             this.btnBuyHouses.TabIndex = 11;
@@ -244,7 +264,7 @@
             // 
             // btnBuyStreet
             // 
-            this.btnBuyStreet.Location = new System.Drawing.Point(700, 128);
+            this.btnBuyStreet.Location = new System.Drawing.Point(700, 99);
             this.btnBuyStreet.Name = "btnBuyStreet";
             this.btnBuyStreet.Size = new System.Drawing.Size(75, 23);
             this.btnBuyStreet.TabIndex = 12;
@@ -255,7 +275,7 @@
             // 
             // btnSellStreet
             // 
-            this.btnSellStreet.Location = new System.Drawing.Point(700, 157);
+            this.btnSellStreet.Location = new System.Drawing.Point(720, 361);
             this.btnSellStreet.Name = "btnSellStreet";
             this.btnSellStreet.Size = new System.Drawing.Size(75, 23);
             this.btnSellStreet.TabIndex = 12;
@@ -265,7 +285,7 @@
             // 
             // btnSaveGame
             // 
-            this.btnSaveGame.Location = new System.Drawing.Point(700, 186);
+            this.btnSaveGame.Location = new System.Drawing.Point(720, 390);
             this.btnSaveGame.Name = "btnSaveGame";
             this.btnSaveGame.Size = new System.Drawing.Size(75, 23);
             this.btnSaveGame.TabIndex = 13;
@@ -276,18 +296,18 @@
             // sfdSaveGame
             // 
             this.sfdSaveGame.DefaultExt = "mon";
-            this.sfdSaveGame.Filter = "Monopol save file(*.mon)|*.mon";
+            this.sfdSaveGame.Filter = "Monopol sparfil(*.mon)|*.mon";
+            this.sfdSaveGame.Title = "Spara ditt monopolspel";
             // 
-            // lblPlayerInfo
+            // btnBankrupt
             // 
-            this.lblPlayerInfo.BackColor = System.Drawing.Color.Transparent;
-            this.lblPlayerInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblPlayerInfo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.lblPlayerInfo.Font = new System.Drawing.Font("Segoe Marker", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlayerInfo.Location = new System.Drawing.Point(219, 139);
-            this.lblPlayerInfo.Name = "lblPlayerInfo";
-            this.lblPlayerInfo.Size = new System.Drawing.Size(173, 146);
-            this.lblPlayerInfo.TabIndex = 14;
+            this.btnBankrupt.Location = new System.Drawing.Point(720, 303);
+            this.btnBankrupt.Name = "btnBankrupt";
+            this.btnBankrupt.Size = new System.Drawing.Size(75, 23);
+            this.btnBankrupt.TabIndex = 14;
+            this.btnBankrupt.Text = "Gå i konkurs";
+            this.btnBankrupt.UseVisualStyleBackColor = true;
+            this.btnBankrupt.Visible = false;
             // 
             // frmMonopoly
             // 
@@ -296,6 +316,7 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.CancelButton = this.btnQuit;
             this.ClientSize = new System.Drawing.Size(798, 648);
+            this.Controls.Add(this.btnBankrupt);
             this.Controls.Add(this.btnSaveGame);
             this.Controls.Add(this.btnSellStreet);
             this.Controls.Add(this.btnBuyStreet);
@@ -350,6 +371,7 @@
         private System.Windows.Forms.SaveFileDialog sfdSaveGame;
         private System.Windows.Forms.Label lblFreePark;
         private System.Windows.Forms.Label lblPlayerInfo;
+        private Button btnBankrupt;
     }
 }
 

@@ -12,7 +12,7 @@ namespace MonopolyBoard
 {
     public partial class BuyHouse : Form
     {
-        public frmMonopoly board;
+        public frmMonopoly board; // Private / Public?
         public BuyHouse()
         {
             InitializeComponent();

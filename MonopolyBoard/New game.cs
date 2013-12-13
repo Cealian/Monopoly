@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace MonopolyBoard
 {
     public partial class New_game : Form
     {
+
+        frmMonopoly board = new frmMonopoly();
+
         public New_game()
         {
             InitializeComponent();
@@ -68,36 +72,43 @@ namespace MonopolyBoard
         private void txtPlayer_TextChanged(object sender, EventArgs e) /* Make sure you can't type the name of a player unless the players name before have been entered */
         {
             TextBox txtBoxPlayer = sender as TextBox;
+            Color inactiveColor = Color.LightGray;
 
             if (txtBoxPlayer == txtBoxPlayer1 && txtBoxPlayer.Text != "")
             {
                 txtBoxPlayer2.Enabled = true;
+                txtBoxPlayer2.BackColor = board.GetPlayerColor(1);
             }
             else if (txtBoxPlayer == txtBoxPlayer1 && txtBoxPlayer.Text == "")
             {
                 txtBoxPlayer2.Enabled = false;
                 txtBoxPlayer2.Text = "";
+                txtBoxPlayer2.BackColor = inactiveColor;
             }
 
             if (txtBoxPlayer == txtBoxPlayer2 && txtBoxPlayer.Text != "")
             {
                 txtBoxPlayer3.Enabled = true;
+                txtBoxPlayer3.BackColor = board.GetPlayerColor(2);
             }
             else if (txtBoxPlayer == txtBoxPlayer2 && txtBoxPlayer.Text == "")
             {
                 txtBoxPlayer3.Enabled = false;
                 txtBoxPlayer3.Text = "";
+                txtBoxPlayer3.BackColor = inactiveColor;
             }
 
             if (txtBoxPlayer == txtBoxPlayer3 && txtBoxPlayer.Text != "")
             {
                 txtBoxPlayer4.Enabled = true;
+                txtBoxPlayer4.BackColor = board.GetPlayerColor(3);
                 
             }
             else if (txtBoxPlayer == txtBoxPlayer3 && txtBoxPlayer.Text == "")
             {
                 txtBoxPlayer4.Enabled = false;
                 txtBoxPlayer4.Text = "";
+                txtBoxPlayer4.BackColor = inactiveColor;
             }
         }
     }
