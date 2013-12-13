@@ -94,20 +94,18 @@ namespace MonopolyBoard
         private void cbMoneyA_CheckedChanged(object sender, EventArgs e)//Sets txtMoneyA into focus and sets the second checkbox to false.
         {
             txtMoneyA.Focus();
-            if (cbMoneyB.Checked==true && cbMoneyA.Checked==false)
+            if (cbMoneyB.Checked)
             {
                 cbMoneyB.Checked = false;
-                cbMoneyA.Checked = true;
             }
         }
 
         private void cbMoneyB_CheckedChanged(object sender, EventArgs e)//Sets txtMoneyB into focus and sets the first checkbox to false.
         {
             txtMoneyB.Focus();
-            if (cbMoneyA.Checked==true && cbMoneyB.Checked==false)
+            if (cbMoneyA.Checked)
             {
                 cbMoneyA.Checked = false;
-                cbMoneyB.Checked = true;
             }
         }
 

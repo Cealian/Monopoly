@@ -14,7 +14,8 @@ namespace MonopolyBoard
         private void SellStreet_Load(object sender, EventArgs e)
         {
             UpdateSquares();
-            lbStreets.SetSelected(0, true);
+            if(lbStreets.Items.Count<0)
+                lbStreets.SetSelected(0, true);
             UpdateInfo();
         }
 
