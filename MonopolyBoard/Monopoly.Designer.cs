@@ -60,6 +60,7 @@ namespace MonopolyBoard
             this.btnSellStreet = new System.Windows.Forms.Button();
             this.btnSaveGame = new System.Windows.Forms.Button();
             this.sfdSaveGame = new System.Windows.Forms.SaveFileDialog();
+            this.btnBankrupt = new System.Windows.Forms.Button();
             this.pnlMainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer2)).BeginInit();
@@ -298,6 +299,16 @@ namespace MonopolyBoard
             this.sfdSaveGame.Filter = "Monopol sparfil(*.mon)|*.mon";
             this.sfdSaveGame.Title = "Spara ditt monopolspel";
             // 
+            // btnBankrupt
+            // 
+            this.btnBankrupt.Location = new System.Drawing.Point(720, 303);
+            this.btnBankrupt.Name = "btnBankrupt";
+            this.btnBankrupt.Size = new System.Drawing.Size(75, 23);
+            this.btnBankrupt.TabIndex = 14;
+            this.btnBankrupt.Text = "Gå i konkurs";
+            this.btnBankrupt.UseVisualStyleBackColor = true;
+            this.btnBankrupt.Visible = false;
+            // 
             // frmMonopoly
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -305,6 +316,7 @@ namespace MonopolyBoard
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.CancelButton = this.btnQuit;
             this.ClientSize = new System.Drawing.Size(798, 648);
+            this.Controls.Add(this.btnBankrupt);
             this.Controls.Add(this.btnSaveGame);
             this.Controls.Add(this.btnSellStreet);
             this.Controls.Add(this.btnBuyStreet);
@@ -359,6 +371,7 @@ namespace MonopolyBoard
         private System.Windows.Forms.SaveFileDialog sfdSaveGame;
         private System.Windows.Forms.Label lblFreePark;
         private System.Windows.Forms.Label lblPlayerInfo;
+        private Button btnBankrupt;
     }
 }
 

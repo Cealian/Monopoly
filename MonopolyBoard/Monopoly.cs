@@ -906,6 +906,14 @@ namespace MonopolyBoard
 
             return playerColor;
         }
+        private void CheckIfPlayerCantPay()
+        {
+            if (Player[activePlayer].GetMoney() < 0)
+            {
+                btnNextPlayer.Enabled = false;
+                btnBankrupt.Visible = true;
+            }
+        }
 
         /* Allow command line to be seen during normal execution */
         [DllImport("kernel32.dll", SetLastError = true)]
