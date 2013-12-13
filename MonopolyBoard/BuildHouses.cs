@@ -60,9 +60,15 @@ namespace MonopolyBoard
                 if (lbStreets.SelectedItem.ToString() == name && squareType == typeof(Street))
                 {
                     if (((Street)board.SquaresArray[i]).GetNoOfHouses() > 0)
+                    {
                         btnSellHouse.Enabled = true;
+                        btnMortgage.Enabled = false;
+                    }
                     else
+                    {
                         btnSellHouse.Enabled = false;
+                        btnMortgage.Enabled = true;
+                    }
 
                     if (((Street)board.SquaresArray[i]).GetMortgaged())
                         btnMortgage.Text = "Lös ut";
@@ -102,7 +108,7 @@ namespace MonopolyBoard
                 if (squareType == typeof(Street) && ((Street)board.SquaresArray[i]).GetBlock() == block)
                 {
                     Street street = ((Street)board.SquaresArray[i]);
-                    if (street.GetOwner() == board.activePlayer && street.GetNoOfHouses() < 5)
+                    if (street.GetOwner() == board.activePlayer && street.GetNoOfHouses() < 5 && !street.GetMortgaged())
                         btnBuyHouse.Enabled = true;
                     else
                     {
