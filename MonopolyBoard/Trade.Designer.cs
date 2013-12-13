@@ -40,6 +40,7 @@
             this.clbPlayerB = new System.Windows.Forms.CheckedListBox();
             this.btnTrade = new System.Windows.Forms.Button();
             this.lbPlayers = new System.Windows.Forms.ListBox();
+            this.btnClose = new System.Windows.Forms.Button();
             this.gbAPlayer.SuspendLayout();
             this.gbSPlayer.SuspendLayout();
             this.SuspendLayout();
@@ -163,11 +164,23 @@
             this.lbPlayers.TabIndex = 5;
             this.lbPlayers.SelectedIndexChanged += new System.EventHandler(this.lbPlayers_SelectedIndexChanged);
             // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(246, 231);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(75, 23);
+            this.btnClose.TabIndex = 6;
+            this.btnClose.Text = "Stäng";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
             // Trade
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(585, 342);
+            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.lbPlayers);
             this.Controls.Add(this.btnTrade);
             this.Controls.Add(this.gbSPlayer);
@@ -197,6 +210,7 @@
         private System.Windows.Forms.MaskedTextBox mtxtMoneyA;
         private System.Windows.Forms.MaskedTextBox mtxtMoneyB;
         private System.Windows.Forms.ListBox lbPlayers;
+        private System.Windows.Forms.Button btnClose;
     }
 }
 

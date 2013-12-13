@@ -23,7 +23,7 @@ namespace MonopolyBoard
 
         private void btnSell_Click(object sender, EventArgs e)
         {
-            Sell();
+            Mortgage();
             UpdateInfo();
         }
 
@@ -105,7 +105,8 @@ namespace MonopolyBoard
             for (int i = 0; i < board.SquaresArray.Length; i++)
             {
                 Type squareType = board.SquaresArray[i].GetType();
-                if (squareType == typeof(Street) && ((Street)board.SquaresArray[i]).GetBlock() == block)
+                string name = board.SquaresArray[i].GetName();
+                if (squareType == typeof(Street) && lbStreets.SelectedItem.ToString() == name && ((Street)board.SquaresArray[i]).GetBlock() == block)
                 {
                     Street street = ((Street)board.SquaresArray[i]);
                     if (street.GetOwner() == board.activePlayer && street.GetNoOfHouses() < 5 && !street.GetMortgaged())
@@ -121,7 +122,7 @@ namespace MonopolyBoard
             board.UpdatePlayerInfo();
         }
 
-        private void Sell()
+        private void Mortgage()
         {
             for (int i = 0; i < board.SquaresArray.Length; i++)
             {
@@ -212,6 +213,12 @@ namespace MonopolyBoard
                 }
             }
             UpdateInfo();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Dispose();
+            Close();
         }
     }
 }

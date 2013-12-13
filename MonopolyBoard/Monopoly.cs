@@ -870,7 +870,6 @@ namespace MonopolyBoard
             sellStreet.Show();
         }
 
-
         public Color GetPlayerColor(int player)
         {
             Color playerColor = Color.Transparent;
@@ -894,6 +893,7 @@ namespace MonopolyBoard
 
             return playerColor;
         }
+        
         private void CheckIfPlayerCantPay()
         {
             if (Player[activePlayer].GetMoney() < 0)

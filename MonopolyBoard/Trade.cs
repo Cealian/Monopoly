@@ -26,11 +26,6 @@ namespace MonopolyBoard
             text[1] = txtMoneyB.Text;
             try
             {
-                //if (cbMoneyA.Checked && cbMoneyB.Checked)
-                //{
-                //    moneyToMove[0] = int.Parse(txtMoneyA.Text);
-                //    moneyToMove[1] = int.Parse(txtMoneyB.Text);
-                //}
                 if (cbMoneyA.Checked)
                     moneyToMove = int.Parse(txtMoneyA.Text);
                 else if (cbMoneyB.Checked)
@@ -39,14 +34,6 @@ namespace MonopolyBoard
             }
             catch (FormatException)
             {
-                //if (cbMoneyA.Checked && cbMoneyB.Checked)
-                //{
-                //    moneyToMove[0] = 0;
-                //    moneyToMove[1] = 0;
-                //    txtMoneyA.Text = "";
-                //    txtMoneyB.Text = "";
-                //    MessageBox.Show("Skriv in ett heltal.");
-                //}
                 if (cbMoneyA.Checked)
                 {
                     moneyToMove = 0;
@@ -64,19 +51,10 @@ namespace MonopolyBoard
             if (moneyToMove < 0)
                 moneyToMove = 0;
 
-            //if (cbMoneyA.Checked && cbMoneyB.Checked)
-            //{
-            //    board.Player[board.activePlayer].SubtractMoney(moneyToMove[0]);
-            //    board.Player[GetSelectedPlayer()].AddMoney(moneyToMove[0]);
-            //    board.Player[GetSelectedPlayer()].SubtractMoney(moneyToMove[1]);
-            //    board.Player[board.activePlayer].AddMoney(moneyToMove[1]);
-            //    txtMoneyA.Text = "";
-            //    txtMoneyB.Text = "";
-            //    cbMoneyA.Checked = false;
-            //    cbMoneyB.Checked = false;
-            //}
             if (cbMoneyA.Checked)
             {
+                if (moneyToMove > board.Player[board.activePlayer].GetMoney())
+                    moneyToMove = board.Player[board.activePlayer].GetMoney();
                 board.Player[board.activePlayer].SubtractMoney(moneyToMove);
                 board.Player[GetSelectedPlayer()].AddMoney(moneyToMove);
                 txtMoneyA.Text = "";
@@ -84,6 +62,8 @@ namespace MonopolyBoard
             }
             else if (cbMoneyB.Checked)
             {
+                if (moneyToMove > board.Player[GetSelectedPlayer()].GetMoney())
+                    moneyToMove = board.Player[GetSelectedPlayer()].GetMoney();
                 board.Player[GetSelectedPlayer()].SubtractMoney(moneyToMove);
                 board.Player[board.activePlayer].AddMoney(moneyToMove);
                 txtMoneyB.Text = "";
@@ -239,6 +219,12 @@ namespace MonopolyBoard
                     }
                 }
             }
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Dispose();
+            Close();
         }
     }
 }

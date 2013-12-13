@@ -33,6 +33,7 @@
             this.btnBuyHouse = new System.Windows.Forms.Button();
             this.btnSellHouse = new System.Windows.Forms.Button();
             this.lbStreets = new System.Windows.Forms.ListBox();
+            this.btnClose = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnMortgage
@@ -84,18 +85,30 @@
             this.lbStreets.TabIndex = 5;
             this.lbStreets.SelectedIndexChanged += new System.EventHandler(this.lbStreets_SelectedIndexChanged);
             // 
-            // SellStreet
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(158, 162);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(83, 23);
+            this.btnClose.TabIndex = 6;
+            this.btnClose.Text = "Stäng";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // BuildHouses
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(472, 194);
+            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.lbStreets);
             this.Controls.Add(this.btnSellHouse);
             this.Controls.Add(this.btnBuyHouse);
             this.Controls.Add(this.lbInfo);
             this.Controls.Add(this.btnMortgage);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "SellStreet";
+            this.Name = "BuildHouses";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SellStreet";
@@ -112,5 +125,6 @@
         private System.Windows.Forms.Button btnBuyHouse;
         private System.Windows.Forms.Button btnSellHouse;
         private System.Windows.Forms.ListBox lbStreets;
+        private System.Windows.Forms.Button btnClose;
     }
 }

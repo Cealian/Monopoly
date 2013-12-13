@@ -55,7 +55,6 @@ namespace MonopolyBoard
             this.btnTrade = new System.Windows.Forms.Button();
             this.lblSquareInfo = new System.Windows.Forms.Label();
             this.btnNextPlayer = new System.Windows.Forms.Button();
-            this.btnBuyHouses = new System.Windows.Forms.Button();
             this.btnBuyStreet = new System.Windows.Forms.Button();
             this.btnSellStreet = new System.Windows.Forms.Button();
             this.btnSaveGame = new System.Windows.Forms.Button();
@@ -228,7 +227,7 @@ namespace MonopolyBoard
             this.btnTrade.Name = "btnTrade";
             this.btnTrade.Size = new System.Drawing.Size(75, 23);
             this.btnTrade.TabIndex = 8;
-            this.btnTrade.Text = "Trade";
+            this.btnTrade.Text = "Byt";
             this.btnTrade.UseVisualStyleBackColor = true;
             this.btnTrade.Click += new System.EventHandler(this.btnTrade_Click);
             // 
@@ -252,16 +251,6 @@ namespace MonopolyBoard
             this.btnNextPlayer.UseVisualStyleBackColor = true;
             this.btnNextPlayer.Click += new System.EventHandler(this.btnNextPlayer_Click);
             // 
-            // btnBuyHouses
-            // 
-            this.btnBuyHouses.Location = new System.Drawing.Point(720, 332);
-            this.btnBuyHouses.Name = "btnBuyHouses";
-            this.btnBuyHouses.Size = new System.Drawing.Size(75, 23);
-            this.btnBuyHouses.TabIndex = 11;
-            this.btnBuyHouses.Text = "Köpa hus";
-            this.btnBuyHouses.UseVisualStyleBackColor = true;
-            this.btnBuyHouses.Click += new System.EventHandler(this.btnBuyHouses_Click);
-            // 
             // btnBuyStreet
             // 
             this.btnBuyStreet.Location = new System.Drawing.Point(700, 99);
@@ -275,9 +264,9 @@ namespace MonopolyBoard
             // 
             // btnSellStreet
             // 
-            this.btnSellStreet.Location = new System.Drawing.Point(720, 361);
+            this.btnSellStreet.Location = new System.Drawing.Point(700, 128);
             this.btnSellStreet.Name = "btnSellStreet";
-            this.btnSellStreet.Size = new System.Drawing.Size(75, 23);
+            this.btnSellStreet.Size = new System.Drawing.Size(95, 23);
             this.btnSellStreet.TabIndex = 12;
             this.btnSellStreet.Text = "Hantera gator";
             this.btnSellStreet.UseVisualStyleBackColor = true;
@@ -321,7 +310,6 @@ namespace MonopolyBoard
             this.Controls.Add(this.btnSaveGame);
             this.Controls.Add(this.btnSellStreet);
             this.Controls.Add(this.btnBuyStreet);
-            this.Controls.Add(this.btnBuyHouses);
             this.Controls.Add(this.btnNextPlayer);
             this.Controls.Add(this.lblSquareInfo);
             this.Controls.Add(this.btnTrade);
@@ -365,7 +353,6 @@ namespace MonopolyBoard
         private System.Windows.Forms.Button btnTrade;
         private System.Windows.Forms.Label lblSquareInfo;
         private System.Windows.Forms.Button btnNextPlayer;
-        private System.Windows.Forms.Button btnBuyHouses;
         private System.Windows.Forms.Button btnSellStreet;
         private System.Windows.Forms.Button btnBuyStreet;
         private System.Windows.Forms.Button btnSaveGame;
