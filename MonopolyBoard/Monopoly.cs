@@ -76,22 +76,6 @@ namespace MonopolyBoard
         private void tmrMovePlayer_Tick(object sender, EventArgs e) /* Move player until its remaining steps = 0. */
         {
             MoveActivePlayer();
-
-            switch (activePlayer)
-            {
-                case 0:
-                    picPlayer0.BackColor = Color.Transparent;
-                    break;
-                case 1:
-                    picPlayer1.BackColor = Color.Transparent;
-                    break;
-                case 2:
-                    picPlayer2.BackColor = Color.Transparent;
-                    break;
-                case 3:
-                    picPlayer3.BackColor = Color.Transparent;
-                    break;
-            }
         }
 
         public void MoveActivePlayer() /* Move the active player. */
@@ -919,5 +903,10 @@ namespace MonopolyBoard
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAsAttribute(UnmanagedType.Bool)]
         static extern bool AllocConsole();
+
+        private void btnBankrupt_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
