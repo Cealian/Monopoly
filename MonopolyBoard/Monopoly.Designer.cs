@@ -39,6 +39,8 @@ namespace MonopolyBoard
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMonopoly));
             this.pnlMainPanel = new System.Windows.Forms.Panel();
+            this.lblply4Info = new System.Windows.Forms.Label();
+            this.lblply3Info = new System.Windows.Forms.Label();
             this.lblply2Inf = new System.Windows.Forms.Label();
             this.lblply1Info = new System.Windows.Forms.Label();
             this.lblPlayerInfo = new System.Windows.Forms.Label();
@@ -62,8 +64,7 @@ namespace MonopolyBoard
             this.btnSaveGame = new System.Windows.Forms.Button();
             this.sfdSaveGame = new System.Windows.Forms.SaveFileDialog();
             this.btnBankrupt = new System.Windows.Forms.Button();
-            this.lblply3Info = new System.Windows.Forms.Label();
-            this.lblply4Info = new System.Windows.Forms.Label();
+            this.btnJail = new System.Windows.Forms.Button();
             this.pnlMainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer2)).BeginInit();
@@ -93,6 +94,24 @@ namespace MonopolyBoard
             this.pnlMainPanel.Size = new System.Drawing.Size(648, 648);
             this.pnlMainPanel.TabIndex = 0;
             this.pnlMainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMainPanel_Paint);
+            // 
+            // lblply4Info
+            // 
+            this.lblply4Info.BackColor = System.Drawing.Color.Transparent;
+            this.lblply4Info.Location = new System.Drawing.Point(460, 457);
+            this.lblply4Info.Name = "lblply4Info";
+            this.lblply4Info.Size = new System.Drawing.Size(100, 90);
+            this.lblply4Info.TabIndex = 18;
+            this.lblply4Info.Text = "ply4Info";
+            // 
+            // lblply3Info
+            // 
+            this.lblply3Info.BackColor = System.Drawing.Color.Transparent;
+            this.lblply3Info.Location = new System.Drawing.Point(111, 457);
+            this.lblply3Info.Name = "lblply3Info";
+            this.lblply3Info.Size = new System.Drawing.Size(100, 64);
+            this.lblply3Info.TabIndex = 17;
+            this.lblply3Info.Text = "ply3Info";
             // 
             // lblply2Inf
             // 
@@ -325,23 +344,16 @@ namespace MonopolyBoard
             this.btnBankrupt.Visible = false;
             this.btnBankrupt.Click += new System.EventHandler(this.btnBankrupt_Click);
             // 
-            // lblply3Info
+            // btnJail
             // 
-            this.lblply3Info.BackColor = System.Drawing.Color.Transparent;
-            this.lblply3Info.Location = new System.Drawing.Point(111, 457);
-            this.lblply3Info.Name = "lblply3Info";
-            this.lblply3Info.Size = new System.Drawing.Size(100, 64);
-            this.lblply3Info.TabIndex = 17;
-            this.lblply3Info.Text = "ply3Info";
-            // 
-            // lblply4Info
-            // 
-            this.lblply4Info.BackColor = System.Drawing.Color.Transparent;
-            this.lblply4Info.Location = new System.Drawing.Point(460, 457);
-            this.lblply4Info.Name = "lblply4Info";
-            this.lblply4Info.Size = new System.Drawing.Size(100, 90);
-            this.lblply4Info.TabIndex = 18;
-            this.lblply4Info.Text = "ply4Info";
+            this.btnJail.Location = new System.Drawing.Point(704, 274);
+            this.btnJail.Name = "btnJail";
+            this.btnJail.Size = new System.Drawing.Size(91, 23);
+            this.btnJail.TabIndex = 15;
+            this.btnJail.Text = "Betala Borgen";
+            this.btnJail.UseVisualStyleBackColor = true;
+            this.btnJail.Visible = false;
+            this.btnJail.Click += new System.EventHandler(this.button1_Click);
             // 
             // frmMonopoly
             // 
@@ -350,6 +362,7 @@ namespace MonopolyBoard
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.CancelButton = this.btnQuit;
             this.ClientSize = new System.Drawing.Size(798, 648);
+            this.Controls.Add(this.btnJail);
             this.Controls.Add(this.btnBankrupt);
             this.Controls.Add(this.btnSaveGame);
             this.Controls.Add(this.btnSellStreet);
@@ -408,6 +421,7 @@ namespace MonopolyBoard
         private Label lblply1Info;
         private Label lblply4Info;
         private Label lblply3Info;
+        private Button btnJail;
     }
 }
 
