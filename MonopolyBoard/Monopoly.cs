@@ -759,23 +759,40 @@ namespace MonopolyBoard
 
         public void UpdatePlayerInfo() /* Updates the on-screen info about the players. */
         {
-            string playerInfo;
+            string playerInfo, player1Info, player2Info, player3Info, player4Info;
 
+            player1Info = Player[0].GetName() + ": " + Player[0].GetMoney();
+            player2Info = Player[1].GetName() + ": " + Player[1].GetMoney();
+            player3Info = "";
+            player4Info = "";
+            
             playerInfo = Player[0].GetName() + ": " + Player[0].GetMoney() + "\n";
             playerInfo += Player[1].GetName() + ": " + Player[1].GetMoney() + "\n";
 
             if (Player[2].GetName() != "")
             {
                 playerInfo += Player[2].GetName() + ": " + Player[2].GetMoney() + "\n";
+                player3Info = Player[2].GetName() + ": " + Player[2].GetMoney() + "kr";
             }
 
             if (Player[3].GetName() != "")
             {
                 playerInfo += Player[3].GetName() + ": " + Player[3].GetMoney() + "\n";
+                player4Info = Player[3].GetName() + ": " + Player[3].GetMoney() + "kr";
             }
 
             lblPlayerInfo.Text = Player[activePlayer].GetName() + "\n" + playerInfo;
             lblPlayerInfo.ForeColor = GetPlayerColor(activePlayer);
+            lblply1Info.ForeColor = GetPlayerColor(0);
+            lblply2Inf.ForeColor = GetPlayerColor(1);
+            lblply3Info.ForeColor = GetPlayerColor(2);
+            lblply4Info.ForeColor = GetPlayerColor(3);
+            lblply1Info.Text = player1Info + "kr";
+            lblply2Inf.Text = player2Info + "kr";
+            lblply3Info.Text = player3Info;
+            lblply4Info.Text = player4Info;
+            
+
             UpdateFreeParkValue();
 
             Console.WriteLine(GetPlayerColor(activePlayer).ToString());

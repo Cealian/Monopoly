@@ -25,6 +25,10 @@ namespace MonopolyBoard
             /* Draw monopoly board */
             drawVerticalLines(lines);
             drawHorisontalLines(lines);
+            fillStreets();
+            streetPrices();
+            images();
+            texts();
         }
 
         private static void drawVerticalLines(Pen lines) /* Draws the vertical lines for the monopoly board */
@@ -86,6 +90,132 @@ namespace MonopolyBoard
 
             gObject.FillRectangle(brush, markPositionX, markPositionY, 10, 10);
             Console.WriteLine("New player: "+ player + " New pos: " + squarePosition);
+
+        }
+        private static void fillStreets()
+        {
+            int x = 82, y = 567, colorX = 53, colorY = 20, i = 54, edge = 506;
+
+
+            gObject.FillRectangle(Brushes.RoyalBlue, new Rectangle(x, y, colorX, colorY));
+            gObject.FillRectangle(Brushes.RoyalBlue, new Rectangle(x + i, y, colorX, colorY));
+            gObject.FillRectangle(Brushes.RoyalBlue, new Rectangle(x + 3 * i, y, colorX, colorY));
+            gObject.FillRectangle(Brushes.SaddleBrown, new Rectangle(x + 6 * i, y, colorX, colorY));
+            gObject.FillRectangle(Brushes.SaddleBrown, new Rectangle(x + 8 * i, y, colorX, colorY));
+
+            gObject.FillRectangle(Brushes.Red, new Rectangle(x, y - edge, colorX, colorY));
+            gObject.FillRectangle(Brushes.Red, new Rectangle(x + 2 * i, y - edge, colorX, colorY));
+            gObject.FillRectangle(Brushes.Red, new Rectangle(x + 3 * i, y - edge, colorX, colorY));
+            gObject.FillRectangle(Brushes.Yellow, new Rectangle(x + 5 * i, y - edge, colorX, colorY));
+            gObject.FillRectangle(Brushes.Yellow, new Rectangle(x + 6 * i, y - edge, colorX, colorY));
+            gObject.FillRectangle(Brushes.Yellow, new Rectangle(x + 8 * i, y - edge, colorX, colorY));
+
+            gObject.FillRectangle(Brushes.Orange, new Rectangle(x - colorY, y + 1 - edge + colorY, colorY, colorX));
+            gObject.FillRectangle(Brushes.Orange, new Rectangle(x - colorY, y + 1 - edge + colorY + i, colorY, colorX));
+            gObject.FillRectangle(Brushes.Orange, new Rectangle(x - colorY, y + 1 - edge + colorY + 3 * i, colorY, colorX));
+            gObject.FillRectangle(Brushes.Purple, new Rectangle(x - colorY, y + 1 - edge + colorY + 5 * i, colorY, colorX));
+            gObject.FillRectangle(Brushes.Purple, new Rectangle(x - colorY, y + 1 - edge + colorY + 6 * i, colorY, colorX));
+            gObject.FillRectangle(Brushes.Purple, new Rectangle(x - colorY, y + 1 - edge + colorY + 8 * i, colorY, colorX));
+
+            gObject.FillRectangle(Brushes.Green, new Rectangle(x + edge - colorY, y + 1 - edge + colorY + 3 * i, colorY, colorX));
+            gObject.FillRectangle(Brushes.Green, new Rectangle(x + edge - colorY, y + 1 - edge + colorY + i, colorY, colorX));
+            gObject.FillRectangle(Brushes.Green, new Rectangle(x + edge - colorY, y + 1 - edge + colorY, colorY, colorX));
+
+            gObject.FillRectangle(Brushes.Blue, new Rectangle(x + edge - colorY, y + 1 - edge + colorY + 8 * i, colorY, colorX));
+            gObject.FillRectangle(Brushes.Blue, new Rectangle(x + edge - colorY, y + 1 - edge + colorY + 6 * i, colorY, colorX));
+        }
+        private static void streetPrices()
+        {
+            float x = 84, y = 622, i = 54, edgex = 618, edgey = 580, color = 20;
+
+            gObject.DrawString("2400kr", SystemFonts.CaptionFont, Brushes.Black, x, y);
+            gObject.DrawString("2000kr", SystemFonts.CaptionFont, Brushes.Black, x + i, y);
+            gObject.DrawString("2000kr", SystemFonts.CaptionFont, Brushes.Black, x + 3 * i, y);
+            gObject.DrawString("2000kr", SystemFonts.CaptionFont, Brushes.Black, x + 6 * i, y);
+            gObject.DrawString("1200kr", SystemFonts.CaptionFont, Brushes.Black, x + 8 * i, y);
+
+            gObject.DrawString("2800kr", SystemFonts.CaptionFont, Brushes.Black, x - i - color, y - i - color);
+            gObject.DrawString("2800kr", SystemFonts.CaptionFont, Brushes.Black, x - i - color, y - 3 * i - color);
+            gObject.DrawString("3200kr", SystemFonts.CaptionFont, Brushes.Black, x - i - color, y - 4 * i - color);
+            gObject.DrawString("3600kr", SystemFonts.CaptionFont, Brushes.Black, x - i - color, y - 6 * i - color);
+            gObject.DrawString("3600kr", SystemFonts.CaptionFont, Brushes.Black, x - i - color, y - 8 * i - color);
+            gObject.DrawString("4000kr", SystemFonts.CaptionFont, Brushes.Black, x - i - color, y - 9 * i - color);
+
+            gObject.DrawString("4400kr", SystemFonts.CaptionFont, Brushes.Black, x, y - edgey);
+            gObject.DrawString("4400kr", SystemFonts.CaptionFont, Brushes.Black, x + 2 * i, y - edgey);
+            gObject.DrawString("4800kr", SystemFonts.CaptionFont, Brushes.Black, x + 3 * i, y - edgey);
+            gObject.DrawString("5200kr", SystemFonts.CaptionFont, Brushes.Black, x + 6 * i, y - edgey);
+            gObject.DrawString("5200kr", SystemFonts.CaptionFont, Brushes.Black, x + 5 * i, y - edgey);
+            gObject.DrawString("5600kr", SystemFonts.CaptionFont, Brushes.Black, x + 8 * i, y - edgey);
+
+            gObject.DrawString("6000kr", SystemFonts.CaptionFont, Brushes.Black, x - 2 * i + edgex, y - 9 * i - color);
+            gObject.DrawString("6000kr", SystemFonts.CaptionFont, Brushes.Black, x - 2 * i + edgex, y - 8 * i - color);
+            gObject.DrawString("6400kr", SystemFonts.CaptionFont, Brushes.Black, x - 2 * i + edgex, y - 6 * i - color);
+            gObject.DrawString("7000kr", SystemFonts.CaptionFont, Brushes.Black, x - 2 * i + edgex, y - 3 * i - color);
+            gObject.DrawString("8000kr", SystemFonts.CaptionFont, Brushes.Black, x - 2 * i + edgex, y - 1 * i - color);
+
+
+        }
+        private void images()
+        {
+            int x = 310, y = 600, i = 280;
+            gObject.DrawImage(Properties.Resources._30px_Crystal_Clear_app_agent, 590, 30);
+            gObject.DrawImage(Properties.Resources._30px_Db_Schild_svg, x, y);
+            gObject.DrawImage(Properties.Resources._30px_Db_Schild_svg, x - i, y - i);
+            gObject.DrawImage(Properties.Resources._30px_Db_Schild_svg, x, y - 2 * i);
+            gObject.DrawImage(Properties.Resources._30px_Db_Schild_svg, x + i, y - i);
+            gObject.DrawImage(Properties.Resources._30px_Sinnbild_Kfz_svg, 25, 25);
+        }
+
+        private void texts()
+        {
+            float i = 77, x = 735, y = 839, edgey = 837, edgeX = 630, j = 105, colour = 30;
+            
+            gObject.DrawString("GÅ", SystemFonts.CaptionFont, Brushes.Black, 595, 595);
+            gObject.DrawString("På besök \n\ni fängelse", SystemFonts.CaptionFont, Brushes.Black, 5, 570);
+            gObject.DrawString("Fri\nParkering", SystemFonts.CaptionFont, Brushes.Black, 1, 40);
+            gObject.DrawString("Gå i\n\n\nfängelse", SystemFonts.CaptionFont, Brushes.Black, 570, 2);
+            gObject.ScaleTransform(0.7F, 0.7F);
+            gObject.DrawString("Västerlång-\ngatan", SystemFonts.CaptionFont, Brushes.Black, x, y);
+            gObject.DrawString("Allmänning", SystemFonts.CaptionFont, Brushes.Black, x - i, y - colour);
+            gObject.DrawString("Hornsgatan", SystemFonts.CaptionFont, Brushes.Black, x - 2 * i, y);
+            gObject.DrawString("Inkomst-\nskatt", SystemFonts.CaptionFont, Brushes.Black, x - i *3, y - colour);
+            gObject.DrawString("Södrastation", SystemFonts.CaptionFont, Brushes.Black, x - 4 * i - 5, y - colour);
+            gObject.DrawString("Folkkunga-\ngatan", SystemFonts.CaptionFont, Brushes.Black, x - i * 5, y);
+            gObject.DrawString("Chans", SystemFonts.CaptionFont, Brushes.Black, x - i * 6, y - colour);
+            gObject.DrawString("Götgatan", SystemFonts.CaptionFont, Brushes.Black, x - i * 7, y);
+            gObject.DrawString("Götgatan", SystemFonts.CaptionFont, Brushes.Black, x - i * 8, y);
+
+            gObject.DrawString("S:t Eriks-\ngatan", SystemFonts.CaptionFont, Brushes.Black, x - j - edgeX, y - j);
+            gObject.DrawString("Elverket", SystemFonts.CaptionFont, Brushes.Black, x - j - edgeX, y - j - i);
+            gObject.DrawString("Odengatan", SystemFonts.CaptionFont, Brushes.Black, x - j - edgeX, y - j - i * 2);
+            gObject.DrawString("Valhalla-\nvägen", SystemFonts.CaptionFont, Brushes.Black, x - j - edgeX, y - j - i * 3);
+            gObject.DrawString("Östrastation", SystemFonts.CaptionFont, Brushes.Black, x - j - edgeX, y - j - i * 4);
+            gObject.DrawString("Sturegatan", SystemFonts.CaptionFont, Brushes.Black, x - j - edgeX, y - j - i * 5);
+            gObject.DrawString("Allmänning", SystemFonts.CaptionFont, Brushes.Black, x - j - edgeX, y - j - i * 6);
+            gObject.DrawString("Karlavägen", SystemFonts.CaptionFont, Brushes.Black, x - j - edgeX, y - j - i * 7);
+            gObject.DrawString("Narvavägen", SystemFonts.CaptionFont, Brushes.Black, x - j - edgeX, y - j - i * 8);
+
+            gObject.DrawString("Stureplan", SystemFonts.CaptionFont, Brushes.Black, x, y - edgey);
+            gObject.DrawString("Vatten-\nverket", SystemFonts.CaptionFont, Brushes.Black, x - i, y - edgey);
+            gObject.DrawString("Kungsgatan", SystemFonts.CaptionFont, Brushes.Black, x - 2 * i, y - edgey);
+            gObject.DrawString("Vasagatan", SystemFonts.CaptionFont, Brushes.Black, x - 3 * i, y - edgey);
+            gObject.DrawString("Central-\nstation", SystemFonts.CaptionFont, Brushes.Black, x - 4 * i, y - edgey);
+            gObject.DrawString("Hamngatan", SystemFonts.CaptionFont, Brushes.Black, x - 5 * i, y - edgey);
+            gObject.DrawString("Kungsträd-\ngårdsgatan", SystemFonts.CaptionFont, Brushes.Black, x - 6 * i, y - edgey);
+            gObject.DrawString("Chans", SystemFonts.CaptionFont, Brushes.Black, x - 7 * i, y - edgey);
+            gObject.DrawString("Strand-\nvägen", SystemFonts.CaptionFont, Brushes.Black, x - 8 * i, y - edgey);
+
+            gObject.DrawString("Norrmalms-\ntorg", SystemFonts.CaptionFont, Brushes.Black, x + j, y - j);
+            gObject.DrawString("Lyxskatt", SystemFonts.CaptionFont, Brushes.Black, x + j - colour, y - j - i);
+            gObject.DrawString("Centrum", SystemFonts.CaptionFont, Brushes.Black, x + j, y - j - 2 * i);
+            gObject.DrawString("Chans", SystemFonts.CaptionFont, Brushes.Black, x + j - colour, y - j - 3 * i);
+            gObject.DrawString("Norra station", SystemFonts.CaptionFont, Brushes.Black, x + j - 28, y - j - 4 * i);
+            gObject.DrawString("Diplomat-\nstaden", SystemFonts.CaptionFont, Brushes.Black, x + j, y - j - 5 * i);
+            gObject.DrawString("Allmänning", SystemFonts.CaptionFont, Brushes.Black, x + j - colour, y - j - 6 * i);
+            gObject.DrawString("Drottning-\ngatan", SystemFonts.CaptionFont, Brushes.Black, x + j, y - j - 7 * i);
+            gObject.DrawString("Gustaf Adolfs\ntorg", SystemFonts.CaptionFont, Brushes.Black, x + j - 3, y - j - 8 * i);
+
 
         }
     }
