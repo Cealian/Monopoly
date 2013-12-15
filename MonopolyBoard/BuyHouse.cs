@@ -13,14 +13,14 @@ namespace MonopolyBoard
     public partial class BuyHouse : Form
     {
         public frmMonopoly board;
+        public Street board2;
+
         public BuyHouse()
         {
+            string test = board.Player[board.activePlayer].GetName();
+            clbStreets.Items.Add(test);
             InitializeComponent();
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            this.Dispose();
+            
         }
     }
 }

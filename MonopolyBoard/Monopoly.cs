@@ -653,9 +653,9 @@ namespace MonopolyBoard
 
         private void btnBuyHouses_Click(object sender, EventArgs e) // Hjälp mig inne i formen
         {
-            BuyHouse BuyHouseForm = new BuyHouse();
-            BuyHouseForm.board = this;
-            BuyHouseForm.ShowDialog();
+            BuyHouse BHF = new BuyHouse();
+            BHF.board = this;
+            BHF.ShowDialog();
         }
 
 
