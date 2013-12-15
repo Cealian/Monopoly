@@ -106,16 +106,27 @@ namespace MonopolyBoard
             {
                 Type squareType = board.SquaresArray[i].GetType();
                 string name = board.SquaresArray[i].GetName();
-                if (squareType == typeof(Street) && lbStreets.SelectedItem.ToString() == name && ((Street)board.SquaresArray[i]).GetBlock() == block)
+                if (squareType == typeof(Street))// && ((Street)board.SquaresArray[i]).GetOwner() == board.activePlayer)
                 {
                     Street street = ((Street)board.SquaresArray[i]);
-                    if (street.GetOwner() == board.activePlayer && street.GetNoOfHouses() < 5 && !street.GetMortgaged())
+
+                    if (((Street)board.SquaresArray[i]).GetBlock() == block && ((Street)board.SquaresArray[i]).GetNoOfHouses() < 5 )
+                    {
                         btnBuyHouse.Enabled = true;
+                        Console.WriteLine(street.GetOwner() + " " + street.GetNoOfHouses() + " " + name + "" + street.GetBlock() + " " + block);
+                        break;
+                    }
+                    else if (street.GetMortgaged())
+                    {
+                        btnBuyHouse.Enabled = false;
+                        break;
+                    }
                     else
                     {
                         btnBuyHouse.Enabled = false;
                         break;
                     }
+
                 }
             }
             board.ShowSquareInfo();
