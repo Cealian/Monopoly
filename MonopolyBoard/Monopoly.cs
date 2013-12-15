@@ -543,6 +543,21 @@ namespace MonopolyBoard
             {
                 activePlayer = 0;
             }
+
+            if (Player[activePlayer].IsInJail() == true)
+            {
+                //for (int turn = 0; turn < 4; turn++)
+                //{
+                    btnJail.Visible = true;
+                /*    if (turn == 3)
+                    {
+                        MessageBox.Show("Du måste betala 1000 i borgen");
+                        Player[activePlayer].SubtractMoney(1000);
+                        Player[activePlayer].GetOutOfJail();
+                        turn = 0;
+                    }
+                 */
+             }
         }
 
         public void RunSquareEvent() /* Checks what kind of square the player landed on and acts accordingly. */
@@ -928,6 +943,22 @@ namespace MonopolyBoard
         private void btnBankrupt_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int playerMoney = Player[activePlayer].GetMoney();
+            string prompt = "Vill du Betala 1000 för att komma ut ut fängelset\nDu har " + playerMoney + " kr";
+
+            if (MessageBox.Show(prompt, "Betala Borgen", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                return;
+            }
+
+            Player[activePlayer].SubtractMoney(1000);
+            Player[activePlayer].GetOutOfJail();
+            btnJail.Hide();
+            ShowSquareInfo();
         }
     }
 }
