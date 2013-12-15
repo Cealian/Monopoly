@@ -61,32 +61,23 @@ namespace MonopolyBoard
                 {
                     Street street = ((Street)board.SquaresArray[i]);
                     block = street.GetBlock();
-                    int streetsOnBlock = 0;
-                    if (street.GetNoOfHouses() > 0)
-                    {
-                        btnSellHouse.Enabled = true;
-                        btnMortgage.Enabled = false;
-                    }
-                    else
-                    {
-                        btnSellHouse.Enabled = false;
-                        btnMortgage.Enabled = true;
-                    }
-
-                    if (street.GetNoOfHouses() == 5)
-                        info = street.GetInfo() + "\nEtt Hotell";
-                    else
-                        info = street.GetInfo() + "\nAntal hus: " + street.GetNoOfHouses();
-
+                    int streetsOnBlock = 0, isMortgaged = 0, anyHouses = 0;
                     for (int j = 0; j < board.SquaresArray.Length; j++)
                     {
-                        if (board.SquaresArray[j].GetType() == typeof(Street) && block == ((Street)board.SquaresArray[j]).GetBlock()
-                                && ((Street)board.SquaresArray[j]).GetOwner() == board.activePlayer)
+                        if (board.SquaresArray[j].GetType() == typeof(Street))
                         {
-                            streetsOnBlock++;
+                            if (block == ((Street)board.SquaresArray[j]).GetBlock()
+                                    && ((Street)board.SquaresArray[j]).GetOwner() == board.activePlayer)
+                            {
+                                streetsOnBlock++;
+                                if (((Street)board.SquaresArray[j]).GetMortgaged())
+                                    isMortgaged++;
+                                else if (((Street)board.SquaresArray[j]).GetNoOfHouses() > 0)
+                                    anyHouses++;
+                            }
                         }
                     }
-                    if (!street.GetMortgaged() && street.GetNoOfHouses() < 5)
+                    if (!street.GetMortgaged() && street.GetNoOfHouses() < 5 && isMortgaged == 0)
                     {
                         if (streetsOnBlock == 2)
                         {
@@ -102,6 +93,28 @@ namespace MonopolyBoard
                     }
                     else
                         btnBuyHouse.Enabled = false;
+
+
+                    if (street.GetNoOfHouses() > 0)
+                    {
+                        btnSellHouse.Enabled = true;
+                        btnMortgage.Enabled = false;
+                    }
+                    else if (street.GetNoOfHouses() == 0 && anyHouses > 0)
+                    {
+                        btnSellHouse.Enabled = false;
+                        btnMortgage.Enabled = false;
+                    }
+                    else
+                    {
+                        btnSellHouse.Enabled = false;
+                        btnMortgage.Enabled = true;
+                    }
+
+                    if (street.GetNoOfHouses() == 5)
+                        info = street.GetInfo() + "\nEtt Hotell";
+                    else
+                        info = street.GetInfo() + "\nAntal hus: " + street.GetNoOfHouses();
 
                     if (street.GetMortgaged())
                     {
