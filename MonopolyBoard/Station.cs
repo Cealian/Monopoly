@@ -4,6 +4,7 @@ namespace MonopolyBoard
     public class Station : Square
     {
         protected int owner, block;
+        protected bool mortgaged;
         protected frmMonopoly board;
 
         public Station()
@@ -12,19 +13,16 @@ namespace MonopolyBoard
             price = 0;
             owner = 5;
             block = 0;
+            mortgaged = false;
         }
 
         public Station(string setName, int setPrice, int setBlock)
         {
-            /*
-             * name = setName   ?
-             * price = setPrice ?
-             */
-
             name = setName;
             price = setPrice;
             owner = 5;
             block = setBlock;
+            mortgaged = false;
         }
 
         public int GetOwner()
@@ -37,6 +35,16 @@ namespace MonopolyBoard
             return block;
         }
 
+        public bool GetMortgaged()
+        {
+            return mortgaged;
+        }
+
+        public void ToggleMortage()
+        {
+            mortgaged = !mortgaged;
+        }
+
         public void ChangeOwner(int newOwner)
         {
             owner = newOwner;
@@ -47,7 +55,7 @@ namespace MonopolyBoard
             return Round(GetPrice() / 4);
         }
 
-        public int GetSellPrice()
+        public int GetMortgagePrice()
         {
             return Round(GetPrice() / 2);
         }
@@ -59,7 +67,12 @@ namespace MonopolyBoard
 
         new public string GetInfo()
         {
-            return GetName() + "\n" + GetPrice() + "kr\n" + GetRentOutput();
+            string info = GetName() + "\n" + GetPrice() + "kr\n" + GetRentOutput();
+
+            if (GetMortgaged())
+                info += "\nIntecknad";
+
+            return info;
         }
 
         protected int Round(int value) /* Rounds to the nearest value of VALUE_TO_ROUND_TO */

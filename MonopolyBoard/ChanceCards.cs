@@ -15,7 +15,7 @@ namespace MonopolyBoard
         private bool jailCard;
 
         /* ----- Function ----- */
-        public ChanceCards(string setText, int setValue, bool setJailCard=false, int setPosition = 0)
+        public ChanceCards(string setText, int setValue, bool setJailCard = false, int setPosition = 0)
         {
             text = setText;
             value = setValue;
@@ -25,8 +25,7 @@ namespace MonopolyBoard
 
         public void GiveJailCard()
         {
-            if(jailCard)
-                board.Player[board.activePlayer].GetJailCard();
+            board.Player[board.activePlayer].GetJailCard();
         }
 
         public string GetText()
@@ -44,12 +43,13 @@ namespace MonopolyBoard
             return position;
         }
 
-        public void ChangePosition()
+        public bool GetJailCard()
         {
-            if (GetPosition() == -1)
-                board.MoveActivePlayerToJail();
+            return jailCard;
+        }
 
-            int startPosition = board.Player[board.activePlayer].GetPosition();
+        public void ChangePosition(int startPosition)
+        {
             int stepsToMove = 0;
             if (startPosition > GetPosition())
             {
@@ -59,6 +59,23 @@ namespace MonopolyBoard
                 stepsToMove = GetPosition() - startPosition;
 
             board.MovePlayer(stepsToMove);
+        }
+
+        public void GoToJail()
+        {
+            board.MoveActivePlayerToJail();
+        }
+
+        public void GetMoneyFromAll()
+        {
+            for (int i = 0; i < board.Player.Length; i++)
+            {
+                if (board.Player[i].GetName() != "" && i != board.activePlayer)
+                {
+                    board.Player[i].SubtractMoney(GetValue());
+                    board.Player[board.activePlayer].AddMoney(GetValue());
+                }
+            }
         }
 
         public void GetOrPay()

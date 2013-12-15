@@ -33,7 +33,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblPrice = new System.Windows.Forms.Label();
             this.lblShowPrice = new System.Windows.Forms.Label();
-            this.clbStreets = new System.Windows.Forms.CheckedListBox();
+            this.lbStreets = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // btnBuy
@@ -44,6 +44,7 @@
             this.btnBuy.TabIndex = 1;
             this.btnBuy.Text = "Köp";
             this.btnBuy.UseVisualStyleBackColor = true;
+            this.btnBuy.Click += new System.EventHandler(this.btnBuy_Click);
             // 
             // btnCancel
             // 
@@ -82,15 +83,14 @@
             this.lblShowPrice.Size = new System.Drawing.Size(0, 13);
             this.lblShowPrice.TabIndex = 5;
             // 
-            // clbStreets
+            // lbStreets
             // 
-            this.clbStreets.CheckOnClick = true;
-            this.clbStreets.FormattingEnabled = true;
-            this.clbStreets.Location = new System.Drawing.Point(12, 35);
-            this.clbStreets.Name = "clbStreets";
-            this.clbStreets.ScrollAlwaysVisible = true;
-            this.clbStreets.Size = new System.Drawing.Size(120, 124);
-            this.clbStreets.TabIndex = 6;
+            this.lbStreets.FormattingEnabled = true;
+            this.lbStreets.Location = new System.Drawing.Point(12, 35);
+            this.lbStreets.Name = "lbStreets";
+            this.lbStreets.Size = new System.Drawing.Size(125, 121);
+            this.lbStreets.TabIndex = 0;
+            this.lbStreets.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // BuyHouse
             // 
@@ -99,7 +99,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(351, 169);
-            this.Controls.Add(this.clbStreets);
+            this.Controls.Add(this.lbStreets);
             this.Controls.Add(this.lblShowPrice);
             this.Controls.Add(this.lblPrice);
             this.Controls.Add(this.label1);
@@ -107,6 +107,7 @@
             this.Controls.Add(this.btnBuy);
             this.Name = "BuyHouse";
             this.Text = "Köp hus";
+            this.Load += new System.EventHandler(this.BuyHouse_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -119,6 +120,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblPrice;
         private System.Windows.Forms.Label lblShowPrice;
-        private System.Windows.Forms.CheckedListBox clbStreets;
+        private System.Windows.Forms.ListBox lbStreets;
     }
 }

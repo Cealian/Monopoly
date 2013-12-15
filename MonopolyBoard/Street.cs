@@ -13,6 +13,7 @@ namespace MonopolyBoard
             owner = 5;
             block = 0;
             noOfHouses = 0;
+            mortgaged = false;
         }
 
         public Street(string setName, int setPrice, int setBlock)
@@ -22,6 +23,7 @@ namespace MonopolyBoard
             owner = 5;
             block = setBlock;
             noOfHouses = 0;
+            mortgaged = false;
         }
 
         public int GetNoOfHouses()
@@ -33,7 +35,7 @@ namespace MonopolyBoard
         {
             noOfHouses++;
         }
-        
+
         new public int GetRent()
         {
             if (noOfHouses == 0)
@@ -49,23 +51,23 @@ namespace MonopolyBoard
             else
                 return Round(Convert.ToInt32(GetPrice() * 4.88));
         }
-        
+
         new public string GetRentOutput()
         {
             return "Bara tomt: " + Round(Convert.ToInt32(GetPrice() * 0.08)) + "kr\nEtt hus: " + Round(Convert.ToInt32(GetPrice() * 0.38)) + "kr\nTvå hus: " + Round(Convert.ToInt32(GetPrice() * 1.08))
                 + "kr\nTre hus: " + Round(Convert.ToInt32(GetPrice() * 2.78)) + "kr\nFyra hus: " + Round(Convert.ToInt32(GetPrice() * 3.78)) + "kr\nEtt hotell: " + Round(Convert.ToInt32(GetPrice() * 4.88)) + "kr";
         }
-        
+
         public void SellHouse()
         {
             noOfHouses--;
         }
-        
+
         public int GetHousePrice()
         {
             return Round(Convert.ToInt32(GetPrice() * 0.69));
         }
-        
+
         public int GetSellHousePrice()
         {
             return Round(Convert.ToInt32(GetPrice() * 0.345));
@@ -73,7 +75,12 @@ namespace MonopolyBoard
 
         new public string GetInfo()
         {
-            return GetName() + " \n" + GetPrice() + "kr\n" + GetRentOutput() + "\nHus kostar: " + GetHousePrice() + "kr";
+            string info = GetName() + " \n" + GetPrice() + "kr\n" + GetRentOutput() + "\nHus kostar: " + GetHousePrice() + "kr";
+
+            if (GetMortgaged())
+                info += "\nIntecknad";
+
+            return info;
         }
     }
 }
