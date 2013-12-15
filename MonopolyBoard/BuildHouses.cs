@@ -97,6 +97,8 @@ namespace MonopolyBoard
                         }
                         else if (streetsOnBlock == 3)
                             btnBuyHouse.Enabled = true;
+                        else
+                            btnBuyHouse.Enabled = false;
                     }
                     else
                         btnBuyHouse.Enabled = false;
