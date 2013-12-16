@@ -553,7 +553,7 @@ namespace MonopolyBoard
 
             if (Player[activePlayer].IsInJail() == true)
             {
-                btnJail.Visible = true;
+                btnBail.Visible = true;
              }
         }
 
@@ -666,12 +666,12 @@ namespace MonopolyBoard
             Type squareType = Squares[position].GetType();
             int rent = 0;
             bool isMortgaged = false;
-
+            /*Do nothing if the street is owned by active player*/
             if (owner == activePlayer)
             {
                 return;
             }
-
+            /*Shows the Buy Street button if the street has no owner*/
             if (squareType == typeof(Street))
             {
                 if (owner == 5)
@@ -682,6 +682,7 @@ namespace MonopolyBoard
                 isMortgaged = ((Street)Squares[position]).GetMortgaged();
                 rent = ((Street)Squares[position]).GetRent();
             }
+            /*Shows the Buy Street button if the station has no owner*/
             else if (squareType == typeof(Station))
             {
                 if (owner == 5)
@@ -693,6 +694,7 @@ namespace MonopolyBoard
                 isMortgaged = ((Station)Squares[position]).GetMortgaged();
                 rent = ((Station)Squares[position]).GetRent();
             }
+            /*Shows the Buy Street button if the Powerstation has no owner*/
             else if (squareType == typeof(PowerStation))
             {
                 if (owner == 5)
@@ -704,13 +706,14 @@ namespace MonopolyBoard
                 rent = ((PowerStation)Squares[position]).GetRent();
             }
 
-
+            /*Tells the player if the street is mortaged*/
             if (isMortgaged)
             {
                 MessageBox.Show("Du hamnade på " + Squares[position].GetName() + "\nInteknad.");
                 return;
             }
             MessageBox.Show("Du hamnade på " + Squares[position].GetName() + "\nHyra: " + rent + " betalas till " + Player[owner].GetName());
+            /*Pays the rent*/
             Player[activePlayer].SubtractMoney(rent);
             Player[owner].AddMoney(rent);
 
@@ -915,19 +918,20 @@ namespace MonopolyBoard
             BuyHouseForm.ShowDialog();
         }
 
-        private void btnBuyStreet_Click(object sender, EventArgs e)
+        private void btnBuyStreet_Click(object sender, EventArgs e) /*This code handles the buying of streets.*/
         {
             int playerMoney = Player[activePlayer].GetMoney();
             int position = Player[activePlayer].GetPosition();
             int streetPrice = Squares[position].GetPrice();
             string streetName = Squares[position].GetName();
-
+            
+            /*Check if the player has enough money to buy the street*/
             if (playerMoney < streetPrice)
             {
                 MessageBox.Show("Du har inte råd att köpa denna gatan");
                 return;
             }
-
+            /*Ask the player if he want to buy the street*/
             string prompt = "Vill du köpa " + streetName + " för " + streetPrice + " kr\nDu har " + playerMoney + " kr";
 
             if (MessageBox.Show(prompt, "Köpa gata", MessageBoxButtons.YesNo) == DialogResult.No)
@@ -936,7 +940,7 @@ namespace MonopolyBoard
             }
 
             Type squareType = Squares[position].GetType();
-
+            /*Set the owner of the street to the active player*/
             if (squareType == typeof(Street))
             {
                 ((Street)Squares[position]).ChangeOwner(activePlayer);
@@ -950,8 +954,8 @@ namespace MonopolyBoard
                 ((PowerStation)Squares[position]).ChangeOwner(activePlayer);
             }
 
-
-            Player[activePlayer].SubtractMoney(streetPrice);
+            
+            Player[activePlayer].SubtractMoney(streetPrice);//Take money from the player
             btnBuyStreet.Hide();
             ShowSquareInfo();
 
