@@ -553,17 +553,7 @@ namespace MonopolyBoard
 
             if (Player[activePlayer].IsInJail() == true)
             {
-                //for (int turn = 0; turn < 4; turn++)
-                //{
-                    btnBail.Visible = true;
-                /*    if (turn == 3)
-                    {
-                        MessageBox.Show("Du måste betala 1000 i borgen");
-                        Player[activePlayer].SubtractMoney(1000);
-                        Player[activePlayer].GetOutOfJail();
-                        turn = 0;
-        }
-                 */
+                btnJail.Visible = true;
              }
         }
 
@@ -809,7 +799,7 @@ namespace MonopolyBoard
             lblPlayerInfo.ForeColor = GetPlayerColor(activePlayer);
             
             //Each Player's information displayed on their respective lable, in their respective colors
-            lblply1Info.ForeColor = GetPlayerColor(0); 
+            lblply1Info.ForeColor = GetPlayerColor(0);
             lblply2Inf.ForeColor = GetPlayerColor(1);
             lblply3Info.ForeColor = GetPlayerColor(2);
             lblply4Info.ForeColor = GetPlayerColor(3);
@@ -910,12 +900,12 @@ namespace MonopolyBoard
                  ply4TurnsInJail++;
 
             if (ply1TurnsInJail == 4 || ply2TurnsInJail == 4 || ply3TurnsInJail == 4 || ply4TurnsInJail == 4)//Forces the active Player to bail after 3 turns
-                {
-                    MessageBox.Show(forcePay);
-                    btnBankrupt.Visible = true;
-                    btnNextPlayer.Enabled = false;
-                    btnRollDices.Enabled = false;
-                }
+                    {
+                        MessageBox.Show(forcePay);
+                        btnBankrupt.Visible = true;
+                        btnNextPlayer.Enabled = false;
+                        btnRollDices.Enabled = false;
+                    }
         }
 
         private void btnBuyHouses_Click(object sender, EventArgs e)
@@ -1045,9 +1035,9 @@ namespace MonopolyBoard
             string prompt = "Vill du Betala 1000kr för att komma ut ut fängelset?\nDu har " + playerMoney + " kr";
 
             if (MessageBox.Show(prompt, "Betala Borgen", MessageBoxButtons.YesNo) == DialogResult.No)
-            {  
+        {
                 return;
-            }            
+            }
             Player[activePlayer].SubtractMoney(1000);
             Player[activePlayer].GetOutOfJail();
             btnBail.Hide();
