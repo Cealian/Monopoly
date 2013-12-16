@@ -553,18 +553,8 @@ namespace MonopolyBoard
 
             if (Player[activePlayer].IsInJail() == true)
             {
-                //for (int turn = 0; turn < 4; turn++)
-                //{
-                    btnJail.Visible = true;
-                /*    if (turn == 3)
-                    {
-                        MessageBox.Show("Du måste betala 1000 i borgen");
-                        Player[activePlayer].SubtractMoney(1000);
-                        Player[activePlayer].GetOutOfJail();
-                        turn = 0;
-        }
-                 */
-             }
+                btnJail.Visible = true;
+            }
         }
 
         public void RunSquareEvent() /* Checks what kind of square the player landed on and acts accordingly. */
