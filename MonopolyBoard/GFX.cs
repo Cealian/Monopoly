@@ -12,7 +12,7 @@ namespace MonopolyBoard
         /* ----- Constructors ----- */
         public GFX(Graphics g)
         {
-            gObject = g;            
+            gObject = g;
             setUpCanvas();
 
         }
@@ -156,7 +156,7 @@ namespace MonopolyBoard
              gObject.DrawString("8000kr", SystemFonts.CaptionFont, Brushes.Black, x - 2 * i + edgex, y - 1 * i - color);
 
 
-         }
+        }
          private void images()
          {
              int x = 310, y = 600, i = 280;

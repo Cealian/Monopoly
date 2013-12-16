@@ -59,9 +59,50 @@ namespace MonopolyBoard
                 Type squareType = board.SquaresArray[i].GetType();
                 if (lbStreets.SelectedItem.ToString() == name && squareType == typeof(Street))
                 {
-                    if (((Street)board.SquaresArray[i]).GetNoOfHouses() > 0)
+                    Street street = ((Street)board.SquaresArray[i]);
+                    block = street.GetBlock();
+                    int streetsOnBlock = 0, isMortgaged = 0, anyHouses = 0;
+                    for (int j = 0; j < board.SquaresArray.Length; j++)
+                    {
+                        if (board.SquaresArray[j].GetType() == typeof(Street))
+                        {
+                            if (block == ((Street)board.SquaresArray[j]).GetBlock()
+                                    && ((Street)board.SquaresArray[j]).GetOwner() == board.activePlayer)
+                            {
+                                streetsOnBlock++;
+                                if (((Street)board.SquaresArray[j]).GetMortgaged())
+                                    isMortgaged++;
+                                else if (((Street)board.SquaresArray[j]).GetNoOfHouses() > 0)
+                                    anyHouses++;
+                            }
+                        }
+                    }
+                    if (!street.GetMortgaged() && street.GetNoOfHouses() < 5 && isMortgaged == 0)
+                    {
+                        if (streetsOnBlock == 2)
+                        {
+                            if (block == 0 || block == 7)
+                                btnBuyHouse.Enabled = true;
+                            else
+                                btnBuyHouse.Enabled = false;
+                        }
+                        else if (streetsOnBlock == 3)
+                            btnBuyHouse.Enabled = true;
+                        else
+                            btnBuyHouse.Enabled = false;
+                    }
+                    else
+                        btnBuyHouse.Enabled = false;
+
+
+                    if (street.GetNoOfHouses() > 0)
                     {
                         btnSellHouse.Enabled = true;
+                        btnMortgage.Enabled = false;
+                    }
+                    else if (street.GetNoOfHouses() == 0 && anyHouses > 0)
+                    {
+                        btnSellHouse.Enabled = false;
                         btnMortgage.Enabled = false;
                     }
                     else
@@ -70,15 +111,19 @@ namespace MonopolyBoard
                         btnMortgage.Enabled = true;
                     }
 
-                    if (((Street)board.SquaresArray[i]).GetMortgaged())
+                    if (street.GetNoOfHouses() == 5)
+                        info = street.GetInfo() + "\nEtt Hotell";
+                    else
+                        info = street.GetInfo() + "\nAntal hus: " + street.GetNoOfHouses();
+
+                    if (street.GetMortgaged())
+                    {
                         btnMortgage.Text = "Lös ut";
+                    }
                     else
+                    {
                         btnMortgage.Text = "Inteckna";
-                    block = ((Street)board.SquaresArray[i]).GetBlock();
-                    if (((Street)board.SquaresArray[i]).GetNoOfHouses() == 5)
-                        info = ((Street)board.SquaresArray[i]).GetInfo() + "\nEtt Hotell";
-                    else
-                        info = ((Street)board.SquaresArray[i]).GetInfo() + "\nAntal hus: " + ((Street)board.SquaresArray[i]).GetNoOfHouses();
+                    }
                 }
                 else if (lbStreets.SelectedItem.ToString() == name && squareType == typeof(Station))
                 {
@@ -102,22 +147,6 @@ namespace MonopolyBoard
                 }
             }
             lbInfo.Text = info;
-            for (int i = 0; i < board.SquaresArray.Length; i++)
-            {
-                Type squareType = board.SquaresArray[i].GetType();
-                string name = board.SquaresArray[i].GetName();
-                if (squareType == typeof(Street) && lbStreets.SelectedItem.ToString() == name && ((Street)board.SquaresArray[i]).GetBlock() == block)
-                {
-                    Street street = ((Street)board.SquaresArray[i]);
-                    if (street.GetOwner() == board.activePlayer && street.GetNoOfHouses() < 5 && !street.GetMortgaged())
-                        btnBuyHouse.Enabled = true;
-                    else
-                    {
-                        btnBuyHouse.Enabled = false;
-                        break;
-                    }
-                }
-            }
             board.ShowSquareInfo();
             board.UpdatePlayerInfo();
         }

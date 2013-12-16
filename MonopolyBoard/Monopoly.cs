@@ -537,7 +537,7 @@ namespace MonopolyBoard
                 picPlayer2.Hide();
             }
             
-        }      
+        }
 
         public void NextPlayer() /* Change activePlayer to next player. */
         {
@@ -550,6 +550,21 @@ namespace MonopolyBoard
             {
                 activePlayer = 0;
             }
+
+            if (Player[activePlayer].IsInJail() == true)
+            {
+                //for (int turn = 0; turn < 4; turn++)
+                //{
+                    btnJail.Visible = true;
+                /*    if (turn == 3)
+                    {
+                        MessageBox.Show("Du måste betala 1000 i borgen");
+                        Player[activePlayer].SubtractMoney(1000);
+                        Player[activePlayer].GetOutOfJail();
+                        turn = 0;
+        }
+                 */
+             }
         }
 
         public void RunSquareEvent() /* Checks what kind of square the player landed on and acts accordingly. */
@@ -766,7 +781,7 @@ namespace MonopolyBoard
 
         public void UpdatePlayerInfo() /* Updates the on-screen info about the players. */
         {
-            
+
             string playerInfo, player1Info, player2Info, player3Info, player4Info;
 
             player1Info = Player[0].GetName() + ": " + Player[0].GetMoney();
@@ -776,7 +791,7 @@ namespace MonopolyBoard
             
             playerInfo = Player[0].GetName() + ": " + Player[0].GetMoney() + "\n";
             playerInfo += Player[1].GetName() + ": " + Player[1].GetMoney() + "\n";
-      
+
 
             if (Player[2].GetName() != "")
             {
@@ -873,7 +888,7 @@ namespace MonopolyBoard
             }
             else
                 btnJail.Visible = false;
-                UpdateFreeParkValue();          
+            UpdateFreeParkValue();
 
             Console.WriteLine(GetPlayerColor(activePlayer).ToString());
 
@@ -942,7 +957,7 @@ namespace MonopolyBoard
                 }
   
         }
-            
+
         
 
         private void btnBuyHouses_Click(object sender, EventArgs e)
@@ -950,8 +965,6 @@ namespace MonopolyBoard
             BuyHouse BuyHouseForm = new BuyHouse();
             BuyHouseForm.board = this;
             BuyHouseForm.ShowDialog();
-
-            UpdatePlayerInfo();
         }
 
         private void btnBuyStreet_Click(object sender, EventArgs e)
@@ -1068,24 +1081,20 @@ namespace MonopolyBoard
             
         }
 
-        private void btnJail_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-           /* int plyrMoney = Player[activePlayer].GetMoney(); 
-            string forcePay = "Du måste betala 1000 kr för att få komma ut.";
-            string noMoney = "Du har inte råd att betala";
+            int playerMoney = Player[activePlayer].GetMoney();
+            string prompt = "Vill du Betala 1000 för att komma ut ut fängelset\nDu har " + playerMoney + " kr";
 
-            if (MessageBox.Show(forcePay, "nDu har: " + plyrMoney, MessageBoxButtons.YesNo) == DialogResult.No)
-            {
+            if (MessageBox.Show(prompt, "Betala Borgen", MessageBoxButtons.YesNo) == DialogResult.No)
+        {
                 return;
             }
-
-            if (plyrMoney < 1000)
-                {
-                    MessageBox.Show(noMoney);
-                }
-                Player[activePlayer].SubtractMoney(1000); */
-            }
+            
+            Player[activePlayer].SubtractMoney(1000);
+            Player[activePlayer].GetOutOfJail();
+            btnJail.Hide();
+            ShowSquareInfo();
         }
-     
     }
 }

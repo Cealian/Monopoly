@@ -12,15 +12,13 @@ namespace MonopolyBoard
 {
     public partial class BuyHouse : Form
     {
-        public frmMonopoly board; // Private / Public?
+        public frmMonopoly board;
         public BuyHouse()
         {
+            string test = board.Player[board.activePlayer].GetName();
+            clbStreets.Items.Add(test);
             InitializeComponent();
-        }
 
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            this.Dispose();
         }
 
         private void BuyHouse_Load(object sender, EventArgs e)
