@@ -20,10 +20,7 @@ namespace MonopolyBoard
 
         private void MoneyToMove()//Moves money between the players.
         {
-            string[] text = new string[2];
             int moneyToMove = 0;
-            text[0] = txtMoneyA.Text;
-            text[1] = txtMoneyB.Text;
             try
             {
                 if (cbMoneyA.Checked)
@@ -44,7 +41,7 @@ namespace MonopolyBoard
                 {
                     moneyToMove = 0;
                     txtMoneyB.Text = "";
-                    MessageBox.Show("Skriv in ett heltal");
+                    MessageBox.Show("Skriv in ett heltal,");
                 }
             }
 
@@ -221,7 +218,7 @@ namespace MonopolyBoard
             }
         }
 
-        private void btnClose_Click(object sender, EventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)//Closes the form.
         {
             Dispose();
             Close();

@@ -342,7 +342,7 @@ namespace MonopolyBoard
         /* Instantiation of all chance and community cards */
         #region Cards instantiation
 
-        public void InstantiateChanceCards()
+        public void InstantiateChanceCards()/* Instantiation of all chancecards*/
         {
             Chances[0] = new ChanceCards("Betala skolavgifter 3000 kr.", -3000);
             Chances[1] = new ChanceCards("Gå i fängelset! Gå direkt till fängelset utan att passera Gå.", 0, false, -1);
@@ -362,7 +362,7 @@ namespace MonopolyBoard
             Chances[15] = new ChanceCards("Betala trängselskatt, betala 200 kr", -200);
         }
 
-        public void InstantiateCommunityCards()
+        public void InstantiateCommunityCards()/* Instantiation of all communitycards*/
         {
             ComCard[0] = new CommunityCards("Gå vidare till Gå.", 0, false, 0);
             ComCard[1] = new CommunityCards("Betala sjukhusräkning, 2000 kr.", -2000);
@@ -503,7 +503,7 @@ namespace MonopolyBoard
 
         }
 
-        private void btnTrade_Click(object sender, EventArgs e) /* Open trade window. */
+        private void btnTrade_Click(object sender, EventArgs e) /* Open the form where the active player can trade with the other players.*/
         {
             Trade TradeForm = new Trade();
             TradeForm.board = this;
@@ -1031,7 +1031,7 @@ namespace MonopolyBoard
         }
 
 
-        private void btnSellStreet_Click(object sender, EventArgs e)
+        private void btnSellStreet_Click(object sender, EventArgs e)/*Opens the form where the player can buy and sell houses and mortgage streets*/
         {
             BuildHouses sellStreet = new BuildHouses();
             sellStreet.board = this;

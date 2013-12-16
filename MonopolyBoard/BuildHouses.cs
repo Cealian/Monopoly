@@ -11,7 +11,7 @@ namespace MonopolyBoard
             InitializeComponent();
         }
 
-        private void SellStreet_Load(object sender, EventArgs e)
+        private void SellStreet_Load(object sender, EventArgs e)/*Loads the listbox with the streets the active player owns*/
         {
             UpdateSquares();
             if (lbStreets.Items.Count > 0)
@@ -21,7 +21,7 @@ namespace MonopolyBoard
             }
         }
 
-        private void btnSell_Click(object sender, EventArgs e)
+        private void btnSell_Click(object sender, EventArgs e)/*Mortgage the selected street and updates all fields.*/
         {
             Mortgage();
             UpdateInfo();
