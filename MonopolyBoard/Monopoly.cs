@@ -1081,7 +1081,7 @@ namespace MonopolyBoard
             
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnJail_Click(object sender, EventArgs e)
         {
             int playerMoney = Player[activePlayer].GetMoney();
             string prompt = "Vill du Betala 1000 för att komma ut ut fängelset\nDu har " + playerMoney + " kr";

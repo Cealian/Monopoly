@@ -16,7 +16,7 @@ namespace MonopolyBoard
         public BuyHouse()
         {
             string test = board.Player[board.activePlayer].GetName();
-            clbStreets.Items.Add(test);
+            //clbStreets.Items.Add(test);
             InitializeComponent();
 
         }
