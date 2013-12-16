@@ -72,7 +72,7 @@ namespace MonopolyBoard
             this.btnSaveGame = new System.Windows.Forms.Button();
             this.sfdSaveGame = new System.Windows.Forms.SaveFileDialog();
             this.btnBankrupt = new System.Windows.Forms.Button();
-            this.btnJail = new System.Windows.Forms.Button();
+            this.btnBail = new System.Windows.Forms.Button();
             this.pnlMainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer2)).BeginInit();
@@ -244,7 +244,7 @@ namespace MonopolyBoard
             this.lblPlayerInfo.BackColor = System.Drawing.Color.Transparent;
             this.lblPlayerInfo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.lblPlayerInfo.Font = new System.Drawing.Font("Segoe Marker", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlayerInfo.Location = new System.Drawing.Point(239, 209);
+            this.lblPlayerInfo.Location = new System.Drawing.Point(254, 235);
             this.lblPlayerInfo.Name = "lblPlayerInfo";
             this.lblPlayerInfo.Size = new System.Drawing.Size(162, 116);
             this.lblPlayerInfo.TabIndex = 14;
@@ -452,16 +452,16 @@ namespace MonopolyBoard
             this.btnBankrupt.Visible = false;
             this.btnBankrupt.Click += new System.EventHandler(this.btnBankrupt_Click);
             // 
-            // btnJail
+            // btnBail
             // 
-            this.btnJail.Location = new System.Drawing.Point(704, 274);
-            this.btnJail.Name = "btnJail";
-            this.btnJail.Size = new System.Drawing.Size(91, 23);
-            this.btnJail.TabIndex = 15;
-            this.btnJail.Text = "Betala borgen";
-            this.btnJail.UseVisualStyleBackColor = true;
-            this.btnJail.Visible = false;
-            this.btnJail.Click += new System.EventHandler(this.btnJail_Click);
+            this.btnBail.Location = new System.Drawing.Point(704, 274);
+            this.btnBail.Name = "btnBail";
+            this.btnBail.Size = new System.Drawing.Size(91, 23);
+            this.btnBail.TabIndex = 15;
+            this.btnBail.Text = "Betala borgen";
+            this.btnBail.UseVisualStyleBackColor = true;
+            this.btnBail.Visible = false;
+            this.btnBail.Click += new System.EventHandler(this.btnBail_Click);
             // 
             // frmMonopoly
             // 
@@ -470,7 +470,7 @@ namespace MonopolyBoard
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.CancelButton = this.btnQuit;
             this.ClientSize = new System.Drawing.Size(798, 648);
-            this.Controls.Add(this.btnJail);
+            this.Controls.Add(this.btnBail);
             this.Controls.Add(this.btnBankrupt);
             this.Controls.Add(this.btnSaveGame);
             this.Controls.Add(this.btnSellStreet);
@@ -533,7 +533,7 @@ namespace MonopolyBoard
         private Label lblply1InJail;
         private Label lblply4InJail;
         private Label lblply3InJail;
-        private Button btnJail;
+        private Button btnBail;
         private Label lblply2NoTurnsInJail;
         private Label lblply1NoTurnsInJail;
         private Label lblply3NoTurnsInJail;

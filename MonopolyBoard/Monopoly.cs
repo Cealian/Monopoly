@@ -23,10 +23,10 @@ namespace MonopolyBoard
         const int PX_PER_PACE = 9;
         public int activePlayer = new Random().Next(0, 4);
         int diceEqualCount = 0;
-        int ply1turnsInJail = 0; 
-        int ply2turnsInJail = 0;
-        int ply3turnsInJail = 0;
-        int ply4turnsInJail = 0;
+        int ply1TurnsInJail = 0; 
+        int ply2TurnsInJail = 0;
+        int ply3TurnsInJail = 0;
+        int ply4TurnsInJail = 0;
         int chanceCard = new Random().Next(0, 16), comCard = new Random().Next(0, 16);
 
         public frmMonopoly()
@@ -555,7 +555,7 @@ namespace MonopolyBoard
             {
                 //for (int turn = 0; turn < 4; turn++)
                 //{
-                    btnJail.Visible = true;
+                    btnBail.Visible = true;
                 /*    if (turn == 3)
                     {
                         MessageBox.Show("Du måste betala 1000 i borgen");
@@ -789,17 +789,17 @@ namespace MonopolyBoard
             player3Info = "";
             player4Info = "";       
             
-            playerInfo = Player[0].GetName() + ": " + Player[0].GetMoney() + "\n";
-            playerInfo += Player[1].GetName() + ": " + Player[1].GetMoney() + "\n";
+            playerInfo = Player[0].GetName() + ": " + Player[0].GetMoney() + "\n"; //Information about Player 1
+            playerInfo += Player[1].GetName() + ": " + Player[1].GetMoney() + "\n";//Information about Player 2
 
 
-            if (Player[2].GetName() != "")
+            if (Player[2].GetName() != "")//Information about Player 3, if there is a 3;rd player
             {
                 playerInfo += Player[2].GetName() + ": " + Player[2].GetMoney() + "\n";
                 player3Info = Player[2].GetName() + ": " + Player[2].GetMoney() + "kr";
             }
 
-            if (Player[3].GetName() != "")
+            if (Player[3].GetName() != "")//Information about Player 4, if there is a 4;th player
             {
                 playerInfo += Player[3].GetName() + ": " + Player[3].GetMoney() + "\n";
                 player4Info = Player[3].GetName() + ": " + Player[3].GetMoney() + "kr";
@@ -807,7 +807,9 @@ namespace MonopolyBoard
 
             lblPlayerInfo.Text = Player[activePlayer].GetName() + "\n" + playerInfo;
             lblPlayerInfo.ForeColor = GetPlayerColor(activePlayer);
-            lblply1Info.ForeColor = GetPlayerColor(0);
+            
+            //Each Player's information displayed on their respective lable, in their respective colors
+            lblply1Info.ForeColor = GetPlayerColor(0); 
             lblply2Inf.ForeColor = GetPlayerColor(1);
             lblply3Info.ForeColor = GetPlayerColor(2);
             lblply4Info.ForeColor = GetPlayerColor(3);
@@ -816,80 +818,69 @@ namespace MonopolyBoard
             lblply3Info.Text = player3Info;
             lblply4Info.Text = player4Info;
 
-            if (Player[0].IsInJail() == true)
+            if (Player[0].IsInJail() == true)//Displays the labels showing that Player 1 is in Jail and how many turns Player 1 has spent in Jail
             {
                 lblply1InJail.Visible = true;
-                lblply1NoTurnsInJail.Text = "Antal omgångar:" + ply1turnsInJail;
+                lblply1NoTurnsInJail.Text = "Antal omgångar:" + ply1TurnsInJail;
                 lblply1NoTurnsInJail.ForeColor = Color.Red;
                 lblply1NoTurnsInJail.Visible = true;
             }
-            else
+            else//Should Player 1 not be in Jail(or get out of Jail) the count for turns in jail is reset to o and the lables hidden
             {
                 lblply1InJail.Visible = false;
                 lblply1NoTurnsInJail.Visible = false;
+                ply1TurnsInJail = 0;
             }
-                if (Player[1].IsInJail() == true)
+            if (Player[1].IsInJail() == true)//Displays the labels showing that Player 2 is in Jail and how many turns Player 2 has spent in Jail
                 {
                     lblply2InJail.Visible = true;
-                    lblply2NoTurnsInJail.Text = "Antal omgångar:" + ply2turnsInJail;
+                    lblply2NoTurnsInJail.Text = "Antal omgångar:" + ply2TurnsInJail;
                     lblply2NoTurnsInJail.ForeColor = Color.Red;
                     lblply2NoTurnsInJail.Visible = true;
 
                 }
-                else
+            else//Should Player 2 not be in Jail(or get out of Jail) the count for turns in jail is reset to o and the lables hidden
                 {
                     lblply2InJail.Visible = false;
                     lblply2NoTurnsInJail.Visible = false;
+                    ply2TurnsInJail = 0;
                 }
 
-                if (Player[2].IsInJail() == true)
+            if (Player[2].IsInJail() == true)//Displays the labels showing that Player 3 is in Jail and how many turns Player 3 has spent in Jail
                 {
                     lblply3InJail.Visible = true;
-                    lblply3NoTurnsInJail.Text = "Antal omgångar:" + ply3turnsInJail;
+                    lblply3NoTurnsInJail.Text = "Antal omgångar:" + ply3TurnsInJail;
                     lblply3NoTurnsInJail.ForeColor = Color.Red;
                     lblply3NoTurnsInJail.Visible = true;
 
                 }
-                else
+            else//Should Player 3 not be in Jail(or get out of Jail) the count for turns in jail is reset to o and the lables hidden
                 {
                     lblply3InJail.Visible = false;
                     lblply3NoTurnsInJail.Visible = false;
+                    ply3TurnsInJail = 0;
                 }
 
-                if (Player[3].IsInJail() == true)
+            if (Player[3].IsInJail() == true)//Displays the labels showing that Player 4 is in Jail and how many turns Player 4 has spent in Jail
                 {
                     lblply4InJail.Visible = true;
-                    lblply4NoTurnsInJail.Text = "Antal omgångar:" + ply4turnsInJail;
+                    lblply4NoTurnsInJail.Text = "Antal omgångar:" + ply4TurnsInJail;
                     lblply4NoTurnsInJail.ForeColor = Color.Red;
                     lblply4NoTurnsInJail.Visible = true;
 
                 }
-                else
+            else//Should Player 4 not be in Jail(or get out of Jail) the count for turns in jail is reset to o and the lables hidden
                 {
                     lblply4InJail.Visible = false;
                     lblply4NoTurnsInJail.Visible = false;
+                    ply4TurnsInJail = 0;
                 }
 
-            if (Player[activePlayer].IsInJail() == true)
-            {
-                //for (int turn = 0; turn < 4; turn++)
-                //{
-                btnJail.Visible = true;
-                
-                
-                /*    if (turn == 3)
-                    {
-                        MessageBox.Show("Du måste betala 1000 i borgen");
-                        Player[activePlayer].SubtractMoney(1000);
-                        Player[activePlayer].GetOutOfJail();
-                        turn = 0;
-                    }
-                 */
-            }
+            if (Player[activePlayer].IsInJail() == true)//Displays the bail button if the active Player is in jail
+                btnBail.Visible = true;                          
             else
-                btnJail.Visible = false;
+                btnBail.Visible = false;
             UpdateFreeParkValue();
-
             Console.WriteLine(GetPlayerColor(activePlayer).ToString());
 
             /*
@@ -901,64 +892,31 @@ namespace MonopolyBoard
              *  I fängelse (gör det coolt).
              */
         }
-        public void JailCount()
+        public void JailCount() //Keeps track of how many turns each player has spent in jail and forces them to pay or go bankrupt after 3 turns
         {
             string forcePay = "Du måste betala 1000kr i borgen";
 
 
-            if (Player[0].IsInJail() == true && Player[activePlayer] == Player[0])
-            {
-                ply1turnsInJail++;
+            if (Player[0].IsInJail() == true && Player[activePlayer] == Player[0])//How long Player 1 has spent in jail
+                ply1TurnsInJail++;
 
-                if (ply1turnsInJail == 4)
+            if (Player[1].IsInJail() == true && Player[activePlayer] == Player[1])//How long Player 2 has spent in jail
+                ply2TurnsInJail++;
+
+            if (Player[2].IsInJail() == true && Player[activePlayer] == Player[2])//How long Player 3 has spent in jail
+                 ply3TurnsInJail++;
+
+            if (Player[3].IsInJail() == true && Player[activePlayer] == Player[3])//How long Player 4 has spent in jail
+                 ply4TurnsInJail++;
+
+            if (ply1TurnsInJail == 4 || ply2TurnsInJail == 4 || ply3TurnsInJail == 4 || ply4TurnsInJail == 4)//Forces the active Player to bail after 3 turns
                 {
                     MessageBox.Show(forcePay);
                     btnBankrupt.Visible = true;
                     btnNextPlayer.Enabled = false;
                     btnRollDices.Enabled = false;
                 }
-            }
-                if (Player[1].IsInJail() == true && Player[activePlayer] == Player[1])
-                {
-                    ply2turnsInJail++;
-                    if (ply2turnsInJail == 4)
-                    {
-                        MessageBox.Show(forcePay);
-                        btnBankrupt.Visible = true;
-                        btnNextPlayer.Enabled = false;
-                        btnRollDices.Enabled = false;
-                    }
-                }
-
-                if (Player[2].IsInJail() == true && Player[activePlayer] == Player[2])
-                {
-                    ply3turnsInJail++;
-                    if (ply3turnsInJail == 4)
-                    {
-                        MessageBox.Show(forcePay);
-                        btnBankrupt.Visible = true;
-                        btnNextPlayer.Enabled = false;
-                        btnRollDices.Enabled = false;
-                    }
-                }
-
-
-                if (Player[3].IsInJail() == true && Player[activePlayer] == Player[3])
-                {
-                    ply4turnsInJail++;
-                    if (ply4turnsInJail == 4)
-                    {
-                        MessageBox.Show(forcePay);
-                        btnBankrupt.Visible = true;
-                        btnNextPlayer.Enabled = false;
-                        btnRollDices.Enabled = false;
-                    }
-
-                }
-  
         }
-
-        
 
         private void btnBuyHouses_Click(object sender, EventArgs e)
         {
@@ -1081,20 +1039,21 @@ namespace MonopolyBoard
             
         }
 
-        private void btnJail_Click(object sender, EventArgs e)
+        private void btnBail_Click(object sender, EventArgs e)
         {
             int playerMoney = Player[activePlayer].GetMoney();
-            string prompt = "Vill du Betala 1000 för att komma ut ut fängelset\nDu har " + playerMoney + " kr";
+            string prompt = "Vill du Betala 1000kr för att komma ut ut fängelset?\nDu har " + playerMoney + " kr";
 
             if (MessageBox.Show(prompt, "Betala Borgen", MessageBoxButtons.YesNo) == DialogResult.No)
-        {
+            {  
                 return;
-            }
-            
+            }            
             Player[activePlayer].SubtractMoney(1000);
             Player[activePlayer].GetOutOfJail();
-            btnJail.Hide();
+            btnBail.Hide();
+            btnNextPlayer.Enabled = true;
             ShowSquareInfo();
+            UpdatePlayerInfo();
         }
     }
 }

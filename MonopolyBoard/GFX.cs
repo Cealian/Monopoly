@@ -92,7 +92,7 @@ namespace MonopolyBoard
             Console.WriteLine("New player: "+ player + " New pos: " + squarePosition);
 
         }
-         private static void fillStreets()
+         private static void fillStreets()//Draws all of the colored squares,in their respective positions, which are the streest and their blocks
          {
              int x = 82, y = 567, colorX = 53, colorY = 20, i = 54, edge = 506;
 
@@ -124,7 +124,7 @@ namespace MonopolyBoard
              gObject.FillRectangle(Brushes.Blue, new Rectangle(x + edge - colorY, y + 1 - edge + colorY + 6 * i, colorY, colorX));
          }
 
-         private static void streetPrices()
+         private static void streetPrices()//Draws all the prices for streets,stations, taxes etc.
          {
              
             int x = 84, y = 622, i = 54, edgex = 618, edgey = 580, color = 20;
@@ -132,12 +132,16 @@ namespace MonopolyBoard
              gObject.DrawString("2400kr", SystemFonts.CaptionFont, Brushes.Black, x, y);
              gObject.DrawString("2000kr", SystemFonts.CaptionFont, Brushes.Black, x + i, y);
              gObject.DrawString("2000kr", SystemFonts.CaptionFont, Brushes.Black, x + 3 * i, y);
+             gObject.DrawString("4000kr", SystemFonts.CaptionFont, Brushes.Black, x + 4 * i, y);
+             gObject.DrawString("4000kr", SystemFonts.CaptionFont, Brushes.Black, x + 5 * i, y);
              gObject.DrawString("1200kr", SystemFonts.CaptionFont, Brushes.Black, x + 6 * i, y);
              gObject.DrawString("1200kr", SystemFonts.CaptionFont, Brushes.Black, x + 8 * i, y);
 
              gObject.DrawString("2800kr", SystemFonts.CaptionFont, Brushes.Black, x - i - color, y - i - color);
+             gObject.DrawString("3000kr", SystemFonts.CaptionFont, Brushes.Black, x - i - color, y - 2 * i - color);
              gObject.DrawString("2800kr", SystemFonts.CaptionFont, Brushes.Black, x - i - color, y - 3 * i - color);
              gObject.DrawString("3200kr", SystemFonts.CaptionFont, Brushes.Black, x - i - color, y - 4 * i - color);
+             gObject.DrawString("4000kr", SystemFonts.CaptionFont, Brushes.Black, x - i - color, y - 5 * i - color);
              gObject.DrawString("3600kr", SystemFonts.CaptionFont, Brushes.Black, x - i - color, y - 6 * i - color);
              gObject.DrawString("3600kr", SystemFonts.CaptionFont, Brushes.Black, x - i - color, y - 8 * i - color);
              gObject.DrawString("4000kr", SystemFonts.CaptionFont, Brushes.Black, x - i - color, y - 9 * i - color);
@@ -145,30 +149,34 @@ namespace MonopolyBoard
              gObject.DrawString("4400kr", SystemFonts.CaptionFont, Brushes.Black, x, y - edgey);
              gObject.DrawString("4400kr", SystemFonts.CaptionFont, Brushes.Black, x + 2 * i, y - edgey);
              gObject.DrawString("4800kr", SystemFonts.CaptionFont, Brushes.Black, x + 3 * i, y - edgey);
-             gObject.DrawString("5200kr", SystemFonts.CaptionFont, Brushes.Black, x + 6 * i, y - edgey);
+             gObject.DrawString("4000kr", SystemFonts.CaptionFont, Brushes.Black, x + 4 * i, y - edgey + color);
              gObject.DrawString("5200kr", SystemFonts.CaptionFont, Brushes.Black, x + 5 * i, y - edgey);
+             gObject.DrawString("5200kr", SystemFonts.CaptionFont, Brushes.Black, x + 6 * i, y - edgey);
+             gObject.DrawString("3000kr", SystemFonts.CaptionFont, Brushes.Black, x + 7 * i, y - edgey + color);
              gObject.DrawString("5600kr", SystemFonts.CaptionFont, Brushes.Black, x + 8 * i, y - edgey);
 
              gObject.DrawString("6000kr", SystemFonts.CaptionFont, Brushes.Black, x - 2 * i + edgex, y - 9 * i - color);
              gObject.DrawString("6000kr", SystemFonts.CaptionFont, Brushes.Black, x - 2 * i + edgex, y - 8 * i - color);
              gObject.DrawString("6400kr", SystemFonts.CaptionFont, Brushes.Black, x - 2 * i + edgex, y - 6 * i - color);
+             gObject.DrawString("4000kr", SystemFonts.CaptionFont, Brushes.Black, x - 2 * i + edgex, y - 5 * i - color);
              gObject.DrawString("7000kr", SystemFonts.CaptionFont, Brushes.Black, x - 2 * i + edgex, y - 3 * i - color);
+             gObject.DrawString("2000kr", SystemFonts.CaptionFont, Brushes.Black, x - 2 * i + edgex, y - 2 * i - color);
              gObject.DrawString("8000kr", SystemFonts.CaptionFont, Brushes.Black, x - 2 * i + edgex, y - 1 * i - color);
 
 
         }
-         private void images()
+         private void images()//Draws already made pictures on the board
          {
              int x = 310, y = 600, i = 280;
              gObject.DrawImage(Properties.Resources._30px_Crystal_Clear_app_agent, 590, 30);
              gObject.DrawImage(Properties.Resources._30px_Db_Schild_svg, x, y);
-             gObject.DrawImage(Properties.Resources._30px_Db_Schild_svg, x - i, y - i);
+             gObject.DrawImage(Properties.Resources._30px_Db_Schild_svg, x - i, y - i -8);
              gObject.DrawImage(Properties.Resources._30px_Db_Schild_svg, x, y - 2 * i);
-             gObject.DrawImage(Properties.Resources._30px_Db_Schild_svg, x + i, y - i);
+             gObject.DrawImage(Properties.Resources._30px_Db_Schild_svg, x + i, y - i - 8);
              gObject.DrawImage(Properties.Resources._30px_Sinnbild_Kfz_svg, 25, 25);
          }
 
-         private static void texts()
+         private static void texts()//Draws all the names and texts 
          {
              int i = 67, x = 642, y = 735, edgey = 732, edgeX = 547, j = 94, colour = 25;
             
@@ -177,7 +185,7 @@ namespace MonopolyBoard
              gObject.DrawString("Fri\nParkering", SystemFonts.CaptionFont, Brushes.Black, 1, 40);
              gObject.DrawString("Gå i\n\n\nfängelse", SystemFonts.CaptionFont, Brushes.Black, 570, 2);
             
-             gObject.ScaleTransform(0.8F, 0.8F);
+             gObject.ScaleTransform(0.8F, 0.8F);//Scales down the names so they will room in the squares
              gObject.DrawString("Västerlång-\ngatan", SystemFonts.DefaultFont, Brushes.Black, x,y);             
              gObject.DrawString("Allmänning", SystemFonts.DefaultFont, Brushes.Black, x - i, y - colour);             
              gObject.DrawString("Hornsgatan", SystemFonts.DefaultFont, Brushes.Black, x - 2 * i, y);
@@ -217,7 +225,7 @@ namespace MonopolyBoard
              gObject.DrawString("Allmänning", SystemFonts.DefaultFont, Brushes.Black, x + j - colour, y - j - 6 * i);
              gObject.DrawString("Drottning-\ngatan", SystemFonts.DefaultFont, Brushes.Black, x + j, y - j - 7 * i);
              gObject.DrawString("Gustaf Adolfs\ntorg", SystemFonts.DefaultFont, Brushes.Black, x + j, y - j - 8 * i);
-             gObject.ScaleTransform(1.25F, 1.25F);
+             gObject.ScaleTransform(1.25F, 1.25F);//Scales the graphics object back to it's former size
              
 
          }
