@@ -132,7 +132,7 @@ namespace MonopolyBoard
              gObject.DrawString("2400kr", SystemFonts.CaptionFont, Brushes.Black, x, y);
              gObject.DrawString("2000kr", SystemFonts.CaptionFont, Brushes.Black, x + i, y);
              gObject.DrawString("2000kr", SystemFonts.CaptionFont, Brushes.Black, x + 3 * i, y);
-             gObject.DrawString("2000kr", SystemFonts.CaptionFont, Brushes.Black, x + 6 * i, y);
+             gObject.DrawString("1200kr", SystemFonts.CaptionFont, Brushes.Black, x + 6 * i, y);
              gObject.DrawString("1200kr", SystemFonts.CaptionFont, Brushes.Black, x + 8 * i, y);
 
              gObject.DrawString("2800kr", SystemFonts.CaptionFont, Brushes.Black, x - i - color, y - i - color);
