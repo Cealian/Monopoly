@@ -39,6 +39,14 @@ namespace MonopolyBoard
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMonopoly));
             this.pnlMainPanel = new System.Windows.Forms.Panel();
+            this.lblply2NoTurnsInJail = new System.Windows.Forms.Label();
+            this.lblply1NoTurnsInJail = new System.Windows.Forms.Label();
+            this.lblply3NoTurnsInJail = new System.Windows.Forms.Label();
+            this.lblply4NoTurnsInJail = new System.Windows.Forms.Label();
+            this.lblply2InJail = new System.Windows.Forms.Label();
+            this.lblply1InJail = new System.Windows.Forms.Label();
+            this.lblply4InJail = new System.Windows.Forms.Label();
+            this.lblply3InJail = new System.Windows.Forms.Label();
             this.lblply4Info = new System.Windows.Forms.Label();
             this.lblply3Info = new System.Windows.Forms.Label();
             this.lblply2Inf = new System.Windows.Forms.Label();
@@ -64,10 +72,7 @@ namespace MonopolyBoard
             this.btnSaveGame = new System.Windows.Forms.Button();
             this.sfdSaveGame = new System.Windows.Forms.SaveFileDialog();
             this.btnBankrupt = new System.Windows.Forms.Button();
-            this.lblply3InJail = new System.Windows.Forms.Label();
-            this.lblply4InJail = new System.Windows.Forms.Label();
-            this.lblply1InJail = new System.Windows.Forms.Label();
-            this.lblply2InJail = new System.Windows.Forms.Label();
+            this.btnJail = new System.Windows.Forms.Button();
             this.pnlMainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer2)).BeginInit();
@@ -82,6 +87,10 @@ namespace MonopolyBoard
             this.pnlMainPanel.BackgroundImage = global::MonopolyBoard.Properties.Resources.Plan;
             this.pnlMainPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnlMainPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlMainPanel.Controls.Add(this.lblply2NoTurnsInJail);
+            this.pnlMainPanel.Controls.Add(this.lblply1NoTurnsInJail);
+            this.pnlMainPanel.Controls.Add(this.lblply3NoTurnsInJail);
+            this.pnlMainPanel.Controls.Add(this.lblply4NoTurnsInJail);
             this.pnlMainPanel.Controls.Add(this.lblply2InJail);
             this.pnlMainPanel.Controls.Add(this.lblply1InJail);
             this.pnlMainPanel.Controls.Add(this.lblply4InJail);
@@ -102,6 +111,98 @@ namespace MonopolyBoard
             this.pnlMainPanel.TabIndex = 0;
             this.pnlMainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMainPanel_Paint);
             // 
+            // lblply2NoTurnsInJail
+            // 
+            this.lblply2NoTurnsInJail.BackColor = System.Drawing.Color.Transparent;
+            this.lblply2NoTurnsInJail.ForeColor = System.Drawing.Color.Red;
+            this.lblply2NoTurnsInJail.Location = new System.Drawing.Point(460, 168);
+            this.lblply2NoTurnsInJail.Name = "lblply2NoTurnsInJail";
+            this.lblply2NoTurnsInJail.Size = new System.Drawing.Size(100, 23);
+            this.lblply2NoTurnsInJail.TabIndex = 26;
+            this.lblply2NoTurnsInJail.Text = "Antal omgångar:";
+            this.lblply2NoTurnsInJail.Visible = false;
+            // 
+            // lblply1NoTurnsInJail
+            // 
+            this.lblply1NoTurnsInJail.BackColor = System.Drawing.Color.Transparent;
+            this.lblply1NoTurnsInJail.ForeColor = System.Drawing.Color.Red;
+            this.lblply1NoTurnsInJail.Location = new System.Drawing.Point(92, 168);
+            this.lblply1NoTurnsInJail.Name = "lblply1NoTurnsInJail";
+            this.lblply1NoTurnsInJail.Size = new System.Drawing.Size(100, 23);
+            this.lblply1NoTurnsInJail.TabIndex = 25;
+            this.lblply1NoTurnsInJail.Text = "Antal omgångar:";
+            this.lblply1NoTurnsInJail.Visible = false;
+            // 
+            // lblply3NoTurnsInJail
+            // 
+            this.lblply3NoTurnsInJail.BackColor = System.Drawing.Color.Transparent;
+            this.lblply3NoTurnsInJail.ForeColor = System.Drawing.Color.Red;
+            this.lblply3NoTurnsInJail.Location = new System.Drawing.Point(92, 521);
+            this.lblply3NoTurnsInJail.Name = "lblply3NoTurnsInJail";
+            this.lblply3NoTurnsInJail.Size = new System.Drawing.Size(100, 23);
+            this.lblply3NoTurnsInJail.TabIndex = 24;
+            this.lblply3NoTurnsInJail.Text = "Antal omgångar:";
+            this.lblply3NoTurnsInJail.Visible = false;
+            // 
+            // lblply4NoTurnsInJail
+            // 
+            this.lblply4NoTurnsInJail.BackColor = System.Drawing.Color.Transparent;
+            this.lblply4NoTurnsInJail.ForeColor = System.Drawing.Color.Red;
+            this.lblply4NoTurnsInJail.Location = new System.Drawing.Point(460, 521);
+            this.lblply4NoTurnsInJail.Name = "lblply4NoTurnsInJail";
+            this.lblply4NoTurnsInJail.Size = new System.Drawing.Size(100, 23);
+            this.lblply4NoTurnsInJail.TabIndex = 23;
+            this.lblply4NoTurnsInJail.Text = "Antal omgångar:";
+            this.lblply4NoTurnsInJail.Visible = false;
+            // 
+            // lblply2InJail
+            // 
+            this.lblply2InJail.BackColor = System.Drawing.Color.Transparent;
+            this.lblply2InJail.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblply2InJail.ForeColor = System.Drawing.Color.Red;
+            this.lblply2InJail.Location = new System.Drawing.Point(460, 145);
+            this.lblply2InJail.Name = "lblply2InJail";
+            this.lblply2InJail.Size = new System.Drawing.Size(100, 23);
+            this.lblply2InJail.TabIndex = 22;
+            this.lblply2InJail.Text = "I FÄNGELSE";
+            this.lblply2InJail.Visible = false;
+            // 
+            // lblply1InJail
+            // 
+            this.lblply1InJail.BackColor = System.Drawing.Color.Transparent;
+            this.lblply1InJail.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblply1InJail.ForeColor = System.Drawing.Color.Red;
+            this.lblply1InJail.Location = new System.Drawing.Point(92, 145);
+            this.lblply1InJail.Name = "lblply1InJail";
+            this.lblply1InJail.Size = new System.Drawing.Size(100, 23);
+            this.lblply1InJail.TabIndex = 21;
+            this.lblply1InJail.Text = "I FÄNGELSE";
+            this.lblply1InJail.Visible = false;
+            // 
+            // lblply4InJail
+            // 
+            this.lblply4InJail.BackColor = System.Drawing.Color.Transparent;
+            this.lblply4InJail.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblply4InJail.ForeColor = System.Drawing.Color.Red;
+            this.lblply4InJail.Location = new System.Drawing.Point(460, 498);
+            this.lblply4InJail.Name = "lblply4InJail";
+            this.lblply4InJail.Size = new System.Drawing.Size(100, 23);
+            this.lblply4InJail.TabIndex = 20;
+            this.lblply4InJail.Text = "I FÄNGELSE";
+            this.lblply4InJail.Visible = false;
+            // 
+            // lblply3InJail
+            // 
+            this.lblply3InJail.BackColor = System.Drawing.Color.Transparent;
+            this.lblply3InJail.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblply3InJail.ForeColor = System.Drawing.Color.Red;
+            this.lblply3InJail.Location = new System.Drawing.Point(92, 498);
+            this.lblply3InJail.Name = "lblply3InJail";
+            this.lblply3InJail.Size = new System.Drawing.Size(100, 23);
+            this.lblply3InJail.TabIndex = 19;
+            this.lblply3InJail.Text = "I FÄNGELSE";
+            this.lblply3InJail.Visible = false;
+            // 
             // lblply4Info
             // 
             this.lblply4Info.BackColor = System.Drawing.Color.Transparent;
@@ -114,7 +215,7 @@ namespace MonopolyBoard
             // lblply3Info
             // 
             this.lblply3Info.BackColor = System.Drawing.Color.Transparent;
-            this.lblply3Info.Location = new System.Drawing.Point(111, 457);
+            this.lblply3Info.Location = new System.Drawing.Point(92, 457);
             this.lblply3Info.Name = "lblply3Info";
             this.lblply3Info.Size = new System.Drawing.Size(100, 64);
             this.lblply3Info.TabIndex = 17;
@@ -132,7 +233,7 @@ namespace MonopolyBoard
             // lblply1Info
             // 
             this.lblply1Info.BackColor = System.Drawing.Color.Transparent;
-            this.lblply1Info.Location = new System.Drawing.Point(111, 112);
+            this.lblply1Info.Location = new System.Drawing.Point(92, 112);
             this.lblply1Info.Name = "lblply1Info";
             this.lblply1Info.Size = new System.Drawing.Size(100, 56);
             this.lblply1Info.TabIndex = 15;
@@ -351,53 +452,16 @@ namespace MonopolyBoard
             this.btnBankrupt.Visible = false;
             this.btnBankrupt.Click += new System.EventHandler(this.btnBankrupt_Click);
             // 
-            // lblply3InJail
+            // btnJail
             // 
-            this.lblply3InJail.BackColor = System.Drawing.Color.Transparent;
-            this.lblply3InJail.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblply3InJail.ForeColor = System.Drawing.Color.Red;
-            this.lblply3InJail.Location = new System.Drawing.Point(92, 524);
-            this.lblply3InJail.Name = "lblply3InJail";
-            this.lblply3InJail.Size = new System.Drawing.Size(100, 23);
-            this.lblply3InJail.TabIndex = 19;
-            this.lblply3InJail.Text = "I FÄNGELSE";
-            this.lblply3InJail.Visible = false;
-            // 
-            // lblply4InJail
-            // 
-            this.lblply4InJail.BackColor = System.Drawing.Color.Transparent;
-            this.lblply4InJail.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblply4InJail.ForeColor = System.Drawing.Color.Red;
-            this.lblply4InJail.Location = new System.Drawing.Point(441, 525);
-            this.lblply4InJail.Name = "lblply4InJail";
-            this.lblply4InJail.Size = new System.Drawing.Size(100, 23);
-            this.lblply4InJail.TabIndex = 20;
-            this.lblply4InJail.Text = "I FÄNGELSE";
-            this.lblply4InJail.Visible = false;
-            // 
-            // lblply1InJail
-            // 
-            this.lblply1InJail.BackColor = System.Drawing.Color.Transparent;
-            this.lblply1InJail.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblply1InJail.ForeColor = System.Drawing.Color.Red;
-            this.lblply1InJail.Location = new System.Drawing.Point(92, 184);
-            this.lblply1InJail.Name = "lblply1InJail";
-            this.lblply1InJail.Size = new System.Drawing.Size(100, 23);
-            this.lblply1InJail.TabIndex = 21;
-            this.lblply1InJail.Text = "I FÄNGELSE";
-            this.lblply1InJail.Visible = false;
-            // 
-            // lblply2InJail
-            // 
-            this.lblply2InJail.BackColor = System.Drawing.Color.Transparent;
-            this.lblply2InJail.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblply2InJail.ForeColor = System.Drawing.Color.Red;
-            this.lblply2InJail.Location = new System.Drawing.Point(441, 184);
-            this.lblply2InJail.Name = "lblply2InJail";
-            this.lblply2InJail.Size = new System.Drawing.Size(100, 23);
-            this.lblply2InJail.TabIndex = 22;
-            this.lblply2InJail.Text = "I FÄNGELSE";
-            this.lblply2InJail.Visible = false;
+            this.btnJail.Location = new System.Drawing.Point(704, 274);
+            this.btnJail.Name = "btnJail";
+            this.btnJail.Size = new System.Drawing.Size(91, 23);
+            this.btnJail.TabIndex = 15;
+            this.btnJail.Text = "Betala borgen";
+            this.btnJail.UseVisualStyleBackColor = true;
+            this.btnJail.Visible = false;
+            this.btnJail.Click += new System.EventHandler(this.btnJail_Click);
             // 
             // frmMonopoly
             // 
@@ -406,6 +470,7 @@ namespace MonopolyBoard
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.CancelButton = this.btnQuit;
             this.ClientSize = new System.Drawing.Size(798, 648);
+            this.Controls.Add(this.btnJail);
             this.Controls.Add(this.btnBankrupt);
             this.Controls.Add(this.btnSaveGame);
             this.Controls.Add(this.btnSellStreet);
@@ -468,6 +533,11 @@ namespace MonopolyBoard
         private Label lblply1InJail;
         private Label lblply4InJail;
         private Label lblply3InJail;
+        private Button btnJail;
+        private Label lblply2NoTurnsInJail;
+        private Label lblply1NoTurnsInJail;
+        private Label lblply3NoTurnsInJail;
+        private Label lblply4NoTurnsInJail;
     }
 }
 

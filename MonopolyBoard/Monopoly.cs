@@ -23,6 +23,10 @@ namespace MonopolyBoard
         const int PX_PER_PACE = 9;
         public int activePlayer = new Random().Next(0, 4);
         int diceEqualCount = 0;
+        int ply1turnsInJail = 0; 
+        int ply2turnsInJail = 0;
+        int ply3turnsInJail = 0;
+        int ply4turnsInJail = 0;
         int chanceCard = new Random().Next(0, 16), comCard = new Random().Next(0, 16);
 
         public frmMonopoly()
@@ -432,7 +436,7 @@ namespace MonopolyBoard
             // Player[2].SetMoney(700);
             // Player[3].SetMoney(800);
             //MovePlayer(7);
-            //MoveActivePlayerToJail();
+            MoveActivePlayerToJail();
 
             UpdatePlayerInfo();
             //UpdatePlayerInfo();
@@ -515,6 +519,8 @@ namespace MonopolyBoard
             btnBuyStreet.Hide();
             NextPlayer();
             UpdatePlayerInfo();
+            if (Player[activePlayer].IsInJail() == true)
+            JailCount();
         }
 
         #endregion
@@ -530,7 +536,8 @@ namespace MonopolyBoard
             {
                 picPlayer2.Hide();
             }
-        }
+            
+        }      
 
         public void NextPlayer() /* Change activePlayer to next player. */
         {
@@ -759,16 +766,17 @@ namespace MonopolyBoard
 
         public void UpdatePlayerInfo() /* Updates the on-screen info about the players. */
         {
+            
             string playerInfo, player1Info, player2Info, player3Info, player4Info;
 
             player1Info = Player[0].GetName() + ": " + Player[0].GetMoney();
             player2Info = Player[1].GetName() + ": " + Player[1].GetMoney();
             player3Info = "";
-            player4Info = "";
+            player4Info = "";       
             
             playerInfo = Player[0].GetName() + ": " + Player[0].GetMoney() + "\n";
             playerInfo += Player[1].GetName() + ": " + Player[1].GetMoney() + "\n";
-  
+      
 
             if (Player[2].GetName() != "")
             {
@@ -782,18 +790,6 @@ namespace MonopolyBoard
                 player4Info = Player[3].GetName() + ": " + Player[3].GetMoney() + "kr";
             }
 
-            if (Player[0].IsInJail() == true)
-                lblply1InJail.Visible = true;
-
-            if (Player[1].IsInJail() == true)
-                lblply2Inf.Visible = true;
-
-            if (Player[2].IsInJail() == true)
-                lblply3Info.Visible = true;
-
-            if (Player[3].IsInJail() == true)
-                lblply4InJail.Visible = true;
-
             lblPlayerInfo.Text = Player[activePlayer].GetName() + "\n" + playerInfo;
             lblPlayerInfo.ForeColor = GetPlayerColor(activePlayer);
             lblply1Info.ForeColor = GetPlayerColor(0);
@@ -804,9 +800,80 @@ namespace MonopolyBoard
             lblply2Inf.Text = player2Info + "kr";
             lblply3Info.Text = player3Info;
             lblply4Info.Text = player4Info;
-            
 
-            UpdateFreeParkValue();
+            if (Player[0].IsInJail() == true)
+            {
+                lblply1InJail.Visible = true;
+                lblply1NoTurnsInJail.Text = "Antal omgångar:" + ply1turnsInJail;
+                lblply1NoTurnsInJail.ForeColor = Color.Red;
+                lblply1NoTurnsInJail.Visible = true;
+            }
+            else
+            {
+                lblply1InJail.Visible = false;
+                lblply1NoTurnsInJail.Visible = false;
+            }
+                if (Player[1].IsInJail() == true)
+                {
+                    lblply2InJail.Visible = true;
+                    lblply2NoTurnsInJail.Text = "Antal omgångar:" + ply2turnsInJail;
+                    lblply2NoTurnsInJail.ForeColor = Color.Red;
+                    lblply2NoTurnsInJail.Visible = true;
+
+                }
+                else
+                {
+                    lblply2InJail.Visible = false;
+                    lblply2NoTurnsInJail.Visible = false;
+                }
+
+                if (Player[2].IsInJail() == true)
+                {
+                    lblply3InJail.Visible = true;
+                    lblply3NoTurnsInJail.Text = "Antal omgångar:" + ply3turnsInJail;
+                    lblply3NoTurnsInJail.ForeColor = Color.Red;
+                    lblply3NoTurnsInJail.Visible = true;
+
+                }
+                else
+                {
+                    lblply3InJail.Visible = false;
+                    lblply3NoTurnsInJail.Visible = false;
+                }
+
+                if (Player[3].IsInJail() == true)
+                {
+                    lblply4InJail.Visible = true;
+                    lblply4NoTurnsInJail.Text = "Antal omgångar:" + ply4turnsInJail;
+                    lblply4NoTurnsInJail.ForeColor = Color.Red;
+                    lblply4NoTurnsInJail.Visible = true;
+
+                }
+                else
+                {
+                    lblply4InJail.Visible = false;
+                    lblply4NoTurnsInJail.Visible = false;
+                }
+
+            if (Player[activePlayer].IsInJail() == true)
+            {
+                //for (int turn = 0; turn < 4; turn++)
+                //{
+                btnJail.Visible = true;
+                
+                
+                /*    if (turn == 3)
+                    {
+                        MessageBox.Show("Du måste betala 1000 i borgen");
+                        Player[activePlayer].SubtractMoney(1000);
+                        Player[activePlayer].GetOutOfJail();
+                        turn = 0;
+                    }
+                 */
+            }
+            else
+                btnJail.Visible = false;
+                UpdateFreeParkValue();          
 
             Console.WriteLine(GetPlayerColor(activePlayer).ToString());
 
@@ -819,6 +886,64 @@ namespace MonopolyBoard
              *  I fängelse (gör det coolt).
              */
         }
+        public void JailCount()
+        {
+            string forcePay = "Du måste betala 1000kr i borgen";
+
+
+            if (Player[0].IsInJail() == true && Player[activePlayer] == Player[0])
+            {
+                ply1turnsInJail++;
+
+                if (ply1turnsInJail == 4)
+                {
+                    MessageBox.Show(forcePay);
+                    btnBankrupt.Visible = true;
+                    btnNextPlayer.Enabled = false;
+                    btnRollDices.Enabled = false;
+                }
+            }
+                if (Player[1].IsInJail() == true && Player[activePlayer] == Player[1])
+                {
+                    ply2turnsInJail++;
+                    if (ply2turnsInJail == 4)
+                    {
+                        MessageBox.Show(forcePay);
+                        btnBankrupt.Visible = true;
+                        btnNextPlayer.Enabled = false;
+                        btnRollDices.Enabled = false;
+                    }
+                }
+
+                if (Player[2].IsInJail() == true && Player[activePlayer] == Player[2])
+                {
+                    ply3turnsInJail++;
+                    if (ply3turnsInJail == 4)
+                    {
+                        MessageBox.Show(forcePay);
+                        btnBankrupt.Visible = true;
+                        btnNextPlayer.Enabled = false;
+                        btnRollDices.Enabled = false;
+                    }
+                }
+
+
+                if (Player[3].IsInJail() == true && Player[activePlayer] == Player[3])
+                {
+                    ply4turnsInJail++;
+                    if (ply4turnsInJail == 4)
+                    {
+                        MessageBox.Show(forcePay);
+                        btnBankrupt.Visible = true;
+                        btnNextPlayer.Enabled = false;
+                        btnRollDices.Enabled = false;
+                    }
+
+                }
+  
+        }
+            
+        
 
         private void btnBuyHouses_Click(object sender, EventArgs e)
         {
@@ -942,5 +1067,25 @@ namespace MonopolyBoard
         {
             
         }
+
+        private void btnJail_Click(object sender, EventArgs e)
+        {
+           /* int plyrMoney = Player[activePlayer].GetMoney(); 
+            string forcePay = "Du måste betala 1000 kr för att få komma ut.";
+            string noMoney = "Du har inte råd att betala";
+
+            if (MessageBox.Show(forcePay, "nDu har: " + plyrMoney, MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                return;
+            }
+
+            if (plyrMoney < 1000)
+                {
+                    MessageBox.Show(noMoney);
+                }
+                Player[activePlayer].SubtractMoney(1000); */
+            }
+        }
+     
     }
 }
