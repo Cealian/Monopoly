@@ -68,7 +68,8 @@
             // 
             // txtBoxPlayer1
             // 
-            this.txtBoxPlayer1.BackColor = System.Drawing.Color.Pink;
+            this.txtBoxPlayer1.BackColor = System.Drawing.Color.Red;
+            this.txtBoxPlayer1.ForeColor = System.Drawing.Color.White;
             this.txtBoxPlayer1.Location = new System.Drawing.Point(20, 61);
             this.txtBoxPlayer1.Name = "txtBoxPlayer1";
             this.txtBoxPlayer1.Size = new System.Drawing.Size(151, 20);

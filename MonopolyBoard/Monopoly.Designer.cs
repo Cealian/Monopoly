@@ -511,20 +511,17 @@ namespace MonopolyBoard
         public System.Windows.Forms.PictureBox picPlayer1;
         public System.Windows.Forms.PictureBox picPlayer3;
         public System.Windows.Forms.PictureBox picPlayer2;
-        private System.Windows.Forms.Button btnRollDices;
         private System.Windows.Forms.Label lblDice1;
         private System.Windows.Forms.Label lblDice2;
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Button btnTrade;
         private System.Windows.Forms.Label lblSquareInfo;
-        private System.Windows.Forms.Button btnNextPlayer;
         private System.Windows.Forms.Button btnSellStreet;
         private System.Windows.Forms.Button btnBuyStreet;
         private System.Windows.Forms.Button btnSaveGame;
         private System.Windows.Forms.SaveFileDialog sfdSaveGame;
         private System.Windows.Forms.Label lblFreePark;
         private System.Windows.Forms.Label lblPlayerInfo;
-        private Button btnBankrupt;
         private Label lblply2Inf;
         private Label lblply1Info;
         private Label lblply4Info;
@@ -538,6 +535,9 @@ namespace MonopolyBoard
         private Label lblply1NoTurnsInJail;
         private Label lblply3NoTurnsInJail;
         private Label lblply4NoTurnsInJail;
+        public Button btnBankrupt;
+        public Button btnRollDices;
+        public Button btnNextPlayer;
     }
 }
 

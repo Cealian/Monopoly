@@ -22,8 +22,8 @@ namespace MonopolyBoard
         const int PACES_PER_SQUARE = 6;
         const int PX_PER_PACE = 9;
         public int activePlayer = new Random().Next(0, 4);
-        int diceEqualCount = 0;
-        int ply1TurnsInJail = 0; 
+        public int diceEqualCount = 0;
+        int ply1TurnsInJail = 0;
         int ply2TurnsInJail = 0;
         int ply3TurnsInJail = 0;
         int ply4TurnsInJail = 0;
@@ -520,41 +520,53 @@ namespace MonopolyBoard
             NextPlayer();
             UpdatePlayerInfo();
             if (Player[activePlayer].IsInJail() == true)
-            JailCount();
+                JailCount();
         }
 
         #endregion
 
         public void HideInactivePlayers() /* Hide players that are not in the game. */
         {
-            if (Player[3].GetName() == "")
+
+
+            if (Player[0].GetName() == "")
             {
-                picPlayer3.Hide();
+                picPlayer0.Hide();
+            }
+
+            if (Player[1].GetName() == "")
+            {
+                picPlayer1.Hide();
             }
 
             if (Player[2].GetName() == "")
             {
                 picPlayer2.Hide();
             }
-            
+
+            if (Player[3].GetName() == "")
+            {
+                picPlayer3.Hide();
+            }
+
         }
 
         public void NextPlayer() /* Change activePlayer to next player. */
         {
-            if (diceEqualCount == 0)
+            do
             {
                 activePlayer++;
-            }
 
-            if (activePlayer > 3 || Player[activePlayer].GetName() == "")
-            {
-                activePlayer = 0;
-            }
+                if (activePlayer > 3)
+                {
+                    activePlayer = 0;
+                }
+            } while (Player[activePlayer].GetName() == "");
 
             if (Player[activePlayer].IsInJail() == true)
             {
-                btnJail.Visible = true;
-             }
+                btnBail.Visible = true;
+            }
         }
 
         public void RunSquareEvent() /* Checks what kind of square the player landed on and acts accordingly. */
@@ -665,6 +677,7 @@ namespace MonopolyBoard
 
             Type squareType = Squares[position].GetType();
             int rent = 0;
+            int block = 0;
             bool isMortgaged = false;
 
             if (owner == activePlayer)
@@ -681,17 +694,28 @@ namespace MonopolyBoard
                 }
                 isMortgaged = ((Street)Squares[position]).GetMortgaged();
                 rent = ((Street)Squares[position]).GetRent();
+
+                block = ((Street)Squares[position]).GetBlock();
+                if (SamePlayerOwnsBlock(block) && BlockIsNotMortgaged(block) && ((Street)Squares[position]).GetNoOfHouses() == 0)
+                {
+                    rent = rent * 2;
+                }
             }
             else if (squareType == typeof(Station))
             {
                 if (owner == 5)
                 {
-
                     btnBuyStreet.Show();
                     return;
                 }
                 isMortgaged = ((Station)Squares[position]).GetMortgaged();
                 rent = ((Station)Squares[position]).GetRent();
+
+                block = ((Station)Squares[position]).GetBlock();
+                if (SamePlayerOwnsBlock(block) && BlockIsNotMortgaged(block))
+                {
+                    rent = rent * 2;
+                }
             }
             else if (squareType == typeof(PowerStation))
             {
@@ -702,15 +726,21 @@ namespace MonopolyBoard
                 }
                 isMortgaged = ((PowerStation)Squares[position]).GetMortgaged();
                 rent = ((PowerStation)Squares[position]).GetRent();
+
+                block = ((PowerStation)Squares[position]).GetBlock();
+                if (SamePlayerOwnsBlock(block) && BlockIsNotMortgaged(block))
+                {
+                    rent = rent * 2;
+                }
             }
 
 
             if (isMortgaged)
             {
-                MessageBox.Show("Du hamnade på " + Squares[position].GetName() + "\nInteknad.");
+                MessageBox.Show("Du hamnade på " + Squares[position].GetName() + "\nIntecknad.");
                 return;
             }
-            MessageBox.Show("Du hamnade på " + Squares[position].GetName() + "\nHyra: " + rent + " betalas till " + Player[owner].GetName());
+            MessageBox.Show("Du hamnade på " + Squares[position].GetName() + "\nHyra: " + rent + " kr betalas till " + Player[owner].GetName());
             Player[activePlayer].SubtractMoney(rent);
             Player[owner].AddMoney(rent);
 
@@ -777,8 +807,8 @@ namespace MonopolyBoard
             player1Info = Player[0].GetName() + ": " + Player[0].GetMoney();
             player2Info = Player[1].GetName() + ": " + Player[1].GetMoney();
             player3Info = "";
-            player4Info = "";       
-            
+            player4Info = "";
+
             playerInfo = Player[0].GetName() + ": " + Player[0].GetMoney() + "\n"; //Information about Player 1
             playerInfo += Player[1].GetName() + ": " + Player[1].GetMoney() + "\n";//Information about Player 2
 
@@ -797,7 +827,7 @@ namespace MonopolyBoard
 
             lblPlayerInfo.Text = Player[activePlayer].GetName() + "\n" + playerInfo;
             lblPlayerInfo.ForeColor = GetPlayerColor(activePlayer);
-            
+
             //Each Player's information displayed on their respective lable, in their respective colors
             lblply1Info.ForeColor = GetPlayerColor(0);
             lblply2Inf.ForeColor = GetPlayerColor(1);
@@ -822,52 +852,52 @@ namespace MonopolyBoard
                 ply1TurnsInJail = 0;
             }
             if (Player[1].IsInJail() == true)//Displays the labels showing that Player 2 is in Jail and how many turns Player 2 has spent in Jail
-                {
-                    lblply2InJail.Visible = true;
-                    lblply2NoTurnsInJail.Text = "Antal omgångar:" + ply2TurnsInJail;
-                    lblply2NoTurnsInJail.ForeColor = Color.Red;
-                    lblply2NoTurnsInJail.Visible = true;
+            {
+                lblply2InJail.Visible = true;
+                lblply2NoTurnsInJail.Text = "Antal omgångar:" + ply2TurnsInJail;
+                lblply2NoTurnsInJail.ForeColor = Color.Red;
+                lblply2NoTurnsInJail.Visible = true;
 
-                }
+            }
             else//Should Player 2 not be in Jail(or get out of Jail) the count for turns in jail is reset to o and the lables hidden
-                {
-                    lblply2InJail.Visible = false;
-                    lblply2NoTurnsInJail.Visible = false;
-                    ply2TurnsInJail = 0;
-                }
+            {
+                lblply2InJail.Visible = false;
+                lblply2NoTurnsInJail.Visible = false;
+                ply2TurnsInJail = 0;
+            }
 
             if (Player[2].IsInJail() == true)//Displays the labels showing that Player 3 is in Jail and how many turns Player 3 has spent in Jail
-                {
-                    lblply3InJail.Visible = true;
-                    lblply3NoTurnsInJail.Text = "Antal omgångar:" + ply3TurnsInJail;
-                    lblply3NoTurnsInJail.ForeColor = Color.Red;
-                    lblply3NoTurnsInJail.Visible = true;
+            {
+                lblply3InJail.Visible = true;
+                lblply3NoTurnsInJail.Text = "Antal omgångar:" + ply3TurnsInJail;
+                lblply3NoTurnsInJail.ForeColor = Color.Red;
+                lblply3NoTurnsInJail.Visible = true;
 
-                }
+            }
             else//Should Player 3 not be in Jail(or get out of Jail) the count for turns in jail is reset to o and the lables hidden
-                {
-                    lblply3InJail.Visible = false;
-                    lblply3NoTurnsInJail.Visible = false;
-                    ply3TurnsInJail = 0;
-                }
+            {
+                lblply3InJail.Visible = false;
+                lblply3NoTurnsInJail.Visible = false;
+                ply3TurnsInJail = 0;
+            }
 
             if (Player[3].IsInJail() == true)//Displays the labels showing that Player 4 is in Jail and how many turns Player 4 has spent in Jail
-                {
-                    lblply4InJail.Visible = true;
-                    lblply4NoTurnsInJail.Text = "Antal omgångar:" + ply4TurnsInJail;
-                    lblply4NoTurnsInJail.ForeColor = Color.Red;
-                    lblply4NoTurnsInJail.Visible = true;
+            {
+                lblply4InJail.Visible = true;
+                lblply4NoTurnsInJail.Text = "Antal omgångar:" + ply4TurnsInJail;
+                lblply4NoTurnsInJail.ForeColor = Color.Red;
+                lblply4NoTurnsInJail.Visible = true;
 
-                }
+            }
             else//Should Player 4 not be in Jail(or get out of Jail) the count for turns in jail is reset to o and the lables hidden
-                {
-                    lblply4InJail.Visible = false;
-                    lblply4NoTurnsInJail.Visible = false;
-                    ply4TurnsInJail = 0;
-                }
+            {
+                lblply4InJail.Visible = false;
+                lblply4NoTurnsInJail.Visible = false;
+                ply4TurnsInJail = 0;
+            }
 
             if (Player[activePlayer].IsInJail() == true)//Displays the bail button if the active Player is in jail
-                btnBail.Visible = true;                          
+                btnBail.Visible = true;
             else
                 btnBail.Visible = false;
             UpdateFreeParkValue();
@@ -882,6 +912,7 @@ namespace MonopolyBoard
              *  I fängelse (gör det coolt).
              */
         }
+
         public void JailCount() //Keeps track of how many turns each player has spent in jail and forces them to pay or go bankrupt after 3 turns
         {
             string forcePay = "Du måste betala 1000kr i borgen";
@@ -894,18 +925,18 @@ namespace MonopolyBoard
                 ply2TurnsInJail++;
 
             if (Player[2].IsInJail() == true && Player[activePlayer] == Player[2])//How long Player 3 has spent in jail
-                 ply3TurnsInJail++;
+                ply3TurnsInJail++;
 
             if (Player[3].IsInJail() == true && Player[activePlayer] == Player[3])//How long Player 4 has spent in jail
-                 ply4TurnsInJail++;
+                ply4TurnsInJail++;
 
             if (ply1TurnsInJail == 4 || ply2TurnsInJail == 4 || ply3TurnsInJail == 4 || ply4TurnsInJail == 4)//Forces the active Player to bail after 3 turns
-                    {
-                        MessageBox.Show(forcePay);
-                        btnBankrupt.Visible = true;
-                        btnNextPlayer.Enabled = false;
-                        btnRollDices.Enabled = false;
-                    }
+            {
+                MessageBox.Show(forcePay);
+                btnBankrupt.Visible = true;
+                btnNextPlayer.Enabled = false;
+                btnRollDices.Enabled = false;
+            }
         }
 
         private void btnBuyHouses_Click(object sender, EventArgs e)
@@ -978,7 +1009,6 @@ namespace MonopolyBoard
             lblFreePark.Text = Freepark.GetValue().ToString();
         }
 
-
         private void btnSellStreet_Click(object sender, EventArgs e)/*Opens the form where the player can buy and sell houses and mortgage streets*/
         {
             BuildHouses sellStreet = new BuildHouses();
@@ -992,7 +1022,7 @@ namespace MonopolyBoard
 
             if (player == 0)
             {
-                playerColor = Color.Pink;
+                playerColor = Color.Red;
             }
             else if (player == 1)
             {
@@ -1009,7 +1039,7 @@ namespace MonopolyBoard
 
             return playerColor;
         }
-        
+
         private void CheckIfPlayerCantPay()
         {
             if (Player[activePlayer].GetMoney() < 0)
@@ -1019,6 +1049,179 @@ namespace MonopolyBoard
             }
         }
 
+        public bool SamePlayerOwnsBlock(int block) /* Returns true of the same player owns every street of the block. */
+        {
+            int street1 = 0, street2 = 0, street3 = 0, street4 = 0;
+
+            if (block == 0) // Streets 1 & 3
+            {
+                street1 = 1;
+                street2 = 3;
+            }
+            else if (block == 1) // Streets 6 & 8 & 9
+            {
+                street1 = 6;
+                street2 = 8;
+                street3 = 9;
+            }
+            else if (block == 2) // Streets 11 & 13 & 14
+            {
+                street1 = 11;
+                street2 = 13;
+                street3 = 14;
+            }
+            else if (block == 3) // Streets 16 & 18 & 19
+            {
+                street1 = 16;
+                street2 = 18;
+                street3 = 19;
+            }
+            else if (block == 4) // Streets 21 & 23 & 24
+            {
+                street1 = 21;
+                street2 = 23;
+                street3 = 24;
+            }
+            else if (block == 5) // Streets 26 & 27 & 29
+            {
+                street1 = 26;
+                street2 = 27;
+                street3 = 29;
+            }
+            else if (block == 6) // Streets 31 & 32 & 34
+            {
+                street1 = 31;
+                street2 = 32;
+                street3 = 34;
+
+            }
+            else if (block == 7) // Streets 37 & 39
+            {
+                street2 = 37;
+                street3 = 39;
+            }
+            else if (block == 8) // Streets 5 & 15 & 25 & 35 - Train stations
+            {
+                street1 = 5;
+                street2 = 15;
+                street3 = 25;
+                street4 = 35;
+            }
+            else if (block == 9) // Streets 12 & 28 - Power stations
+            {
+                street1 = 37;
+                street2 = 39;
+            }
+
+
+            else if (street3 == 0 && block != 9) // First or last block.
+            {
+                return (((Street)Squares[street1]).GetOwner() == ((Street)Squares[street2]).GetOwner());
+            }
+            else if (block == 9) // Power station block.
+            {
+                return (((PowerStation)Squares[street1]).GetOwner() == ((PowerStation)Squares[street2]).GetOwner());
+            }
+            if (street4 != 0) // Train station.
+            {
+                return (((Station)Squares[street1]).GetOwner() == ((Station)Squares[street2]).GetOwner()
+                        && ((Station)Squares[street1]).GetOwner() == ((Station)Squares[street3]).GetOwner()
+                        && ((Station)Squares[street1]).GetOwner() == ((Station)Squares[street4]).GetOwner());
+            }
+
+            /* If you made it here it's a street block with 3 streets. */
+            return (((Street)Squares[street1]).GetOwner() == ((Street)Squares[street2]).GetOwner()
+                && ((Street)Squares[street1]).GetOwner() == ((Street)Squares[street3]).GetOwner());
+        }
+
+        public bool BlockIsNotMortgaged(int block)
+        {
+            int street1 = 0, street2 = 0, street3 = 0, street4 = 0;
+
+            if (block == 0) // Streets 1 & 3
+            {
+                street1 = 1;
+                street2 = 3;
+            }
+            else if (block == 1) // Streets 6 & 8 & 9
+            {
+                street1 = 6;
+                street2 = 8;
+                street3 = 9;
+            }
+            else if (block == 2) // Streets 11 & 13 & 14
+            {
+                street1 = 11;
+                street2 = 13;
+                street3 = 14;
+            }
+            else if (block == 3) // Streets 16 & 18 & 19
+            {
+                street1 = 16;
+                street2 = 18;
+                street3 = 19;
+            }
+            else if (block == 4) // Streets 21 & 23 & 24
+            {
+                street1 = 21;
+                street2 = 23;
+                street3 = 24;
+            }
+            else if (block == 5) // Streets 26 & 27 & 29
+            {
+                street1 = 26;
+                street2 = 27;
+                street3 = 29;
+            }
+            else if (block == 6) // Streets 31 & 32 & 34
+            {
+                street1 = 31;
+                street2 = 32;
+                street3 = 34;
+
+            }
+            else if (block == 7) // Streets 37 & 39
+            {
+                street2 = 37;
+                street3 = 39;
+            }
+            else if (block == 8) // Streets 5 & 15 & 25 & 35 - Train stations
+            {
+                street2 = 5;
+                street3 = 15;
+                street2 = 25;
+                street3 = 35;
+            }
+            else if (block == 9) // Streets 12 & 28 - Power stations
+            {
+                street2 = 37;
+                street3 = 39;
+            }
+
+            if (street3 == 0 && block != 9) // Last or first block
+            {
+                return !(((Street)Squares[street1]).GetMortgaged()
+                    && ((Street)Squares[street2]).GetMortgaged());
+            }
+            else if (block == 9) // Power station block
+            {
+                return !(((PowerStation)Squares[street1]).GetMortgaged()
+                    && ((PowerStation)Squares[street2]).GetMortgaged());
+            }
+            else if (street4 != 0) // Train station block
+            {
+                return !(((Street)Squares[street1]).GetMortgaged()
+                        && ((Street)Squares[street2]).GetMortgaged()
+                        && ((Street)Squares[street3]).GetMortgaged()
+                        && ((Street)Squares[street4]).GetMortgaged());
+            }
+
+            /* If you made it here it's a street block with 3 streets. */
+            return !(((Street)Squares[street1]).GetMortgaged()
+                    && ((Street)Squares[street2]).GetMortgaged()
+                    && ((Street)Squares[street3]).GetMortgaged());
+        }
+
         /* Allow command line to be seen during normal execution */
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAsAttribute(UnmanagedType.Bool)]
@@ -1026,7 +1229,23 @@ namespace MonopolyBoard
 
         private void btnBankrupt_Click(object sender, EventArgs e)
         {
-            
+            foreach (Square square in Squares)
+            {
+                if (square.GetType() == typeof(Street))
+                {
+                    ((Street)square).ChangeOwner(5);
+                }
+                else if (square.GetType() == typeof(Station))
+                {
+                    ((Station)square).ChangeOwner(5);
+                }
+                else if (square.GetType() == typeof(PowerStation))
+                {
+                    ((PowerStation)square).ChangeOwner(5);
+                }
+            }
+
+            HideInactivePlayers();
         }
 
         private void btnBail_Click(object sender, EventArgs e)
@@ -1035,7 +1254,7 @@ namespace MonopolyBoard
             string prompt = "Vill du Betala 1000kr för att komma ut ut fängelset?\nDu har " + playerMoney + " kr";
 
             if (MessageBox.Show(prompt, "Betala Borgen", MessageBoxButtons.YesNo) == DialogResult.No)
-        {
+            {
                 return;
             }
             Player[activePlayer].SubtractMoney(1000);
