@@ -339,7 +339,7 @@ namespace MonopolyBoard
 
         #endregion
 
-        /* Instantiation of all chance and community cards */
+        /* Instantiation of all chance and community chest cards */
         #region Cards instantiation
 
         public void InstantiateChanceCards()/* Instantiation of all chancecards*/
@@ -505,7 +505,7 @@ namespace MonopolyBoard
 
         private void btnTrade_Click(object sender, EventArgs e) /* Open the form where the active player can trade with the other players.*/
         {
-            Trade TradeForm = new Trade();
+            frmTrade TradeForm = new frmTrade();
             TradeForm.board = this;
             TradeForm.ShowDialog();
 
@@ -1013,9 +1013,9 @@ namespace MonopolyBoard
             lblFreePark.Text = Freepark.GetValue().ToString();
         }
 
-        private void btnSellStreet_Click(object sender, EventArgs e)/*Opens the form where the player can buy and sell houses and mortgage streets*/
+        private void btnManageStreet_Click(object sender, EventArgs e)/*Opens the form where the player can buy and sell houses and mortgage streets*/
         {
-            BuildHouses sellStreet = new BuildHouses();
+            frmManageStreets sellStreet = new frmManageStreets();
             sellStreet.board = this;
             sellStreet.Show();
         }
@@ -1252,7 +1252,8 @@ namespace MonopolyBoard
             HideInactivePlayers();
         }
 
-        private void btnBail_Click(object sender, EventArgs e)
+        private void btnBail_Click(object sender, EventArgs e)/*Gives the player the possibiliy to bail. If the player chooses, and is able to pay,
+                                                               * the number of turns in jail(for the active player) will be set to 0.*/
         {
             int playerMoney = Player[activePlayer].GetMoney();
             string prompt = "Vill du Betala 1000kr för att komma ut ut fängelset?\nDu har " + playerMoney + " kr";
@@ -1262,6 +1263,7 @@ namespace MonopolyBoard
                 return;
             }
             Player[activePlayer].SubtractMoney(1000);
+            Freepark.AddMoney(1000);
             Player[activePlayer].GetOutOfJail();
             btnBail.Hide();
             btnNextPlayer.Enabled = true;

@@ -423,7 +423,7 @@ namespace MonopolyBoard
             this.btnSellStreet.TabIndex = 12;
             this.btnSellStreet.Text = "Hantera gator";
             this.btnSellStreet.UseVisualStyleBackColor = true;
-            this.btnSellStreet.Click += new System.EventHandler(this.btnSellStreet_Click);
+            this.btnSellStreet.Click += new System.EventHandler(this.btnManageStreet_Click);
             // 
             // btnSaveGame
             // 

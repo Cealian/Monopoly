@@ -1,6 +1,6 @@
 ﻿namespace MonopolyBoard
 {
-    partial class BuildHouses
+    partial class frmManageStreets
     {
         /// <summary>
         /// Required designer variable.
@@ -87,6 +87,7 @@
             // 
             // btnClose
             // 
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.Location = new System.Drawing.Point(158, 162);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(83, 23);
@@ -95,7 +96,7 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // BuildHouses
+            // frmManageStreets
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -108,10 +109,10 @@
             this.Controls.Add(this.lbInfo);
             this.Controls.Add(this.btnMortgage);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "BuildHouses";
+            this.Name = "frmManageStreets";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SellStreet";
+            this.Text = "Hantera Gator";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.SellStreet_Load);
             this.ResumeLayout(false);

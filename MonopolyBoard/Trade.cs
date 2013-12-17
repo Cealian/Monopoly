@@ -8,12 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MonopolyBoard
+namespace MonopolyBoard/*Written by Sebastian Olsson*/
 {
-    public partial class Trade : Form
+    public partial class frmTrade : Form//This is the trade form.
     {
         public frmMonopoly board;
-        public Trade()
+        public frmTrade()
         {
             InitializeComponent();
         }
@@ -88,7 +88,7 @@ namespace MonopolyBoard
             ChangePlayers();
         }
 
-        private void Trade_Load(object sender, EventArgs e)//Loads all veribles that we need when the form opens.
+        private void Trade_Load(object sender, EventArgs e)//Loads all varibles that we need when the form opens.
         {
             for (int i = 0; i < board.Player.Length; i++)
             {

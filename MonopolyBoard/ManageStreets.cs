@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace MonopolyBoard
+namespace MonopolyBoard/*Written by Sebastian Olsson*/
 {
-    public partial class BuildHouses : Form
+    public partial class frmManageStreets : Form/*This is the street management form.*/
     {
         public frmMonopoly board;
-        public BuildHouses()
+        public frmManageStreets()
         {
             InitializeComponent();
         }
@@ -27,7 +27,7 @@ namespace MonopolyBoard
             UpdateInfo();
         }
 
-        private void UpdateSquares()
+        private void UpdateSquares()/*Updates the listbox.*/
         {
             lbInfo.Text = "";
             lbStreets.Items.Clear();
@@ -49,7 +49,7 @@ namespace MonopolyBoard
             }
         }
 
-        private void UpdateInfo()
+        private void UpdateInfo()/*Updates all the buttons and the infolabel with the correct data.*/
         {
             string info = "";
             int block = 10;
@@ -151,7 +151,7 @@ namespace MonopolyBoard
             board.UpdatePlayerInfo();
         }
 
-        private void Mortgage()
+        private void Mortgage()/*Mortgage the selceted object.*/
         {
             for (int i = 0; i < board.SquaresArray.Length; i++)
             {
@@ -203,12 +203,12 @@ namespace MonopolyBoard
             }
         }
 
-        private void lbStreets_SelectedIndexChanged(object sender, EventArgs e)
+        private void lbStreets_SelectedIndexChanged(object sender, EventArgs e)/*Updates all the buttons and the infolabel with the correct data.*/
         {
             UpdateInfo();
         }
 
-        private void btnBuyHouse_Click(object sender, EventArgs e)
+        private void btnBuyHouse_Click(object sender, EventArgs e)/*Builds a house on the selected street.*/
         {
             for (int i = 0; i < board.SquaresArray.Length; i++)
             {
@@ -226,7 +226,7 @@ namespace MonopolyBoard
             UpdateInfo();
         }
 
-        private void btnSellHouse_Click(object sender, EventArgs e)
+        private void btnSellHouse_Click(object sender, EventArgs e)/*Sells a house on the selected street.*/
         {
             for (int i = 0; i < board.SquaresArray.Length; i++)
             {
@@ -244,7 +244,7 @@ namespace MonopolyBoard
             UpdateInfo();
         }
 
-        private void btnClose_Click(object sender, EventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)/*Closes the form.*/
         {
             Dispose();
             Close();
