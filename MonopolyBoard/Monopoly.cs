@@ -945,13 +945,6 @@ namespace MonopolyBoard
                     }
         }
 
-        private void btnBuyHouses_Click(object sender, EventArgs e)
-        {
-            BuyHouse BuyHouseForm = new BuyHouse();
-            BuyHouseForm.board = this;
-            BuyHouseForm.ShowDialog();
-        }
-
         private void btnBuyStreet_Click(object sender, EventArgs e) /*This code handles the buying of streets.*/
         {
             int playerMoney = Player[activePlayer].GetMoney();

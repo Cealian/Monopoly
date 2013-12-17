@@ -59,12 +59,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BuyHouse.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="BuyHouse.Designer.cs">
-      <DependentUpon>BuyHouse.cs</DependentUpon>
-    </Compile>
     <Compile Include="ChanceCards.cs" />
     <Compile Include="CommunityCards.cs" />
     <Compile Include="FreeParking.cs" />
@@ -101,9 +95,6 @@
     <Compile Include="Trade.Designer.cs">
       <DependentUpon>Trade.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="BuyHouse.resx">
-      <DependentUpon>BuyHouse.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Monopoly.resx">
       <DependentUpon>Monopoly.cs</DependentUpon>
     </EmbeddedResource>
