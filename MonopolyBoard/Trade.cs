@@ -86,6 +86,7 @@ namespace MonopolyBoard/*Written by Sebastian Olsson*/
             MoveStreets(GetSelectedPlayer());
             MoveStreets(board.activePlayer);
             ChangePlayers();
+            board.CheckOwnership();
         }
 
         private void Trade_Load(object sender, EventArgs e)//Loads all varibles that we need when the form opens.

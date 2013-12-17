@@ -75,6 +75,7 @@ namespace MonopolyBoard
         {
             Player[activePlayer].MoveForward(steps);
             tmrMovePlayer.Start();
+
         }
 
         private void tmrMovePlayer_Tick(object sender, EventArgs e) /* Move player until its remaining steps = 0. */
@@ -84,6 +85,7 @@ namespace MonopolyBoard
 
         public void MoveActivePlayer() /* Move the active player. */
         {
+            btnNextPlayer.Enabled = false;
             if (paces < PACES_PER_SQUARE) /* Move the player 16px five times for every square. */
             {
                 if (activePlayer == 0)
@@ -521,6 +523,7 @@ namespace MonopolyBoard
             UpdatePlayerInfo();
             if (Player[activePlayer].IsInJail() == true)
             JailCount();
+            CheckOwnership();
         }
 
         #endregion
@@ -989,6 +992,7 @@ namespace MonopolyBoard
             Player[activePlayer].SubtractMoney(streetPrice);//Take money from the player
             btnBuyStreet.Hide();
             ShowSquareInfo();
+            CheckOwnership();
 
             GEngine.UpdateOwner(position, activePlayer);
 
@@ -1269,6 +1273,30 @@ namespace MonopolyBoard
             btnNextPlayer.Enabled = true;
             ShowSquareInfo();
             UpdatePlayerInfo();
+        }
+
+        public void CheckOwnership()/*Checks if the active player owns any squares.*/
+        {
+            for (int i = 0; i < SquaresArray.Length; i++)
+            {
+                if (SquaresArray[i].GetType() == typeof(Street) && ((Street)SquaresArray[i]).GetOwner() == activePlayer)
+                {
+                    btnSellStreet.Visible = true;
+                    return;
+                }
+                else if (SquaresArray[i].GetType() == typeof(Station) && ((Station)SquaresArray[i]).GetOwner() == activePlayer)
+                {
+                    btnSellStreet.Visible = true;
+                    return;
+                }
+                else if (SquaresArray[i].GetType() == typeof(PowerStation) && ((PowerStation)SquaresArray[i]).GetOwner() == activePlayer)
+                {
+                    btnSellStreet.Visible = true;
+                    return;
+                }
+                else
+                    btnSellStreet.Visible = false;
+            }
         }
     }
 }
