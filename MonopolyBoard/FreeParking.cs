@@ -2,6 +2,8 @@
 {
     public class FreeParking
     {
+        /*Written by Elias Johansson*/
+
         /*This class is storing methods for handling the freeparking square on the monopoly board.*/
         
         private int value = 0; 
