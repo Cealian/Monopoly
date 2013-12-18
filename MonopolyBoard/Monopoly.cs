@@ -918,30 +918,25 @@ namespace MonopolyBoard
         public void UpdatePlayerInfo() /* Updates the on-screen info about the players. */
         {
 
-            string playerInfo, player1Info, player2Info, player3Info, player4Info;
+            string player1Info, player2Info, player3Info, player4Info;
 
             player1Info = Player[0].GetName() + ": " + Player[0].GetMoney();
             player2Info = Player[1].GetName() + ": " + Player[1].GetMoney();
             player3Info = "";
             player4Info = "";
 
-            playerInfo = Player[0].GetName() + ": " + Player[0].GetMoney() + "\n"; //Information about Player 1
-            playerInfo += Player[1].GetName() + ": " + Player[1].GetMoney() + "\n";//Information about Player 2
-
 
             if (Player[2].GetName() != "")//Information about Player 3, if there is a 3;rd player
             {
-                playerInfo += Player[2].GetName() + ": " + Player[2].GetMoney() + "\n";
                 player3Info = Player[2].GetName() + ": " + Player[2].GetMoney() + "kr";
             }
 
             if (Player[3].GetName() != "")//Information about Player 4, if there is a 4;th player
             {
-                playerInfo += Player[3].GetName() + ": " + Player[3].GetMoney() + "\n";
                 player4Info = Player[3].GetName() + ": " + Player[3].GetMoney() + "kr";
             }
 
-            lblPlayerInfo.Text = Player[activePlayer].GetName() + "\n" + playerInfo;
+            lblPlayerInfo.Text = Player[activePlayer].GetName() + ": " + Player[activePlayer].GetMoney() + " Kr";
             lblPlayerInfo.ForeColor = GetPlayerColor(activePlayer);
 
             //Each Player's information displayed on their respective lable, in their respective colors
