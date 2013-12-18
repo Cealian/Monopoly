@@ -62,7 +62,6 @@
     <Compile Include="ChanceCards.cs" />
     <Compile Include="CommunityCards.cs" />
     <Compile Include="FreeParking.cs" />
-    <Compile Include="GameSave.cs" />
     <Compile Include="Monopoly.cs">
       <SubType>Form</SubType>
     </Compile>

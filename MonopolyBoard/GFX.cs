@@ -14,7 +14,6 @@ namespace MonopolyBoard
         {
             gObject = g;
             setUpCanvas();
-
         }
 
         /* ----- Functions ----- */
@@ -166,6 +165,7 @@ namespace MonopolyBoard
 
 
         }
+
         private void images()//Draws already made pictures on the board
         {
             int x = 310, y = 600, i = 280;

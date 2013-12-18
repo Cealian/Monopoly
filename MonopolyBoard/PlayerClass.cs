@@ -1,5 +1,5 @@
-﻿
-using System;
+﻿using System;
+
 namespace MonopolyBoard
 {
     public class PlayerClass
@@ -11,7 +11,7 @@ namespace MonopolyBoard
         private bool jailCard = false;
         private bool inJail = false;
         private int stepsLeft; // Used when moving player to see how many steps he/she has left.
-        public frmMonopoly board;
+        frmMonopoly board = new frmMonopoly();
 
         /* ----- Functions -----*/
         public PlayerClass(string newName) /* Constructor, sets player name. */
@@ -57,23 +57,26 @@ namespace MonopolyBoard
             if (money >= amount)
             {
                 money -= amount;
+                return;
             }
-            else
-            {
-                money -= amount;
-                board.btnBankrupt.Enabled = true;
-                board.btnNextPlayer.Enabled = false;
-                board.btnRollDices.Enabled = false;
-            }
+            /*
+            money -= amount;
+            Console.WriteLine("Can't afford it!");
+            board.btnBankrupt.Show();
+            board.btnNextPlayer.Enabled = false;
+            board.btnRollDices.Enabled = false;
+             * 
+             * Konka HUR?!?!?
+            */
         }
 
         public void AddMoney(int amount) /* Increases the players money by the specified amount. */
         {
             money += amount;
 
-            if (money > 0 && board.btnBankrupt.Enabled)
+            if (money > 0 && board.btnBankrupt.Visible)
             {
-                board.btnBankrupt.Enabled = false;
+                board.btnBankrupt.Hide();
                 if (board.diceEqualCount > 0)
                 {
                     board.btnRollDices.Enabled = true;

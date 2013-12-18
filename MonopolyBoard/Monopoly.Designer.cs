@@ -69,7 +69,6 @@ namespace MonopolyBoard
             this.btnNextPlayer = new System.Windows.Forms.Button();
             this.btnBuyStreet = new System.Windows.Forms.Button();
             this.btnSellStreet = new System.Windows.Forms.Button();
-            this.btnSaveGame = new System.Windows.Forms.Button();
             this.sfdSaveGame = new System.Windows.Forms.SaveFileDialog();
             this.btnBankrupt = new System.Windows.Forms.Button();
             this.btnBail = new System.Windows.Forms.Button();
@@ -426,16 +425,6 @@ namespace MonopolyBoard
             this.btnSellStreet.Visible = false;
             this.btnSellStreet.Click += new System.EventHandler(this.btnManageStreet_Click);
             // 
-            // btnSaveGame
-            // 
-            this.btnSaveGame.Location = new System.Drawing.Point(720, 390);
-            this.btnSaveGame.Name = "btnSaveGame";
-            this.btnSaveGame.Size = new System.Drawing.Size(75, 23);
-            this.btnSaveGame.TabIndex = 13;
-            this.btnSaveGame.Text = "Spara spelet";
-            this.btnSaveGame.UseVisualStyleBackColor = true;
-            this.btnSaveGame.Click += new System.EventHandler(this.btnSaveGame_Click);
-            // 
             // sfdSaveGame
             // 
             this.sfdSaveGame.DefaultExt = "mon";
@@ -473,7 +462,6 @@ namespace MonopolyBoard
             this.ClientSize = new System.Drawing.Size(798, 648);
             this.Controls.Add(this.btnBail);
             this.Controls.Add(this.btnBankrupt);
-            this.Controls.Add(this.btnSaveGame);
             this.Controls.Add(this.btnSellStreet);
             this.Controls.Add(this.btnBuyStreet);
             this.Controls.Add(this.btnNextPlayer);
@@ -519,7 +507,6 @@ namespace MonopolyBoard
         private System.Windows.Forms.Label lblSquareInfo;
         private System.Windows.Forms.Button btnSellStreet;
         private System.Windows.Forms.Button btnBuyStreet;
-        private System.Windows.Forms.Button btnSaveGame;
         private System.Windows.Forms.SaveFileDialog sfdSaveGame;
         private System.Windows.Forms.Label lblFreePark;
         private System.Windows.Forms.Label lblPlayerInfo;
@@ -531,7 +518,6 @@ namespace MonopolyBoard
         private Label lblply1InJail;
         private Label lblply4InJail;
         private Label lblply3InJail;
-        private Button btnBail;
         private Label lblply2NoTurnsInJail;
         private Label lblply1NoTurnsInJail;
         private Label lblply3NoTurnsInJail;
@@ -539,6 +525,7 @@ namespace MonopolyBoard
         public Button btnBankrupt;
         public Button btnRollDices;
         public Button btnNextPlayer;
+        public Button btnBail;
     }
 }
 
