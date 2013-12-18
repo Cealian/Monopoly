@@ -173,29 +173,29 @@ namespace MonopolyBoard/*Written by Sebastian Olsson*/
         {
             for (int i = 0; i < board.Squares.Length; i++)/*Here I loop through all the squares in the game.*/
             {
-                foreach (object itemChecked in clbPlayerA.CheckedItems)/*Here I loop through all the checked items in the left listbox*/
+                foreach (object itemChecked in clbPlayerA.CheckedItems)/*Here I loop through all the checked items in the left listbox.*/
                 {
-                    if (lbPlayers.SelectedItem.ToString() == board.Player[toPlayer].GetName()
+                    if (lbPlayers.SelectedItem.ToString() == board.Player[toPlayer].GetName()/*Here I find the checked square in the array.*/
                         && itemChecked.ToString() == board.Squares[i].GetName())
                     {
-                        if (board.Squares[i].GetType() == typeof(Street))
+                        if (board.Squares[i].GetType() == typeof(Street))/*If it's a street I change owner of the checked street to the other player.*/
                         {
                             ((Street)board.Squares[i]).ChangeOwner(toPlayer);
                             board.GEngine.UpdateOwner(i, toPlayer);
                         }
-                        else if (board.Squares[i].GetType() == typeof(Station))
+                        else if (board.Squares[i].GetType() == typeof(Station))/*If it's a station I change owner of the checked station to the other player.*/
                         {
                             ((Station)board.Squares[i]).ChangeOwner(toPlayer);
                             board.GEngine.UpdateOwner(i, toPlayer);
                         }
-                        else if (board.Squares[i].GetType() == typeof(PowerStation))
+                        else if (board.Squares[i].GetType() == typeof(PowerStation))/*If it's a powerstation I change owner of the checked powerstation to the other player.*/
                         {
                             ((PowerStation)board.Squares[i]).ChangeOwner(toPlayer);
                             board.GEngine.UpdateOwner(i, toPlayer);
                         }
                     }
                 }
-                foreach (object itemChecked in clbPlayerB.CheckedItems)
+                foreach (object itemChecked in clbPlayerB.CheckedItems)/*Then I do the same thing but in the right listbox. I have to do the same thing two times because it's two diffrent listbox.*/
                 {
                     if (itemChecked.ToString() == board.Squares[i].GetName())
                     {
