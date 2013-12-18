@@ -33,7 +33,7 @@ namespace MonopolyBoard
         {
             InitializeComponent();
 
-            AllocConsole(); // Show console.
+            // AllocConsole(); // Show console.
 
             InstantiateSquares();
             InstantiateStreets();
