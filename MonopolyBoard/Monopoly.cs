@@ -12,10 +12,9 @@ namespace MonopolyBoard
     {
         public GFX GEngine; /* GFX engine */
         public PlayerClass[] Player = new PlayerClass[4]; /* Players */
-        public Square[] SquaresArray = new Square[40];
+        public Square[] Squares = new Square[40];
         public ChanceCards[] Chances = new ChanceCards[16];
         public CommunityCards[] ComCard = new CommunityCards[16];
-        public BindingList<Square> Squares;
         public FreeParking Freepark = new FreeParking();
 
         int paces = 0;
@@ -42,7 +41,7 @@ namespace MonopolyBoard
             InstantiateChanceCards();
             InstantiateCommunityCards();
 
-            Squares = new BindingList<Square>(SquaresArray);
+            
         }
 
         private void Monopoly_Load(object sender, EventArgs e) /* Monopoply loads, start new game. */
@@ -276,67 +275,67 @@ namespace MonopolyBoard
 
         public void InstantiateSquares() /* Instantiate all squares that are just squares. */
         {
-            SquaresArray[0] = new Square("Gå", 4000);
-            SquaresArray[2] = new Square("Allmänning");
-            SquaresArray[4] = new Square("Inkomstskatt", 4000);
-            SquaresArray[7] = new Square("Chans");
-            SquaresArray[10] = new Square("Fängelse");
-            SquaresArray[17] = new Square("Allmänning");
-            SquaresArray[20] = new Square("Fri parkering");
-            SquaresArray[22] = new Square("Chans");
-            SquaresArray[30] = new Square("Gå i fängelse");
-            SquaresArray[33] = new Square("Allmänning");
-            SquaresArray[36] = new Square("Chans");
-            SquaresArray[38] = new Square("Lyxskatt", 2000);
+            Squares[0] = new Square("Gå", 4000);
+            Squares[2] = new Square("Allmänning");
+            Squares[4] = new Square("Inkomstskatt", 4000);
+            Squares[7] = new Square("Chans");
+            Squares[10] = new Square("Fängelse");
+            Squares[17] = new Square("Allmänning");
+            Squares[20] = new Square("Fri parkering");
+            Squares[22] = new Square("Chans");
+            Squares[30] = new Square("Gå i fängelse");
+            Squares[33] = new Square("Allmänning");
+            Squares[36] = new Square("Chans");
+            Squares[38] = new Square("Lyxskatt", 2000);
 
 
         }
 
         public void InstantiateStreets() /* Instantiate all squares that are streets. */
         {
-            SquaresArray[1] = new Street("Västerlångatan", 1200, 0);
-            SquaresArray[3] = new Street("Hornsgatan", 1200, 0);
+            Squares[1] = new Street("Västerlångatan", 1200, 0);
+            Squares[3] = new Street("Hornsgatan", 1200, 0);
 
-            SquaresArray[6] = new Street("Folkungagatan", 2000, 1);
-            SquaresArray[8] = new Street("Götgatan", 2000, 1);
-            SquaresArray[9] = new Street("Ringvägen", 2400, 1);
+            Squares[6] = new Street("Folkungagatan", 2000, 1);
+            Squares[8] = new Street("Götgatan", 2000, 1);
+            Squares[9] = new Street("Ringvägen", 2400, 1);
 
-            SquaresArray[11] = new Street("S:t Eriksgatan", 2800, 2);
-            SquaresArray[13] = new Street("Odengatan", 2800, 2);
-            SquaresArray[14] = new Street("Valhallavägen", 3200, 2);
+            Squares[11] = new Street("S:t Eriksgatan", 2800, 2);
+            Squares[13] = new Street("Odengatan", 2800, 2);
+            Squares[14] = new Street("Valhallavägen", 3200, 2);
 
-            SquaresArray[16] = new Street("Sturegatan", 3600, 3);
-            SquaresArray[18] = new Street("Karlavägen", 3600, 3);
-            SquaresArray[19] = new Street("Narvavägen", 4000, 3);
+            Squares[16] = new Street("Sturegatan", 3600, 3);
+            Squares[18] = new Street("Karlavägen", 3600, 3);
+            Squares[19] = new Street("Narvavägen", 4000, 3);
 
-            SquaresArray[21] = new Street("Strandvägen", 4400, 4);
-            SquaresArray[23] = new Street("Kungsträdgårdsgatan", 4400, 4);
-            SquaresArray[24] = new Street("Hamngatan", 4800, 4);
+            Squares[21] = new Street("Strandvägen", 4400, 4);
+            Squares[23] = new Street("Kungsträdgårdsgatan", 4400, 4);
+            Squares[24] = new Street("Hamngatan", 4800, 4);
 
-            SquaresArray[26] = new Street("Vasagatan", 5200, 5);
-            SquaresArray[27] = new Street("Kungsgatan", 5200, 5);
-            SquaresArray[29] = new Street("Stureplan", 5600, 5);
+            Squares[26] = new Street("Vasagatan", 5200, 5);
+            Squares[27] = new Street("Kungsgatan", 5200, 5);
+            Squares[29] = new Street("Stureplan", 5600, 5);
 
-            SquaresArray[31] = new Street("Gustav Adolfs torg", 6000, 6);
-            SquaresArray[32] = new Street("Drottninggatan", 6000, 6);
-            SquaresArray[34] = new Street("Diplomatstaden", 6400, 6);
+            Squares[31] = new Street("Gustav Adolfs torg", 6000, 6);
+            Squares[32] = new Street("Drottninggatan", 6000, 6);
+            Squares[34] = new Street("Diplomatstaden", 6400, 6);
 
-            SquaresArray[37] = new Street("Centrum", 7000, 7);
-            SquaresArray[39] = new Street("Norrmalmstorg", 8000, 7);
+            Squares[37] = new Street("Centrum", 7000, 7);
+            Squares[39] = new Street("Norrmalmstorg", 8000, 7);
         }
 
         public void InstantiateStations() /* Instantiate all squares that are stations. */
         {
-            SquaresArray[5] = new Station("Södra station", 4000, 8);
-            SquaresArray[15] = new Station("Östra station", 4000, 8);
-            SquaresArray[25] = new Station("Centralstation", 4000, 8);
-            SquaresArray[35] = new Station("Norra station", 4000, 8);
+            Squares[5] = new Station("Södra station", 4000, 8);
+            Squares[15] = new Station("Östra station", 4000, 8);
+            Squares[25] = new Station("Centralstation", 4000, 8);
+            Squares[35] = new Station("Norra station", 4000, 8);
         }
 
         public void InstantiatePowerStations()/* Instantiate all squares that are powerstations. */
         {
-            SquaresArray[12] = new PowerStation("Elverket", 3000, 9);
-            SquaresArray[28] = new PowerStation("Vattenledningsverket", 3000, 9);
+            Squares[12] = new PowerStation("Elverket", 3000, 9);
+            Squares[28] = new PowerStation("Vattenledningsverket", 3000, 9);
         }
 
         #endregion
@@ -908,7 +907,7 @@ namespace MonopolyBoard
 
         public void TaxActivePlayer() /* Tax the active player and subtract the appropriate amount. */
         {
-            int positionprice = SquaresArray[Player[activePlayer].GetPosition()].GetPrice();
+            int positionprice = Squares[Player[activePlayer].GetPosition()].GetPrice();
 
             Player[activePlayer].SubtractMoney(positionprice);
             Freepark.AddMoney(positionprice);
@@ -1281,19 +1280,19 @@ namespace MonopolyBoard
 
         public void CheckOwnership()/*Checks if the active player owns any squares.*/
         {
-            for (int i = 0; i < SquaresArray.Length; i++)
+            for (int i = 0; i < Squares.Length; i++)
             {
-                if (SquaresArray[i].GetType() == typeof(Street) && ((Street)SquaresArray[i]).GetOwner() == activePlayer)
+                if (Squares[i].GetType() == typeof(Street) && ((Street)Squares[i]).GetOwner() == activePlayer)
                 {
                     btnSellStreet.Visible = true;
                     return;
                 }
-                else if (SquaresArray[i].GetType() == typeof(Station) && ((Station)SquaresArray[i]).GetOwner() == activePlayer)
+                else if (Squares[i].GetType() == typeof(Station) && ((Station)Squares[i]).GetOwner() == activePlayer)
                 {
                     btnSellStreet.Visible = true;
                     return;
                 }
-                else if (SquaresArray[i].GetType() == typeof(PowerStation) && ((PowerStation)SquaresArray[i]).GetOwner() == activePlayer)
+                else if (Squares[i].GetType() == typeof(PowerStation) && ((PowerStation)Squares[i]).GetOwner() == activePlayer)
                 {
                     btnSellStreet.Visible = true;
                     return;

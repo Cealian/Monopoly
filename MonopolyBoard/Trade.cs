@@ -127,7 +127,7 @@ namespace MonopolyBoard/*Written by Sebastian Olsson*/
             board.ShowSquareInfo();
             board.UpdatePlayerInfo();
 
-            foreach (Square square in board.SquaresArray)
+            foreach (Square square in board.Squares)
             {
                 if (square.GetType() == typeof(Street))
                 {
@@ -171,47 +171,47 @@ namespace MonopolyBoard/*Written by Sebastian Olsson*/
 
         private void MoveStreets(int toPlayer)//Moves streets between players.
         {
-            for (int i = 0; i < board.SquaresArray.Length; i++)/*Here I loop through all the squares in the game.*/
+            for (int i = 0; i < board.Squares.Length; i++)/*Here I loop through all the squares in the game.*/
             {
                 foreach (object itemChecked in clbPlayerA.CheckedItems)/*Here I loop through all the checked items in the left listbox*/
                 {
                     if (lbPlayers.SelectedItem.ToString() == board.Player[toPlayer].GetName()
-                        && itemChecked.ToString() == board.SquaresArray[i].GetName())
+                        && itemChecked.ToString() == board.Squares[i].GetName())
                     {
-                        if (board.SquaresArray[i].GetType() == typeof(Street))
+                        if (board.Squares[i].GetType() == typeof(Street))
                         {
-                            ((Street)board.SquaresArray[i]).ChangeOwner(toPlayer);
+                            ((Street)board.Squares[i]).ChangeOwner(toPlayer);
                             board.GEngine.UpdateOwner(i, toPlayer);
                         }
-                        else if (board.SquaresArray[i].GetType() == typeof(Station))
+                        else if (board.Squares[i].GetType() == typeof(Station))
                         {
-                            ((Station)board.SquaresArray[i]).ChangeOwner(toPlayer);
+                            ((Station)board.Squares[i]).ChangeOwner(toPlayer);
                             board.GEngine.UpdateOwner(i, toPlayer);
                         }
-                        else if (board.SquaresArray[i].GetType() == typeof(PowerStation))
+                        else if (board.Squares[i].GetType() == typeof(PowerStation))
                         {
-                            ((PowerStation)board.SquaresArray[i]).ChangeOwner(toPlayer);
+                            ((PowerStation)board.Squares[i]).ChangeOwner(toPlayer);
                             board.GEngine.UpdateOwner(i, toPlayer);
                         }
                     }
                 }
                 foreach (object itemChecked in clbPlayerB.CheckedItems)
                 {
-                    if (itemChecked.ToString() == board.SquaresArray[i].GetName())
+                    if (itemChecked.ToString() == board.Squares[i].GetName())
                     {
-                        if (board.SquaresArray[i].GetType() == typeof(Street))
+                        if (board.Squares[i].GetType() == typeof(Street))
                         {
-                            ((Street)board.SquaresArray[i]).ChangeOwner(toPlayer);
+                            ((Street)board.Squares[i]).ChangeOwner(toPlayer);
                             board.GEngine.UpdateOwner(i, toPlayer);
                         }
-                        else if (board.SquaresArray[i].GetType() == typeof(Station))
+                        else if (board.Squares[i].GetType() == typeof(Station))
                         {
-                            ((Station)board.SquaresArray[i]).ChangeOwner(toPlayer);
+                            ((Station)board.Squares[i]).ChangeOwner(toPlayer);
                             board.GEngine.UpdateOwner(i, toPlayer);
                         }
-                        else if (board.SquaresArray[i].GetType() == typeof(PowerStation))
+                        else if (board.Squares[i].GetType() == typeof(PowerStation))
                         {
-                            ((PowerStation)board.SquaresArray[i]).ChangeOwner(toPlayer);
+                            ((PowerStation)board.Squares[i]).ChangeOwner(toPlayer);
                             board.GEngine.UpdateOwner(i, toPlayer);
                         }
                     }

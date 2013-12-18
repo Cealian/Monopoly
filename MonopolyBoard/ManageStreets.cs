@@ -32,7 +32,7 @@ namespace MonopolyBoard/*Written by Sebastian Olsson*/
             lbInfo.Text = "";
             lbStreets.Items.Clear();
             int player = board.activePlayer;
-            foreach (Square square in board.SquaresArray)
+            foreach (Square square in board.Squares)
             {
                 if (square.GetType() == typeof(Street) && ((Street)square).GetOwner() == player)
                 {
@@ -53,26 +53,26 @@ namespace MonopolyBoard/*Written by Sebastian Olsson*/
         {
             string info = "";
             int block = 10;
-            for (int i = 0; i < board.SquaresArray.Length; i++)/*I looping through all squares in the game.*/
+            for (int i = 0; i < board.Squares.Length; i++)/*I looping through all squares in the game.*/
             {
-                string name = board.SquaresArray[i].GetName();
-                Type squareType = board.SquaresArray[i].GetType();
+                string name = board.Squares[i].GetName();
+                Type squareType = board.Squares[i].GetType();
                 if (lbStreets.SelectedItem.ToString() == name && squareType == typeof(Street))/*When I find a Street with the same name as the selected object this if ist true.*/
                 {
-                    Street street = ((Street)board.SquaresArray[i]);
+                    Street street = ((Street)board.Squares[i]);
                     block = street.GetBlock();
                     int streetsOnBlock = 0, isMortgaged = 0, anyHouses = 0;/*Here I create three diffrent counters to count through the second loop.*/
-                    for (int j = 0; j < board.SquaresArray.Length; j++)/*Here I loop through all the squares one more time to see which streets are in the same block as the selected street.*/
+                    for (int j = 0; j < board.Squares.Length; j++)/*Here I loop through all the squares one more time to see which streets are in the same block as the selected street.*/
                     {
-                        if (board.SquaresArray[j].GetType() == typeof(Street))
+                        if (board.Squares[j].GetType() == typeof(Street))
                         {
-                            if (block == ((Street)board.SquaresArray[j]).GetBlock()
-                                    && ((Street)board.SquaresArray[j]).GetOwner() == board.activePlayer)/*If the active player owns a street in the same block as the selected street this if is true.*/
+                            if (block == ((Street)board.Squares[j]).GetBlock()
+                                    && ((Street)board.Squares[j]).GetOwner() == board.activePlayer)/*If the active player owns a street in the same block as the selected street this if is true.*/
                             {
                                 streetsOnBlock++;/*If the player owns a street in the same block as the selcted street this will increase with one.*/
-                                if (((Street)board.SquaresArray[j]).GetMortgaged())
+                                if (((Street)board.Squares[j]).GetMortgaged())
                                     isMortgaged++;/*If the player owns a street in the same block as the selected street but the street is mortgaged this will increase with one.*/
-                                else if (((Street)board.SquaresArray[j]).GetNoOfHouses() > 0)
+                                else if (((Street)board.Squares[j]).GetNoOfHouses() > 0)
                                     anyHouses++;/*If there is any street on the block with any houses on it this will increase with one.*/
                             }
                         }
@@ -129,21 +129,21 @@ namespace MonopolyBoard/*Written by Sebastian Olsson*/
                 {
                     btnBuyHouse.Enabled = false;
                     btnSellHouse.Enabled = false;
-                    if (((Station)board.SquaresArray[i]).GetMortgaged())
+                    if (((Station)board.Squares[i]).GetMortgaged())
                         btnMortgage.Text = "Lös ut";
                     else
                         btnMortgage.Text = "Inteckna";
-                    info = ((Station)board.SquaresArray[i]).GetInfo();
+                    info = ((Station)board.Squares[i]).GetInfo();
                 }
                 else if (lbStreets.SelectedItem.ToString() == name && squareType == typeof(PowerStation))
                 {
                     btnBuyHouse.Enabled = false;
                     btnSellHouse.Enabled = false;
-                    if (((PowerStation)board.SquaresArray[i]).GetMortgaged())
+                    if (((PowerStation)board.Squares[i]).GetMortgaged())
                         btnMortgage.Text = "Lös ut";
                     else
                         btnMortgage.Text = "Inteckna";
-                    info = ((PowerStation)board.SquaresArray[i]).GetInfo();
+                    info = ((PowerStation)board.Squares[i]).GetInfo();
                 }
             }
             lbInfo.Text = info;
@@ -153,9 +153,9 @@ namespace MonopolyBoard/*Written by Sebastian Olsson*/
 
         private void Mortgage()/*Mortgage the selceted object.*/
         {
-            for (int i = 0; i < board.SquaresArray.Length; i++)
+            for (int i = 0; i < board.Squares.Length; i++)
             {
-                Square sellSquare = board.SquaresArray[i];
+                Square sellSquare = board.Squares[i];
 
                 if (lbStreets.SelectedItem.ToString() == sellSquare.GetName())
                 {
@@ -210,12 +210,12 @@ namespace MonopolyBoard/*Written by Sebastian Olsson*/
 
         private void btnBuyHouse_Click(object sender, EventArgs e)/*Builds a house on the selected street.*/
         {
-            for (int i = 0; i < board.SquaresArray.Length; i++)
+            for (int i = 0; i < board.Squares.Length; i++)
             {
-                Type streetType = board.SquaresArray[i].GetType();
+                Type streetType = board.Squares[i].GetType();
                 if (streetType == typeof(Street))
                 {
-                    Street street = ((Street)board.SquaresArray[i]);
+                    Street street = ((Street)board.Squares[i]);
                     if (lbStreets.SelectedItem.ToString() == street.GetName())
                     {
                         street.BuildHouse();
@@ -228,12 +228,12 @@ namespace MonopolyBoard/*Written by Sebastian Olsson*/
 
         private void btnSellHouse_Click(object sender, EventArgs e)/*Sells a house on the selected street.*/
         {
-            for (int i = 0; i < board.SquaresArray.Length; i++)
+            for (int i = 0; i < board.Squares.Length; i++)
             {
-                Type streetType = board.SquaresArray[i].GetType();
+                Type streetType = board.Squares[i].GetType();
                 if (streetType == typeof(Street))
                 {
-                    Street street = ((Street)board.SquaresArray[i]);
+                    Street street = ((Street)board.Squares[i]);
                     if (lbStreets.SelectedItem.ToString() == street.GetName())
                     {
                         street.SellHouse();
