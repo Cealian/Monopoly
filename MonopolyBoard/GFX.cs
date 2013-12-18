@@ -14,7 +14,6 @@ namespace MonopolyBoard
         {
             gObject = g;
             setUpCanvas();
-
         }
 
         /* ----- Functions ----- */
@@ -65,7 +64,7 @@ namespace MonopolyBoard
             int markPositionX = 0;
             int markPositionY = 0;
 
-            if(squarePosition > 0 && squarePosition < 10)
+            if (squarePosition > 0 && squarePosition < 10)
             {
                 markPositionX = 567 - (54 * squarePosition);
                 markPositionY = 638;
@@ -89,9 +88,10 @@ namespace MonopolyBoard
             SolidBrush brush = new SolidBrush(board.GetPlayerColor(player));
 
             gObject.FillRectangle(brush, markPositionX, markPositionY, 10, 10);
-            Console.WriteLine("New player: "+ player + " New pos: " + squarePosition);
+            Console.WriteLine("New player: " + player + " New pos: " + squarePosition);
 
         }
+
          private static void fillStreets()//Draws all of the colored squares,in their respective positions, which are the streest and their blocks
          {
              int x = 82, y = 567, colorX = 53, colorY = 20, i = 54, edge = 506;
@@ -166,6 +166,7 @@ namespace MonopolyBoard
 
 
         }
+
          private void images()//Draws already made pictures on the board
          {
              int x = 310, y = 600, i = 280, j = 77;
@@ -196,7 +197,7 @@ namespace MonopolyBoard
              gObject.DrawString("Gå i\n\n\nfängelse", SystemFonts.CaptionFont, Brushes.Black, 570, 2);
             
              gObject.ScaleTransform(0.8F, 0.8F);//Scales down the names so they will room in the squares
-             gObject.DrawString("Västerlång-\ngatan", SystemFonts.DefaultFont, Brushes.Black, x,y);             
+            gObject.DrawString("Västerlång-\ngatan", SystemFonts.DefaultFont, Brushes.Black, x, y);
              gObject.DrawString("Allmänning", SystemFonts.DefaultFont, Brushes.Black, x - i, y - colour);             
              gObject.DrawString("Hornsgatan", SystemFonts.DefaultFont, Brushes.Black, x - 2 * i, y);
              gObject.DrawString("Inkomst-\nskatt", SystemFonts.DefaultFont, Brushes.Black, x - i * 3, y - colour);

@@ -22,7 +22,7 @@ namespace MonopolyBoard
         const int PACES_PER_SQUARE = 6;
         const int PX_PER_PACE = 9;
         public int activePlayer = new Random().Next(0, 4);
-        int diceEqualCount = 0;
+        public int diceEqualCount = 0;
         int ply1TurnsInJail = 0; 
         int ply2TurnsInJail = 0;
         int ply3TurnsInJail = 0;
@@ -75,6 +75,7 @@ namespace MonopolyBoard
         {
             Player[activePlayer].MoveForward(steps);
             tmrMovePlayer.Start();
+
         }
 
         private void tmrMovePlayer_Tick(object sender, EventArgs e) /* Move player until its remaining steps = 0. */
@@ -84,6 +85,7 @@ namespace MonopolyBoard
 
         public void MoveActivePlayer() /* Move the active player. */
         {
+            btnNextPlayer.Enabled = false;
             if (paces < PACES_PER_SQUARE) /* Move the player 16px five times for every square. */
             {
                 if (activePlayer == 0)
@@ -339,7 +341,7 @@ namespace MonopolyBoard
 
         #endregion
 
-        /* Instantiation of all chance and community cards */
+        /* Instantiation of all chance and community chest cards */
         #region Cards instantiation
 
         public void InstantiateChanceCards()/* Instantiation of all chancecards*/
@@ -449,6 +451,7 @@ namespace MonopolyBoard
         private void btnTurn_Click(object sender, EventArgs e) /* Roll dices and move active player. */
         {
             btnRollDices.Enabled = false;
+            btnBuyStreet.Hide();
 
             Color formColor = this.BackColor;
             Color doubleDiceColor = Color.LawnGreen;
@@ -494,6 +497,7 @@ namespace MonopolyBoard
             if (diceEqualCount == 3)
             {
                 MoveActivePlayerToJail();
+                btnNextPlayer.Enabled = true;
                 return;
             }
 
@@ -505,7 +509,7 @@ namespace MonopolyBoard
 
         private void btnTrade_Click(object sender, EventArgs e) /* Open the form where the active player can trade with the other players.*/
         {
-            Trade TradeForm = new Trade();
+            frmTrade TradeForm = new frmTrade();
             TradeForm.board = this;
             TradeForm.ShowDialog();
 
@@ -521,15 +525,126 @@ namespace MonopolyBoard
             UpdatePlayerInfo();
             if (Player[activePlayer].IsInJail() == true)
             JailCount();
+            CheckOwnership();
+        }
+
+        private void btnBuyStreet_Click(object sender, EventArgs e) /*This code handles the buying of streets.*/
+        {
+            int playerMoney = Player[activePlayer].GetMoney();
+            int position = Player[activePlayer].GetPosition();
+            int streetPrice = Squares[position].GetPrice();
+            string streetName = Squares[position].GetName();
+
+            /*Check if the player has enough money to buy the street*/
+            if (playerMoney < streetPrice)
+            {
+                MessageBox.Show("Du har inte råd att köpa denna gatan");
+                return;
+            }
+            /*Ask the player if he want to buy the street*/
+            string prompt = "Vill du köpa " + streetName + " för " + streetPrice + " kr\nDu har " + playerMoney + " kr";
+
+            if (MessageBox.Show(prompt, "Köpa gata", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                return;
+            }
+
+            Type squareType = Squares[position].GetType();
+            /*Set the owner of the street to the active player*/
+            if (squareType == typeof(Street))
+            {
+                ((Street)Squares[position]).ChangeOwner(activePlayer);
+            }
+            else if (squareType == typeof(Station))
+            {
+                ((Station)Squares[position]).ChangeOwner(activePlayer);
+            }
+            else if (squareType == typeof(PowerStation))
+            {
+                ((PowerStation)Squares[position]).ChangeOwner(activePlayer);
+            }
+
+
+            Player[activePlayer].SubtractMoney(streetPrice);//Take money from the player
+            btnBuyStreet.Hide();
+            ShowSquareInfo();
+            CheckOwnership();
+
+            GEngine.UpdateOwner(position, activePlayer);
+
+        }
+
+        private void btnManageStreet_Click(object sender, EventArgs e)/*Opens the form where the player can buy and sell houses and mortgage streets*/
+        {
+            frmManageStreets sellStreet = new frmManageStreets();
+            sellStreet.board = this;
+            sellStreet.Show();
+        }
+
+        private void btnBankrupt_Click(object sender, EventArgs e)
+        {
+
+            if (ActivePlayers() <= 2)
+            {
+                NextPlayer();
+                MessageBox.Show(Player[activePlayer].GetName() + " har vunnit monopol.\nGrattis!");
+                Application.Exit();
+            }
+
+            foreach (Square square in Squares)
+            {
+                if (square.GetType() == typeof(Street))
+                {
+                    ((Street)square).ChangeOwner(5);
+                }
+                else if (square.GetType() == typeof(Station))
+                {
+                    ((Station)square).ChangeOwner(5);
+                }
+                else if (square.GetType() == typeof(PowerStation))
+                {
+                    ((PowerStation)square).ChangeOwner(5);
+                }
+            }
+
+            HideInactivePlayers();
+        }
+
+        private void btnBail_Click(object sender, EventArgs e)/*Gives the player the possibiliy to bail. If the player chooses, and is able to pay,
+                                                               * the number of turns in jail(for the active player) will be set to 0.*/
+        {
+            int playerMoney = Player[activePlayer].GetMoney();
+            string prompt = "Vill du Betala 1000kr för att komma ut ut fängelset?\nDu har " + playerMoney + " kr";
+
+            if (MessageBox.Show(prompt, "Betala Borgen", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                return;
+            }
+
+            Player[activePlayer].SubtractMoney(1000);
+            Freepark.AddMoney(1000);
+            Player[activePlayer].GetOutOfJail();
+
+            btnBail.Hide();
+            btnNextPlayer.Enabled = true;
+            ShowSquareInfo();
+            UpdatePlayerInfo();
         }
 
         #endregion
 
         public void HideInactivePlayers() /* Hide players that are not in the game. */
         {
-            if (Player[3].GetName() == "")
+
+
+            if (Player[0].GetName() == "")
             {
-                picPlayer3.Hide();
+                picPlayer0.Hide();
+            }
+
+            if (Player[1].GetName() == "")
+            {
+                picPlayer1.Hide();
             }
 
             if (Player[2].GetName() == "")
@@ -537,19 +652,24 @@ namespace MonopolyBoard
                 picPlayer2.Hide();
             }
             
+            if (Player[3].GetName() == "")
+            {
+                picPlayer3.Hide();
+        }
+
         }
 
         public void NextPlayer() /* Change activePlayer to next player. */
         {
-            if (diceEqualCount == 0)
+            do
             {
                 activePlayer++;
-            }
 
-            if (activePlayer > 3 || Player[activePlayer].GetName() == "")
+                if (activePlayer > 3)
             {
                 activePlayer = 0;
             }
+            } while (Player[activePlayer].GetName() == "");
 
             if (Player[activePlayer].IsInJail() == true)
             {
@@ -665,13 +785,14 @@ namespace MonopolyBoard
 
             Type squareType = Squares[position].GetType();
             int rent = 0;
+            int block = 0;
             bool isMortgaged = false;
-
+            /*Do nothing if the street is owned by active player*/
             if (owner == activePlayer)
             {
                 return;
             }
-
+            /*Shows the Buy Street button if the street has no owner*/
             if (squareType == typeof(Street))
             {
                 if (owner == 5)
@@ -681,18 +802,31 @@ namespace MonopolyBoard
                 }
                 isMortgaged = ((Street)Squares[position]).GetMortgaged();
                 rent = ((Street)Squares[position]).GetRent();
+
+                block = ((Street)Squares[position]).GetBlock();
+                if (SamePlayerOwnsBlock(block) && BlockIsNotMortgaged(block) && ((Street)Squares[position]).GetNoOfHouses() == 0)
+                {
+                    rent = rent * 2;
             }
+            }
+            /*Shows the Buy Street button if the station has no owner*/
             else if (squareType == typeof(Station))
             {
                 if (owner == 5)
                 {
-
                     btnBuyStreet.Show();
                     return;
                 }
                 isMortgaged = ((Station)Squares[position]).GetMortgaged();
                 rent = ((Station)Squares[position]).GetRent();
+
+                block = ((Station)Squares[position]).GetBlock();
+                if (SamePlayerOwnsBlock(block) && BlockIsNotMortgaged(block))
+                {
+                    rent = rent * 2;
             }
+            }
+            /*Shows the Buy Street button if the Powerstation has no owner*/
             else if (squareType == typeof(PowerStation))
             {
                 if (owner == 5)
@@ -702,15 +836,22 @@ namespace MonopolyBoard
                 }
                 isMortgaged = ((PowerStation)Squares[position]).GetMortgaged();
                 rent = ((PowerStation)Squares[position]).GetRent();
+
+                block = ((PowerStation)Squares[position]).GetBlock();
+                if (SamePlayerOwnsBlock(block) && BlockIsNotMortgaged(block))
+                {
+                    rent = rent * 2;
+            }
             }
 
-
+            /*Tells the player if the street is mortaged*/
             if (isMortgaged)
             {
-                MessageBox.Show("Du hamnade på " + Squares[position].GetName() + "\nInteknad.");
+                MessageBox.Show("Du hamnade på " + Squares[position].GetName() + "\nIntecknad.");
                 return;
             }
             MessageBox.Show("Du hamnade på " + Squares[position].GetName() + "\nHyra: " + rent + " betalas till " + Player[owner].GetName());
+            /*Pays the rent*/
             Player[activePlayer].SubtractMoney(rent);
             Player[owner].AddMoney(rent);
 
@@ -882,6 +1023,7 @@ namespace MonopolyBoard
              *  I fängelse (gör det coolt).
              */
         }
+
         public void JailCount() //Keeps track of how many turns each player has spent in jail and forces them to pay or go bankrupt after 3 turns
         {
             string forcePay = "Du måste betala 1000kr i borgen";
@@ -908,82 +1050,9 @@ namespace MonopolyBoard
                     }
         }
 
-        private void btnBuyHouses_Click(object sender, EventArgs e)
-        {
-            BuyHouse BuyHouseForm = new BuyHouse();
-            BuyHouseForm.board = this;
-            BuyHouseForm.ShowDialog();
-        }
-
-        private void btnBuyStreet_Click(object sender, EventArgs e)
-        {
-            int playerMoney = Player[activePlayer].GetMoney();
-            int position = Player[activePlayer].GetPosition();
-            int streetPrice = Squares[position].GetPrice();
-            string streetName = Squares[position].GetName();
-
-            if (playerMoney < streetPrice)
-            {
-                MessageBox.Show("Du har inte råd att köpa denna gatan");
-                return;
-            }
-
-            string prompt = "Vill du köpa " + streetName + " för " + streetPrice + " kr\nDu har " + playerMoney + " kr";
-
-            if (MessageBox.Show(prompt, "Köpa gata", MessageBoxButtons.YesNo) == DialogResult.No)
-            {
-                return;
-            }
-
-            Type squareType = Squares[position].GetType();
-
-            if (squareType == typeof(Street))
-            {
-                ((Street)Squares[position]).ChangeOwner(activePlayer);
-            }
-            else if (squareType == typeof(Station))
-            {
-                ((Station)Squares[position]).ChangeOwner(activePlayer);
-            }
-            else if (squareType == typeof(PowerStation))
-            {
-                ((PowerStation)Squares[position]).ChangeOwner(activePlayer);
-            }
-
-
-            Player[activePlayer].SubtractMoney(streetPrice);
-            btnBuyStreet.Hide();
-            ShowSquareInfo();
-
-            GEngine.UpdateOwner(position, activePlayer);
-
-        }
-
-        private void btnSaveGame_Click(object sender, EventArgs e) /* Save the current monopoly game to be able to continue later */
-        {
-            sfdSaveGame.ShowDialog();
-            if (sfdSaveGame.FileName != "")
-            {
-                FileStream fs = (FileStream)sfdSaveGame.OpenFile();
-
-                GameSave newSave = new GameSave(ref fs);
-                newSave.Save();
-
-                fs.Close();
-            }
-        }
-
         private void UpdateFreeParkValue()
         {
             lblFreePark.Text = Freepark.GetValue().ToString();
-        }
-
-
-        private void btnSellStreet_Click(object sender, EventArgs e)/*Opens the form where the player can buy and sell houses and mortgage streets*/
-        {
-            BuildHouses sellStreet = new BuildHouses();
-            sellStreet.board = this;
-            sellStreet.Show();
         }
 
         public Color GetPlayerColor(int player)
@@ -992,7 +1061,7 @@ namespace MonopolyBoard
 
             if (player == 0)
             {
-                playerColor = Color.Pink;
+                playerColor = Color.Red;
             }
             else if (player == 1)
             {
@@ -1009,13 +1078,213 @@ namespace MonopolyBoard
 
             return playerColor;
         }
-        
+
         private void CheckIfPlayerCantPay()
-        {
+            {
             if (Player[activePlayer].GetMoney() < 0)
             {
                 btnNextPlayer.Enabled = false;
                 btnBankrupt.Visible = true;
+            }
+        }
+
+        public bool SamePlayerOwnsBlock(int block) /* Returns true of the same player owns every street of the block. */
+        {
+            int street1 = 0, street2 = 0, street3 = 0, street4 = 0;
+
+            if (block == 0) // Streets 1 & 3
+            {
+                street1 = 1;
+                street2 = 3;
+            }
+            else if (block == 1) // Streets 6 & 8 & 9
+            {
+                street1 = 6;
+                street2 = 8;
+                street3 = 9;
+            }
+            else if (block == 2) // Streets 11 & 13 & 14
+            {
+                street1 = 11;
+                street2 = 13;
+                street3 = 14;
+            }
+            else if (block == 3) // Streets 16 & 18 & 19
+            {
+                street1 = 16;
+                street2 = 18;
+                street3 = 19;
+            }
+            else if (block == 4) // Streets 21 & 23 & 24
+            {
+                street1 = 21;
+                street2 = 23;
+                street3 = 24;
+            }
+            else if (block == 5) // Streets 26 & 27 & 29
+            {
+                street1 = 26;
+                street2 = 27;
+                street3 = 29;
+            }
+            else if (block == 6) // Streets 31 & 32 & 34
+            {
+                street1 = 31;
+                street2 = 32;
+                street3 = 34;
+
+        }
+            else if (block == 7) // Streets 37 & 39
+            {
+                street2 = 37;
+                street3 = 39;
+            }
+            else if (block == 8) // Streets 5 & 15 & 25 & 35 - Train stations
+        {
+                street1 = 5;
+                street2 = 15;
+                street3 = 25;
+                street4 = 35;
+            }
+            else if (block == 9) // Streets 12 & 28 - Power stations
+            {
+                street1 = 12;
+                street2 = 28;
+            }
+
+
+            if (street3 == 0 && block != 9) // First or last block.
+            {
+                return (((Street)Squares[street1]).GetOwner() == ((Street)Squares[street2]).GetOwner());
+            }
+            else if (block == 9) // Power station block.
+            {
+                return (((PowerStation)Squares[street1]).GetOwner() == ((PowerStation)Squares[street2]).GetOwner());
+            }
+            else if (street4 != 0) // Train station.
+            {
+                return (((Station)Squares[street1]).GetOwner() == ((Station)Squares[street2]).GetOwner()
+                        && ((Station)Squares[street1]).GetOwner() == ((Station)Squares[street3]).GetOwner()
+                        && ((Station)Squares[street1]).GetOwner() == ((Station)Squares[street4]).GetOwner());
+        }
+
+            /* If you made it here it's a street block with 3 streets. */
+            return (((Street)Squares[street1]).GetOwner() == ((Street)Squares[street2]).GetOwner()
+                && ((Street)Squares[street1]).GetOwner() == ((Street)Squares[street3]).GetOwner());
+        }
+
+        public bool BlockIsNotMortgaged(int block)
+        {
+            int street1 = 0, street2 = 0, street3 = 0, street4 = 0;
+
+            if (block == 0) // Streets 1 & 3
+            {
+                street1 = 1;
+                street2 = 3;
+            }
+            else if (block == 1) // Streets 6 & 8 & 9
+            {
+                street1 = 6;
+                street2 = 8;
+                street3 = 9;
+            }
+            else if (block == 2) // Streets 11 & 13 & 14
+            {
+                street1 = 11;
+                street2 = 13;
+                street3 = 14;
+            }
+            else if (block == 3) // Streets 16 & 18 & 19
+            {
+                street1 = 16;
+                street2 = 18;
+                street3 = 19;
+            }
+            else if (block == 4) // Streets 21 & 23 & 24
+            {
+                street1 = 21;
+                street2 = 23;
+                street3 = 24;
+            }
+            else if (block == 5) // Streets 26 & 27 & 29
+        {
+                street1 = 26;
+                street2 = 27;
+                street3 = 29;
+        }
+            else if (block == 6) // Streets 31 & 32 & 34
+            {
+                street1 = 31;
+                street2 = 32;
+                street3 = 34;
+
+            }
+            else if (block == 7) // Streets 37 & 39
+            {
+                street2 = 37;
+                street3 = 39;
+            }
+            else if (block == 8) // Streets 5 & 15 & 25 & 35 - Train stations
+            {
+                street2 = 5;
+                street3 = 15;
+                street2 = 25;
+                street3 = 35;
+            }
+            else if (block == 9) // Streets 12 & 28 - Power stations
+        {
+                street2 = 37;
+                street3 = 39;
+            }
+
+            if (street3 == 0 && block != 9) // Last or first block
+            {
+                return !(((Street)Squares[street1]).GetMortgaged()
+                    && ((Street)Squares[street2]).GetMortgaged());
+            }
+            else if (block == 9) // Power station block
+            {
+                return !(((PowerStation)Squares[street1]).GetMortgaged()
+                    && ((PowerStation)Squares[street2]).GetMortgaged());
+            }
+            else if (street4 != 0) // Train station block
+            {
+                return !(((Street)Squares[street1]).GetMortgaged()
+                        && ((Street)Squares[street2]).GetMortgaged()
+                        && ((Street)Squares[street3]).GetMortgaged()
+                        && ((Street)Squares[street4]).GetMortgaged());
+            }
+
+            /* If you made it here it's a street block with 3 streets. */
+            return !(((Street)Squares[street1]).GetMortgaged()
+                    && ((Street)Squares[street2]).GetMortgaged()
+                    && ((Street)Squares[street3]).GetMortgaged());
+            }
+
+        public int ActivePlayers()
+        {
+            int activePlayers = 0;
+            foreach (PlayerClass player in Player)
+            {
+                if (player.GetName() != "")
+            {
+                    activePlayers++;
+                }
+            }
+            return activePlayers;
+        }
+        
+        private void btnBankrupt_Click(object sender, EventArgs e)
+        {
+            foreach (Square square in Squares)
+        {
+
+                int owner = ((Station)square).GetOwner();
+
+                if (owner != activePlayer)
+            {
+                    continue;
+                }
             }
         }
 
@@ -1024,26 +1293,28 @@ namespace MonopolyBoard
         [return: MarshalAsAttribute(UnmanagedType.Bool)]
         static extern bool AllocConsole();
 
-        private void btnBankrupt_Click(object sender, EventArgs e)
+        public void CheckOwnership()/*Checks if the active player owns any squares.*/
         {
-            
+            for (int i = 0; i < SquaresArray.Length; i++)
+            {
+                if (SquaresArray[i].GetType() == typeof(Street) && ((Street)SquaresArray[i]).GetOwner() == activePlayer)
+        {
+                    btnSellStreet.Visible = true;
+                    return;
         }
-
-        private void btnBail_Click(object sender, EventArgs e)
+                else if (SquaresArray[i].GetType() == typeof(Station) && ((Station)SquaresArray[i]).GetOwner() == activePlayer)
         {
-            int playerMoney = Player[activePlayer].GetMoney();
-            string prompt = "Vill du Betala 1000kr för att komma ut ut fängelset?\nDu har " + playerMoney + " kr";
-
-            if (MessageBox.Show(prompt, "Betala Borgen", MessageBoxButtons.YesNo) == DialogResult.No)
+                    btnSellStreet.Visible = true;
+                    return;
+                }
+                else if (SquaresArray[i].GetType() == typeof(PowerStation) && ((PowerStation)SquaresArray[i]).GetOwner() == activePlayer)
         {
+                    btnSellStreet.Visible = true;
                 return;
             }
-            Player[activePlayer].SubtractMoney(1000);
-            Player[activePlayer].GetOutOfJail();
-            btnBail.Hide();
-            btnNextPlayer.Enabled = true;
-            ShowSquareInfo();
-            UpdatePlayerInfo();
+                else
+                    btnSellStreet.Visible = false;
+            }
         }
     }
 }

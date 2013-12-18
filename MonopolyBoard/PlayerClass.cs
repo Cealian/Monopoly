@@ -1,5 +1,5 @@
-﻿
-using System;
+﻿using System;
+
 namespace MonopolyBoard
 {
     public class PlayerClass
@@ -11,12 +11,13 @@ namespace MonopolyBoard
         private bool jailCard = false;
         private bool inJail = false;
         private int stepsLeft; // Used when moving player to see how many steps he/she has left.
-
+        frmMonopoly board = new frmMonopoly();
 
         /* ----- Functions -----*/
         public PlayerClass(string newName) /* Constructor, sets player name. */
         {
             name = newName;
+            board = new frmMonopoly();
         }
 
         public string GetName() /* Return the name of the player. */
@@ -56,16 +57,35 @@ namespace MonopolyBoard
             if (money >= amount)
             {
                 money -= amount;
+                return;
             }
-            else
-            {
-                // alternativ: konkurs, sälja av gator till bank, 
-            }
+            /*
+            money -= amount;
+            Console.WriteLine("Can't afford it!");
+            board.btnBankrupt.Show();
+            board.btnNextPlayer.Enabled = false;
+            board.btnRollDices.Enabled = false;
+             * 
+             * Konka HUR?!?!?
+            */
         }
 
         public void AddMoney(int amount) /* Increases the players money by the specified amount. */
         {
             money += amount;
+
+            if (money > 0 && board.btnBankrupt.Visible)
+            {
+                board.btnBankrupt.Hide();
+                if (board.diceEqualCount > 0)
+                {
+                    board.btnRollDices.Enabled = true;
+                }
+                else
+                {
+                    board.btnNextPlayer.Enabled = true;
+                }
+            }
         }
 
         public int GetPosition() /* Returns the players position (0 - 39) */
@@ -99,6 +119,12 @@ namespace MonopolyBoard
         public void UseJailCard()
         {
             jailCard = false;
+        }
+
+        public void GoBankrupt()
+        {
+            name = "";
+            money = 0;
         }
 
         //SETMONEY Ta bort sen

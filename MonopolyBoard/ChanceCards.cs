@@ -4,18 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MonopolyBoard
+namespace MonopolyBoard/*Written by Sebastian Olsson*/
 {
-    public class ChanceCards
+    public class ChanceCards/*This class defines the chanse cards in the game.*/
     {
-        /* ----- Members ----- */
         public frmMonopoly board;
         private string text;
         private int value, position;
         private bool jailCard;
 
-        /* ----- Function ----- */
-        public ChanceCards(string setText, int setValue, bool setJailCard = false, int setPosition = 0)
+        public ChanceCards(string setText, int setValue, bool setJailCard = false, int setPosition = 0)/*The counstructor for this class.*/
         {
             text = setText;
             value = setValue;
@@ -23,32 +21,32 @@ namespace MonopolyBoard
             jailCard = setJailCard;
         }
 
-        public void GiveJailCard()
+        public void GiveJailCard()/*Gives the active player a get-out-of-jail-card.*/
         {
             board.Player[board.activePlayer].GetJailCard();
         }
 
-        public string GetText()
+        public string GetText()/*Returns the text of the card.*/
         {
             return text;
         }
 
-        public int GetValue()
+        public int GetValue()/*Returns the value of the card.*/
         {
             return value;
         }
 
-        public int GetPosition()
+        public int GetPosition()/*Returns the position of the card.*/
         {
             return position;
         }
 
-        public bool GetJailCard()
+        public bool GetJailCard()/*Returns if it's a get-out-of-jail-card or not.*/
         {
             return jailCard;
         }
 
-        public void ChangePosition(int startPosition)
+        public void ChangePosition(int startPosition)/*Moves the active player to the position that the card says.*/
         {
             int stepsToMove = 0;
             if (startPosition > GetPosition())
@@ -61,12 +59,12 @@ namespace MonopolyBoard
             board.MovePlayer(stepsToMove);
         }
 
-        public void GoToJail()
+        public void GoToJail()/*Moves the active player to jail.*/
         {
             board.MoveActivePlayerToJail();
         }
 
-        public void GetMoneyFromAll()
+        public void GetMoneyFromAll()/*Takes money from all the other players and gives it to the active player.*/
         {
             for (int i = 0; i < board.Player.Length; i++)
             {
@@ -78,7 +76,7 @@ namespace MonopolyBoard
             }
         }
 
-        public void GetOrPay()
+        public void GetOrPay()/*Either gives to the active pleyer or takes money from the active player and gives it to freeparking.*/
         {
             if (GetValue() < 0)
             {

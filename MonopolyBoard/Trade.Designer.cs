@@ -1,6 +1,6 @@
 ﻿namespace MonopolyBoard
 {
-    partial class Trade
+    partial class frmTrade
     {
         /// <summary>
         /// Required designer variable.
@@ -166,6 +166,7 @@
             // 
             // btnClose
             // 
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.Location = new System.Drawing.Point(246, 231);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
@@ -174,7 +175,7 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // Trade
+            // frmTrade
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -185,8 +186,8 @@
             this.Controls.Add(this.btnTrade);
             this.Controls.Add(this.gbSPlayer);
             this.Controls.Add(this.gbAPlayer);
-            this.Name = "Trade";
-            this.Text = "Trade";
+            this.Name = "frmTrade";
+            this.Text = "Byte";
             this.Load += new System.EventHandler(this.Trade_Load);
             this.gbAPlayer.ResumeLayout(false);
             this.gbAPlayer.PerformLayout();

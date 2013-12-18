@@ -69,7 +69,6 @@ namespace MonopolyBoard
             this.btnNextPlayer = new System.Windows.Forms.Button();
             this.btnBuyStreet = new System.Windows.Forms.Button();
             this.btnSellStreet = new System.Windows.Forms.Button();
-            this.btnSaveGame = new System.Windows.Forms.Button();
             this.sfdSaveGame = new System.Windows.Forms.SaveFileDialog();
             this.btnBankrupt = new System.Windows.Forms.Button();
             this.btnBail = new System.Windows.Forms.Button();
@@ -423,17 +422,8 @@ namespace MonopolyBoard
             this.btnSellStreet.TabIndex = 12;
             this.btnSellStreet.Text = "Hantera gator";
             this.btnSellStreet.UseVisualStyleBackColor = true;
-            this.btnSellStreet.Click += new System.EventHandler(this.btnSellStreet_Click);
-            // 
-            // btnSaveGame
-            // 
-            this.btnSaveGame.Location = new System.Drawing.Point(720, 390);
-            this.btnSaveGame.Name = "btnSaveGame";
-            this.btnSaveGame.Size = new System.Drawing.Size(75, 23);
-            this.btnSaveGame.TabIndex = 13;
-            this.btnSaveGame.Text = "Spara spelet";
-            this.btnSaveGame.UseVisualStyleBackColor = true;
-            this.btnSaveGame.Click += new System.EventHandler(this.btnSaveGame_Click);
+            this.btnSellStreet.Visible = false;
+            this.btnSellStreet.Click += new System.EventHandler(this.btnManageStreet_Click);
             // 
             // sfdSaveGame
             // 
@@ -472,7 +462,6 @@ namespace MonopolyBoard
             this.ClientSize = new System.Drawing.Size(798, 648);
             this.Controls.Add(this.btnBail);
             this.Controls.Add(this.btnBankrupt);
-            this.Controls.Add(this.btnSaveGame);
             this.Controls.Add(this.btnSellStreet);
             this.Controls.Add(this.btnBuyStreet);
             this.Controls.Add(this.btnNextPlayer);
@@ -511,20 +500,16 @@ namespace MonopolyBoard
         public System.Windows.Forms.PictureBox picPlayer1;
         public System.Windows.Forms.PictureBox picPlayer3;
         public System.Windows.Forms.PictureBox picPlayer2;
-        private System.Windows.Forms.Button btnRollDices;
         private System.Windows.Forms.Label lblDice1;
         private System.Windows.Forms.Label lblDice2;
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Button btnTrade;
         private System.Windows.Forms.Label lblSquareInfo;
-        private System.Windows.Forms.Button btnNextPlayer;
         private System.Windows.Forms.Button btnSellStreet;
         private System.Windows.Forms.Button btnBuyStreet;
-        private System.Windows.Forms.Button btnSaveGame;
         private System.Windows.Forms.SaveFileDialog sfdSaveGame;
         private System.Windows.Forms.Label lblFreePark;
         private System.Windows.Forms.Label lblPlayerInfo;
-        private Button btnBankrupt;
         private Label lblply2Inf;
         private Label lblply1Info;
         private Label lblply4Info;
@@ -533,11 +518,14 @@ namespace MonopolyBoard
         private Label lblply1InJail;
         private Label lblply4InJail;
         private Label lblply3InJail;
-        private Button btnBail;
         private Label lblply2NoTurnsInJail;
         private Label lblply1NoTurnsInJail;
         private Label lblply3NoTurnsInJail;
         private Label lblply4NoTurnsInJail;
+        public Button btnBankrupt;
+        public Button btnRollDices;
+        public Button btnNextPlayer;
+        public Button btnBail;
     }
 }
 
