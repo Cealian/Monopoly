@@ -53,40 +53,40 @@ namespace MonopolyBoard/*Written by Sebastian Olsson*/
         {
             string info = "";
             int block = 10;
-            for (int i = 0; i < board.SquaresArray.Length; i++)
+            for (int i = 0; i < board.SquaresArray.Length; i++)/*I looping through all squares in the game.*/
             {
                 string name = board.SquaresArray[i].GetName();
                 Type squareType = board.SquaresArray[i].GetType();
-                if (lbStreets.SelectedItem.ToString() == name && squareType == typeof(Street))
+                if (lbStreets.SelectedItem.ToString() == name && squareType == typeof(Street))/*When I find a Street with the same name as the selected object this if ist true.*/
                 {
                     Street street = ((Street)board.SquaresArray[i]);
                     block = street.GetBlock();
-                    int streetsOnBlock = 0, isMortgaged = 0, anyHouses = 0;
-                    for (int j = 0; j < board.SquaresArray.Length; j++)
+                    int streetsOnBlock = 0, isMortgaged = 0, anyHouses = 0;/*Here I create three diffrent counters to count through the second loop.*/
+                    for (int j = 0; j < board.SquaresArray.Length; j++)/*Here I loop through all the squares one more time to see which streets are in the same block as the selected street.*/
                     {
                         if (board.SquaresArray[j].GetType() == typeof(Street))
                         {
                             if (block == ((Street)board.SquaresArray[j]).GetBlock()
-                                    && ((Street)board.SquaresArray[j]).GetOwner() == board.activePlayer)
+                                    && ((Street)board.SquaresArray[j]).GetOwner() == board.activePlayer)/*If the active player owns a street in the same block as the selected street this if is true.*/
                             {
-                                streetsOnBlock++;
+                                streetsOnBlock++;/*If the player owns a street in the same block as the selcted street this will increase with one.*/
                                 if (((Street)board.SquaresArray[j]).GetMortgaged())
-                                    isMortgaged++;
+                                    isMortgaged++;/*If the player owns a street in the same block as the selected street but the street is mortgaged this will increase with one.*/
                                 else if (((Street)board.SquaresArray[j]).GetNoOfHouses() > 0)
-                                    anyHouses++;
+                                    anyHouses++;/*If there is any street on the block with any houses on it this will increase with one.*/
                             }
                         }
                     }
-                    if (!street.GetMortgaged() && street.GetNoOfHouses() < 5 && isMortgaged == 0)
+                    if (!street.GetMortgaged() && street.GetNoOfHouses() < 5 && isMortgaged == 0)/*If the selected street isn't mortgaged, dosen't have 5 houses and there isn't any mortgaged streets on the block this if is true.*/
                     {
-                        if (streetsOnBlock == 2)
+                        if (streetsOnBlock == 2)/*If the player owns two streets on the same block I checks if it's the first or last block because they only have two streets while all the other streets have three.*/
                         {
-                            if (block == 0 || block == 7)
+                            if (block == 0 || block == 7)/*If it's the first or last block you only have to own two streets to be able to build houses.*/
                                 btnBuyHouse.Enabled = true;
                             else
                                 btnBuyHouse.Enabled = false;
                         }
-                        else if (streetsOnBlock == 3)
+                        else if (streetsOnBlock == 3)/*If it's not the first or last streets you need to own three streets to build houses.*/
                             btnBuyHouse.Enabled = true;
                         else
                             btnBuyHouse.Enabled = false;
@@ -95,12 +95,12 @@ namespace MonopolyBoard/*Written by Sebastian Olsson*/
                         btnBuyHouse.Enabled = false;
 
 
-                    if (street.GetNoOfHouses() > 0)
+                    if (street.GetNoOfHouses() > 0)/*If the selected street have any houses you wont be able to mortgage the selected street.*/
                     {
                         btnSellHouse.Enabled = true;
                         btnMortgage.Enabled = false;
                     }
-                    else if (street.GetNoOfHouses() == 0 && anyHouses > 0)
+                    else if (street.GetNoOfHouses() == 0 && anyHouses > 0)/*If any street on the block have any houses you won't be able to mortgage any of the other streets on the block.*/
                     {
                         btnSellHouse.Enabled = false;
                         btnMortgage.Enabled = false;
@@ -111,12 +111,12 @@ namespace MonopolyBoard/*Written by Sebastian Olsson*/
                         btnMortgage.Enabled = true;
                     }
 
-                    if (street.GetNoOfHouses() == 5)
+                    if (street.GetNoOfHouses() == 5)/*If you have 5 houses it's the same as the one hotel.*/
                         info = street.GetInfo() + "\nEtt Hotell";
                     else
                         info = street.GetInfo() + "\nAntal hus: " + street.GetNoOfHouses();
 
-                    if (street.GetMortgaged())
+                    if (street.GetMortgaged())/*If the street is mortgaged the text on the botton changes.*/
                     {
                         btnMortgage.Text = "Lös ut";
                     }
