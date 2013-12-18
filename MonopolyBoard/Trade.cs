@@ -171,9 +171,9 @@ namespace MonopolyBoard/*Written by Sebastian Olsson*/
 
         private void MoveStreets(int toPlayer)//Moves streets between players.
         {
-            for (int i = 0; i < board.SquaresArray.Length; i++)
+            for (int i = 0; i < board.SquaresArray.Length; i++)/*Here I loop through all the squares in the game.*/
             {
-                foreach (object itemChecked in clbPlayerA.CheckedItems)
+                foreach (object itemChecked in clbPlayerA.CheckedItems)/*Here I loop through all the checked items in the left listbox*/
                 {
                     if (lbPlayers.SelectedItem.ToString() == board.Player[toPlayer].GetName()
                         && itemChecked.ToString() == board.SquaresArray[i].GetName())
