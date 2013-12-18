@@ -310,7 +310,7 @@ namespace MonopolyBoard
             // btnQuit
             // 
             this.btnQuit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnQuit.Location = new System.Drawing.Point(654, 53);
+            this.btnQuit.Location = new System.Drawing.Point(654, 12);
             this.btnQuit.Name = "btnQuit";
             this.btnQuit.Size = new System.Drawing.Size(40, 32);
             this.btnQuit.TabIndex = 1;
@@ -320,12 +320,13 @@ namespace MonopolyBoard
             // 
             // btnTest
             // 
-            this.btnTest.Location = new System.Drawing.Point(654, 12);
+            this.btnTest.Location = new System.Drawing.Point(654, 322);
             this.btnTest.Name = "btnTest";
             this.btnTest.Size = new System.Drawing.Size(40, 35);
             this.btnTest.TabIndex = 2;
             this.btnTest.Text = "Test";
             this.btnTest.UseVisualStyleBackColor = true;
+            this.btnTest.Visible = false;
             this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
             // tmrMovePlayer

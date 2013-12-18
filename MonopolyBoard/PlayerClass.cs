@@ -11,7 +11,7 @@ namespace MonopolyBoard
         private bool jailCard = false;
         private bool inJail = false;
         private int stepsLeft; // Used when moving player to see how many steps he/she has left.
-        frmMonopoly board = new frmMonopoly();
+        public frmMonopoly board;
 
         /* ----- Functions -----*/
         public PlayerClass(string newName) /* Constructor, sets player name. */
@@ -59,15 +59,14 @@ namespace MonopolyBoard
                 money -= amount;
                 return;
             }
-            /*
+
             money -= amount;
+
             Console.WriteLine("Can't afford it!");
+
             board.btnBankrupt.Show();
             board.btnNextPlayer.Enabled = false;
             board.btnRollDices.Enabled = false;
-             * 
-             * Konka HUR?!?!?
-            */
         }
 
         public void AddMoney(int amount) /* Increases the players money by the specified amount. */

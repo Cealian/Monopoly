@@ -23,7 +23,7 @@ namespace MonopolyBoard
         const int PX_PER_PACE = 9;
         public int activePlayer = new Random().Next(0, 4);
         public int diceEqualCount = 0;
-        int ply1TurnsInJail = 0; 
+        int ply1TurnsInJail = 0;
         int ply2TurnsInJail = 0;
         int ply3TurnsInJail = 0;
         int ply4TurnsInJail = 0;
@@ -58,8 +58,8 @@ namespace MonopolyBoard
             else
                 Application.Exit();
 
-            UpdatePlayerInfo();
 
+            UpdatePlayerInfo();
         }
 
         private void pnlMainPanel_Paint(object sender, PaintEventArgs e) /* Paint monopoly board using GFX engine. */
@@ -524,7 +524,7 @@ namespace MonopolyBoard
             NextPlayer();
             UpdatePlayerInfo();
             if (Player[activePlayer].IsInJail() == true)
-            JailCount();
+                JailCount();
             CheckOwnership();
         }
 
@@ -621,12 +621,14 @@ namespace MonopolyBoard
                 return;
             }
 
+
+
+            btnNextPlayer.Enabled = true;
             Player[activePlayer].SubtractMoney(1000);
             Freepark.AddMoney(1000);
             Player[activePlayer].GetOutOfJail();
 
             btnBail.Hide();
-            btnNextPlayer.Enabled = true;
             ShowSquareInfo();
             UpdatePlayerInfo();
         }
@@ -651,11 +653,11 @@ namespace MonopolyBoard
             {
                 picPlayer2.Hide();
             }
-            
+
             if (Player[3].GetName() == "")
             {
                 picPlayer3.Hide();
-        }
+            }
 
         }
 
@@ -666,15 +668,18 @@ namespace MonopolyBoard
                 activePlayer++;
 
                 if (activePlayer > 3)
-            {
-                activePlayer = 0;
-            }
+                {
+                    activePlayer = 0;
+                }
+
             } while (Player[activePlayer].GetName() == "");
+
+            Player[activePlayer].board = this;
 
             if (Player[activePlayer].IsInJail() == true)
             {
                 btnBail.Visible = true;
-             }
+            }
         }
 
         public void RunSquareEvent() /* Checks what kind of square the player landed on and acts accordingly. */
@@ -807,7 +812,7 @@ namespace MonopolyBoard
                 if (SamePlayerOwnsBlock(block) && BlockIsNotMortgaged(block) && ((Street)Squares[position]).GetNoOfHouses() == 0)
                 {
                     rent = rent * 2;
-            }
+                }
             }
             /*Shows the Buy Street button if the station has no owner*/
             else if (squareType == typeof(Station))
@@ -824,7 +829,7 @@ namespace MonopolyBoard
                 if (SamePlayerOwnsBlock(block) && BlockIsNotMortgaged(block))
                 {
                     rent = rent * 2;
-            }
+                }
             }
             /*Shows the Buy Street button if the Powerstation has no owner*/
             else if (squareType == typeof(PowerStation))
@@ -841,7 +846,7 @@ namespace MonopolyBoard
                 if (SamePlayerOwnsBlock(block) && BlockIsNotMortgaged(block))
                 {
                     rent = rent * 2;
-            }
+                }
             }
 
             /*Tells the player if the street is mortaged*/
@@ -918,8 +923,8 @@ namespace MonopolyBoard
             player1Info = Player[0].GetName() + ": " + Player[0].GetMoney();
             player2Info = Player[1].GetName() + ": " + Player[1].GetMoney();
             player3Info = "";
-            player4Info = "";       
-            
+            player4Info = "";
+
             playerInfo = Player[0].GetName() + ": " + Player[0].GetMoney() + "\n"; //Information about Player 1
             playerInfo += Player[1].GetName() + ": " + Player[1].GetMoney() + "\n";//Information about Player 2
 
@@ -938,7 +943,7 @@ namespace MonopolyBoard
 
             lblPlayerInfo.Text = Player[activePlayer].GetName() + "\n" + playerInfo;
             lblPlayerInfo.ForeColor = GetPlayerColor(activePlayer);
-            
+
             //Each Player's information displayed on their respective lable, in their respective colors
             lblply1Info.ForeColor = GetPlayerColor(0);
             lblply2Inf.ForeColor = GetPlayerColor(1);
@@ -963,52 +968,52 @@ namespace MonopolyBoard
                 ply1TurnsInJail = 0;
             }
             if (Player[1].IsInJail() == true)//Displays the labels showing that Player 2 is in Jail and how many turns Player 2 has spent in Jail
-                {
-                    lblply2InJail.Visible = true;
-                    lblply2NoTurnsInJail.Text = "Antal omgångar:" + ply2TurnsInJail;
-                    lblply2NoTurnsInJail.ForeColor = Color.Red;
-                    lblply2NoTurnsInJail.Visible = true;
+            {
+                lblply2InJail.Visible = true;
+                lblply2NoTurnsInJail.Text = "Antal omgångar:" + ply2TurnsInJail;
+                lblply2NoTurnsInJail.ForeColor = Color.Red;
+                lblply2NoTurnsInJail.Visible = true;
 
-                }
+            }
             else//Should Player 2 not be in Jail(or get out of Jail) the count for turns in jail is reset to o and the lables hidden
-                {
-                    lblply2InJail.Visible = false;
-                    lblply2NoTurnsInJail.Visible = false;
-                    ply2TurnsInJail = 0;
-                }
+            {
+                lblply2InJail.Visible = false;
+                lblply2NoTurnsInJail.Visible = false;
+                ply2TurnsInJail = 0;
+            }
 
             if (Player[2].IsInJail() == true)//Displays the labels showing that Player 3 is in Jail and how many turns Player 3 has spent in Jail
-                {
-                    lblply3InJail.Visible = true;
-                    lblply3NoTurnsInJail.Text = "Antal omgångar:" + ply3TurnsInJail;
-                    lblply3NoTurnsInJail.ForeColor = Color.Red;
-                    lblply3NoTurnsInJail.Visible = true;
+            {
+                lblply3InJail.Visible = true;
+                lblply3NoTurnsInJail.Text = "Antal omgångar:" + ply3TurnsInJail;
+                lblply3NoTurnsInJail.ForeColor = Color.Red;
+                lblply3NoTurnsInJail.Visible = true;
 
-                }
+            }
             else//Should Player 3 not be in Jail(or get out of Jail) the count for turns in jail is reset to o and the lables hidden
-                {
-                    lblply3InJail.Visible = false;
-                    lblply3NoTurnsInJail.Visible = false;
-                    ply3TurnsInJail = 0;
-                }
+            {
+                lblply3InJail.Visible = false;
+                lblply3NoTurnsInJail.Visible = false;
+                ply3TurnsInJail = 0;
+            }
 
             if (Player[3].IsInJail() == true)//Displays the labels showing that Player 4 is in Jail and how many turns Player 4 has spent in Jail
-                {
-                    lblply4InJail.Visible = true;
-                    lblply4NoTurnsInJail.Text = "Antal omgångar:" + ply4TurnsInJail;
-                    lblply4NoTurnsInJail.ForeColor = Color.Red;
-                    lblply4NoTurnsInJail.Visible = true;
+            {
+                lblply4InJail.Visible = true;
+                lblply4NoTurnsInJail.Text = "Antal omgångar:" + ply4TurnsInJail;
+                lblply4NoTurnsInJail.ForeColor = Color.Red;
+                lblply4NoTurnsInJail.Visible = true;
 
-                }
+            }
             else//Should Player 4 not be in Jail(or get out of Jail) the count for turns in jail is reset to o and the lables hidden
-                {
-                    lblply4InJail.Visible = false;
-                    lblply4NoTurnsInJail.Visible = false;
-                    ply4TurnsInJail = 0;
-                }
+            {
+                lblply4InJail.Visible = false;
+                lblply4NoTurnsInJail.Visible = false;
+                ply4TurnsInJail = 0;
+            }
 
             if (Player[activePlayer].IsInJail() == true)//Displays the bail button if the active Player is in jail
-                btnBail.Visible = true;                          
+                btnBail.Visible = true;
             else
                 btnBail.Visible = false;
             UpdateFreeParkValue();
@@ -1036,18 +1041,18 @@ namespace MonopolyBoard
                 ply2TurnsInJail++;
 
             if (Player[2].IsInJail() == true && Player[activePlayer] == Player[2])//How long Player 3 has spent in jail
-                 ply3TurnsInJail++;
+                ply3TurnsInJail++;
 
             if (Player[3].IsInJail() == true && Player[activePlayer] == Player[3])//How long Player 4 has spent in jail
-                 ply4TurnsInJail++;
+                ply4TurnsInJail++;
 
             if (ply1TurnsInJail == 4 || ply2TurnsInJail == 4 || ply3TurnsInJail == 4 || ply4TurnsInJail == 4)//Forces the active Player to bail after 3 turns
-                    {
-                        MessageBox.Show(forcePay);
-                        btnBankrupt.Visible = true;
-                        btnNextPlayer.Enabled = false;
-                        btnRollDices.Enabled = false;
-                    }
+            {
+                MessageBox.Show(forcePay);
+                btnBankrupt.Visible = true;
+                btnNextPlayer.Enabled = false;
+                btnRollDices.Enabled = false;
+            }
         }
 
         private void UpdateFreeParkValue()
@@ -1080,7 +1085,7 @@ namespace MonopolyBoard
         }
 
         private void CheckIfPlayerCantPay()
-            {
+        {
             if (Player[activePlayer].GetMoney() < 0)
             {
                 btnNextPlayer.Enabled = false;
@@ -1133,14 +1138,14 @@ namespace MonopolyBoard
                 street2 = 32;
                 street3 = 34;
 
-        }
+            }
             else if (block == 7) // Streets 37 & 39
             {
                 street2 = 37;
                 street3 = 39;
             }
             else if (block == 8) // Streets 5 & 15 & 25 & 35 - Train stations
-        {
+            {
                 street1 = 5;
                 street2 = 15;
                 street3 = 25;
@@ -1166,7 +1171,7 @@ namespace MonopolyBoard
                 return (((Station)Squares[street1]).GetOwner() == ((Station)Squares[street2]).GetOwner()
                         && ((Station)Squares[street1]).GetOwner() == ((Station)Squares[street3]).GetOwner()
                         && ((Station)Squares[street1]).GetOwner() == ((Station)Squares[street4]).GetOwner());
-        }
+            }
 
             /* If you made it here it's a street block with 3 streets. */
             return (((Street)Squares[street1]).GetOwner() == ((Street)Squares[street2]).GetOwner()
@@ -1207,11 +1212,11 @@ namespace MonopolyBoard
                 street3 = 24;
             }
             else if (block == 5) // Streets 26 & 27 & 29
-        {
+            {
                 street1 = 26;
                 street2 = 27;
                 street3 = 29;
-        }
+            }
             else if (block == 6) // Streets 31 & 32 & 34
             {
                 street1 = 31;
@@ -1232,7 +1237,7 @@ namespace MonopolyBoard
                 street3 = 35;
             }
             else if (block == 9) // Streets 12 & 28 - Power stations
-        {
+            {
                 street2 = 37;
                 street3 = 39;
             }
@@ -1259,7 +1264,7 @@ namespace MonopolyBoard
             return !(((Street)Squares[street1]).GetMortgaged()
                     && ((Street)Squares[street2]).GetMortgaged()
                     && ((Street)Squares[street3]).GetMortgaged());
-            }
+        }
 
         public int ActivePlayers()
         {
@@ -1267,51 +1272,37 @@ namespace MonopolyBoard
             foreach (PlayerClass player in Player)
             {
                 if (player.GetName() != "")
-            {
+                {
                     activePlayers++;
                 }
             }
             return activePlayers;
         }
-        
-       /* private void btnBankrupt_Click(object sender, EventArgs e)
-        {
-            foreach (Square square in Squares)
-        {
-
-                int owner = ((Station)square).GetOwner();
-
-                if (owner != activePlayer)
-            {
-                    continue;
-                }
-            }
-        }*/
 
         /* Allow command line to be seen during normal execution */
-        [DllImport("kernel32.dll", SetLastError = true)]
-        [return: MarshalAsAttribute(UnmanagedType.Bool)]
-        static extern bool AllocConsole();
+        //[DllImport("kernel32.dll", SetLastError = true)]
+        //[return: MarshalAsAttribute(UnmanagedType.Bool)]
+        //static extern bool AllocConsole();
 
         public void CheckOwnership()/*Checks if the active player owns any squares.*/
         {
             for (int i = 0; i < SquaresArray.Length; i++)
             {
                 if (SquaresArray[i].GetType() == typeof(Street) && ((Street)SquaresArray[i]).GetOwner() == activePlayer)
-        {
+                {
                     btnSellStreet.Visible = true;
                     return;
-        }
+                }
                 else if (SquaresArray[i].GetType() == typeof(Station) && ((Station)SquaresArray[i]).GetOwner() == activePlayer)
-        {
+                {
                     btnSellStreet.Visible = true;
                     return;
                 }
                 else if (SquaresArray[i].GetType() == typeof(PowerStation) && ((PowerStation)SquaresArray[i]).GetOwner() == activePlayer)
-        {
+                {
                     btnSellStreet.Visible = true;
-                return;
-            }
+                    return;
+                }
                 else
                     btnSellStreet.Visible = false;
             }
