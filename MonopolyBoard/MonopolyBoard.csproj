@@ -171,6 +171,57 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Lamp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Vatten.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Lampa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Lamp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\QuestionMark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\30px-Crystal_Clear_app_agent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\30px-Db-Schild.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\30px-Sinnbild_Kfz.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Lampa1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\vatten1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Vatten2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Lampa2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FrageTecken.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Fragetecken1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Allmanning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Lampa3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Lampa4.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

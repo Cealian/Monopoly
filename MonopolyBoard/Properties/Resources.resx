@@ -118,16 +118,28 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="_30px_Sinnbild_Kfz_svg" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\30px-Sinnbild_Kfz.svg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="_30px_Crystal_Clear_app_agent" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\30px-Crystal_Clear_app_agent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="_30px_Db_Schild_svg" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\30px-Db-Schild.svg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Plan" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Plan.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Allmanning" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Allmanning.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Fragetecken1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Fragetecken1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FriParkering" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>30px-Sinnbild_Kfz.svg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GaIFangelse" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>30px-Crystal_Clear_app_agent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Station" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>30px-Db-Schild.svg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Vatten2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Vatten2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Lampa4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Lampa4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

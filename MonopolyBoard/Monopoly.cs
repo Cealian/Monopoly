@@ -553,7 +553,7 @@ namespace MonopolyBoard
 
             if (Player[activePlayer].IsInJail() == true)
             {
-                btnJail.Visible = true;
+                btnBail.Visible = true;
              }
         }
 

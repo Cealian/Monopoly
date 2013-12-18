@@ -136,6 +136,7 @@ namespace MonopolyBoard
              gObject.DrawString("4000kr", SystemFonts.CaptionFont, Brushes.Black, x + 5 * i, y);
              gObject.DrawString("1200kr", SystemFonts.CaptionFont, Brushes.Black, x + 6 * i, y);
              gObject.DrawString("1200kr", SystemFonts.CaptionFont, Brushes.Black, x + 8 * i, y);
+             gObject.DrawString("4000kr", SystemFonts.CaptionFont, Brushes.Black, x + 9 * i + 20, y);
 
              gObject.DrawString("2800kr", SystemFonts.CaptionFont, Brushes.Black, x - i - color, y - i - color);
              gObject.DrawString("3000kr", SystemFonts.CaptionFont, Brushes.Black, x - i - color, y - 2 * i - color);
@@ -167,13 +168,22 @@ namespace MonopolyBoard
         }
          private void images()//Draws already made pictures on the board
          {
-             int x = 310, y = 600, i = 280;
-             gObject.DrawImage(Properties.Resources._30px_Crystal_Clear_app_agent, 590, 30);
-             gObject.DrawImage(Properties.Resources._30px_Db_Schild_svg, x, y);
-             gObject.DrawImage(Properties.Resources._30px_Db_Schild_svg, x - i, y - i -8);
-             gObject.DrawImage(Properties.Resources._30px_Db_Schild_svg, x, y - 2 * i);
-             gObject.DrawImage(Properties.Resources._30px_Db_Schild_svg, x + i, y - i - 8);
-             gObject.DrawImage(Properties.Resources._30px_Sinnbild_Kfz_svg, 25, 25);
+             int x = 310, y = 600, i = 280, j = 77;
+             gObject.DrawImage(Properties.Resources.GaIFangelse, 590, 30);
+             
+             gObject.DrawImage(Properties.Resources.Allmanning, x + 2*j, y);
+             gObject.DrawImage(Properties.Resources.Allmanning, x + i +7, y-i -2*j +30);
+             gObject.DrawImage(Properties.Resources.Allmanning, x - i, y-i -2* j +30);
+             gObject.DrawImage(Properties.Resources.Fragetecken1, x - 2 * j +40, y-15);
+             gObject.DrawImage(Properties.Resources.Fragetecken1, x -2 * j-15, y - 2*i-15);
+             gObject.DrawImage(Properties.Resources.Fragetecken1, x + i, y -i +35);
+             gObject.DrawImage(Properties.Resources.Lampa4, x -i , y - i +2*j - 10);
+             gObject.DrawImage(Properties.Resources.Vatten2, x + 2 * j, y - 2 * i - 10);
+             gObject.DrawImage(Properties.Resources.Station, x, y);
+             gObject.DrawImage(Properties.Resources.Station, x - i, y - i - 8);
+             gObject.DrawImage(Properties.Resources.Station, x, y - 2 * i);
+             gObject.DrawImage(Properties.Resources.Station, x + i, y - i - 8);
+             gObject.DrawImage(Properties.Resources.FriParkering, 25, 25);
          }
 
          private static void texts()//Draws all the names and texts 

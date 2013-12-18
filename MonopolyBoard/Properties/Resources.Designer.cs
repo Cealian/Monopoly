@@ -63,9 +63,9 @@ namespace MonopolyBoard.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _30px_Crystal_Clear_app_agent {
+        internal static System.Drawing.Bitmap Allmanning {
             get {
-                object obj = ResourceManager.GetObject("_30px_Crystal_Clear_app_agent", resourceCulture);
+                object obj = ResourceManager.GetObject("Allmanning", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace MonopolyBoard.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _30px_Db_Schild_svg {
+        internal static System.Drawing.Bitmap Fragetecken1 {
             get {
-                object obj = ResourceManager.GetObject("_30px_Db_Schild_svg", resourceCulture);
+                object obj = ResourceManager.GetObject("Fragetecken1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,29 @@ namespace MonopolyBoard.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _30px_Sinnbild_Kfz_svg {
+        internal static System.Drawing.Bitmap FriParkering {
             get {
-                object obj = ResourceManager.GetObject("_30px_Sinnbild_Kfz_svg", resourceCulture);
+                object obj = ResourceManager.GetObject("FriParkering", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GaIFangelse {
+            get {
+                object obj = ResourceManager.GetObject("GaIFangelse", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Lampa4 {
+            get {
+                object obj = ResourceManager.GetObject("Lampa4", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -96,6 +116,26 @@ namespace MonopolyBoard.Properties {
         internal static System.Drawing.Bitmap Plan {
             get {
                 object obj = ResourceManager.GetObject("Plan", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Station {
+            get {
+                object obj = ResourceManager.GetObject("Station", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Vatten2 {
+            get {
+                object obj = ResourceManager.GetObject("Vatten2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
