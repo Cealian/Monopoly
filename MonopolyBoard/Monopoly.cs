@@ -1274,7 +1274,7 @@ namespace MonopolyBoard
             return activePlayers;
         }
         
-        private void btnBankrupt_Click(object sender, EventArgs e)
+       /* private void btnBankrupt_Click(object sender, EventArgs e)
         {
             foreach (Square square in Squares)
         {
@@ -1286,7 +1286,7 @@ namespace MonopolyBoard
                     continue;
                 }
             }
-        }
+        }*/
 
         /* Allow command line to be seen during normal execution */
         [DllImport("kernel32.dll", SetLastError = true)]
